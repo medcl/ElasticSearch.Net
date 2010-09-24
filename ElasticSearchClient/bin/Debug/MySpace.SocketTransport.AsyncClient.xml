@@ -1,0 +1,319 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MySpace.SocketTransport.AsyncClient</name>
+    </assembly>
+    <members>
+        <member name="T:MySpace.SocketTransport.AsyncSocketClient">
+            <summary>
+            	<para>A socket client that allows the use of asynchronous I/O.</para>
+            </summary>
+        </member>
+        <member name="M:MySpace.SocketTransport.AsyncSocketClient.#ctor(System.Net.IPEndPoint,MySpace.SocketTransport.SocketPoolConfig)">
+            <summary>
+            	<para>Initializes a new instance of the <see cref="T:MySpace.SocketTransport.AsyncSocketClient"/> class.</para>
+            </summary>
+            <param name="endPoint">The remote end-point this instance will connect to.</param>
+            <param name="config">Optional configuration settings. Specify <see langword="null"/> to fallback on reasonable defaults.</param>
+            <exception cref="T:System.ArgumentNullException">
+            <para><paramref name="endPoint"/> is <see langword="null"/>.</para>
+            </exception>
+        </member>
+        <member name="M:MySpace.SocketTransport.AsyncSocketClient.SendOneWayAsync``1(System.Int16,``0,MySpace.Common.Procedure{``0,System.IO.Stream},System.Action{MySpace.SocketTransport.OneWayAsyncEventArgs})">
+            <summary>
+            <para>Sends a <see cref="T:System.IO.Stream"/> of containing data serialized from
+            <paramref name="dataSerializer"/> and <paramref name="data"/> to
+            <see cref="P:MySpace.SocketTransport.AsyncSocketClient.EndPoint"/> with <paramref name="commandId"/>.
+            Calls <paramref name="resultAction"/> when all data has been sent to
+            the destination. Please note that this is just a tcp acknowledgement that the data
+            was received and not an acknowlegements that the data was processed.</para>
+            </summary>
+            <typeparam name="T">The type of data to be sent.</typeparam>
+            <param name="commandId">The command id.</param>
+            <param name="data">The data to send.</param>
+            <param name="dataSerializer">
+            <para>A method to serialize <paramref name="data"/> into a <see cref="T:System.IO.Stream"/>.</para>
+            </param>
+            <param name="resultAction">
+            <para>The method that will be called when the remote end point acknowledges that the data was
+            recieved, the operation fails, or the operation times out.</para>
+            </param>
+            <exception cref="T:System.ArgumentNullException">
+            <para><paramref name="dataSerializer"/> is <see langword="null"/>.</para>
+            <para>- or -</para>
+            <para><paramref name="resultAction"/> is <see langword="null"/>.</para>
+            </exception>
+        </member>
+        <member name="M:MySpace.SocketTransport.AsyncSocketClient.SendRoundTripAsync``1(System.Int16,``0,MySpace.Common.Procedure{``0,System.IO.Stream},System.Action{MySpace.SocketTransport.RoundTripAsyncEventArgs})">
+            <summary>
+            <para>Sends a <see cref="T:System.IO.Stream"/> of containing data serialized from
+            <paramref name="dataSerializer"/> and <paramref name="data"/> to
+            <see cref="P:MySpace.SocketTransport.AsyncSocketClient.EndPoint"/> with <paramref name="commandId"/>.
+            Calls <paramref name="resultAction"/> when response data has been
+            recieved from <see cref="P:MySpace.SocketTransport.AsyncSocketClient.EndPoint"/>.</para>
+            </summary>
+            <typeparam name="T">The type of data to be sent.</typeparam>
+            <param name="commandId">The command id.</param>
+            <param name="data">The data to send.</param>
+            <param name="dataSerializer">
+            <para>A method to serialize <paramref name="data"/> into a <see cref="T:System.IO.Stream"/>.</para>
+            </param>
+            <param name="resultAction">
+            <para>The method that will be called when the remote end point responds,
+            the operation fails, or the operation times out.</para>
+            </param>
+            <exception cref="T:System.ArgumentNullException">
+            <para><paramref name="dataSerializer"/> is <see langword="null"/>.</para>
+            <para>- or -</para>
+            <para><paramref name="resultAction"/> is <see langword="null"/>.</para>
+            </exception>
+        </member>
+        <member name="M:MySpace.SocketTransport.AsyncSocketClient.Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+        </member>
+        <member name="P:MySpace.SocketTransport.AsyncSocketClient.MemoryPool">
+            <summary>
+            	<para>Gets a memory pool that may be used within the assembly.</para>
+            </summary>
+            <value>
+            	<para>A memory pool that may be used within the assembly.</para>
+            </value>
+        </member>
+        <member name="P:MySpace.SocketTransport.AsyncSocketClient.EndPoint">
+            <summary>
+            	<para>Gets the end point this instance communicates with.</para>
+            </summary>
+            <value>
+            	<para>The end point this instance communicates with.</para>
+            </value>
+        </member>
+        <member name="T:MySpace.SocketTransport.SocketPoolConfig">
+            <summary>
+            	<para>Encapsulates configuration settings for
+            	socket pools used by <see cref="T:MySpace.SocketTransport.AsyncSocketClient"/>.</para>
+            </summary>
+        </member>
+        <member name="M:MySpace.SocketTransport.SocketPoolConfig.#ctor">
+            <summary>
+            	<para>Initializes a new instance of the <see cref="T:MySpace.SocketTransport.SocketPoolConfig"/> class.</para>
+            </summary>
+        </member>
+        <member name="P:MySpace.SocketTransport.SocketPoolConfig.ConnectTimeout">
+            <summary>
+            How many milliseconds to wait for the remote host to accept a new connection.
+            </summary>
+        </member>
+        <member name="P:MySpace.SocketTransport.SocketPoolConfig.ReceiveTimeout">
+            <summary>
+            How many milliseconds to wait for a response to a sync messages.
+            </summary>
+        </member>
+        <member name="P:MySpace.SocketTransport.SocketPoolConfig.NetworkOrdered">
+            <summary>
+            	<para>Gets or sets a value indicating whether envelope data should be processed in network order.</para>
+            </summary>
+            <value>
+            	<para><see langword="true"/> if envelope data should be processed in network order; otherwise, <see langword="false"/>.</para>
+            </value>
+        </member>
+        <member name="T:MySpace.SocketTransport.AsyncEventArgs">
+            <summary>
+            	<para>An <see cref="T:System.EventArgs"/> implementation for asyncrhonous operations.</para>
+            </summary>
+        </member>
+        <member name="T:MySpace.SocketTransport.ICompletion">
+            <summary>
+            	<para>Encapsulates the results of a completable operation.</para>
+            </summary>
+        </member>
+        <member name="M:MySpace.SocketTransport.ICompletion.Complete">
+            <summary>
+            	<para>Completes the operation.</para>
+            </summary>
+        </member>
+        <member name="M:MySpace.SocketTransport.AsyncEventArgs.#ctor">
+            <summary>
+            	<para>Initializes a new instance of the <see cref="T:MySpace.SocketTransport.AsyncEventArgs"/> class.</para>
+            </summary>
+        </member>
+        <member name="M:MySpace.SocketTransport.AsyncEventArgs.MySpace#SocketTransport#ICompletion#Complete">
+            <summary>
+            Completes the operation.
+            </summary>
+        </member>
+        <member name="M:MySpace.SocketTransport.AsyncEventArgs.PerformCompletion">
+            <summary>
+            Called when the operation completes.
+            </summary>
+        </member>
+        <member name="P:MySpace.SocketTransport.AsyncEventArgs.CompletedSynchronously">
+            <summary>
+            	<para>Gets a value indicating whether the async operation completed synchronously.</para>
+            </summary>
+            <value>
+            	<para><see langword="true"/> if the operation completed synchronously; otherwise, <see langword="false"/>.</para>
+            </value>
+        </member>
+        <member name="P:MySpace.SocketTransport.AsyncEventArgs.Error">
+            <summary>
+            	<para>Gets the error if there was one; otherwise gets <see langword="null"/>.</para>
+            </summary>
+            <value>
+            	<para>The error, if one occurred; <see langword="null"/> otherwise.</para>
+            </value>
+        </member>
+        <member name="T:MySpace.SocketTransport.OneWayAsyncEventArgs">
+            <summary>
+            	<para>An <see cref="T:MySpace.SocketTransport.AsyncEventArgs"/> implementation for one-way socket operations.</para>
+            </summary>
+        </member>
+        <member name="M:MySpace.SocketTransport.OneWayAsyncEventArgs.Create(System.Boolean,System.Exception,System.Action{MySpace.SocketTransport.OneWayAsyncEventArgs})">
+            <summary>
+            	<para>Creates a new instance of the <see cref="T:MySpace.SocketTransport.OneWayAsyncEventArgs"/> class.</para>
+            </summary>
+            <param name="completedSynchronously">
+            	<para><see langword="true"/> if the operation completed synchronously; otherwise, <see langword="false"/>.</para>
+            </param>
+            <param name="error">
+            	<para>Gets the error if there was one; otherwise gets <see langword="null"/>.</para>
+            </param>
+            <param name="completionAction">The completion action that will be called when <see cref="M:MySpace.SocketTransport.ICompletion.Complete"/> is called.</param>
+            <returns>
+            <para>A new instance of the <see cref="T:MySpace.SocketTransport.OneWayAsyncEventArgs"/> class.</para>
+            </returns>
+        </member>
+        <member name="M:MySpace.SocketTransport.OneWayAsyncEventArgs.PerformCompletion">
+            <summary>
+            Completes the operation.
+            </summary>
+        </member>
+        <member name="T:MySpace.SocketTransport.RoundTripAsyncEventArgs">
+            <summary>
+            	<para>An <see cref="T:MySpace.SocketTransport.AsyncEventArgs"/> implementation for two-way socket operations.</para>
+            </summary>
+        </member>
+        <member name="M:MySpace.SocketTransport.RoundTripAsyncEventArgs.Create(System.Boolean,System.Exception,MySpace.Common.IPoolItem{System.IO.MemoryStream},System.Action{MySpace.SocketTransport.RoundTripAsyncEventArgs})">
+            <summary>
+            	<para>Creates a new instance of the <see cref="T:MySpace.SocketTransport.RoundTripAsyncEventArgs"/> class.</para>
+            </summary>
+            <param name="completedSynchronously">
+            	<para><see langword="true"/> if the operation completed synchronously; otherwise, <see langword="false"/>.</para>
+            </param>
+            <param name="error">
+            	<para>Gets the error if there was one; otherwise gets <see langword="null"/>.</para>
+            </param>
+            <param name="response">The response data.</param>
+            <param name="completionAction">The completion action that will be called when <see cref="M:MySpace.SocketTransport.ICompletion.Complete"/> is called.</param>
+            <returns>
+            <para>A new instance of the <see cref="T:MySpace.SocketTransport.RoundTripAsyncEventArgs"/> class.</para>
+            </returns>
+        </member>
+        <member name="M:MySpace.SocketTransport.RoundTripAsyncEventArgs.PerformCompletion">
+            <summary>
+            Completes the operation.
+            </summary>
+        </member>
+        <member name="P:MySpace.SocketTransport.RoundTripAsyncEventArgs.Response">
+            <summary>
+            	<para>Gets the response stream that was sent from the server.</para>
+            </summary>
+            <value>
+            	<para>The response stream that was sent from the server.
+            	<see langword="null"/> if the response was empty.</para>
+            </value>
+        </member>
+        <member name="T:MySpace.SocketTransport.SocketChannel">
+            <summary>
+            	<para>Encapsulates a socket connection to a specified end point.</para>
+            </summary>
+        </member>
+        <member name="M:MySpace.SocketTransport.SocketChannel.#ctor(System.Net.EndPoint,System.Int32)">
+            <summary>
+            	<para>Initializes a new instance of the <see cref="T:MySpace.SocketTransport.SocketChannel"/> class.</para>
+            </summary>
+            <param name="endpoint">The endpoint to connect to.</param>
+            <param name="connectTimeout">
+            <para>The time, in milliseconds, to wait for a connection before timing out.</para>
+             </param>
+            <exception cref="T:System.ArgumentNullException">
+            <para><paramref name="endpoint"/> is <see langword="null"/>.</para>
+            </exception>
+        </member>
+        <member name="M:MySpace.SocketTransport.SocketChannel.SendOneWayAsync(System.Int32,MySpace.Common.IPoolItem{System.IO.MemoryStream},System.Action{MySpace.SocketTransport.OneWayAsyncEventArgs})">
+            <summary>
+            <para>Sends the data in <paramref name="sendData"/> to the remote end point
+            specified during construction. Calls <paramref name="resultAction"/> when all data
+            has been sent. Please note that this only indicates that the server received the data
+            and does not guarantee that data was processed.</para>
+            </summary>
+            <param name="timeout">The time to wait, in milliseconds, before the operation times out.</param>
+            <param name="sendData">
+            <para>The data to send. The pool item will be disposed, returned to the owning pool,
+            automatically when it is no longer needed. So it is important that consumers do not
+            access it after calling this method.</para>
+            </param>
+            <param name="resultAction">
+            <para>The method that will be called when the host acknowledges that the data was
+            recieved, the operation fails, or the operation times out.</para>
+            </param>
+            <exception cref="T:System.ArgumentNullException">
+            <para><paramref name="sendData"/> is <see langword="null"/>.</para>
+            </exception>
+        </member>
+        <member name="M:MySpace.SocketTransport.SocketChannel.SendRoundTripAsync(System.Int32,MySpace.Common.IPoolItem{System.IO.MemoryStream},System.Action{MySpace.SocketTransport.RoundTripAsyncEventArgs})">
+            <summary>
+            <para>Sends the data in <paramref name="sendData"/> to <see cref="P:MySpace.SocketTransport.SocketChannel.EndPoint"/>.
+            Calls <paramref name="resultAction"/> when response data has been recieved,
+            the operation times-out, or the operation fails.</para>
+            </summary>
+            <param name="timeout">The time to wait, in milliseconds, before the operation times out.</param>
+            <param name="sendData">
+            <para>The data to send. The pool item will be disposed, returned to the owning pool,
+            automatically when it is no longer needed. So it is important that consumers do not
+            access it after calling this method.</para>
+            </param>
+            <param name="resultAction">
+            <para>The method that will be called when the end point responds,
+            the operation fails, or the operation times out.</para>
+            </param>
+            <exception cref="T:System.ArgumentNullException">
+            <para><paramref name="sendData"/> is <see langword="null"/>.</para>
+            </exception>
+        </member>
+        <member name="M:MySpace.SocketTransport.SocketChannel.Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+        </member>
+        <member name="P:MySpace.SocketTransport.SocketChannel.EndPoint">
+            <summary>
+            	<para>Gets the end point this instance is connected or will connect to.</para>
+            </summary>
+            <value>
+            	<para>The end point this instance is connected or will connect to.</para>
+            </value>
+        </member>
+        <member name="P:MySpace.SocketTransport.SocketChannel.HasError">
+            <summary>
+            	<para>Gets a value indicating whether this instance has an error.</para>
+            </summary>
+            <value>
+            	<para><see langword="true"/> if this instance has error; otherwise, <see langword="false"/>.</para>
+            </value>
+        </member>
+        <member name="M:MySpace.SocketTransport.SocketChannel.AsyncSocketTask.SetEnumerator(System.Collections.Generic.IEnumerator{System.Boolean})">
+            <summary>
+            <para>Accepts an enumerator that performs operations on the socket.
+            While the enumerator is running it will have aquired a lock on _socket
+            so no other tasks can run concurrently. The enumerator should 
+            yield break to finish, yield return false to yield control on async I/O,
+            (the async I/O callback should then invoke <see cref="P:MySpace.SocketTransport.SocketChannel.AsyncSocketTask.Callback"/>
+            when it's ready to continue), yield return true to yield control so the
+            task may check for completion then continue the task synchronously.</para>
+            </summary>
+            <param name="target">The target enumerator.</param>
+        </member>
+    </members>
+</doc>

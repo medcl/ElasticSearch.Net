@@ -1,0 +1,179 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MySpace.SocketTransport.Common</name>
+    </assembly>
+    <members>
+        <member name="T:MySpace.SocketTransport.ClientMessage">
+            <summary>
+            	<para>Encapsulates methods for reading/writing messages that originate from the client
+            	that are compatible with MySpace's existing socket transport system.</para>
+            </summary>
+        </member>
+        <member name="F:MySpace.SocketTransport.ClientMessage.HeaderSize">
+            <summary>
+            <para>The number of bytes that will be prefixed to the data sent to the host.</para>
+            </summary>
+        </member>
+        <member name="F:MySpace.SocketTransport.ClientMessage.TerminatorSize">
+            <summary>
+            <para>The number of bytes that will be appended to the data sent to the host.</para>
+            </summary>
+        </member>
+        <member name="F:MySpace.SocketTransport.ClientMessage.EnvelopeSize">
+            <summary>
+            <para>The number of bytes added to messages.</para>
+            <para><see cref="F:MySpace.SocketTransport.ClientMessage.EnvelopeSize"/> == <see cref="F:MySpace.SocketTransport.ClientMessage.HeaderSize"/> + <see cref="F:MySpace.SocketTransport.ClientMessage.TerminatorSize"/>.</para>
+            </summary>
+        </member>
+        <member name="M:MySpace.SocketTransport.ClientMessage.WriteMessage``1(System.IO.Stream,System.Boolean,System.Int16,System.Int16,System.Boolean,``0,MySpace.Common.Procedure{``0,System.IO.Stream})">
+            <summary>
+            Writes the message to send to a socket server.
+            </summary>
+            <typeparam name="T">
+            <para>The type of object contained in the message.</para>
+            </typeparam>
+            <param name="destination">The destination stream to write the message to.</param>
+            <param name="networkOrdered">
+            <para><see langword="true"/> to use network-ordered endianness for the header
+            information; <see langword="false"/> otherwise.</para></param>
+            <param name="commandId">The command id to send to the server.</param>
+            <param name="messageId">The message id.</param>
+            <param name="isRoundTrip">
+            <para><see langword="true"/> if a reply is expected from the server;
+            <see langword="false"/> otherwise.</para>
+            </param>
+            <param name="message">The object to encode in the message.</param>
+            <param name="messageSerializer">
+            <para>A method that will serialize <paramref name="message"/> into <paramref name="destination"/>.</para>
+            </param>
+        </member>
+        <member name="T:MySpace.SocketTransport.ServerMessage">
+            <summary>
+            	<para>Encapsulates methods for reading/writing messages that originate from the server
+            	that are compatible with MySpace's existing socket transport system.</para>
+            </summary>
+        </member>
+        <member name="F:MySpace.SocketTransport.ServerMessage.HeaderSize">
+            <summary>
+            <para>The number of bytes in the header.</para>
+            </summary>
+        </member>
+        <member name="F:MySpace.SocketTransport.ServerMessage.EmptyReplyMessageLength">
+            <summary>
+            <para>The total message length, in bytes, of an empty reply. If a message is recieved
+            of this length it should be checked for the empty reply condition via <see cref="M:MySpace.SocketTransport.ServerMessage.IsEmptyMessage(System.Byte[],System.Int32,System.Int32)"/>.</para>
+            </summary>
+        </member>
+        <member name="M:MySpace.SocketTransport.ServerMessage.ReadMessageHeader(System.Byte[],System.Int32,System.Boolean,System.Int32@,System.Int32@)">
+            <summary>
+            Reads a message header from <paramref name="source"/>.
+            <paramref name="source"/> must have at least <see cref="F:MySpace.SocketTransport.ServerMessage.HeaderSize"/> bytes.
+            </summary>
+            <param name="source">The source to read from.</param>
+            <param name="offset">The offset of <paramref name="source"/> to start reading from.</param>
+            <param name="networkOrdered">
+            <para><see langword="true"/> if the header information is expected to be in network order;
+            <see langword="false"/> otherwise.</para>
+            </param>
+            <param name="messageLength">The length of the message including the header.</param>
+            <param name="messageId">The message id that was sent to the server.</param>
+            <exception cref="T:System.ArgumentNullException">
+            <para><paramref name="source"/> is <see langword="null"/>.</para>
+            </exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+            <para><paramref name="source.Length"/> is less than <see cref="F:MySpace.SocketTransport.ServerMessage.HeaderSize"/>.</para>
+            <para>- or -</para>
+            <para>The remaining bytes following <paramref name="source"/>[<paramref name="offset"/>] (inclusive) is less than <see cref="F:MySpace.SocketTransport.ServerMessage.HeaderSize"/>.</para>
+            </exception>
+        </member>
+        <member name="M:MySpace.SocketTransport.ServerMessage.IsEmptyMessage(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            	<para>Determines whether a message from the server is a special empty reply message.</para>
+            </summary>
+            <param name="messageBuffer">The buffer containing the message.</param>
+            <param name="offset">
+            <para>The offset where the message data begins. This is the place where the data begins
+            and not where the message header begins.</para>
+            </param>
+            <param name="totalMessageLength">
+            <para>Total length of the message. This is the same message length value that is retrieved
+            from <see cref="M:MySpace.SocketTransport.ServerMessage.ReadMessageHeader(System.Byte[],System.Int32,System.Boolean,System.Int32@,System.Int32@)"/>. This value includes the length of message header.</para>
+            </param>
+            <returns>
+            	<para><see langword="true"/> if the message is a special empty reply message;
+            	otherwise, <see langword="false"/>.</para>
+            </returns>
+            <exception cref="T:System.ArgumentNullException">
+            <para><paramref name="messageBuffer"/> is <see langword="null"/></para>.
+            </exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+            <para><paramref name="messageBuffer.Length"/> is less than
+            <see cref="F:MySpace.SocketTransport.ServerMessage.EmptyReplyMessageLength"/> - <see cref="F:MySpace.SocketTransport.ServerMessage.HeaderSize"/>.</para>
+            <para>- or -</para>
+            <para>The remaining bytes following <paramref name="messageBuffer"/> is less than
+            <see cref="F:MySpace.SocketTransport.ServerMessage.EmptyReplyMessageLength"/> - <see cref="F:MySpace.SocketTransport.ServerMessage.HeaderSize"/>.</para>
+            </exception>
+        </member>
+        <member name="T:MySpace.SocketTransport.ServerMessageHeader">
+            <summary>
+            	<para>Encapsulates a message header for messages that originate from the server.</para>
+            </summary>
+        </member>
+        <member name="M:MySpace.SocketTransport.ServerMessageHeader.Clear">
+            <summary>
+            	<para>Clears any header data contained by this instance; sets <see cref="P:MySpace.SocketTransport.ServerMessageHeader.IsComplete"/> to <see langword="false"/>.</para>
+            </summary>
+        </member>
+        <member name="M:MySpace.SocketTransport.ServerMessageHeader.Read(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            	<para>Reads the message header from <paramref name="data"/>
+            	starting at <paramref name="offset"/>.</para>
+            </summary>
+            <param name="data">The data to read the header from.</param>
+            <param name="offset">The offset to start reading at.</param>
+            <param name="count">
+            <para>The maximum number of bytes to read. If this exceeds the expected header size
+            the remaining bytes will not be read.</para>
+            </param>
+            <returns>
+            <para>The number of bytes read.</para>
+            </returns>
+        </member>
+        <member name="P:MySpace.SocketTransport.ServerMessageHeader.IsComplete">
+            <summary>
+            	<para>Gets a value indicating whether this instance contains a full message header.</para>
+            </summary>
+            <value>
+            	<para><see langword="true"/> if this instance is complete; otherwise, <see langword="false"/>.</para>
+            </value>
+        </member>
+        <member name="P:MySpace.SocketTransport.ServerMessageHeader.MessageLength">
+            <summary>
+            <para>Gets the full length of the message including the header size.</para>
+            </summary>
+            <value>The full length of the message including the header size.</value>
+            <exception cref="T:System.InvalidOperationException">
+            <para>The header is incomplete.</para>
+            </exception>
+        </member>
+        <member name="P:MySpace.SocketTransport.ServerMessageHeader.MessageDataLength">
+            <summary>
+            <para>Gets the length of the message data, not including the header size.</para>
+            </summary>
+            <value>The length of the message data, not including the header size.</value>
+            <exception cref="T:System.InvalidOperationException">
+            <para>The header is incomplete.</para>
+            </exception>
+        </member>
+        <member name="P:MySpace.SocketTransport.ServerMessageHeader.MessageId">
+            <summary>
+            <para>Gets message id contained in this header.</para>
+            </summary>
+            <value>The message id contained in this header.</value>
+            <exception cref="T:System.InvalidOperationException">
+            <para>The header is incomplete.</para>
+            </exception>
+        </member>
+    </members>
+</doc>

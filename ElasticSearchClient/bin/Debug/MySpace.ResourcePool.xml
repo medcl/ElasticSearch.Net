@@ -1,0 +1,236 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MySpace.ResourcePool</name>
+    </assembly>
+    <members>
+        <member name="T:MySpace.ResourcePool.MemoryStreamPool">
+            <summary>
+            A ResourcePool of MemoryStreams.
+            </summary>
+            <example>
+            <code>
+            MemoryStreamPool memoryPoolStream = new MemoryStreamPool();
+            ResourcePoolItem&lt;MemoryStream&gt; pooledStream = null;
+            try
+            {
+            	pooledStream = memoryPoolStream.GetItem();
+            	MemoryStream stream = pooledStream.Item;
+            }
+            finally
+            {
+            	memoryPoolStream.ReleaseItem(pooledStream);
+            }
+            </code>
+            </example>
+        </member>
+        <member name="T:MySpace.ResourcePool.ResourcePool`1">
+            <summary>
+            A Pool of objects of type <typeparamref name="T"/>. 
+            An unlimited number of items can be created, and any released items will be reused.
+            </summary>
+            <typeparam name="T">The type of the item to pool.</typeparam>	
+        </member>
+        <member name="F:MySpace.ResourcePool.ResourcePool`1.InfiniteReuse">
+            <summary>
+            Supply to the maxItemReuses constructor parameter or the MaxItemReuses property to indicate infinite reuse of pooled streams.
+            </summary>
+        </member>
+        <member name="F:MySpace.ResourcePool.ResourcePool`1._buildItemDelegate">
+            <summary>
+            The delegate for building new items.
+            </summary>
+        </member>
+        <member name="F:MySpace.ResourcePool.ResourcePool`1._resetItemDelegate">
+            <summary>
+            The delegate for resetting items.
+            </summary>
+        </member>
+        <member name="F:MySpace.ResourcePool.ResourcePool`1._maxItemUses">
+            <summary>
+            The maximum number of times an item will be reused before it is disposed.
+            </summary>
+        </member>
+        <member name="F:MySpace.ResourcePool.ResourcePool`1._minimumItemCount">
+            <summary>
+            The minimum number of items in the pool. 
+            </summary>
+        </member>
+        <member name="M:MySpace.ResourcePool.ResourcePool`1.#ctor">
+            <summary>
+            For creating decendent classes. If you use this you MUST create a buildItemDelegate.
+            </summary>
+        </member>
+        <member name="M:MySpace.ResourcePool.ResourcePool`1.#ctor(MySpace.ResourcePool.ResourcePool{`0}.BuildItemDelegate)">
+            <summary>
+            Create a new resource pool that uses <paramref name="buildItemDelegate"/> to build its items.
+            </summary>
+            <param name="buildItemDelegate">The delegate for creating new items in the pool.</param>
+        </member>
+        <member name="M:MySpace.ResourcePool.ResourcePool`1.#ctor(MySpace.ResourcePool.ResourcePool{`0}.BuildItemDelegate,System.Int32)">
+            <summary>
+            Create a new resource pool that uses <paramref name="buildItemDelegate"/> to build its items and reuses them <paramref name="maxItemReuses"/> times.
+            </summary>
+            <param name="buildItemDelegate">The delegate for creating new items in the pool.</param>
+            <param name="maxItemReuses">The number of times created items will be reused.  Use ResourcePool.InfiniteReuse to reuse items indefinitely.</param>
+        </member>
+        <member name="M:MySpace.ResourcePool.ResourcePool`1.#ctor(MySpace.ResourcePool.ResourcePool{`0}.BuildItemDelegate,System.Int16)">
+            <summary>
+            Create a new resource pool that uses <paramref name="buildItemDelegate"/> to build its items, and creates <paramref name="minimumItemCount"/> permanent ones.
+            </summary>
+            <param name="buildItemDelegate">The delegate for creating new items in the pool.</param>
+            <param name="minimumItemCount">The minimum number of items in the pool. These will be created at instantiation and kept alive indefinitely.</param>
+        </member>
+        <member name="M:MySpace.ResourcePool.ResourcePool`1.InitializeStaticItems(System.Int16)">
+            <summary>
+            Creates <paramref name="minimumItemCount"/> idle static items. 
+            </summary>
+            <param name="minimumItemCount">The number of items to create</param>
+        </member>
+        <member name="M:MySpace.ResourcePool.ResourcePool`1.#ctor(MySpace.ResourcePool.ResourcePool{`0}.BuildItemDelegate,MySpace.ResourcePool.ResourcePool{`0}.ResetItemDelegate)">
+            <summary>
+            Create a new resource pool that uses <paramref name="buildItemDelegate"/> to build its items and
+            <paramref name="resetItemDelegate"/> to reset them.
+            </summary>
+            <param name="buildItemDelegate">The delegate for creating new items in the pool.</param>
+            <param name="resetItemDelegate">The delegate for resetting items in the pool before reuse.</param>
+        </member>
+        <member name="M:MySpace.ResourcePool.ResourcePool`1.#ctor(MySpace.ResourcePool.ResourcePool{`0}.BuildItemDelegate,MySpace.ResourcePool.ResourcePool{`0}.ResetItemDelegate,System.Int32)">
+            <summary>
+            Create a new resource pool that uses <paramref name="buildItemDelegate"/> to build its items,
+            <paramref name="resetItemDelegate"/> to reset them, and will reuse them <paramref name="maxItemReuses"/> times.
+            </summary>
+            <param name="buildItemDelegate">The delegate for creating new items in the pool.</param>
+            <param name="resetItemDelegate">The delegate for resetting items in the pool before reuse.</param>
+            <param name="maxItemReuses">The number of times created items will be reused.  Use ResourcePool.InfiniteReuse to reuse items indefinitely.</param>
+        </member>
+        <member name="M:MySpace.ResourcePool.ResourcePool`1.#ctor(MySpace.ResourcePool.ResourcePool{`0}.BuildItemDelegate,MySpace.ResourcePool.ResourcePool{`0}.ResetItemDelegate,System.Int16)">
+            <summary>
+            Create a new resource pool that uses <paramref name="buildItemDelegate"/> to build its items,
+            <paramref name="resetItemDelegate"/> to reset them, and creates <paramref name="minimumItemCount"/> permanent ones.
+            </summary>
+            <param name="buildItemDelegate">The delegate for creating new items in the pool.</param>
+            <param name="resetItemDelegate">The delegate for resetting items in the pool before reuse.</param>
+            <param name="minimumItemCount">The minimum number of items in the pool. These will be created at instantiation and kept alive indefinitely.</param>
+        </member>
+        <member name="M:MySpace.ResourcePool.ResourcePool`1.#ctor(MySpace.ResourcePool.ResourcePool{`0}.BuildItemDelegate,MySpace.ResourcePool.ResourcePool{`0}.ResetItemDelegate,System.Int32,System.Int16)">
+            <summary>
+            Create a new resource pool that uses <paramref name="buildItemDelegate"/> to build its items,
+            <paramref name="resetItemDelegate"/> to reset them, will reuse them <paramref name="maxItemReuses"/> times, 
+            and creates <paramref name="minimumItemCount"/> permanent ones.
+            </summary>
+            <param name="buildItemDelegate">The delegate for creating new items in the pool.</param>
+            <param name="resetItemDelegate">The delegate for resetting items in the pool before reuse.</param>
+            <param name="maxItemReuses">The number of times created items will be reused.  Use ResourcePool.InfiniteReuse to reuse items indefinitely.</param>
+            <param name="minimumItemCount">The minimum number of items in the pool. These will be created at instantiation and kept alive indefinitely.</param>
+        </member>
+        <member name="M:MySpace.ResourcePool.ResourcePool`1.GetItem">
+            <summary>
+            Gets an item from the pool. If no items are available, a new one will be created.
+            </summary>
+            <returns>A ResourcePoolItem from this pool.</returns>
+            <remarks>You must call ReleaseItem on the Item when you are done with it. It is recommended to use a finally block to do so.</remarks>
+        </member>
+        <member name="M:MySpace.ResourcePool.ResourcePool`1.ReleaseItem(MySpace.ResourcePool.ResourcePoolItem{`0})">
+            <summary>
+            Release the item for reuse. If the resetItemDelegate was set, it will be called before the item is reused.
+            </summary>
+            <param name="item">The item to release.</param>
+            <remarks>It is recommended that this be called in a finally block after a try block which uses the item.</remarks>
+        </member>
+        <member name="P:MySpace.ResourcePool.ResourcePool`1.AllocatedItemsCounter">
+            <summary>
+            A PerformanceCounter used to track how many items have been allocated. This library will not create performance counters, you must supply them.
+            </summary>
+        </member>
+        <member name="P:MySpace.ResourcePool.ResourcePool`1.ItemsInUseCounter">
+            <summary>
+            A PerformanceCounter used to track how many items are currently in use. This library will not create performance counters, you must supply them.
+            </summary>
+        </member>
+        <member name="P:MySpace.ResourcePool.ResourcePool`1.MaxItemReuses">
+            <summary>
+            The maximum number of times an item will be reused before it is disposed. Use ResourcePool.InfiniteReuse to reuse items indefinitely.
+            </summary>
+        </member>
+        <member name="P:MySpace.ResourcePool.ResourcePool`1.MinimumItemCount">
+            <summary>
+            The minimum number of items in the pool. This can only be set on instantiation.
+            </summary>
+        </member>
+        <member name="T:MySpace.ResourcePool.ResourcePool`1.BuildItemDelegate">
+            <summary>
+            Used to create a new item for the pool.
+            </summary>
+            <returns>A new item for the pool.</returns>
+        </member>
+        <member name="T:MySpace.ResourcePool.ResourcePool`1.ResetItemDelegate">
+            <summary>
+            If an item needs to be reset before it is used again, use a delegate of this type to do so.
+            </summary>
+            <param name="item">The item to reset.</param>
+        </member>
+        <member name="M:MySpace.ResourcePool.MemoryStreamPool.#ctor">
+            <summary>
+            Creates a new MemoryStreamPool. New MemoryStreams will have an initial capacity of 0.
+            </summary>
+        </member>
+        <member name="M:MySpace.ResourcePool.MemoryStreamPool.#ctor(System.Int32)">
+            <summary>
+            Creates a new MemoryStreamPool. 
+            New MemoryStreams will have an initial capacity of <paramref name="initialBufferSize"/>
+            </summary>
+            <param name="initialBufferSize">The initial capacity of new MemoryStreams</param>
+        </member>
+        <member name="M:MySpace.ResourcePool.MemoryStreamPool.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Creates a new MemoryStreamPool. 
+            New MemoryStreams will have an initial capacity of <paramref name="initialBufferSize"/>, 
+            and buffers will be used <paramref name="bufferReuses"/> times.
+            </summary>
+            <param name="initialBufferSize">The initial capacity of new MemoryStreams</param>
+            <param name="bufferReuses">The number of times a MemoryStream will be reused. Use ResourcePool.InfiniteReuse to reuse streams indefinitely.</param>		
+        </member>
+        <member name="M:MySpace.ResourcePool.MemoryStreamPool.#ctor(System.Int32,System.Int32,System.Int16)">
+            <summary>
+            Creates a new MemoryStreamPool. 
+            New MemoryStreams will have an initial capacity of <paramref name="initialBufferSize"/>, 
+            and buffers will be used <paramref name="bufferReuses"/> times. <paramref name="minimumItems"/> items will be created initially and reused indefinitely.
+            </summary>
+            <param name="initialBufferSize">The initial capacity of new MemoryStreams</param>
+            <param name="bufferReuses">The number of times a MemoryStream will be reused. Use ResourcePool.InfiniteReuse to reuse streams indefinitely.</param>		
+            <param name="minimumItems">The number of permenent buffers to create on instantiation.</param>
+        </member>
+        <member name="P:MySpace.ResourcePool.MemoryStreamPool.InitialBufferSize">
+            <summary>
+            The initial capacity of new MemoryStreams.
+            </summary>
+        </member>
+        <member name="P:MySpace.ResourcePool.MemoryStreamPool.BufferReuses">
+            <summary>
+            The number of times a buffer will be reused. Use MemoryStreamPool.InfiniteReuse to reuse streams indefinitely.
+            </summary>
+        </member>
+        <member name="T:MySpace.ResourcePool.ResourcePoolItem`1">
+            <summary>
+            Represents a Pooled resource item.
+            </summary>
+            <typeparam name="T">The type of the pooled item.</typeparam>
+        </member>
+        <member name="M:MySpace.ResourcePool.ResourcePoolItem`1.Release">
+            <summary>
+            Releases this item. This is equivalent to calling ReleaseItem on the pool that created the item.
+            </summary>
+        </member>
+        <member name="M:MySpace.ResourcePool.ResourcePoolItem`1.Dispose">
+            <summary>
+            Release the item and all associated resources.
+            </summary>
+        </member>
+        <member name="P:MySpace.ResourcePool.ResourcePoolItem`1.Item">
+            <summary>
+            The actual item that is being pooled.
+            </summary>
+        </member>
+    </members>
+</doc>

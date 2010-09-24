@@ -1,0 +1,1068 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MySpace.DataRelay.RelayComponent.Forwarding</name>
+    </assembly>
+    <members>
+        <member name="T:MySpace.DataRelay.RelayComponent.Forwarding.BulkMessageInfo">
+            <summary>
+            Information about messages sent as lists against the relay server.
+            </summary>
+        </member>
+        <member name="P:MySpace.DataRelay.RelayComponent.Forwarding.BulkMessageInfo.MessageCount">
+            <summary>
+            Number of bulk messages.
+            </summary>
+        </member>
+        <member name="P:MySpace.DataRelay.RelayComponent.Forwarding.BulkMessageInfo.AverageMessageTime">
+            <summary>
+            Average message time.
+            </summary>
+        </member>
+        <member name="P:MySpace.DataRelay.RelayComponent.Forwarding.BulkMessageInfo.LastMessageTime">
+            <summary>
+            Time of the last message.
+            </summary>
+        </member>
+        <member name="P:MySpace.DataRelay.RelayComponent.Forwarding.BulkMessageInfo.LastMessageLength">
+            <summary>
+            Number of items in the last bulk message.
+            </summary>
+        </member>
+        <member name="P:MySpace.DataRelay.RelayComponent.Forwarding.BulkMessageInfo.AverageMessageLength">
+            <summary>
+            Average number of items in bulk messages.
+            </summary>
+        </member>
+        <member name="T:MySpace.DataRelay.RelayComponent.Forwarding.HydrationPolicyStatus">
+            <summary>
+            Hydration policy information for this type.
+            </summary>
+        </member>
+        <member name="P:MySpace.DataRelay.RelayComponent.Forwarding.HydrationPolicyStatus.KeyType">
+            <summary>
+            The <see cref="T:MySpace.DataRelay.RelayKeyType"/> used for hydrating objects.
+            </summary>
+        </member>
+        <member name="P:MySpace.DataRelay.RelayComponent.Forwarding.HydrationPolicyStatus.HydrateMisses">
+            <summary>
+            If <see langword="true"/> it indicates that objects will
+            hydrate on cache misses when getting a single item.
+            </summary>
+        </member>
+        <member name="P:MySpace.DataRelay.RelayComponent.Forwarding.HydrationPolicyStatus.HydrateBulkMisses">
+            <summary>
+            If <see langword="true"/> it indicates that objects will 
+            hydrate on cache misses when getting multiple items.
+            </summary>
+        </member>
+        <member name="T:MySpace.DataRelay.RelayComponent.Forwarding.MessageCountInfo">
+            <summary>
+            Information about messages being processed by the data relay server.
+            </summary>
+        </member>
+        <member name="F:MySpace.DataRelay.RelayComponent.Forwarding.MessageCountInfo.MessageType">
+            <summary>
+            Type of message data is being collected for.
+            </summary>
+        </member>
+        <member name="F:MySpace.DataRelay.RelayComponent.Forwarding.MessageCountInfo.MessageCount">
+            <summary>
+            Number of messages.
+            </summary>
+        </member>
+        <member name="F:MySpace.DataRelay.RelayComponent.Forwarding.MessageCountInfo.AverageMessageTime">
+            <summary>
+            Average message time.
+            </summary>
+        </member>
+        <member name="F:MySpace.DataRelay.RelayComponent.Forwarding.MessageCountInfo.LastMessageTime">
+            <summary>
+            Time of the last message.
+            </summary>
+        </member>
+        <member name="T:MySpace.DataRelay.RelayComponent.Forwarding.ServerDownErrorInfo">
+            <summary>
+            Information for servers that were down.
+            </summary>
+        </member>
+        <member name="P:MySpace.DataRelay.RelayComponent.Forwarding.ServerDownErrorInfo.Errors">
+            <summary>
+            Number of server downtime errors.
+            </summary>
+        </member>
+        <member name="P:MySpace.DataRelay.RelayComponent.Forwarding.ServerDownErrorInfo.ErrorsLast30Seconds">
+            <summary>
+            Number of server downtime errors in the last 30 seconds.
+            </summary>
+        </member>
+        <member name="P:MySpace.DataRelay.RelayComponent.Forwarding.ServerDownErrorInfo.LastTime">
+            <summary>
+            The last time the server was down.
+            </summary>
+        </member>
+        <member name="P:MySpace.DataRelay.RelayComponent.Forwarding.ServerDownErrorInfo.LastTimeDescription">
+            <summary>
+            Description of the last time the server was down.
+            </summary>
+            <example>
+            (20 minutes ago)
+            </example>
+        </member>
+        <member name="T:MySpace.DataRelay.RelayComponent.Forwarding.ServerStatus">
+            <summary>
+            Enumerations used to describe the health status of a data relay server.
+            </summary>
+        </member>
+        <member name="F:MySpace.DataRelay.RelayComponent.Forwarding.ServerStatus.unresolvedServer">
+            <summary>
+            Server with a node address that is invalid or cannot be resolved.
+            </summary>
+        </member>
+        <member name="F:MySpace.DataRelay.RelayComponent.Forwarding.ServerStatus.dangerousServer">
+            <summary>
+            Server that has server down errors surpass the specified group danger
+            zone thresholds.
+            </summary>
+        </member>
+        <member name="F:MySpace.DataRelay.RelayComponent.Forwarding.ServerStatus.inactiveServer">
+            <summary>
+            Server that is not active as specified via configuration.
+            </summary>
+        </member>
+        <member name="F:MySpace.DataRelay.RelayComponent.Forwarding.ServerStatus.chosenServer">
+            <summary>
+            Server that is selected in the cluster.
+            </summary>
+        </member>
+        <member name="F:MySpace.DataRelay.RelayComponent.Forwarding.ServerStatus.happyServer">
+            <summary>
+            Server that is running smoothly.
+            </summary>
+        </member>
+        <member name="T:MySpace.DataRelay.RelayComponent.Forwarding.ForwarderStatus">
+            <summary>
+            A class that stores the statistical information collected by the <see cref="T:MySpace.DataRelay.RelayComponent.Forwarding.Forwarder"/>.
+            </summary>
+        </member>
+        <member name="P:MySpace.DataRelay.RelayComponent.Forwarding.ForwarderStatus.RelayStatistics">
+            <summary>
+            Statistical information specific to the <see cref="T:MySpace.DataRelay.RelayComponent.Forwarding.Forwarder"/>. 
+            </summary>
+        </member>
+        <member name="P:MySpace.DataRelay.RelayComponent.Forwarding.ForwarderStatus.NodeGroupStatuses">
+            <summary>
+            Statistical information collected by the <see cref="T:MySpace.DataRelay.RelayComponent.Forwarding.Forwarder"/> that is specific 
+            to a <see cref="T:MySpace.DataRelay.RelayComponent.Forwarding.NodeGroup"/>; Never <see langword="null"/>.
+            </summary>
+        </member>
+        <member name="T:MySpace.DataRelay.RelayComponent.Forwarding.NodeClusterStatus">
+            <summary>
+            Statistical information collected by the <see cref="T:MySpace.DataRelay.RelayComponent.Forwarding.Forwarder"/> that is specific 
+            to a <see cref="T:MySpace.DataRelay.RelayComponent.Forwarding.NodeCluster"/>.
+            </summary>
+        </member>
+        <member name="P:MySpace.DataRelay.RelayComponent.Forwarding.NodeClusterStatus.NodeStatuses">
+            <summary>
+            The <see cref="T:MySpace.DataRelay.RelayComponent.Forwarding.NodeStatus"/> items in for a cluster; Never <see langword="null"/>
+            </summary>
+        </member>
+        <member name="T:MySpace.DataRelay.RelayComponent.Forwarding.NodeGroupStatus">
+            <summary>
+            A class that stores the statistical information collected by the <see cref="T:MySpace.DataRelay.RelayComponent.Forwarding.Forwarder"/>
+            specific to a <see cref="T:MySpace.DataRelay.RelayComponent.Forwarding.NodeGroup"/>.
+            </summary>
+        </member>
+        <member name="P:MySpace.DataRelay.RelayComponent.Forwarding.NodeGroupStatus.GroupName">
+            <summary>
+            Name of the <see cref="T:MySpace.DataRelay.RelayComponent.Forwarding.NodeGroup"/> that statistical information is 
+            collected for.
+            </summary>
+        </member>
+        <member name="P:MySpace.DataRelay.RelayComponent.Forwarding.NodeGroupStatus.TypeSettingStatuses">
+            <summary>
+            <see cref="T:MySpace.DataRelay.Common.Schemas.TypeSetting"/> information specific to the <see cref="T:MySpace.DataRelay.RelayComponent.Forwarding.NodeGroup"/>; 
+            Never <see langword="null"/>.
+            </summary>
+        </member>
+        <member name="P:MySpace.DataRelay.RelayComponent.Forwarding.NodeGroupStatus.NodeClusterStatuses">
+            <summary>
+            Statistical information collected by the <see cref="T:MySpace.DataRelay.RelayComponent.Forwarding.Forwarder"/> that is specific 
+            to each <see cref="T:MySpace.DataRelay.RelayComponent.Forwarding.NodeCluster"/> in the <see cref="T:MySpace.DataRelay.RelayComponent.Forwarding.NodeGroup"/>; 
+            Never <see langword="null"/>.
+            </summary>
+        </member>
+        <member name="T:MySpace.DataRelay.RelayComponent.Forwarding.NodeStatus">
+            <summary>
+            Class containing information for status of a data relay server.
+            </summary>
+        </member>
+        <member name="P:MySpace.DataRelay.RelayComponent.Forwarding.NodeStatus.Status">
+            <summary>
+            Status of the data relay server as defined by <see cref="T:MySpace.DataRelay.RelayComponent.Forwarding.ServerStatus"/>.
+            </summary>
+        </member>
+        <member name="P:MySpace.DataRelay.RelayComponent.Forwarding.NodeStatus.Host">
+            <summary>
+            Host for the node.
+            </summary>
+        </member>
+        <member name="P:MySpace.DataRelay.RelayComponent.Forwarding.NodeStatus.Port">
+            <summary>
+            Port used by the node. 
+            </summary>
+        </member>
+        <member name="P:MySpace.DataRelay.RelayComponent.Forwarding.NodeStatus.Zone">
+            <summary>
+            Indicates data center location.
+            </summary>
+        </member>
+        <member name="P:MySpace.DataRelay.RelayComponent.Forwarding.NodeStatus.Hops">
+            <summary>
+            Number of network hops the relay server is from the web server.
+            </summary>
+        </member>
+        <member name="P:MySpace.DataRelay.RelayComponent.Forwarding.NodeStatus.DetectedZone">
+            <summary>
+            Zone Id for the <see cref="T:System.Net.IPAddress"/> of the node endpoint;
+            zero if <see cref="T:System.Net.IPAddress"/> is unavailable. 
+            </summary>
+        </member>
+        <member name="P:MySpace.DataRelay.RelayComponent.Forwarding.NodeStatus.OpenConnections">
+            <summary>
+            The number of open socket connections to that server. 
+            </summary>
+        </member>
+        <member name="P:MySpace.DataRelay.RelayComponent.Forwarding.NodeStatus.ActiveConnections">
+            <summary>
+            The number of active socket connections to that server. 
+            It will almost always show zero because the connections 
+            are in use for such short periods of time. 
+            </summary>
+        </member>
+        <member name="P:MySpace.DataRelay.RelayComponent.Forwarding.NodeStatus.GatheringStats">
+            <summary>
+            <see langword="true"/> if data for <see cref="P:MySpace.DataRelay.RelayComponent.Forwarding.NodeStatus.MessageCounts"/> will be collected; 
+            otherwise <see langword="false"/>.
+            </summary>
+        </member>
+        <member name="P:MySpace.DataRelay.RelayComponent.Forwarding.NodeStatus.ServerDownErrorInfo">
+            <summary>
+            Information for servers that were down.
+            </summary>
+        </member>
+        <member name="P:MySpace.DataRelay.RelayComponent.Forwarding.NodeStatus.ServerUnreachableErrorInfo">
+            <summary>
+            Information for servers that were unreachable.
+            </summary>
+        </member>
+        <member name="P:MySpace.DataRelay.RelayComponent.Forwarding.NodeStatus.InMessageQueueCount">
+            <summary>
+            Number of queued messages.
+            </summary>
+        </member>
+        <member name="P:MySpace.DataRelay.RelayComponent.Forwarding.NodeStatus.MessageCounts">
+            <summary>
+            List of message count information.
+            </summary>
+        </member>
+        <member name="P:MySpace.DataRelay.RelayComponent.Forwarding.NodeStatus.BulkInMessageInfo">
+            <summary>
+            Bulk In refers to saves, deletes, and other updates messages sent as lists 
+            against the relay server (the message is putting data “in” the server. 
+            </summary>
+        </member>
+        <member name="P:MySpace.DataRelay.RelayComponent.Forwarding.NodeStatus.BulkOutMessageInfo">
+            <summary>
+            Bulk Out refers to gets and queries sent as lists against the 
+            relay server (the message is getting data “out” of the server. 
+            </summary>
+        </member>
+        <member name="T:MySpace.DataRelay.RelayComponent.Forwarding.NodeWithInfo">
+            <summary>
+            The key for the NodeWithMessages collection
+            Implements IEquatable to support the index[] property of KeyedCollection with
+            a complex type.
+            </summary>
+        </member>
+        <member name="M:MySpace.DataRelay.RelayComponent.Forwarding.NodeWithInfo.#ctor(MySpace.DataRelay.RelayComponent.Forwarding.Node,System.Boolean,System.Boolean)">
+            <summary>
+            CTOR
+            </summary>
+            <param name="node"></param>
+            <param name="syncInMessages"></param>
+            <param name="skipErrorQueue"></param>
+            <summary>
+            added: cbrown
+            To allow exceptions to be thrown from certain object types, and the error queue
+            to be used by others, even when they target the same node, the NodeWithMessages
+            collection now seperates the Relay Messages that can throw exceptions from the
+            remainder of the queue.  This class is now the key to the NodeWithMessages collection
+            class.
+            </summary>
+        </member>
+        <member name="T:MySpace.DataRelay.RelayComponent.Forwarding.NodeWithMessagesCollection">
+            <summary>
+            Collection of messages, keyed by node used for processing
+            </summary>
+            <remarks>
+            cbrown:
+            Changed from
+            	:KeyedCollection&lt;Node, NodeWithMessages&gt; 
+            		to
+            	:KeyedCollection&lt;NodeWithInfo,NodeWithMessages&gt;
+            	
+            Supports carry of typesettings along with node for the purpose of
+            sync messages with throwOnError set
+            A single node may handle multiple types of messages, each with its
+            own Sync/Throw settings.  These will be considered the same if 
+            	A) Node is the same
+            	B) SyncInMessages is the same
+            	C) ThrowOnSyncFailure is the same
+            	
+            NOTE: The nodes will be considered the same, even for different message types
+            when the above conditions are met.  Thus, multiple message types can be conained in
+            a single NodeWithMessages structure	
+            </remarks>
+        </member>
+        <member name="T:MySpace.DataRelay.RelayComponent.Forwarding.RelayInfo">
+            <summary>
+            A class that stores the information collected by the relay system.
+            </summary>
+        </member>
+        <member name="P:MySpace.DataRelay.RelayComponent.Forwarding.RelayInfo.ForwarderStatus">
+            <summary>
+            The statistical information collected by the <see cref="T:MySpace.DataRelay.RelayComponent.Forwarding.Forwarder"/>.
+            </summary>
+        </member>
+        <member name="T:MySpace.DataRelay.RelayComponent.Forwarding.RelayStatistics">
+            <summary>
+            Statistical information specific to the <see cref="T:MySpace.DataRelay.RelayComponent.Forwarding.Forwarder"/>. 
+            </summary>
+        </member>
+        <member name="P:MySpace.DataRelay.RelayComponent.Forwarding.RelayStatistics.CurrentServerTime">
+            <summary>
+            Current Time of the <see cref="T:MySpace.DataRelay.RelayComponent.Forwarding.Forwarder"/>.
+            </summary>
+        </member>
+        <member name="P:MySpace.DataRelay.RelayComponent.Forwarding.RelayStatistics.InitializationTime">
+            <summary>
+            Time of when the <see cref="T:MySpace.DataRelay.RelayComponent.Forwarding.Forwarder"/> was initialized.
+            </summary>
+        </member>
+        <member name="T:MySpace.DataRelay.RelayComponent.Forwarding.ServerUnreachableErrorInfo">
+            <summary>
+            Information for servers that were unreachable.
+            </summary>
+        </member>
+        <member name="P:MySpace.DataRelay.RelayComponent.Forwarding.ServerUnreachableErrorInfo.Errors">
+            <summary>
+            Number of server unreachable errors in the last 30 seconds.
+            </summary>
+        </member>
+        <member name="P:MySpace.DataRelay.RelayComponent.Forwarding.ServerUnreachableErrorInfo.WaitPeriodSeconds">
+            <summary>
+            Period of time to wait for reporting number of server unreachable errors.
+            </summary>
+        </member>
+        <member name="P:MySpace.DataRelay.RelayComponent.Forwarding.ServerUnreachableErrorInfo.ErrorsLast2WaitPeriods">
+            <summary>
+            Number of server unreachable errors in the last two <see cref="P:MySpace.DataRelay.RelayComponent.Forwarding.ServerUnreachableErrorInfo.WaitPeriodSeconds"/>.
+            </summary>
+        </member>
+        <member name="P:MySpace.DataRelay.RelayComponent.Forwarding.ServerUnreachableErrorInfo.LastTime">
+            <summary>
+            The last time the server was unreachable.
+            </summary>
+        </member>
+        <member name="P:MySpace.DataRelay.RelayComponent.Forwarding.ServerUnreachableErrorInfo.LastTimeDescription">
+            <summary>
+            Description of the last time the server was unreachable.
+            </summary>
+            <example>
+            (20 minutes ago)
+            </example>
+        </member>
+        <member name="T:MySpace.DataRelay.RelayComponent.Forwarding.TypeSettingStatus">
+            <summary>
+            <see cref="T:MySpace.DataRelay.Common.Schemas.TypeSetting"/> information related to statistical information 
+            collected by the <see cref="T:MySpace.DataRelay.RelayComponent.Forwarding.Forwarder"/>.
+            </summary>
+        </member>
+        <member name="P:MySpace.DataRelay.RelayComponent.Forwarding.TypeSettingStatus.TypeName">
+            <summary>
+            Fully qualified name of the class.
+            </summary>
+        </member>
+        <member name="P:MySpace.DataRelay.RelayComponent.Forwarding.TypeSettingStatus.TypeId">
+            <summary>
+            Unique integer identifier.
+            </summary>
+        </member>
+        <member name="P:MySpace.DataRelay.RelayComponent.Forwarding.TypeSettingStatus.Disabled">
+            <summary>
+            If <see langword="true"/>, it indicates that no messages 
+            of this type will get sent if the command originates 
+            from the RelayClient.
+            </summary>
+        </member>
+        <member name="P:MySpace.DataRelay.RelayComponent.Forwarding.TypeSettingStatus.Compress">
+            <summary>
+            If <see langword="true"/> it indicates that if the 
+            RelayClient is used the payload for a <see cref="T:MySpace.DataRelay.RelayMessage"/> 
+            of type <see cref="F:MySpace.DataRelay.MessageType.Query"/> is compressed.
+            </summary>
+        </member>
+        <member name="P:MySpace.DataRelay.RelayComponent.Forwarding.TypeSettingStatus.GroupName">
+            <summary>
+            Caching group to which the class belongs.
+            </summary>
+        </member>
+        <member name="P:MySpace.DataRelay.RelayComponent.Forwarding.TypeSettingStatus.RelatedIndexTypeId">
+            <summary>
+            A value that links two <see cref="P:MySpace.DataRelay.RelayComponent.Forwarding.TypeSettingStatus.TypeId"/>s together.  
+            This is primarily used for IndexCache.
+            </summary>
+        </member>
+        <member name="P:MySpace.DataRelay.RelayComponent.Forwarding.TypeSettingStatus.CheckRaceCondition">
+            <summary>
+            Not used.
+            </summary>
+        </member>
+        <member name="P:MySpace.DataRelay.RelayComponent.Forwarding.TypeSettingStatus.TTLSetting">
+            <summary>
+            Expiration settings for the class.
+            </summary>
+        </member>
+        <member name="P:MySpace.DataRelay.RelayComponent.Forwarding.TypeSettingStatus.SyncInMessages">
+            <summary>
+            If <see langword="true"/> it indicates that 
+            the client will block until the in message 
+            has been sent to the data relay server.
+            </summary>
+        </member>
+        <member name="P:MySpace.DataRelay.RelayComponent.Forwarding.TypeSettingStatus.ThrowOnSyncFailure">
+            <summary>
+            Not used.
+            </summary>
+        </member>
+        <member name="P:MySpace.DataRelay.RelayComponent.Forwarding.TypeSettingStatus.HydrationPolicyStatus">
+            <summary>
+            Hydration policy information for this type.
+            </summary>
+        </member>
+        <member name="T:MySpace.DataRelay.RelayComponent.Forwarding.SynchronousAsyncResult">
+            <summary>
+            	<para>A simple <see cref="T:System.IAsyncResult"/> implementation for synchronous completion.</para>
+            </summary>
+        </member>
+        <member name="M:MySpace.DataRelay.RelayComponent.Forwarding.SynchronousAsyncResult.CreateAndComplete(System.AsyncCallback,System.Object)">
+            <summary>
+            Creates a synchronous async result and immeadiatly completes it.
+            </summary>
+            <param name="callback">The callback to invoke.</param>
+            <param name="asyncState">A user-defined state object.</param>
+            <returns>The new synchronous async reuslt object.</returns>
+        </member>
+        <member name="T:MySpace.DataRelay.RelayComponent.Forwarding.SyncRelayOperationException">
+            <summary>
+            When relay messages operate on a type configure with
+            	<see cref="T:MySpace.DataRelay.Common.Schemas.TypeSettings"/> with 
+            	SyncInMessages=true and 
+            	ThrowOnSyncFailure=true
+            failed executions will throw this exception	
+            </summary>
+        </member>
+        <member name="M:MySpace.DataRelay.RelayComponent.Forwarding.SyncRelayOperationException.#ctor(System.String)">
+            <summary>
+            Creates a new instance
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="T:MySpace.DataRelay.RelayComponent.Forwarding.CounterInstaller">
+            <summary>
+            Responsible for installing forwarding counters.
+            </summary>
+        </member>
+        <member name="M:MySpace.DataRelay.RelayComponent.Forwarding.CounterInstaller.#ctor">
+            <summary>
+            Responsible for installing forwarding counters.
+            </summary>
+        </member>
+        <member name="M:MySpace.DataRelay.RelayComponent.Forwarding.CounterInstaller.Install(System.Collections.IDictionary)">
+            <summary>
+            Installs forwarding counters
+            </summary>		
+        </member>
+        <member name="M:MySpace.DataRelay.RelayComponent.Forwarding.CounterInstaller.Uninstall(System.Collections.IDictionary)">
+            <summary>
+            Uninstalls forwarding counters
+            </summary>
+        </member>
+        <member name="M:MySpace.DataRelay.RelayComponent.Forwarding.CounterInstaller.InstallCounters">
+            <summary>
+            Installs forwarding counters
+            </summary>		
+        </member>
+        <member name="M:MySpace.DataRelay.RelayComponent.Forwarding.CounterInstaller.RemoveCounters">
+            <summary>
+            Removes forwarding counters
+            </summary>		
+        </member>
+        <member name="F:MySpace.DataRelay.RelayComponent.Forwarding.CounterInstaller.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:MySpace.DataRelay.RelayComponent.Forwarding.CounterInstaller.Dispose(System.Boolean)">
+            <summary> 
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:MySpace.DataRelay.RelayComponent.Forwarding.CounterInstaller.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:MySpace.DataRelay.RelayComponent.Forwarding.Forwarder">
+            <summary>
+            Responsible for forwading <see cref="T:MySpace.DataRelay.RelayMessage"/> to other relay node servers and
+            is used by clients to send requests into the relay transport.
+            </summary>
+        </member>
+        <member name="F:MySpace.DataRelay.RelayComponent.Forwarding.Forwarder.ComponentName">
+            <summary>
+            The official name of this component, for use in configuration files.
+            </summary>
+        </member>
+        <member name="M:MySpace.DataRelay.RelayComponent.Forwarding.Forwarder.GetComponentName">
+            <summary>
+            Returns a unique human readable component name.  This name MUST match the name used
+            in the component config file.
+            </summary>
+            <returns>The name of the component.</returns>
+        </member>
+        <member name="M:MySpace.DataRelay.RelayComponent.Forwarding.Forwarder.LoadConfig(MySpace.DataRelay.Configuration.RelayNodeConfig,MySpace.DataRelay.ComponentRunState)">
+            <summary>
+            this (or <see cref="M:MySpace.DataRelay.RelayComponent.Forwarding.Forwarder.ReloadConfig(MySpace.DataRelay.Configuration.RelayNodeConfig,MySpace.DataRelay.Common.Schemas.RelayComponent)"/>) gets called (depending) when the TypeSettings.Config file
+            are changed.  
+            </summary>
+            <remarks>
+            Added: craigbro
+            cachedTypeSettings now held with the forwarder for reference of
+            exceptions on Synchronous "in" messages.  
+            To reload, we just null out the cached TypeSettingsCollection object and the
+            accessor will reload it on next call
+            While ConfigurationManager.GetSection is quite performant after the 1st hit,
+            keeping them cached is about twice as fast.		
+            </remarks>
+            <param name="config"></param>
+            <param name="runState"></param>
+        </member>
+        <member name="M:MySpace.DataRelay.RelayComponent.Forwarding.Forwarder.ReloadConfig(MySpace.DataRelay.Configuration.RelayNodeConfig,MySpace.DataRelay.Common.Schemas.RelayComponent)">
+            <summary>
+            this (or <see cref="M:MySpace.DataRelay.RelayComponent.Forwarding.Forwarder.LoadConfig(MySpace.DataRelay.Configuration.RelayNodeConfig,MySpace.DataRelay.ComponentRunState)"/>) gets called (depending) when the TypeSettings.Config file
+            are changed.  
+            </summary>
+            <remarks>
+            Added: craigbro
+            cachedTypeSettings now held with the forwarder for reference of
+            exceptions on Synchronous "in" messages.  
+            To reload, we just null out the cached TypeSettingsCollection object and the
+            accessor will reload it on next call
+            While ConfigurationManager.GetSection is quite performant after the 1st hit,
+            keeping them cached is about twice as fast.		
+            </remarks>
+            <param name="config">The config to reload</param>
+        </member>
+        <member name="M:MySpace.DataRelay.RelayComponent.Forwarding.Forwarder.GetRunState">
+            <summary>
+            Returns a ComponentRunState with any existing error queues, so that they can be persisted through
+            AppDomain reloads.
+            </summary>		
+        </member>
+        <member name="M:MySpace.DataRelay.RelayComponent.Forwarding.Forwarder.GetRuntimeInfo">
+            <summary>
+            Returns the results of GetHtmlStatus in a ForwarderRuntimeInfo object.
+            </summary>		
+        </member>
+        <member name="M:MySpace.DataRelay.RelayComponent.Forwarding.Forwarder.Initialize(MySpace.DataRelay.Configuration.RelayNodeConfig,MySpace.DataRelay.ComponentRunState,MySpace.DataRelay.Common.Schemas.RelayComponent)">
+            <summary>
+            Initializes the component. Any error queues in runState will be reinstantiated.
+            </summary>        
+        </member>
+        <member name="M:MySpace.DataRelay.RelayComponent.Forwarding.Forwarder.Shutdown">
+            <summary>
+            Shut down the component.
+            </summary>
+        </member>
+        <member name="M:MySpace.DataRelay.RelayComponent.Forwarding.Forwarder.HandleMessage(MySpace.DataRelay.RelayMessage)">
+            <summary>
+            Performs processing on single message
+            </summary>
+            <exception cref="T:MySpace.DataRelay.RelayComponent.Forwarding.SyncRelayOperationException">
+            When the type of an object is defined with settings
+            	<see cref="T:MySpace.DataRelay.Common.Schemas.TypeSettings"></see> with 
+            	SyncInMessages=true and 
+            	ThrowOnSyncFailure=true
+            failed "in" executions will throw this exception
+            </exception>
+            <param name="message">Message to be processed</param>
+        </member>
+        <member name="M:MySpace.DataRelay.RelayComponent.Forwarding.Forwarder.HandleMessages(System.Collections.Generic.IList{MySpace.DataRelay.RelayMessage})">
+            <summary>
+            Performs processing on a block of messages
+            </summary>
+            <param name="messages">A list of RealyMessage objects to be processed</param>
+            <exception cref="T:MySpace.DataRelay.RelayComponent.Forwarding.SyncRelayOperationException">
+            When the type of an object is defined with settings
+            	<see cref="T:MySpace.DataRelay.Common.Schemas.TypeSettings"></see> with 
+            	SyncInMessages=true and 
+            	ThrowOnSyncFailure=true
+            failed executions will throw this exception
+            </exception>
+            <remarks>
+            Procssing steps:
+            1. Splits the list of messages into several lists, each containing
+            the node, messages of a single type and settings for that type
+            2. Processes each list individually
+            3. Tracks the success/failure of each list
+            4. If a list (or a message from a list) fails, and the type of message
+            requires a "Throw" when sync fails: throws a SyncRelayOperationException, 
+            otherwise, places failed messages into the exception queue
+            </remarks>
+        </member>
+        <member name="M:MySpace.DataRelay.RelayComponent.Forwarding.Forwarder.RaiseMessageDropped(MySpace.DataRelay.SerializedRelayMessage)">
+            <summary>
+            Calls the NotifyDroppedMessage event with the supplied message.
+            </summary>    
+        </member>
+        <member name="M:MySpace.DataRelay.RelayComponent.Forwarding.Forwarder.RaiseMessageDropped(MySpace.DataRelay.RelayMessage)">
+            <summary>
+            Calls the NotifyDroppedMessage event with the supplied message.
+            </summary>        
+        </member>
+        <member name="M:MySpace.DataRelay.RelayComponent.Forwarding.Forwarder.GetHtmlStatus">
+            <summary>
+            Returns an Html page with information about every defined relay node.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MySpace.DataRelay.RelayComponent.Forwarding.Forwarder.GetHtmlStatus(System.Text.StringBuilder)">
+            <summary>
+            Adds an HTML representation of the clients status for each service to the supplied stringbuilder.
+            </summary>
+        </member>
+        <member name="M:MySpace.DataRelay.RelayComponent.Forwarding.Forwarder.GetForwarderStatus">
+            <summary>
+            Returns statistical information collected by the <see cref="T:MySpace.DataRelay.RelayComponent.Forwarding.Forwarder"/>.
+            </summary>
+            <returns>Returns the <see cref="T:MySpace.DataRelay.RelayComponent.Forwarding.ForwarderStatus"/> object.</returns>
+        </member>
+        <member name="M:MySpace.DataRelay.RelayComponent.Forwarding.Forwarder.Replicate(System.Collections.Generic.IList{MySpace.DataRelay.RelayMessage})">
+            <summary>
+             Replicates a list of messages.
+            </summary>
+            <param name="messages">The list of messages.</param>
+            <returns>The number of messages replicated.</returns>
+        </member>
+        <member name="M:MySpace.DataRelay.RelayComponent.Forwarding.Forwarder.Replicate(MySpace.DataRelay.RelayMessage)">
+            <summary>
+            Replicates a message if the message can be replicated.
+            </summary>
+            <param name="message">The message to replicate.</param>
+            <returns>Returns true if replicated.</returns>
+        </member>
+        <member name="M:MySpace.DataRelay.RelayComponent.Forwarding.Forwarder.BeginHandleMessage(MySpace.DataRelay.RelayMessage,System.Object,System.AsyncCallback)">
+            <summary>
+            Begins asynchronous processing of a single <see cref="T:MySpace.DataRelay.RelayMessage"/>.
+            </summary>
+            <param name="message">The <see cref="T:MySpace.DataRelay.RelayMessage"/>.</param>
+            <param name="state">Callers can put any state they like here.</param>
+            <param name="callback">The method to call upon completion.</param>
+            <returns>
+            Returns an <see cref="T:System.IAsyncResult"/>.
+            </returns>
+        </member>
+        <member name="M:MySpace.DataRelay.RelayComponent.Forwarding.Forwarder.MySpace#DataRelay#IAsyncDataHandler#BeginHandleMessages(System.Collections.Generic.IList{MySpace.DataRelay.RelayMessage},System.Object,System.AsyncCallback)">
+            <summary>
+            Begins asynchronous processing of a <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:MySpace.DataRelay.RelayMessage"/>s.
+            </summary>
+            <param name="messages">The list of <see cref="T:MySpace.DataRelay.RelayMessage"/>s.</param>
+            <param name="state">Callers can put any state they like here.</param>
+            <param name="callback">The method to call upon completion.</param>
+            <returns>
+            Returns an <see cref="T:System.IAsyncResult"/>.
+            </returns>
+            <remarks>
+            <para>This method simply redirects to the synchronous <see cref="M:MySpace.DataRelay.RelayComponent.Forwarding.Forwarder.HandleMessages(System.Collections.Generic.IList{MySpace.DataRelay.RelayMessage})"/> method for now.
+            In the future this may change if we have compelling use-cases for making bulk message handling asynchronous.</para>
+            </remarks>
+        </member>
+        <member name="M:MySpace.DataRelay.RelayComponent.Forwarding.Forwarder.EndHandleMessage(System.IAsyncResult)">
+            <summary>
+            Ends asynchronous processing of a single <see cref="T:MySpace.DataRelay.RelayMessage"/>.
+            </summary>
+            <param name="asyncResult">The <see cref="T:System.IAsyncResult"/> from <see cref="M:MySpace.DataRelay.IAsyncDataHandler.BeginHandleMessage(MySpace.DataRelay.RelayMessage,System.Object,System.AsyncCallback)"/></param>
+        </member>
+        <member name="M:MySpace.DataRelay.RelayComponent.Forwarding.Forwarder.MySpace#DataRelay#IAsyncDataHandler#EndHandleMessages(System.IAsyncResult)">
+            <summary>
+            Ends asynchronous processing of a <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:MySpace.DataRelay.RelayMessage"/>s.
+            </summary>
+            <param name="asyncResult">The <see cref="T:System.IAsyncResult"/> from <see cref="M:MySpace.DataRelay.IAsyncDataHandler.BeginHandleMessages(System.Collections.Generic.IList{MySpace.DataRelay.RelayMessage},System.Object,System.AsyncCallback)"/></param>
+        </member>
+        <member name="E:MySpace.DataRelay.RelayComponent.Forwarding.Forwarder.MessageDropped">
+            <summary>
+            An event for notifying clients that a message was dropped completely from delivery.
+            This is not wrapped with a setter/defaulthandler so that functions that would call 
+            it in a loop can avoid the loop entirely if it's null.		
+            </summary>
+        </member>
+        <member name="T:MySpace.DataRelay.RelayComponent.Forwarding.Forwarder.NotifyDroppedMessage">
+            <summary>
+            Called when a message would be dropped entirely from delivery. 
+            This is most likely to occur if an error queue is full.
+            </summary>        
+        </member>
+        <member name="T:MySpace.DataRelay.RelayComponent.Forwarding.ForwarderRuntimeInfo">
+            <summary>
+            The runtime information object for the forwarding component. Contains the Html Status.
+            </summary>
+        </member>
+        <member name="F:MySpace.DataRelay.RelayComponent.Forwarding.ForwarderRuntimeInfo.HtmlStatus">
+            <summary>
+            The Html formatted status information for the forwarder. Contains information about each defined node.
+            </summary>
+        </member>
+        <member name="M:MySpace.DataRelay.RelayComponent.Forwarding.ForwarderRuntimeInfo.#ctor">
+            <summary>
+            Create an empty ForwarderRuntimeInfo object.
+            </summary>
+        </member>
+        <member name="M:MySpace.DataRelay.RelayComponent.Forwarding.ForwarderRuntimeInfo.GetRuntimeInfoAsString">
+            <summary>
+            Returns the html status of the forwarder.
+            </summary>
+        </member>
+        <member name="T:MySpace.DataRelay.RelayComponent.Forwarding.ForwardingConfig">
+            <summary>
+            XML Configuration for Forwarder component
+            </summary>
+        </member>
+        <member name="F:MySpace.DataRelay.RelayComponent.Forwarding.ForwardingConfig.QueueConfig">
+            <summary>
+            The configuration for forwarding error queues.
+            </summary>
+        </member>
+        <member name="F:MySpace.DataRelay.RelayComponent.Forwarding.ForwardingConfig.MessageChunkLength">
+            <summary>
+            The maximum length of a message list that will be sent in a single network message.
+            </summary>
+        </member>
+        <member name="F:MySpace.DataRelay.RelayComponent.Forwarding.ForwardingConfig.MessageBurstLength">
+            <summary>
+            The bucket size for in messages that will attempt to be filled before forwarding the list.
+            </summary>        
+        </member>
+        <member name="F:MySpace.DataRelay.RelayComponent.Forwarding.ForwardingConfig.MessageBurstTimeout">
+            <summary>
+            The number of milliseconds that are waited to fill the MessageBurst bucket.
+            </summary>
+        </member>
+        <member name="F:MySpace.DataRelay.RelayComponent.Forwarding.ForwardingConfig.NumberOfThreads">
+            <summary>
+            The number of threads used to process In Messages.
+            </summary>
+        </member>
+        <member name="F:MySpace.DataRelay.RelayComponent.Forwarding.ForwardingConfig.NumberOfOutMessageThreads">
+            <summary>
+            The number of threads used to process bulk Out Messages, if EnableAyncBulkGets is enabled. If it is not, calling threads are used.
+            </summary>
+        </member>
+        <member name="F:MySpace.DataRelay.RelayComponent.Forwarding.ForwardingConfig.MaximumTaskQueueDepth">
+            <summary>
+            The maximum number of messages that can be queued. In and Out messages both use this, but are queued seperately.
+            </summary>
+        </member>
+        <member name="F:MySpace.DataRelay.RelayComponent.Forwarding.ForwardingConfig.EnableAsyncBulkGets">
+            <summary>
+            Whether to use the OutMessageThreads to make bulk out message calls simultaneously against multiple client nodes.
+            </summary>
+        </member>
+        <member name="F:MySpace.DataRelay.RelayComponent.Forwarding.ForwardingConfig.RepostMessageLists">
+            <summary>
+            Whether or not in message lists are reposted into the in message buckets. If false, lists are processed as passed and bypass the bucket/burst system.
+            </summary>
+        </member>
+        <member name="F:MySpace.DataRelay.RelayComponent.Forwarding.ForwardingConfig.MapNetwork">
+            <summary>
+            If true, determine the number of hops away each node is.
+            If false, use zone definitions.
+            Only the value at startup is meaningful; changing it after initialization has no effect.
+            </summary>
+        </member>
+        <member name="F:MySpace.DataRelay.RelayComponent.Forwarding.ForwardingConfig.WriteMessageTrace">
+            <summary>
+            If true, the forwarder will write the message.tostring and destination nodes of all handled RelayMessages to the default Trace.
+            </summary>
+        </member>
+        <member name="F:MySpace.DataRelay.RelayComponent.Forwarding.ForwardingConfig.WriteCallingMethod">
+            <summary>
+            If this and WriteMessageTrace are both true, then the external method that caused the message to be sent will be displayed as well.
+            If WriteMessageTrace is false, this has no impact.
+            </summary>
+        </member>
+        <member name="F:MySpace.DataRelay.RelayComponent.Forwarding.ForwardingConfig.TraceSettings">
+            <summary>
+            This controls filtering and file writing options for the message tracing above.
+            </summary>
+        </member>
+        <member name="M:MySpace.DataRelay.RelayComponent.Forwarding.MessageQueue.#ctor">
+            <summary>
+            Only for serialization support. Do not use.
+            </summary>
+        </member>
+        <member name="M:MySpace.DataRelay.RelayComponent.Forwarding.Node.DoHandleMessage(MySpace.DataRelay.RelayMessage,System.Boolean,System.Boolean)">
+            <summary>
+            Processes a single message
+            </summary>
+            <param name="message">Message to be processed</param>
+            <param name="useSyncForInMessages">Default: false
+            The type (from TypeSettings.config) can require synchronous handling for messages
+            </param>
+            <param name="skipErrorQueueForSync">Default: false
+            The type (from TypeSettings.config) can require that should the message processing fail,
+            the message will NOT be sent to the Error Queue for retry.  Instead, the function returns
+            false.
+            Has no effect if useSyncForInMessages is false.
+            </param>
+            <returns>
+            useSyncForInMessages = false	always returns True (message processed Async)
+            useSyncForInMessages = true, skipErrorQueueForSync = false	always returns True (errors placed in queue for retry)
+            useSyncForInMessages = true, skipErrorQueueForSync = true	returns true if the message processing succeeded
+            </returns>
+        </member>
+        <member name="M:MySpace.DataRelay.RelayComponent.Forwarding.Node.HandleInMessageSync(MySpace.DataRelay.RelayMessage,System.Boolean,System.Boolean)">
+            <summary>
+            Processes a single message
+            Calls DoHandleMessage if the message is to be processed synchronously
+            Posts message to process queue otherwise
+            </summary>
+            <param name="message">Message to be processed</param>
+            <param name="useSyncForInMessages">Default: false
+            The type (from TypeSettings.config) can require synchronous handling for messages
+            </param>
+            <param name="skipErrorQueueForSync">Default: false
+            The type (from TypeSettings.config) can require that should the message processing fail,
+            the message will NOT be sent to the Error Queue for retry.  Instead, the function returns
+            false.
+            Has no effect if useSyncForInMessages is false.
+            </param>
+            <returns>
+            useSyncForInMessages = false	always returns True (message processed Async)
+            useSyncForInMessages = true, skipErrorQueueForSync = false	always returns True (errors placed in queue for retry)
+            useSyncForInMessages = true, skipErrorQueueForSync = true	returns true if the message processing succeeded
+            </returns>
+        </member>
+        <member name="M:MySpace.DataRelay.RelayComponent.Forwarding.Node.DoHandleInMessages(MySpace.DataRelay.SerializedRelayMessage[],System.Boolean)">
+            <summary>
+            Processes an array of RelayMessages
+            </summary>
+            <param name="messages">Array of messages to be processed</param>
+            <param name="skipErrorQueueForSync">True if synchronous messages that fail should not be 
+            placed into the error queue for retry.
+            </param>
+            <returns>
+            skipErrorQueueForSync = false	always returns True (message processed Async)
+            skipErrorQueueForSync = true	returns true if the message processing succeeded
+            </returns>
+        </member>
+        <member name="M:MySpace.DataRelay.RelayComponent.Forwarding.Node.DoHandleInMessages(System.Collections.Generic.List{MySpace.DataRelay.SerializedRelayMessage},System.Boolean)">
+            <summary>
+            Processes a <see cref="T:System.Collections.Generic.List`1"/>
+            </summary>
+            <remarks>
+            	This method doesn't handle sync IN messages in the way that the singular version does and
+            	may yield different results since the relay message isn't returned from the server in this case,
+            	where as the singular case it is.
+            </remarks>
+            <param name="messages">List of messages to be processed</param>
+            <param name="skipErrorQueueForSync">True if synchronous messages that fail should not be 
+            placed into the error queue for retry.
+            </param>
+            <returns>
+            skipErrorQueueForSync = false	always returns true (message processed Async)
+            skipErrorQueueForSync = true	returns true if the message processing succeeded
+            </returns>
+        </member>
+        <member name="M:MySpace.DataRelay.RelayComponent.Forwarding.Node.HandleInMessages(System.Collections.Generic.List{MySpace.DataRelay.SerializedRelayMessage},System.Boolean,System.Boolean)">
+            <summary>
+            Processes a List&lt;&gt; of RelayMessages
+            If useSyncForInMessages == true, processes messages immediately
+            If useSyncForInMessages == false, places messages into the message queue
+            </summary>
+            <param name="messages"></param>
+            <param name="useSyncForInMessages"></param>
+            <param name="skipErrorQueueForSync"></param>
+            <returns>
+            useSyncForInMessages = false	always returns True (message processed Async)
+            useSyncForInMessages = true, skipErrorQueueForSync = false	always returns True (errors placed in queue for retry)
+            useSyncForInMessages = true, skipErrorQueueForSync = true	returns true if the message processing succeeded
+            </returns>
+        </member>
+        <member name="M:MySpace.DataRelay.RelayComponent.Forwarding.Node.ToString">
+            <summary>
+            The Host + Port of this Node
+            </summary>        
+        </member>
+        <member name="M:MySpace.DataRelay.RelayComponent.Forwarding.Node.ToExtendedString">
+            <summary>
+            The Host + Port + Group of this Node
+            </summary>        
+        </member>
+        <member name="M:MySpace.DataRelay.RelayComponent.Forwarding.NodeCluster.CalculateTopography(System.Collections.Generic.List{MySpace.DataRelay.RelayComponent.Forwarding.Node},System.Int32)">
+            <summary>
+            Creates a list of nodes indexed by the number of hops away they are from here.
+            </summary>        
+        </member>
+        <member name="M:MySpace.DataRelay.RelayComponent.Forwarding.NodeCluster.CalculateNodeLayers(System.Collections.Generic.List{MySpace.DataRelay.RelayComponent.Forwarding.Node}[],System.Int32)">
+            <summary>
+            This transforms a list indexed by number of hops into layers based on a sliding window size.
+            This tries to treat nodes that are within windowSize hops of each other as being the same distance away.
+            It will not produce a result that strictly obeys this, however - in order to do this completely correctly, the window
+            should move forward one hop at a time. But because this would result in rechecking nodes that had already been checked
+            repeatedly, the window moves forward until it overlaps the last one by one every time. This should produce roughly the desired 
+            result with less overhead.
+            </summary>
+            <param name="nodesByNumberOfHops"></param>
+            <param name="windowSize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MySpace.DataRelay.RelayComponent.Forwarding.NodeCluster.SelectANodeByZone(System.Collections.Generic.List{MySpace.DataRelay.RelayComponent.Forwarding.Node}[],System.Random,System.UInt16)">
+            <summary>
+            Tries to find an activated non-Danger-zone node in nodeLayers, which is assumed to be indexed by zone id.
+            It starts at startZone, and if it fails to find a node in that zone moves randomly through the remaining zones until one is found
+            or all zones are exhausted.
+            </summary>        
+        </member>
+        <member name="P:MySpace.DataRelay.RelayComponent.Forwarding.NodeCluster.MeInThisCluster">
+            <summary>
+            Returns TRUE if the calling node is contained in the cluster.
+            This will never be true for replication.
+            Used by Forwarder to determine replicated messages which should always be
+            processed Async, regardless of the typeSettings
+            </summary>
+        </member>
+        <member name="M:MySpace.DataRelay.RelayComponent.Forwarding.NodeGroup.GetModdedIndexLists(System.Int32[])">
+            <summary>
+            Returns a jagged array of caching server indices and items that are assigned to them.
+            </summary>
+            <param name="objectIdList"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MySpace.DataRelay.RelayComponent.Forwarding.NodeManager.GetRetryCountForMessage(MySpace.DataRelay.RelayMessage)">
+            <summary>
+            Gets the maximum number of times that the message may be retried.
+            </summary>
+            <param name="message">The message.</param>
+            <returns>The maximum number of times that the message may be retried.</returns>
+        </member>
+        <member name="M:MySpace.DataRelay.RelayComponent.Forwarding.NodeManager.DistributeMessages(System.Collections.Generic.IList{MySpace.DataRelay.RelayMessage})">
+            <summary>
+            Splits messages into various lists of in and out message destined for different nodes.
+            </summary>
+            <param name="messages"></param>
+            <returns></returns>
+        </member>
+        <member name="T:MySpace.DataRelay.RelayComponent.Forwarding.SimpleLinkedList`1">
+            <summary>
+            A simple queue (First in/First out) linked list of generics
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:MySpace.DataRelay.RelayComponent.Forwarding.SimpleLinkedList`1.#ctor">
+            <summary>
+            Create an empty linked list.
+            </summary>
+        </member>
+        <member name="M:MySpace.DataRelay.RelayComponent.Forwarding.SimpleLinkedList`1.#ctor(System.Collections.Generic.IList{`0})">
+            <summary>
+            Create a linked list containing all items of the supplied list.
+            </summary>        
+        </member>
+        <member name="M:MySpace.DataRelay.RelayComponent.Forwarding.SimpleLinkedList`1.Push(MySpace.DataRelay.RelayComponent.Forwarding.SimpleLinkedList{`0})">
+            <summary>
+            Push all items of the supplied list on to this one.
+            </summary>
+            <param name="list"></param>
+        </member>
+        <member name="M:MySpace.DataRelay.RelayComponent.Forwarding.SimpleLinkedList`1.Push(`0)">
+            <summary>
+            Push the value onto the head of this list.
+            </summary>        
+        </member>
+        <member name="M:MySpace.DataRelay.RelayComponent.Forwarding.SimpleLinkedList`1.Push(MySpace.DataRelay.RelayComponent.Forwarding.SimpleLinkedListNode{`0})">
+            <summary>
+            Push the supplied node onto this list.
+            </summary>        
+        </member>
+        <member name="M:MySpace.DataRelay.RelayComponent.Forwarding.SimpleLinkedList`1.Pop(`0@)">
+            <summary>
+            Pop the head off of the list.
+            </summary>		
+        </member>
+        <member name="M:MySpace.DataRelay.RelayComponent.Forwarding.SimpleLinkedList`1.PeekAll">
+            <summary>
+            Return a copy of the entire list.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:MySpace.DataRelay.RelayComponent.Forwarding.SimpleLinkedList`1.Count">
+            <summary>
+            The number of elements in the list.
+            </summary>
+        </member>
+        <member name="T:MySpace.DataRelay.RelayComponent.Forwarding.SimpleLinkedListNode`1">
+            <summary>
+            Item used in SimpleLinkedList class
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:MySpace.DataRelay.RelayComponent.Forwarding.SimpleLinkedListNode`1.#ctor(`0)">
+            <summary>
+            Create a node containing the supplied value.
+            </summary>		
+        </member>
+        <member name="T:MySpace.DataRelay.RelayComponent.Forwarding.TransportFactory">
+            <summary>
+            Responsible for creating instances of implementation of <see cref="T:MySpace.DataRelay.Transports.IRelayTransport"/>
+            and <see cref="T:MySpace.DataRelay.Transports.IRelayTransportExtended"/>.
+            </summary>
+        </member>
+        <member name="M:MySpace.DataRelay.RelayComponent.Forwarding.TransportFactory.CreateTransportForNode(MySpace.DataRelay.Common.Schemas.RelayNodeDefinition,MySpace.DataRelay.Common.Schemas.RelayNodeGroupDefinition,System.Int32)">
+            <summary>
+            Creates a new instance of <see cref="T:MySpace.DataRelay.Transports.IRelayTransport"/> for the given <see cref="T:MySpace.DataRelay.Common.Schemas.RelayNodeDefinition"/>
+            and <see cref="T:MySpace.DataRelay.Common.Schemas.RelayNodeGroupDefinition"/>.
+            </summary>
+            <param name="nodeDefinition">The node definition.</param>
+            <param name="group">The group.</param>
+            <param name="chunkLength">The chunk length</param>
+            <returns></returns>
+        </member>
+        <member name="P:MySpace.DataRelay.RelayComponent.Forwarding.TransportFactory.CreateTransportMethod">
+            <summary>
+            Gets or set the <see cref="T:MySpace.DataRelay.RelayComponent.Forwarding.CreateTransportDelegate"/> used to create new instances.
+            </summary>
+        </member>
+        <member name="T:MySpace.DataRelay.RelayComponent.Forwarding.CreateTransportDelegate">
+            <summary>
+            A delegate to create <see cref="T:MySpace.DataRelay.Transports.IRelayTransport"/> instances.
+            </summary>
+            <param name="nodeDefinition">The node definition.</param>
+            <param name="groupDefinition">The group definition.</param>
+            <returns>A new instance of <see cref="T:MySpace.DataRelay.Transports.IRelayTransport"/>.</returns>
+        </member>
+    </members>
+</doc>

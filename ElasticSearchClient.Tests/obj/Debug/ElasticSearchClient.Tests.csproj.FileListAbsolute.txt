@@ -1,0 +1,11 @@
+E:\.NET Related\ElasticSearchClient\ElasticSearchClient.Tests\bin\Debug\ElasticSearchClient.Tests.dll
+E:\.NET Related\ElasticSearchClient\ElasticSearchClient.Tests\bin\Debug\ElasticSearchClient.Tests.pdb
+E:\.NET Related\ElasticSearchClient\ElasticSearchClient.Tests\obj\Debug\ResolveAssemblyReference.cache
+E:\.NET Related\ElasticSearchClient\ElasticSearchClient.Tests\obj\Debug\ElasticSearchClient.Tests.dll
+E:\.NET Related\ElasticSearchClient\ElasticSearchClient.Tests\obj\Debug\ElasticSearchClient.Tests.pdb
+E:\.NET Related\ElasticSearchClient\ElasticSearchClient.Tests\obj\Debug\Decl\ElasticSearchClient.Tests.dll
+E:\.NET Related\ElasticSearchClient\ElasticSearchClient.Tests\obj\Debug\Decl\ElasticSearchClient.Tests.pdb
+E:\.NET Related\ElasticSearchClient\ElasticSearchClient.Tests\bin\Debug\ElasticSearchClient.dll
+E:\.NET Related\ElasticSearchClient\ElasticSearchClient.Tests\bin\Debug\nunit.framework.dll
+E:\.NET Related\ElasticSearchClient\ElasticSearchClient.Tests\bin\Debug\Newtonsoft.Json.dll
+E:\.NET Related\ElasticSearchClient\ElasticSearchClient.Tests\bin\Debug\ElasticSearchClient.pdb

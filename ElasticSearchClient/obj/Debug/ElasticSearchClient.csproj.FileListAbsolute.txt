@@ -1,0 +1,8 @@
+E:\.NET Related\ElasticSearchClient\ElasticSearchClient\bin\Debug\ElasticSearchClient.dll
+E:\.NET Related\ElasticSearchClient\ElasticSearchClient\bin\Debug\ElasticSearchClient.pdb
+E:\.NET Related\ElasticSearchClient\ElasticSearchClient\obj\Debug\ResolveAssemblyReference.cache
+E:\.NET Related\ElasticSearchClient\ElasticSearchClient\obj\Debug\ElasticSearchClient.dll
+E:\.NET Related\ElasticSearchClient\ElasticSearchClient\obj\Debug\ElasticSearchClient.pdb
+E:\.NET Related\ElasticSearchClient\ElasticSearchClient\obj\Debug\Decl\ElasticSearchClient.dll
+E:\.NET Related\ElasticSearchClient\ElasticSearchClient\obj\Debug\Decl\ElasticSearchClient.pdb
+E:\.NET Related\ElasticSearchClient\ElasticSearchClient\bin\Debug\Newtonsoft.Json.dll

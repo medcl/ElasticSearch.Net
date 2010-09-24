@@ -1,0 +1,276 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MySpace.SocketTransport.Client</name>
+    </assembly>
+    <members>
+        <member name="T:MySpace.SocketTransport.SocketClientConfigChangeMethod">
+            <summary>
+            Represents a method that is called when the <see cref="T:MySpace.SocketTransport.SocketClientConfig"/> is changed
+            or modified.
+            </summary>
+            <param name="newConfig">The new config, after the change.</param>
+        </member>
+        <member name="T:MySpace.SocketTransport.SocketClient">
+            <summary>
+            Provides a simple, lightweight socket-level transport. 
+            Use MySpace.SocketTransport.Server on the other end.
+            </summary>
+        </member>
+        <member name="M:MySpace.SocketTransport.SocketClient.#ctor">
+            <summary>
+            Create a new SocketClient for connecting to any number of servers with any settings.
+            </summary>
+        </member>
+        <member name="M:MySpace.SocketTransport.SocketClient.#ctor(MySpace.SocketTransport.SocketSettings)">
+            <summary>
+            Create a new SocketClient that will use the supplied settings for all messages.
+            </summary>
+            <param name="settings"></param>
+        </member>
+        <member name="M:MySpace.SocketTransport.SocketClient.#ctor(System.Net.IPEndPoint)">
+            <summary>
+            Create a new SocketClient with a default connection to destination, using the default settings.
+            </summary>		
+        </member>
+        <member name="M:MySpace.SocketTransport.SocketClient.#ctor(System.Net.IPEndPoint,MySpace.SocketTransport.SocketSettings)">
+            <summary>
+            Create a new SocketClient with a default connection to destination, using the supplied settings.
+            </summary>		
+        </member>
+        <member name="F:MySpace.SocketTransport.SocketClient.config">
+            <summary>
+            Create a new SocketClient using the supplied message provider. This can be used to create a custom message envelope.		
+            </summary>		
+        </member>
+        <member name="M:MySpace.SocketTransport.SocketClient.GetDefaultSettings">
+            <summary>
+            	<para>Get a copy of the default socket settings. 
+            	Useful for creating a settings object based on the default.</para>
+            </summary>
+            <returns>
+            	<para>A <see cref="T:MySpace.SocketTransport.SocketSettings"/> object that is the copy
+            	of the default socket settings; never <see langword="null"/>.</para>
+            </returns>
+        </member>
+        <member name="M:MySpace.SocketTransport.SocketClient.GetSocketCounts(System.Int32@,System.Int32@)">
+            <summary>
+            Get the total number of sockets created, and the number currently in use.
+            </summary>
+            <param name="totalSockets">The total number of sockets created.</param>
+            <param name="activeSockets">The number of sockets currently in use.</param>
+        </member>
+        <member name="M:MySpace.SocketTransport.SocketClient.GetSocketCounts(System.Net.IPEndPoint,System.Int32@,System.Int32@)">
+            <summary>
+            Get the number of sockets created and in use for a given destination using the default socket settings.
+            </summary>
+            <param name="destination">The server endpoint to check for.</param>
+            <param name="totalSockets">The number of sockets created.</param>
+            <param name="activeSockets">The number of active sockets.</param>
+        </member>
+        <member name="M:MySpace.SocketTransport.SocketClient.GetSocketCounts(System.Net.IPEndPoint,MySpace.SocketTransport.SocketSettings,System.Int32@,System.Int32@)">
+            <summary>
+            Get the number of sockets created and in use for a given destination and settings combination. 
+            </summary>
+            <param name="destination">The server endpoint to check for.</param>
+            <param name="settings">The settings object portion of the pool key.</param>
+            <param name="totalSockets">The number of sockets created.</param>        
+            <param name="activeSockets">The number of active sockets.</param>
+        </member>
+        <member name="M:MySpace.SocketTransport.SocketClient.SendOneWay(System.Int32,System.IO.MemoryStream)">
+            <summary>
+            Sends a message to the default server that does not expect a reply, using the default message settings and the default destination.
+            </summary>
+            <param name="commandID">The Command Identifier to send to the server. The server's IMessageHandler should know about all possible CommandIDs</param>
+            <param name="messageStream">The contents of the message for the server to process.</param>
+        </member>
+        <member name="M:MySpace.SocketTransport.SocketClient.SendOneWay(System.Net.IPEndPoint,System.Int32,System.IO.MemoryStream)">
+            <summary>
+            Sends a message to a server that does not expect a reply using the default message settings.
+            </summary>
+            <param name="destination">The server's EndPoint</param>
+            <param name="commandId">The Command Identifier to send to the server. The server's IMessageHandler should know about all possible CommandIDs</param>
+            <param name="messageStream">The contents of the message for the server to process.</param>
+        </member>
+        <member name="M:MySpace.SocketTransport.SocketClient.SendOneWay(System.Net.IPEndPoint,MySpace.SocketTransport.SocketSettings,System.Int32,System.IO.MemoryStream)">
+            <summary>
+            Sends a message to a server that does not expect a reply.
+            </summary>
+            <param name="destination">The server's EndPoint</param>
+            <param name="messageSettings">Settings for the transport.</param>
+            <param name="commandID">The Command Identifier to send to the server. The server's IMessageHandler should know about all possible CommandIDs</param>
+            <param name="messageStream">The contents of the message for the server to process.</param>		
+        </member>
+        <member name="M:MySpace.SocketTransport.SocketClient.SendSync(System.Int32,System.IO.MemoryStream)">
+            <summary>
+            Sends a message to the default server that expects a response, using the default message settings. To use this function you must have used a constructor with an IPEndPoint.
+            </summary>
+            <param name="commandID">The Command Identifier to send to the server. The server's IMessageHandler should know about all possible CommandIDs</param>
+            <param name="messageStream">The contents of the message for the server to process.</param>
+            <returns>The object returned by the server, if any.</returns>
+        </member>
+        <member name="M:MySpace.SocketTransport.SocketClient.SendSync(System.Net.IPEndPoint,System.Int32,System.IO.MemoryStream)">
+            <summary>
+            Sends a message to the server that expects a response, using the default message settings.
+            </summary>
+            <param name="destination">The server's EndPoint</param>
+            <param name="commandID">The Command Identifier to send to the server. The server's IMessageHandler should know about all possible CommandIDs</param>
+            <param name="messageStream">The contents of the message for the server to process.</param>
+            <returns>The object returned by the server, if any.</returns>
+        </member>
+        <member name="M:MySpace.SocketTransport.SocketClient.SendSync(System.Net.IPEndPoint,MySpace.SocketTransport.SocketSettings,System.Int32,System.IO.MemoryStream)">
+            <summary>
+            Sends a message to the server that expects a response.
+            </summary>
+            <param name="destination">The server's EndPoint</param>
+            <param name="messageSettings">The settings to use for the transport.</param>
+            <param name="commandID">The Command Identifier to send to the server. The server's IMessageHandler should know about all possible CommandIDs</param>
+            <param name="messageStream">The contents of the message for the server to process.</param>
+            <returns>The object returned by the server, if any.</returns>
+        </member>
+        <member name="E:MySpace.SocketTransport.SocketClient.ConfigChanged">
+            <summary>
+            Fired when the config changes or is modified.
+            </summary>
+        </member>
+        <member name="T:MySpace.SocketTransport.SocketClientConfig">
+            <summary>
+            Defines settings for socket client.
+            </summary>
+        </member>
+        <member name="F:MySpace.SocketTransport.SocketClientConfig.DefaultSocketSettings">
+            <summary>
+            The default settings used for communication if none are supplied by the user.
+            </summary>
+        </member>
+        <member name="F:MySpace.SocketTransport.SocketClientConfig.UseSharedBufferPool">
+            <summary>
+            By default, every socket pool uses its own pool of reuseable buffers. If this is set, they will all share one pool.
+            </summary>
+        </member>
+        <member name="F:MySpace.SocketTransport.SocketClientConfig.SharedPoolMinimumItems">
+            <summary>
+            The minimum number of items for the shared buffer pool to contain at any time. 
+            </summary>
+        </member>
+        <member name="T:MySpace.SocketTransport.SocketSettings">
+            <summary>
+            Provides settings for transport sockets
+            </summary>
+        </member>
+        <member name="F:MySpace.SocketTransport.SocketSettings.PoolType">
+            <summary>
+            The pooling mechanism used for open sockets. Linked is generally the best choice.
+            </summary>
+        </member>
+        <member name="F:MySpace.SocketTransport.SocketSettings.PoolSize">
+            <summary>
+            The maximum number of sockets to open for a given settings / host combination.
+            </summary>
+        </member>
+        <member name="F:MySpace.SocketTransport.SocketSettings.ConnectTimeout">
+            <summary>
+            How many milliseconds to wait for the remote host to accept a new connection.
+            </summary>
+        </member>
+        <member name="F:MySpace.SocketTransport.SocketSettings.InitialMessageSize">
+            <summary>
+            The initial size in bytes of the internal message buffers.
+            </summary>
+        </member>
+        <member name="F:MySpace.SocketTransport.SocketSettings.MaximumReplyMessageSize">
+            <summary>
+            The maximum expected size in bytes of sync message replies from a server.
+            </summary>
+        </member>
+        <member name="F:MySpace.SocketTransport.SocketSettings.ReceiveBufferSize">
+            <summary>
+            The receive buffer size used by the raw socket.
+            </summary>
+        </member>
+        <member name="F:MySpace.SocketTransport.SocketSettings.ReceiveTimeout">
+            <summary>
+            How many milliseconds to wait for a response to a sync messages.
+            </summary>
+        </member>
+        <member name="F:MySpace.SocketTransport.SocketSettings.SendBufferSize">
+            <summary>
+            The send buffer size used by the raw socket.
+            </summary>
+        </member>
+        <member name="F:MySpace.SocketTransport.SocketSettings.SendTimeout">
+            <summary>
+            How many milliseconds to wait for a send to complete to a server.
+            </summary>
+        </member>
+        <member name="F:MySpace.SocketTransport.SocketSettings.SocketLifetimeMinutes">
+            <summary>
+            How long to keep open sockets alive.
+            </summary>
+        </member>
+        <member name="F:MySpace.SocketTransport.SocketSettings.UseNetworkOrder">
+            <summary>
+            Whether or not to reorder bytes to network order. Don't say yes unless you know why.
+            </summary>
+        </member>
+        <member name="F:MySpace.SocketTransport.SocketSettings.BufferReuses">
+            <summary>
+            How many times to reuses messages rebuffering streams.
+            </summary>
+        </member>
+        <member name="M:MySpace.SocketTransport.SocketSettings.GetHashCode">
+            <summary>
+            Mersenne prime base hash algorithm,
+            produces a perfect hash in the period of (0...2^31-1]
+            should be all but impossible to produce collisions in the given space
+            While the ability to collide exists, the USEFUL collection of settings
+            should keep the collision level to 0.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MySpace.SocketTransport.SocketSettings.SameAs(MySpace.SocketTransport.SocketSettings)">
+            <summary>
+            If obj is an instance of SocketSettings, compares each field and returns false if any are different.
+            </summary>		
+        </member>
+        <member name="M:MySpace.SocketTransport.SocketSettings.Copy">
+            <summary>
+            	<para>Creates a copy of this instance.</para>
+            </summary>
+            <returns>
+            	<para>A new <see cref="T:MySpace.SocketTransport.SocketSettings"/> object with the
+            	same contents as this instance; never <see langword="null"/>.</para>
+            </returns>
+        </member>
+        <member name="M:MySpace.SocketTransport.SocketSettings.#ctor">
+            <summary>
+            Create a new SocketSettings object with hard-coded defaults.
+            </summary>
+        </member>
+        <member name="T:MySpace.SocketTransport.SocketPoolType">
+            <summary>
+            The pooling mechanism used for open sockets.
+            </summary>
+        </member>
+        <member name="F:MySpace.SocketTransport.SocketPoolType.Array">
+            <summary>
+            A fixed array of sockets. Simple and robust but inefficient. Deprecated by Linked.
+            </summary>
+        </member>
+        <member name="F:MySpace.SocketTransport.SocketPoolType.Null">
+            <summary>
+            Do not pool sockets, create a new one for each message.
+            </summary>
+        </member>
+        <member name="F:MySpace.SocketTransport.SocketPoolType.Linked">
+            <summary>
+            A linked list of open sockets. The preferred pool type for most cases.
+            </summary>
+        </member>
+        <member name="T:MySpace.SocketTransport.ManagedSocket">
+            <summary>
+            Provides a base for sockets managed by socket pools.
+            </summary>
+        </member>
+    </members>
+</doc>
