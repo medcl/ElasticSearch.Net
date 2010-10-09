@@ -1,13 +1,12 @@
-h1.ElasticSearch.NET Client
+h1. ElasticSearch.NET Client
 
-h2.Requirements:
+h2. Requirements:
  version > 0.12.0
  thrift plugin enabled£¨non framed£©
 
-h2.Tutorial
+h2. Tutorial
 
-h3. 1.Config your nodes and poolsetting
-<pre>
+h3. Config your nodes and poolsetting
 <?xml version="1.0" encoding="utf-8"?>
 <ElasticSearchConfig majorVersion="1" minorVersion="18">
   <TransportType>thrift</TransportType>
@@ -26,10 +25,9 @@ h3. 1.Config your nodes and poolsetting
     <Node Host="10.129.6.36" Port="9200" Enabled="false" />
   </HttpNodes>
 </ElasticSearchConfig>
-</pre>
-h3. 2.Easy to run
 
-<pre>
+h3. Easy to run
+
 Index:
  ESClient.Instance.Index("testindex", "testtype", "testkey", "{\"a\":\"b\"}");
 Search:
@@ -42,13 +40,13 @@ Get:
 or your can wrapper on top of this£¬and that's what i do¡£
 
 
-h3. 3.TODO Lists
+h3. TODO Lists
   Framed transport bug fix
   QueryDSL
   Mapping 
   Bulk
     
-h2.Benchmark
+h2. Benchmark
 
 (single thread,single ES node,without manual ES optimize or flush)
 
