@@ -1,0 +1,160 @@
+<Configuration>
+  <SettingsComponent>
+    <string />
+    <integer />
+    <boolean>
+      <setting name="SolutionAnalysisEnabled">False</setting>
+    </boolean>
+  </SettingsComponent>
+  <CompletionStatisticsManager>
+    <ItemStatistics item="Qualified:@InfinitByte.Logging.LogWrapper">
+      <Item value="GetLogger`0" priority="3" />
+    </ItemStatistics>
+    <ItemStatistics item="Default">
+      <Item value="Get`0" priority="0" />
+      <Item value="private" priority="0" />
+      <Item value="ElasticSearchConfig`0" priority="5" />
+      <Item value="static" priority="2" />
+      <Item value="new" priority="6" />
+      <Item value="ElasticSearchConfig" priority="0" />
+      <Item value="readonly" priority="0" />
+      <Item value="ReflectorProperty" priority="0" />
+      <Item value="true" priority="0" />
+      <Item value="bool" priority="2" />
+      <Item value="string" priority="2" />
+      <Item value="int" priority="5" />
+      <Item value="false" priority="0" />
+      <Item value="NetReflectorReader`0" priority="1" />
+      <Item value="netReflectorReader" priority="1" />
+      <Item value="NetReflectorReader" priority="0" />
+      <Item value="var" priority="6" />
+      <Item value="obj" priority="0" />
+      <Item value="ESClient`0" priority="5" />
+      <Item value="ElasticSearchClient" priority="4" />
+      <Item value="public" priority="0" />
+      <Item value="char" priority="0" />
+      <Item value="void" priority="0" />
+      <Item value="TestAttribute`0" priority="0" />
+      <Item value="NetReflectorWriter`0" priority="0" />
+      <Item value="netReflectorWriter" priority="1" />
+      <Item value="NetReflectorWriter" priority="0" />
+      <Item value="xmlWriter" priority="1" />
+      <Item value="XmlWriter`0" priority="0" />
+      <Item value="esconfig" priority="0" />
+      <Item value="AppDomain`0" priority="1" />
+      <Item value="Exception" priority="0" />
+      <Item value="ElasticSearchException`0" priority="0" />
+      <Item value="base" priority="0" />
+      <Item value="message" priority="0" />
+      <Item value="p" priority="0" />
+      <Item value="exp" priority="0" />
+      <Item value="LoadConfig`1" priority="0" />
+      <Item value="if" priority="0" />
+      <Item value="instance" priority="1" />
+      <Item value="null" priority="0" />
+      <Item value="scareCrow" priority="0" />
+      <Item value="ElasticSearch" priority="1" />
+      <Item value="Thrift" priority="0" />
+      <Item value="const" priority="1" />
+      <Item value="count" priority="0" />
+      <Item value="Console`0" priority="0" />
+      <Item value="status" priority="0" />
+      <Item value="internal" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:Exortech.NetReflector.NetReflectorReader">
+      <Item value="Read`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@ElasticSearchClient.ESClient">
+      <Item value="Instance" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:ElasticSearchClient.ESClient">
+      <Item value="Status`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@System.Xml.XmlWriter">
+      <Item value="Create`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:Exortech.NetReflector.NetReflectorWriter">
+      <Item value="Write`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@System.AppDomain">
+      <Item value="CurrentDomain" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.AppDomain">
+      <Item value="BaseDirectory" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@ElasticSearch.ESClient">
+      <Item value="Instance" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:ElasticSearch.ESClient">
+      <Item value="Count`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@System.Console">
+      <Item value="WriteLine`0" priority="1" />
+    </ItemStatistics>
+  </CompletionStatisticsManager>
+  <RecentFiles>
+    <RecentFiles>
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:Properties/f:AssemblyInfo.cs" caret="1432" fromTop="37" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:Process/d:Thrift/d:Lib/f:TProcessor.cs" caret="0" fromTop="0" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:Process/d:Thrift/d:Lib/f:TApplicationException.cs" caret="3126" fromTop="10" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:Process/d:Thrift/f:ESNode.cs" caret="5142" fromTop="1" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:Process/d:Thrift/f:ESNodeManager.cs" caret="3859" fromTop="0" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:Process/d:Thrift/f:ESSession.cs" caret="1824" fromTop="6" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:Process/d:Thrift/d:Lib/d:Transport/f:TSocketSettings.cs" caret="1001" fromTop="18" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:ESObjects/f:ESObjects.cs" caret="197" fromTop="11" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:ESObjects/f:ESSearchResult.cs" caret="403" fromTop="12" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:Exception/f:ElasticSearchException.cs" caret="210" fromTop="7" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:Process/d:Http/f:HttpAdaptor.cs" caret="1551" fromTop="12" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:Process/f:RestProvider.cs" caret="1863" fromTop="12" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:Utils/f:AggregateCounter.cs" caret="52" fromTop="2" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/f:ESClient.cs" caret="7152" fromTop="10" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:Config/f:ElasticSearchConfig.config" caret="381" fromTop="9" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:Config/f:ElasticSearchConfig.cs" caret="526" fromTop="16" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:Utils/f:LogWrapper.cs" caret="510" fromTop="13" />
+      <File id="9CC0045F-6260-4F5D-B3C8-C3E7FF61B4C0/d:Config/f:LoggingConfig.config" caret="531" fromTop="13" />
+      <File id="9CC0045F-6260-4F5D-B3C8-C3E7FF61B4C0/f:app.config" caret="335" fromTop="6" />
+      <File id="9CC0045F-6260-4F5D-B3C8-C3E7FF61B4C0/f:Program.cs" caret="655" fromTop="8" />
+      <File id="60BC8E61-E258-4F5D-8BBB-49E9A87536C7/f:Class1.cs" caret="123" fromTop="7" />
+    </RecentFiles>
+    <RecentEdits>
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:Config/f:ElasticSearchConfig.cs" caret="5063" fromTop="3" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:Config/f:ElasticSearchConfig.cs" caret="5063" fromTop="4" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:Config/f:ElasticSearchConfig.cs" caret="5063" fromTop="16" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:Config/f:ElasticSearchConfig.cs" caret="5063" fromTop="20" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:Config/f:ElasticSearchConfig.cs" caret="5063" fromTop="17" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:Config/f:ElasticSearchConfig.cs" caret="5063" fromTop="10" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:Config/f:ElasticSearchConfig.cs" caret="5063" fromTop="15" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:Config/f:ElasticSearchConfig.cs" caret="5063" fromTop="16" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:Config/f:ElasticSearchConfig.cs" caret="5063" fromTop="12" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:Config/f:ElasticSearchConfig.cs" caret="5063" fromTop="13" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:Utils/f:LogWrapper.cs" caret="14718" fromTop="8" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:Utils/f:LogWrapper.cs" caret="14718" fromTop="8" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:Process/d:Thrift/f:ESSession.cs" caret="27433" fromTop="6" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:Config/f:ElasticSearchConfig.cs" caret="1353" fromTop="13" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:Config/f:ElasticSearchConfig.cs" caret="283" fromTop="11" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:Config/f:ElasticSearchConfig.cs" caret="450" fromTop="15" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:Config/f:ElasticSearchConfig.cs" caret="472" fromTop="11" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:Config/f:ElasticSearchConfig.cs" caret="746" fromTop="10" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:Config/f:ElasticSearchConfig.cs" caret="825" fromTop="10" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:Config/f:ElasticSearchConfig.cs" caret="349" fromTop="9" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:Config/f:ElasticSearchConfig.cs" caret="259" fromTop="10" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:Config/f:ElasticSearchConfig.cs" caret="2566" fromTop="21" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:Config/f:ElasticSearchConfig.cs" caret="5060" fromTop="24" />
+      <File id="9CC0045F-6260-4F5D-B3C8-C3E7FF61B4C0/f:app.config" caret="201" fromTop="3" />
+      <File id="9CC0045F-6260-4F5D-B3C8-C3E7FF61B4C0/d:Config/f:LoggingConfig.config" caret="531" fromTop="13" />
+      <File id="9CC0045F-6260-4F5D-B3C8-C3E7FF61B4C0/f:Program.cs" caret="0" fromTop="0" />
+      <File id="9CC0045F-6260-4F5D-B3C8-C3E7FF61B4C0/f:Program.cs" caret="201" fromTop="10" />
+      <File id="60BC8E61-E258-4F5D-8BBB-49E9A87536C7/f:Class1.cs" caret="160" fromTop="9" />
+    </RecentEdits>
+  </RecentFiles>
+  <NAntValidationSettings>
+    <NAntPath value="" />
+  </NAntValidationSettings>
+  <UnitTestRunner>
+    <Providers />
+  </UnitTestRunner>
+  <UnitTestRunnerNUnit>
+    <NUnitInstallDir>D:\Program Files (x86)\NUnit 2.5.4\bin\net-2.0\</NUnitInstallDir>
+    <UseAddins>Never</UseAddins>
+  </UnitTestRunnerNUnit>
+</Configuration>
