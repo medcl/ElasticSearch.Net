@@ -1,12 +1,15 @@
 h1. ElasticSearch.NET Client
 
-h2. Requirements:
- version > 0.12.0
- thrift plugin enabled£¨non framed£©
+h2. Requirements
+
+version > 0.12.0
+thrift plugin enabled£¨non framed£©
 
 h2. Tutorial
 
 h3. Config your nodes and poolsetting
+<pre>
+
 <?xml version="1.0" encoding="utf-8"?>
 <ElasticSearchConfig majorVersion="1" minorVersion="18">
   <TransportType>thrift</TransportType>
@@ -26,6 +29,8 @@ h3. Config your nodes and poolsetting
   </HttpNodes>
 </ElasticSearchConfig>
 
+</pre>
+
 h3. Easy to run
 
 Index:
@@ -36,15 +41,17 @@ Delete:
  ESClient.Instance.Delete("testindex", "testtype", "testkey");
 Get:
  ESClient.Instance.Get("testindex", "testtype", "testkey");
-</pre>
-or your can wrapper on top of this£¬and that's what i do¡£
+
+or your can make a wrapper on top of this£¬and this is what i do
+
 
 
 h3. TODO Lists
-  Framed transport bug fix
-  QueryDSL
-  Mapping 
-  Bulk
+
+Framed transport bug fix
+QueryDSL
+Mapping 
+Bulk
     
 h2. Benchmark
 
