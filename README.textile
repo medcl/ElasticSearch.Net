@@ -8,7 +8,8 @@ thrift plugin enabled (non framed)
 h2. Tutorial
 
 h3. Config your nodes and poolsetting
-<script src="http://gist.github.com/618457.js"> </script>
+
+http://gist.github.com/raw/618457/fd2dc10a3ca3b971175e53f08f174803c6ee7c1c/elasticsearch_config.xml
 
 h3. Easy to run
 
