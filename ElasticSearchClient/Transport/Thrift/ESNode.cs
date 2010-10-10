@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Net.Sockets;
 using System.Threading;
-using ElasticSearch.Client.Utils;
 using ElasticSearch.Config;
+using ElasticSearch.Utils;
 
 namespace ElasticSearch
 {

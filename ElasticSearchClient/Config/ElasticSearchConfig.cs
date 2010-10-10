@@ -42,7 +42,7 @@ namespace ElasticSearch.Config
 			{
 				if (instance == null)
 				{
-					instance = LoadConfig<ElasticSearchConfig>(ConfigName);
+					instance = new ElasticSearchConfig();
 				}
 				return instance;
 			}

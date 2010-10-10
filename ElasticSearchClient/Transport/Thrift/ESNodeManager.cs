@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using ElasticSearch.Client.Utils;
 using ElasticSearch.Config;
 using ElasticSearch.Exception;
+using ElasticSearch.Utils;
 
 namespace ElasticSearch
 {

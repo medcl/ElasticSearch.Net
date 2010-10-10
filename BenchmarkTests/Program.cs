@@ -20,7 +20,7 @@ namespace BenchmarkTests
 			var begin = DateTime.Now;
 			for (var i = 0; i < count; i++)
 			{
-				var response = ESClient.Instance.Index("benchmark_test1", "default", Guid.NewGuid().ToString(), data);
+				var response = ESClient.Instance.Index("benchmark_test", "default", Guid.NewGuid().ToString(), data);
 				if (!response)
 				{
 					failure++;
@@ -30,8 +30,8 @@ namespace BenchmarkTests
 
 			var timespan = end - begin;
 
-			var avg = timespan.TotalMilliseconds;
-			Console.WriteLine("iteration:{0},failure:{3},elapsed time:{1},avg time:{2}ms", count, timespan, avg / count, failure);
+			var avg = timespan.TotalMilliseconds / count;
+			Console.WriteLine("iteration:{0},failure:{3},elapsed time:{1},avg time:{2}ms", count, timespan, avg, failure);
 
 			Console.Write("Press any key to continue . . . ");
 			Console.ReadKey(true);

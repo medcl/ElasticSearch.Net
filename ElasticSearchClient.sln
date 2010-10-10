@@ -5,7 +5,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElasticSearchClient", "Elas
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BenchmarkTests", "BenchmarkTests\BenchmarkTests.csproj", "{9CC0045F-6260-4F5D-B3C8-C3E7FF61B4C0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuickStartTests", "QuickTests\QuickStartTests.csproj", "{60BC8E61-E258-4F5D-8BBB-49E9A87536C7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuickStartTests", "QuickStartTests\QuickStartTests.csproj", "{60BC8E61-E258-4F5D-8BBB-49E9A87536C7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

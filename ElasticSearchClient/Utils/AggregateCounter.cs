@@ -1,6 +1,6 @@
 ﻿using System.Threading;
 
-namespace ElasticSearch.Client.Utils
+namespace ElasticSearch.Utils
 {
 	internal class AggregateCounter
 	{

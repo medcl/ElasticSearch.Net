@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Text;
 using ElasticSearch.Exception;
 using ElasticSearch.Thrift;
+using ElasticSearch.Transport;
 
 namespace ElasticSearch.Transport.Thrift
 {

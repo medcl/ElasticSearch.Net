@@ -9,7 +9,7 @@ namespace Tests
 	{
 		[Test]
 		public void SimpleTests()
-		{
+		{	
 			var result = ESClient.Instance.Index("testindex", "testtype", "testkey", "{\"a\":\"b\"}");
 			var doc = ESClient.Instance.Search("testindex", "testtype", "_id:testkey");
 			Console.WriteLine(doc.JsonString);

@@ -1,7 +1,8 @@
-using ElasticSearch.Client.Utils;
 using ElasticSearch.Config;
 using ElasticSearch.Thrift;
+using ElasticSearch.Transport.Http;
 using ElasticSearch.Transport.Thrift;
+using ElasticSearch.Utils;
 
 namespace ElasticSearch.Transport
 {
