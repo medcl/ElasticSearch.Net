@@ -21,7 +21,6 @@ namespace Tests
 			var numfield = new NumberFieldSetting() { Store = Store.yes, NullValue = 0.00 };
 			typeSetting2.AddFieldSetting("name", numfield);
 
-			var preparedata = ElasticSearchClient.Instance.Index(index, "_prepare", "_medcl", "{}");
 			var result = ElasticSearchClient.Instance.PutMapping(index, typeSetting);
 			Assert.AreEqual(true, result.Success);
 

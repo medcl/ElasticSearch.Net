@@ -7,20 +7,42 @@ thrift plugin enabled (non framed)
 
 h2. Tutorial
 
-h3. Config your nodes and poolsetting
+h3. How to use
 
-http://gist.github.com/raw/618457/fd2dc10a3ca3b971175e53f08f174803c6ee7c1c/elasticsearch_config.xml
+CreateIndex:
+      ElasticSearchClient.Instance.CreateIndex("index", new IndexSetting(5, 1));
 
-h3. Easy to run
+ModifyIndex:
+      ElasticSearchClient.Instance.ModifyIndex(index, new IndexSetting(10, 2));
+
+DeleteIndex:
+      ElasticSearchClient.Instance.DeleteIndex("index");
+
+CreateMapping:
+      var index = "index_operate" + Guid.NewGuid().ToString();
+			StringFieldSetting stringFieldSetting = new StringFieldSetting() { Analyzer = "standard", Type = "string", NullValue = "mystr" };
+
+			TypeSetting typeSetting = new TypeSetting("custom_type");
+			typeSetting.AddFieldSetting("medcl", stringFieldSetting);
+
+			var typeSetting2 = new TypeSetting("hell_type1");
+			var numfield = new NumberFieldSetting() { Store = Store.yes, NullValue = 0.00 };
+			typeSetting2.AddFieldSetting("name", numfield);
+
+			var result = ElasticSearchClient.Instance.PutMapping(index, typeSetting);
+
+
 
 Index:
- ESClient.Instance.Index("testindex", "testtype", "testkey", "{\"a\":\"b\"}");
+      ESClient.Instance.Index("testindex", "testtype", "testkey", "{\"a\":\"b\"}");
 Search:
- ESClient.Instance.Search("testindex", "testtype", "_id:testkey");
+      ESClient.Instance.Search("testindex", "testtype", "_id:testkey");
 Delete:
- ESClient.Instance.Delete("testindex", "testtype", "testkey");
+      ESClient.Instance.Delete("testindex", "testtype", "testkey");
 Get:
- ESClient.Instance.Get("testindex", "testtype", "testkey");
+      ESClient.Instance.Get("testindex", "testtype", "testkey");
+
+
 
 or your can make a wrapper on top of thi,and this is what i do
 
@@ -30,7 +52,6 @@ h3. TODO Lists
 
 Framed transport
 QueryDSL
-Mapping 
 Bulk
     
 h2. Benchmark
