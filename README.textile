@@ -46,7 +46,7 @@ Get:
 
 or your can make a wrapper on top of thi,and this is what i do
 
-
+ps:part of code(queryDSL) copy from http://github.com/Mpdreamz/NEST
 
 h3. TODO Lists
 
