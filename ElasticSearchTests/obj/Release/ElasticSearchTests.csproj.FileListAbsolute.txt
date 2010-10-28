@@ -12,3 +12,5 @@ E:\.NET Related\ElasticSearch.Net\ElasticSearchTests\obj\Release\Tests.dll
 E:\.NET Related\ElasticSearch.Net\ElasticSearchTests\obj\Release\Tests.pdb
 E:\.NET Related\ElasticSearch.Net\ElasticSearchTests\obj\Release\Decl\Tests.dll
 E:\.NET Related\ElasticSearch.Net\ElasticSearchTests\obj\Release\Decl\Tests.pdb
+E:\.NET Related\ElasticSearch.Net\ElasticSearchTests\bin\Release\Lucene.Net.dll
+E:\.NET Related\ElasticSearch.Net\ElasticSearchTests\bin\Release\Lucene.Net.pdb

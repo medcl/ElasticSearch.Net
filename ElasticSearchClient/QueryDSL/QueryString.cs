@@ -4,6 +4,8 @@ using System.Text;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
+//DSL copy from 
+
 namespace ElasticSearch.DSL
 {
 	public enum Operator 
