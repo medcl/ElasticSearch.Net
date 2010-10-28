@@ -1,20 +1,13 @@
+using ElasticSearch.Client.Transport.Thrift;
 using ElasticSearch.Config;
 using ElasticSearch.Thrift;
-using ElasticSearch.Transport.Http;
-using ElasticSearch.Transport.Thrift;
 using ElasticSearch.Utils;
 
-namespace ElasticSearch.Transport
+namespace ElasticSearch.Client.Transport
 {
-	internal class Response
-	{
-		public string Result;
-		public bool Success;
-	}
-
 	internal interface IRestProvider
 	{
-		Response Process(string strUrl, string reqdata, string encoding, Method method);
+		RestResponse Process(string strUrl, string reqdata, string encoding, Method method);
 	}
 
 	internal class RestProvider : IRestProvider
@@ -30,11 +23,11 @@ namespace ElasticSearch.Transport
 
 		#region IRestProvider Members
 
-		public Response Process(string strUrl, string reqdata, string encoding, Method method)
+		public RestResponse Process(string strUrl, string reqdata, string encoding, Method method)
 		{
 			switch (ElasticSearchConfig.Instance.TransportType)
 			{
-				case TransportType.thrift:
+				case TransportType.Thrift:
 					return ThriftAdaptor.Instance.Process(strUrl, reqdata, encoding, method);
 				default:
 					return HttpAdaptor.Instance.Process(strUrl, reqdata, encoding, method);
@@ -43,47 +36,47 @@ namespace ElasticSearch.Transport
 
 		#endregion
 
-		public Response Post(string strUrl, string reqdata, string encoding)
+		public RestResponse Post(string strUrl, string reqdata, string encoding)
 		{
 			return Process(strUrl, reqdata, encoding, Method.POST);
 		}
 
-		public Response Post(string strUrl, string reqdata)
+		public RestResponse Post(string strUrl, string reqdata)
 		{
 			return Process(strUrl, reqdata, DefaultEncoding, Method.POST);
 		}
 
-		public Response Put(string strUrl, string reqdata, string encoding)
+		public RestResponse Put(string strUrl, string reqdata, string encoding)
 		{
 			return Process(strUrl, reqdata, encoding, Method.PUT);
 		}
 
-		public Response Put(string strUrl, string reqdata)
+		public RestResponse Put(string strUrl, string reqdata)
 		{
 			return Process(strUrl, reqdata, DefaultEncoding, Method.PUT);
 		}
 
-		public Response Delete(string url)
+		public RestResponse Delete(string url)
 		{
 			return Process(url, string.Empty, DefaultEncoding, Method.DELETE);
 		}
 
-		public Response Get(string url)
+		public RestResponse Get(string url)
 		{
 			return Process(url, string.Empty, DefaultEncoding, Method.GET);
 		}
 
-		public Response Search(string url)
+		public RestResponse Search(string url)
 		{
 			return Process(url, string.Empty, DefaultEncoding, Method.GET);
 		}
 
-		public Response Search(string url, string reqdata)
+		public RestResponse Search(string url, string reqdata)
 		{
 			return Process(url, reqdata, DefaultEncoding, Method.POST);
 		}
 
-		public Response Search(string url, string reqdata, string encoding)
+		public RestResponse Search(string url, string reqdata, string encoding)
 		{
 			return Process(url, reqdata, encoding, Method.POST);
 		}

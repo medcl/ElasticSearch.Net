@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{7DBBC255-BB21-487D-91A7-A3424CB87D97}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ElasticSearch.Client</RootNamespace>
+    <AssemblyName>ElasticSearch.Client</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="log4net">
+      <HintPath>..\libs\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="NetReflector">
+      <HintPath>..\libs\NetReflector.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=3.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\libs\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Config\ElasticSearch.cs" />
+    <Compile Include="ElasticSearchClient.cs" />
+    <Compile Include="EMO\Document.cs" />
+    <Compile Include="EMO\Hits.cs" />
+    <Compile Include="EMO\HitStatus.cs" />
+    <Compile Include="EMO\IndexItem.cs" />
+    <Compile Include="EMO\IndexSetting.cs" />
+    <Compile Include="EMO\OperateResult.cs" />
+    <Compile Include="EMO\SearchHits.cs" />
+    <Compile Include="EMO\SearchResult.cs" />
+    <Compile Include="EMO\ShardStatus.cs" />
+    <Compile Include="Exception\ElasticSearchException.cs" />
+    <Compile Include="Mapping\Enums.cs" />
+    <Compile Include="Mapping\IndexType.cs" />
+    <Compile Include="Mapping\Mapping.cs" />
+    <Compile Include="Mapping\NumType.cs" />
+    <Compile Include="Mapping\Store.cs" />
+    <Compile Include="Mapping\TypeSetting.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QueryDSL\ElasticQuery.cs" />
+    <Compile Include="QueryDSL\Field.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="QueryDSL\IQuery.cs" />
+    <Compile Include="QueryDSL\QueryString.cs" />
+    <Compile Include="Transport\Connection\Connection.cs" />
+    <Compile Include="Transport\Connection\ConnectionBuilder.cs" />
+    <Compile Include="Transport\Connection\ConnectionPool.cs" />
+    <Compile Include="Transport\Connection\IConnection.cs" />
+    <Compile Include="Transport\Connection\IConnectionProvider.cs" />
+    <Compile Include="Transport\Connection\Server.cs" />
+    <Compile Include="Transport\ElasticNode.cs" />
+    <Compile Include="Transport\ElasticNodeManager.cs" />
+    <Compile Include="Transport\ElasticSession.cs" />
+    <Compile Include="Transport\Http\HttpAdaptor.cs" />
+    <Compile Include="Transport\IDL\Method.cs" />
+    <Compile Include="Transport\IDL\Rest.cs" />
+    <Compile Include="Transport\IDL\RestRequest.cs" />
+    <Compile Include="Transport\IDL\RestResponse.cs" />
+    <Compile Include="Transport\IDL\Status.cs" />
+    <Compile Include="Transport\RestProvider.cs" />
+    <Compile Include="Transport\ThriftAdaptor.cs" />
+    <Compile Include="Transport\Thrift\Collections\THashSet.cs" />
+    <Compile Include="Transport\Thrift\Protocol\TBase.cs" />
+    <Compile Include="Transport\Thrift\Protocol\TBase64Utils.cs" />
+    <Compile Include="Transport\Thrift\Protocol\TBinaryProtocol.cs" />
+    <Compile Include="Transport\Thrift\Protocol\TField.cs" />
+    <Compile Include="Transport\Thrift\Protocol\TJSONProtocol.cs" />
+    <Compile Include="Transport\Thrift\Protocol\TList.cs" />
+    <Compile Include="Transport\Thrift\Protocol\TMap.cs" />
+    <Compile Include="Transport\Thrift\Protocol\TMessage.cs" />
+    <Compile Include="Transport\Thrift\Protocol\TMessageType.cs" />
+    <Compile Include="Transport\Thrift\Protocol\TProtocol.cs" />
+    <Compile Include="Transport\Thrift\Protocol\TProtocolException.cs" />
+    <Compile Include="Transport\Thrift\Protocol\TProtocolFactory.cs" />
+    <Compile Include="Transport\Thrift\Protocol\TProtocolUtil.cs" />
+    <Compile Include="Transport\Thrift\Protocol\TSet.cs" />
+    <Compile Include="Transport\Thrift\Protocol\TStruct.cs" />
+    <Compile Include="Transport\Thrift\Protocol\TType.cs" />
+    <Compile Include="Transport\Thrift\Server\TServer.cs" />
+    <Compile Include="Transport\Thrift\Server\TSimpleServer.cs" />
+    <Compile Include="Transport\Thrift\Server\TThreadedServer.cs" />
+    <Compile Include="Transport\Thrift\Server\TThreadPoolServer.cs" />
+    <Compile Include="Transport\Thrift\TApplicationException.cs" />
+    <Compile Include="Transport\Thrift\TProcessor.cs" />
+    <Compile Include="Transport\Thrift\Transport\SocketConnectState.cs" />
+    <Compile Include="Transport\Thrift\Transport\TBufferedTransport.cs" />
+    <Compile Include="Transport\Thrift\Transport\TFramedTransport.cs" />
+    <Compile Include="Transport\Thrift\Transport\THttpClient.cs" />
+    <Compile Include="Transport\Thrift\Transport\TServerSocket.cs" />
+    <Compile Include="Transport\Thrift\Transport\TServerTransport.cs" />
+    <Compile Include="Transport\Thrift\Transport\TSocket.cs" />
+    <Compile Include="Transport\Thrift\Transport\TSocketSettings.cs" />
+    <Compile Include="Transport\Thrift\Transport\TSocketV2.cs" />
+    <Compile Include="Transport\Thrift\Transport\TStreamTransport.cs" />
+    <Compile Include="Transport\Thrift\Transport\TTransport.cs" />
+    <Compile Include="Transport\Thrift\Transport\TTransportException.cs" />
+    <Compile Include="Transport\Thrift\Transport\TTransportFactory.cs" />
+    <Compile Include="Utils\AggregateCounter.cs" />
+    <Compile Include="Utils\JsonBuilder.cs" />
+    <Compile Include="Utils\JsonSerializer.cs" />
+    <Compile Include="Utils\LogWrapper.cs" />
+    <Compile Include="Utils\JsonDelegates.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Config\ElasticSearch.config">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

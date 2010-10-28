@@ -1,0 +1,14 @@
+E:\.NET Related\ElasticSearch.Net\ElasticSearchClient.Tests\bin\Release\Config\ElasticSearch.config
+E:\.NET Related\ElasticSearch.Net\ElasticSearchClient.Tests\bin\Release\Tests.dll
+E:\.NET Related\ElasticSearch.Net\ElasticSearchClient.Tests\bin\Release\Tests.pdb
+E:\.NET Related\ElasticSearch.Net\ElasticSearchClient.Tests\bin\Release\ElasticSearch.Client.dll
+E:\.NET Related\ElasticSearch.Net\ElasticSearchClient.Tests\bin\Release\nunit.framework.dll
+E:\.NET Related\ElasticSearch.Net\ElasticSearchClient.Tests\bin\Release\log4net.dll
+E:\.NET Related\ElasticSearch.Net\ElasticSearchClient.Tests\bin\Release\Newtonsoft.Json.dll
+E:\.NET Related\ElasticSearch.Net\ElasticSearchClient.Tests\bin\Release\NetReflector.dll
+E:\.NET Related\ElasticSearch.Net\ElasticSearchClient.Tests\bin\Release\ElasticSearch.Client.pdb
+E:\.NET Related\ElasticSearch.Net\ElasticSearchClient.Tests\obj\Release\ResolveAssemblyReference.cache
+E:\.NET Related\ElasticSearch.Net\ElasticSearchClient.Tests\obj\Release\Tests.dll
+E:\.NET Related\ElasticSearch.Net\ElasticSearchClient.Tests\obj\Release\Tests.pdb
+E:\.NET Related\ElasticSearch.Net\ElasticSearchClient.Tests\obj\Release\Decl\Tests.dll
+E:\.NET Related\ElasticSearch.Net\ElasticSearchClient.Tests\obj\Release\Decl\Tests.pdb

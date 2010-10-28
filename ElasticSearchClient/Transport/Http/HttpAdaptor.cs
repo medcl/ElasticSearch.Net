@@ -2,10 +2,11 @@
 using System.IO;
 using System.Net;
 using System.Text;
+using ElasticSearch.Client.Transport;
 using ElasticSearch.Thrift;
 using ElasticSearch.Utils;
 
-namespace ElasticSearch.Transport.Http
+namespace ElasticSearch.Client
 {
 	internal class HttpAdaptor : IRestProvider
 	{
@@ -19,12 +20,12 @@ namespace ElasticSearch.Transport.Http
 
 		#region IRestProvider Members
 
-		public Response Process(string strUrl, string reqdata, string encoding, Method method)
+		public RestResponse Process(string strUrl, string reqdata, string encoding, Method method)
 		{
 			DateTime start = DateTime.Now;
 
-			var result = new Response();
-
+			var result = new RestResponse();
+			string responseStr = string.Empty;
 			try
 			{
 				if (!strUrl.StartsWith("/"))
@@ -47,19 +48,20 @@ namespace ElasticSearch.Transport.Http
 				WebResponse response = request.GetResponse();
 				var reader = new StreamReader(response.GetResponseStream(),
 				                              Encoding.GetEncoding(encoding));
-
-				result.Result = reader.ReadToEnd();
-				result.Success = true;
+				responseStr = reader.ReadToEnd();
+				result.SetBody(responseStr);
+				result.Status = Status.OK;
 				reader.Close();
 				reader.Dispose();
 				response.Close();
 			}
 			catch (WebException e)
 			{
+				result.Status = Status.INTERNAL_SERVER_ERROR;
 				DateTime endtime = DateTime.Now;
-				_logger.ErrorFormat("REQUEST> url: {0},body:{1},method,{2},encoding:{3},time:{5},\nRESPONSE>{4}", strUrl, reqdata,
-				                    method, encoding, result.Result, endtime - start);
-				_logger.HandleException(e, "Error happend while process the request");
+				_logger.ErrorFormat("REQUEST> url: {0},body:{1},method,{2},encoding:{3},time:{5},\n\r RESPONSE>:{4}", strUrl, reqdata,
+				                    method, encoding, responseStr, endtime - start);
+				_logger.ErrorFormat(e, "Error happend while process the request");
 			}
 			return result;
 		}

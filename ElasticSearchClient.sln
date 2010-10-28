@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElasticSearchClient", "ElasticSearchClient\ElasticSearchClient.csproj", "{7DBBC255-BB21-487D-91A7-A3424CB87D97}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElasticSearch.Client", "ElasticSearchClient\ElasticSearch.Client.csproj", "{7DBBC255-BB21-487D-91A7-A3424CB87D97}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BenchmarkTests", "BenchmarkTests\BenchmarkTests.csproj", "{9CC0045F-6260-4F5D-B3C8-C3E7FF61B4C0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Benchmark", "BenchmarkTests\Benchmark.csproj", "{9CC0045F-6260-4F5D-B3C8-C3E7FF61B4C0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuickStartTests", "QuickStartTests\QuickStartTests.csproj", "{60BC8E61-E258-4F5D-8BBB-49E9A87536C7}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{0D707670-DCDB-4F51-8885-A48F4E11E0E2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElasticSearchTests", "ElasticSearchTests\ElasticSearchTests.csproj", "{60BC8E61-E258-4F5D-8BBB-49E9A87536C7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -50,5 +52,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9CC0045F-6260-4F5D-B3C8-C3E7FF61B4C0} = {0D707670-DCDB-4F51-8885-A48F4E11E0E2}
+		{60BC8E61-E258-4F5D-8BBB-49E9A87536C7} = {0D707670-DCDB-4F51-8885-A48F4E11E0E2}
 	EndGlobalSection
 EndGlobal

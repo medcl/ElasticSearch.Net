@@ -6,25 +6,25 @@ namespace ElasticSearch.Utils
 	{
 		private const int c_lsFree = 0;
 		private const int c_lsOwned = 1;
-		private readonly int[] data;
+		private readonly int[] _data;
 		private int _lock = c_lsFree;
-		private int countThisMinute;
-		private int countThisSecond;
-		private int cursor;
+		private int _countThisMinute;
+		private int _countThisSecond;
+		private int _cursor;
 
 		public AggregateCounter(int count)
 		{
-			data = new int[count];
+			_data = new int[count];
 		}
 
 		public void IncrementCounter()
 		{
-			Interlocked.Increment(ref countThisSecond);
+			Interlocked.Increment(ref _countThisSecond);
 		}
 
 		public void IncrementCounterBy(int value)
 		{
-			Interlocked.Add(ref countThisSecond, value);
+			Interlocked.Add(ref _countThisSecond, value);
 		}
 
 		private bool EnterLock()
@@ -61,16 +61,16 @@ namespace ElasticSearch.Utils
 			{
 				try
 				{
-					int totalThisSecond = Interlocked.Exchange(ref countThisSecond, 0);
-					int valueFrom1MinAgo = Interlocked.Exchange(ref data[cursor], totalThisSecond);
+					int totalThisSecond = Interlocked.Exchange(ref _countThisSecond, 0);
+					int valueFrom1MinAgo = Interlocked.Exchange(ref _data[_cursor], totalThisSecond);
 
-					cursor++;
-					if (cursor >= data.Length) cursor = 0;
+					_cursor++;
+					if (_cursor >= _data.Length) _cursor = 0;
 
-					countThisMinute -= valueFrom1MinAgo;
-					countThisMinute += totalThisSecond;
+					_countThisMinute -= valueFrom1MinAgo;
+					_countThisMinute += totalThisSecond;
 
-					return countThisMinute;
+					return _countThisMinute;
 				}
 				finally
 				{

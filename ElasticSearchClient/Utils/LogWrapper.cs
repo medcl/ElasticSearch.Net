@@ -18,7 +18,7 @@ namespace ElasticSearch.Utils
 
 		static LogWrapper()
 		{
-			string loggingConfigFile = "logging.config";
+			string loggingConfigFile = "Logging.config";
 			string configFileValue = ConfigurationManager.AppSettings["LoggingConfigFile"];
 
 			if (!string.IsNullOrEmpty(configFileValue))

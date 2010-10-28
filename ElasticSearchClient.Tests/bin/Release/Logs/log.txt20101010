@@ -1,0 +1,8 @@
+2010-10-10 16:23:16,622 INFO  ElasticSearch.Transport.RestProvider - Requesting url:/testindex/testtype/testkey,body:{"a":"b"},methodPOST
+2010-10-10 16:23:17,983 INFO  ElasticSearch.Transport.RestProvider - Requesting url:/testindex/testtype/_search?q=_id%3atestkey&size=10,body:,methodGET
+2010-10-10 16:23:37,596 INFO  ElasticSearch.Transport.RestProvider - Requesting url:/testindex/testtype/testkey,body:{"a":"b"},methodPOST
+2010-10-10 16:23:38,693 INFO  ElasticSearch.Transport.RestProvider - Requesting url:/testindex/testtype/_search?q=_id%3atestkey&size=10,body:,methodGET
+2010-10-10 16:23:39,027 INFO  ElasticSearch.Transport.RestProvider - Requesting url:/testindex/testtype/testkey,body:,methodDELETE
+2010-10-10 16:23:39,029 INFO  ElasticSearch.Transport.RestProvider - Requesting url:/testindex/testtype/testkey,body:,methodGET
+2010-10-10 16:23:44,150 INFO  ElasticSearch.Transport.RestProvider - Requesting url:/testindex/testtype/testkey,body:{"a":"b"},methodPOST
+2010-10-10 16:23:45,301 INFO  ElasticSearch.Transport.RestProvider - Requesting url:/testindex/testtype/_search?q=_id%3atestkey&size=10,body:,methodGET
