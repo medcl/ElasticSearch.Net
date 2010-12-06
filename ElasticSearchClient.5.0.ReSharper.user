@@ -15,25 +15,25 @@
       <Item value="private" priority="0" />
       <Item value="ElasticSearchConfig`0" priority="6" />
       <Item value="static" priority="5" />
-      <Item value="new" priority="8" />
+      <Item value="new" priority="12" />
       <Item value="ElasticSearchConfig" priority="1" />
       <Item value="readonly" priority="0" />
       <Item value="ReflectorProperty" priority="0" />
       <Item value="true" priority="1" />
-      <Item value="bool" priority="2" />
+      <Item value="bool" priority="3" />
       <Item value="string" priority="4" />
       <Item value="int" priority="5" />
       <Item value="false" priority="0" />
       <Item value="NetReflectorReader`0" priority="1" />
       <Item value="netReflectorReader" priority="1" />
       <Item value="NetReflectorReader" priority="0" />
-      <Item value="var" priority="8" />
+      <Item value="var" priority="9" />
       <Item value="obj" priority="0" />
       <Item value="ESClient`0" priority="6" />
       <Item value="ElasticSearchClient" priority="4" />
-      <Item value="public" priority="4" />
+      <Item value="public" priority="6" />
       <Item value="char" priority="0" />
-      <Item value="void" priority="1" />
+      <Item value="void" priority="2" />
       <Item value="TestAttribute`0" priority="0" />
       <Item value="NetReflectorWriter`0" priority="0" />
       <Item value="netReflectorWriter" priority="1" />
@@ -53,14 +53,14 @@
       <Item value="instance" priority="1" />
       <Item value="null" priority="1" />
       <Item value="scareCrow" priority="0" />
-      <Item value="ElasticSearch" priority="4" />
+      <Item value="ElasticSearch" priority="5" />
       <Item value="Thrift" priority="1" />
       <Item value="const" priority="1" />
       <Item value="count" priority="0" />
       <Item value="Console`0" priority="0" />
       <Item value="status" priority="0" />
       <Item value="internal" priority="0" />
-      <Item value="Client" priority="0" />
+      <Item value="Client" priority="1" />
       <Item value="Utils" priority="0" />
       <Item value="_logger" priority="0" />
       <Item value="strUrl" priority="0" />
@@ -73,22 +73,37 @@
       <Item value="CreateIndex`0" priority="0" />
       <Item value="index" priority="2" />
       <Item value="IndexSetting" priority="0" />
-      <Item value="JsonSerializer" priority="2" />
+      <Item value="JsonSerializer" priority="3" />
       <Item value="_transportType" priority="0" />
-      <Item value="return" priority="2" />
+      <Item value="return" priority="3" />
       <Item value="TransportType`0" priority="0" />
       <Item value="ConnectionPool" priority="0" />
       <Item value="ConnectionPoolConfig" priority="0" />
-      <Item value="ElasticSearchClient`0" priority="3" />
+      <Item value="ElasticSearchClient`0" priority="4" />
       <Item value="Guid`0" priority="0" />
       <Item value="indexName" priority="1" />
       <Item value="Assert`0" priority="0" />
-      <Item value="result" priority="0" />
+      <Item value="result" priority="2" />
       <Item value="IndexItem`0" priority="0" />
       <Item value="indexItem" priority="5" />
       <Item value="type" priority="0" />
       <Item value="indexKey" priority="0" />
-      <Item value="OperateResult`0" priority="0" />
+      <Item value="OperateResult`0" priority="15" />
+      <Item value="operateResult" priority="1" />
+      <Item value="throw" priority="0" />
+      <Item value="OperateResult" priority="0" />
+      <Item value="override" priority="0" />
+      <Item value="Success" priority="0" />
+      <Item value="class" priority="0" />
+      <Item value="Test" priority="0" />
+      <Item value="Lucene" priority="0" />
+      <Item value="Net" priority="0" />
+      <Item value="QueryParsers" priority="0" />
+      <Item value="Search" priority="0" />
+      <Item value="BooleanQuery`0" priority="0" />
+      <Item value="booleanQuery" priority="2" />
+      <Item value="BooleanQuery" priority="0" />
+      <Item value="Term" priority="0" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:Exortech.NetReflector.NetReflectorReader">
       <Item value="Read`0" priority="0" />
@@ -152,7 +167,7 @@
       <Item value="Count" priority="0" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:@ElasticSearch.Utils.JsonSerializer">
-      <Item value="Get`1" priority="1" />
+      <Item value="Get`1" priority="2" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:@ElasticSearch.Config.ElasticSearchConfig">
       <Item value="Instance" priority="0" />
@@ -164,13 +179,14 @@
       <Item value="Thrift" priority="0" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:@ElasticSearch.Client.ElasticSearchClient">
-      <Item value="Instance" priority="4" />
+      <Item value="Instance" priority="5" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:ElasticSearch.Client.ElasticSearchClient">
       <Item value="Delete`0" priority="0" />
       <Item value="DeleteIndex`0" priority="1" />
       <Item value="Index`0" priority="0" />
       <Item value="Refresh`0" priority="0" />
+      <Item value="Search`0" priority="0" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:@System.Guid">
       <Item value="NewGuid`0" priority="0" />
@@ -184,6 +200,20 @@
       <Item value="Fields" priority="0" />
       <Item value="ToJson`0" priority="0" />
     </ItemStatistics>
+    <ItemStatistics item="Qualified:ElasticSearch.Thrift.RestResponse">
+      <Item value="GetBody`0" priority="1" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:ElasticSearch.Client.OperateResult">
+      <Item value="JsonString" priority="0" />
+      <Item value="Success" priority="1" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:Lucene.Net.Search.BooleanQuery">
+      <Item value="Add`0" priority="0" />
+      <Item value="ToString`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@Lucene.Net.Search.BooleanClause+Occur">
+      <Item value="MUST" priority="0" />
+    </ItemStatistics>
   </CompletionStatisticsManager>
   <RecentFiles>
     <RecentFiles>
@@ -191,58 +221,59 @@
       <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:Mapping/f:NumType.cs" caret="0" fromTop="0" />
       <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:Utils/f:AggregateCounter.cs" caret="168" fromTop="3" />
       <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:Utils/f:LogWrapper.cs" caret="465" fromTop="9" />
-      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:Config/f:ElasticSearch.cs" caret="4298" fromTop="8" />
       <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:Transport/f:ElasticNode.cs" caret="567" fromTop="11" />
-      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:Utils/f:JsonSerializer.cs" caret="1340" fromTop="14" />
       <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:Utils/f:JsonDelegates.cs" caret="144" fromTop="5" />
       <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:Transport/d:Thrift/d:Transport/f:TBufferedTransport.cs" caret="2204" fromTop="9" />
       <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:Transport/f:ThriftAdaptor.cs" caret="1261" fromTop="9" />
-      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:Transport/f:RestProvider.cs" caret="1635" fromTop="13" />
       <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:EMO/f:IndexItem.cs" caret="2050" fromTop="10" />
-      <File id="9CC0045F-6260-4F5D-B3C8-C3E7FF61B4C0/f:Program.cs" caret="1239" fromTop="14" />
-      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/f:ElasticSearchClient.cs" caret="204" fromTop="5" />
-      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:QueryDSL/f:Fuzzy.cs" caret="0" fromTop="0" />
-      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:QueryDSL/f:IFilter.cs" caret="0" fromTop="0" />
-      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:QueryDSL/f:InclusiveRange.cs" caret="0" fromTop="0" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:Transport/f:RestProvider.cs" caret="1232" fromTop="8" />
+      <File id="9CC0045F-6260-4F5D-B3C8-C3E7FF61B4C0/f:Program.cs" caret="980" fromTop="10" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:EMO/f:OperateResult.cs" caret="226" fromTop="11" />
+      <File id="60BC8E61-E258-4F5D-8BBB-49E9A87536C7/f:Easy2Go.cs" caret="1039" fromTop="23" />
+      <File id="60BC8E61-E258-4F5D-8BBB-49E9A87536C7/f:MappingTests.cs" caret="1665" fromTop="12" />
+      <File id="60BC8E61-E258-4F5D-8BBB-49E9A87536C7/f:QueryDSLTests.cs" caret="600" fromTop="19" />
+      <File id="9CC0045F-6260-4F5D-B3C8-C3E7FF61B4C0/d:Config/f:ElasticSearch.config" caret="1367" fromTop="25" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:QueryDSL/f:ElasticQuery.cs" caret="418" fromTop="10" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:QueryDSL/f:Field.cs" caret="271" fromTop="10" />
       <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:QueryDSL/f:IQuery.cs" caret="0" fromTop="0" />
-      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:QueryDSL/f:IRange.cs" caret="0" fromTop="0" />
-      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:QueryDSL/f:MatchAll.cs" caret="0" fromTop="0" />
-      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:QueryDSL/f:Prefix.cs" caret="0" fromTop="0" />
-      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:QueryDSL/f:QueryString.cs" caret="3842" fromTop="0" />
-      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:QueryDSL/f:Term.cs" caret="410" fromTop="0" />
-      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:QueryDSL/f:Wildcard.cs" caret="148" fromTop="6" />
-      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:QueryDSL/f:ElasticQuery.cs" caret="338" fromTop="7" />
-      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:QueryDSL/f:ExclusiveRange.cs" caret="701" fromTop="14" />
-      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:QueryDSL/f:Extensions.cs" caret="412" fromTop="10" />
-      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:QueryDSL/f:Field.cs" caret="0" fromTop="0" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:QueryDSL/f:QueryString.cs" caret="145" fromTop="5" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/f:ElasticSearchClient.cs" caret="354" fromTop="0" />
+      <File id="60BC8E61-E258-4F5D-8BBB-49E9A87536C7/f:QueryTests.cs" caret="529" fromTop="15" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:Utils/f:JsonSerializer.cs" caret="166" fromTop="0" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:Config/f:ElasticSearch.config" caret="441" fromTop="8" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:Config/f:ElasticSearch.cs" caret="2028" fromTop="18" />
     </RecentFiles>
     <RecentEdits>
-      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:EMO/f:Document.cs" caret="684" fromTop="36" />
-      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:EMO/f:Document.cs" caret="684" fromTop="6" />
-      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:EMO/f:Document.cs" caret="684" fromTop="7" />
-      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:EMO/f:Document.cs" caret="684" fromTop="2" />
-      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:EMO/f:Document.cs" caret="684" fromTop="9" />
-      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:EMO/f:IndexItem.cs" caret="492" fromTop="7" />
-      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:Mapping/f:Enums.cs" caret="123" fromTop="4" />
-      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:Mapping/f:Enums.cs" caret="34" fromTop="0" />
-      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:Mapping/f:NumType.cs" caret="0" fromTop="0" />
-      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:Mapping/f:IndexType.cs" caret="79" fromTop="4" />
-      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/f:ElasticSearchClient.cs" caret="9781" fromTop="9" />
-      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:Utils/f:JsonSerializer.cs" caret="1340" fromTop="8" />
-      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:Utils/f:JsonSerializer.cs" caret="1340" fromTop="24" />
-      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:Utils/f:JsonSerializer.cs" caret="979" fromTop="9" />
-      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:Utils/f:JsonSerializer.cs" caret="1226" fromTop="24" />
-      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:Utils/f:JsonSerializer.cs" caret="1226" fromTop="12" />
-      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:Utils/f:JsonSerializer.cs" caret="1226" fromTop="21" />
-      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:Utils/f:JsonSerializer.cs" caret="1226" fromTop="12" />
-      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:Utils/f:JsonSerializer.cs" caret="1226" fromTop="12" />
-      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:Utils/f:JsonSerializer.cs" caret="1340" fromTop="14" />
-      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:EMO/f:IndexItem.cs" caret="2111" fromTop="12" />
-      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:EMO/f:IndexItem.cs" caret="2223" fromTop="17" />
-      <File id="9CC0045F-6260-4F5D-B3C8-C3E7FF61B4C0/f:Program.cs" caret="1239" fromTop="14" />
-      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/f:ElasticSearchClient.cs" caret="729" fromTop="4" />
-      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/f:ElasticSearchClient.cs" caret="8" fromTop="0" />
-      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:QueryDSL/f:ExclusiveRange.cs" caret="701" fromTop="8" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/f:ElasticSearchClient.cs" caret="1174" fromTop="12" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/f:ElasticSearchClient.cs" caret="1390" fromTop="19" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/f:ElasticSearchClient.cs" caret="1671" fromTop="12" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/f:ElasticSearchClient.cs" caret="2300" fromTop="9" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/f:ElasticSearchClient.cs" caret="1976" fromTop="6" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/f:ElasticSearchClient.cs" caret="1390" fromTop="11" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/f:ElasticSearchClient.cs" caret="1141" fromTop="11" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/f:ElasticSearchClient.cs" caret="2609" fromTop="5" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/f:ElasticSearchClient.cs" caret="2988" fromTop="14" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/f:ElasticSearchClient.cs" caret="3597" fromTop="21" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/f:ElasticSearchClient.cs" caret="3298" fromTop="15" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/f:ElasticSearchClient.cs" caret="3715" fromTop="13" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/f:ElasticSearchClient.cs" caret="3971" fromTop="19" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/f:ElasticSearchClient.cs" caret="8605" fromTop="7" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/f:ElasticSearchClient.cs" caret="8927" fromTop="12" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/f:ElasticSearchClient.cs" caret="9245" fromTop="14" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/f:ElasticSearchClient.cs" caret="9538" fromTop="19" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/f:ElasticSearchClient.cs" caret="10598" fromTop="13" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/f:ElasticSearchClient.cs" caret="10668" fromTop="17" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/f:ElasticSearchClient.cs" caret="9865" fromTop="2" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/f:ElasticSearchClient.cs" caret="10598" fromTop="9" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/f:ElasticSearchClient.cs" caret="10726" fromTop="14" />
+      <File id="9CC0045F-6260-4F5D-B3C8-C3E7FF61B4C0/f:Program.cs" caret="912" fromTop="5" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:EMO/f:OperateResult.cs" caret="382" fromTop="18" />
+      <File id="60BC8E61-E258-4F5D-8BBB-49E9A87536C7/f:MappingTests.cs" caret="973" fromTop="19" />
+      <File id="60BC8E61-E258-4F5D-8BBB-49E9A87536C7/f:Easy2Go.cs" caret="420" fromTop="16" />
+      <File id="60BC8E61-E258-4F5D-8BBB-49E9A87536C7/f:MappingTests.cs" caret="739" fromTop="11" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:QueryDSL/f:QueryString.cs" caret="145" fromTop="5" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/f:ElasticSearchClient.cs" caret="354" fromTop="0" />
+      <File id="60BC8E61-E258-4F5D-8BBB-49E9A87536C7/f:QueryTests.cs" caret="529" fromTop="15" />
     </RecentEdits>
   </RecentFiles>
   <NAntValidationSettings>

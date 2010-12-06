@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Text;
 using System.Web;
 using ElasticSearch.Client.Transport;
 using ElasticSearch.DSL;
@@ -40,6 +41,15 @@ namespace ElasticSearch.Client
 			return GetOperateResult(result);
 		}
 
+		public OperateResult Bulk(IList<BulkObject> bulkObjects)
+		{
+			string url = "/_bulk";
+			var jsonData = bulkObjects.GetJson();
+			RestResponse result = RestProvider.Instance.Post(url, jsonData);
+			var operateResult= GetOperateResult(result);
+			operateResult.Success = result.Status == Thrift.Status.OK;
+			return operateResult;
+		}
 
 		public OperateResult Delete(string index, string type, string indexKey)
 		{
@@ -47,6 +57,21 @@ namespace ElasticSearch.Client
 			RestResponse result = RestProvider.Instance.Delete(url);
 
 			return GetOperateResult(result);
+		}
+
+		public OperateResult Delete(string indexName, string indexType, string[] objectKeys)
+		{
+			string url = "/_bulk";
+			var stringBuilder = new StringBuilder(objectKeys.Length);
+			foreach (var variable in objectKeys)
+			{
+				stringBuilder.AppendLine("{{ \"delete\" : {{ \"_index\" : \"{0}\", \"_type\" : \"{1}\", \"_id\" : \"{2}\" }} }}".Fill(indexName.ToLower(), indexType, variable));
+			}
+			var jsonData = stringBuilder.ToString();
+			RestResponse result = RestProvider.Instance.Post(url, jsonData);
+			var operateResult = GetOperateResult(result);
+			operateResult.Success = result.Status == Thrift.Status.OK;
+			return operateResult;
 		}
 
 		/// <summary>
@@ -237,8 +262,7 @@ namespace ElasticSearch.Client
 			string url = "/" + index + "/" + string.Join(",", type) + "/_search?q=" + queryString +"&from="+from+ "&size=" + size;
 			RestResponse result = RestProvider.Instance.Get(url);
 
-			var hitResult = new SearchResult();
-			hitResult.JsonString = result.GetBody();
+			var hitResult = new SearchResult(result.GetBody());
 			return hitResult;
 		}
 
@@ -255,8 +279,7 @@ namespace ElasticSearch.Client
 			string url = "/" + index + "/_search?q=" + queryString + "&from=" + from + "&size=" + size;
 			RestResponse result = RestProvider.Instance.Get(url);
 
-			var hitResult = new SearchResult();
-			hitResult.JsonString = result.GetBody();
+			var hitResult = new SearchResult(result.GetBody());
 			return hitResult;
 		}
 
@@ -270,6 +293,22 @@ namespace ElasticSearch.Client
 			return Search(index, new[] {type}, queryString,from,size);
 		}
 
+		public List<string> SearchIds(string index, string[] type, string queryString, string sortString, int from, int size)
+		{
+			queryString = HttpUtility.UrlEncode(queryString.Trim());
+			string url = "/{0}/{1}/_search?q={2}&fields=_id&from={3}&size={4}".Fill(index.ToLower(), string.Join(",", type),
+																				 queryString, from, size);
+
+			if (!string.IsNullOrEmpty(sortString))
+			{
+				url += "&sort=" + sortString;
+			}
+
+			RestResponse result = RestProvider.Instance.Get(url);
+
+			var hitResult = new SearchResult(result.GetBody());
+			return hitResult.GetHitIds();
+		}
 
 		public SearchResult Search(string index, string type, string queryString, int size)
 		{
@@ -287,8 +326,7 @@ namespace ElasticSearch.Client
 			
 			string url = "/" + index + "/" + string.Join(",", type) + "/_search";
 			RestResponse result = RestProvider.Instance.Post(url,jsonstr);
-			var hitResult = new SearchResult();
-			hitResult.JsonString = result.GetBody();
+			var hitResult = new SearchResult(result.GetBody());
 			return hitResult;
 		}
 		

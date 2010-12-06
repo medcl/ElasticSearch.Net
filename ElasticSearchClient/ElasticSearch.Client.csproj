@@ -63,6 +63,7 @@
   <ItemGroup>
     <Compile Include="Config\ElasticSearch.cs" />
     <Compile Include="ElasticSearchClient.cs" />
+    <Compile Include="EMO\BulkObject.cs" />
     <Compile Include="EMO\Document.cs" />
     <Compile Include="EMO\Hits.cs" />
     <Compile Include="EMO\HitStatus.cs" />

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using ElasticSearch.Utils;
 using Newtonsoft.Json;
+using JsonSerializer = ElasticSearch.Utils.JsonSerializer;
 
 namespace ElasticSearch.Client
 {
@@ -10,8 +12,13 @@ namespace ElasticSearch.Client
 	/// </summary>
 	public class SearchResult
 	{
-		private SearchHits _hits;
-		
+		private HitStatus _hits;
+
+		public SearchResult(string jsonResult)
+		{
+			JsonString = jsonResult;
+		}
+
 		[JsonIgnore]
 		private bool _isNotcalled = true;
 		
@@ -28,22 +35,36 @@ namespace ElasticSearch.Client
 				_isNotcalled = false;
 				try
 				{
-				var temp = JsonConvert.DeserializeObject<SearchHits>(JsonString);
-				if (temp != null)
-				{
-					_hits = new SearchHits();
-					_hits.Hits = temp.Hits;
-					return _hits.Hits;
-				}
+					if (!string.IsNullOrEmpty(JsonString))
+					{
+						var temp = JsonSerializer.Get<SearchHits>(JsonString);
+						if (temp != null && temp.Hits != null)
+						{
+							_hits = temp.Hits;
+						}
+					}
 				}
 				catch (System.Exception e)
 				{
-					_logger.ErrorFormat(e,"Json:{0}",JsonString);
+					_logger.Error(JsonString, e);
 				}
-				
+
 			}
-			if (_hits != null) return _hits.Hits;
+			if (_hits != null) return _hits;
 			return new HitStatus();
+		}
+
+		public List<string> GetHitIds()
+		{
+			var temp = GetHits();
+			if (temp.Hits.Count > 0)
+			{
+				List<Hits> hits = temp.Hits;
+				IEnumerable<string> dhit = from hit in hits
+										   select hit.Id;
+				return new List<string>(dhit);
+			}
+			return new List<string>();
 		}
 
 		public int GetTotalCount()
