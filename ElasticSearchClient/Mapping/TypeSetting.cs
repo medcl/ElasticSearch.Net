@@ -1,8 +1,16 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using Newtonsoft.Json;
 
 namespace ElasticSearch.Mapping
 {
+	[JsonObject("_source")]
+	public class SourceSetting
+	{
+		[JsonProperty("enabled")]
+		public bool Enabled = true;
+	}
+
 	public class TypeSetting
 	{
 		public TypeSetting(string typeName)
@@ -13,23 +21,26 @@ namespace ElasticSearch.Mapping
 		[JsonIgnore]
 		internal string Type;
 
+		[JsonProperty("_source")]
+		public SourceSetting SourceSetting;
+
 		public void AddFieldSetting(AbstractFieldSetting fieldSetting)
 		{
-			_fieldSettings[fieldSetting.Name]=fieldSetting;
+			_fieldSettings[fieldSetting.Name] = fieldSetting;
 		}
 
-		public void AddFieldSetting(string  filedName,AbstractFieldSetting fieldSetting)
+		public void AddFieldSetting(string filedName, AbstractFieldSetting fieldSetting)
 		{
 			_fieldSettings[filedName] = fieldSetting;
 		}
 
 		[JsonProperty("properties")]
 		Dictionary<string, AbstractFieldSetting> _fieldSettings = new Dictionary<string, AbstractFieldSetting>();
-		
+
 		[JsonProperty("ignore_conflicts")]
 		[JsonIgnore]
 		public bool IgnoreConflicts;
-		
+
 		#region field mapping operation
 
 
@@ -49,11 +60,13 @@ namespace ElasticSearch.Mapping
 		/// <param name="indexAnalyzer">The analyzer used to analyze the text contents when analyzed during indexing.</param>
 		/// <param name="searchAnalyzer">The analyzer used to analyze the field when part of a query string.</param>
 		/// <param name="includeInAll">Should the field be included in the _all field (if enabled). Defaults to true or to the parent object type setting.</param>
-		public void CreateStringField(string name,string indexName, Store store=Store.no, IndexType index=IndexType.analyzed,
-		                              TermVector termVector=TermVector.no, double boost=1.0, string nullValue=null,
-		                              bool omitNorms=false, bool omitTermFreqAndPositions=false, string analyzer=null,
-		                              string indexAnalyzer=null, string searchAnalyzer=null, bool includeInAll=true)
+		public void CreateStringField(string name, string indexName = null, Store store = Store.no, IndexType index = IndexType.analyzed,
+									  TermVector termVector = TermVector.no, double boost = 1.0, string nullValue = null,
+									  bool omitNorms = false, bool omitTermFreqAndPositions = false, string analyzer = null,
+									  string indexAnalyzer = null, string searchAnalyzer = null, bool includeInAll = true)
 		{
+			Contract.Ensures(_fieldSettings != null);
+
 			var field = new StringFieldSetting();
 			field.Name = name;
 			field.IndexName = indexName;
@@ -68,7 +81,7 @@ namespace ElasticSearch.Mapping
 			field.IndexAnalyzer = indexAnalyzer;
 			field.SearchAnalyzer = searchAnalyzer;
 			field.IncludeInAll = includeInAll;
-			
+
 			_fieldSettings[name] = field;
 		}
 
@@ -83,18 +96,20 @@ namespace ElasticSearch.Mapping
 		/// <param name="boost">The boost value. Defaults to 1.0.</param>
 		/// <param name="nullValue">When there is a (JSON) null value for the field, use the null_value as the field value. Defaults to not adding the field at all.</param>
 		/// <param name="includeInAll">Should the field be included in the _all field (if enabled). Defaults to true or to the parent object type setting.</param>
-		public void CreateNumField(string name,NumType type=NumType.Integer,
-		                           string indexName=null,
-		                           IndexType index=IndexType.analyzed,
-		                           Store store=Store.no,
-		                           int precisionStep=4,
-		                           double boost=1.0,
-		                           string nullValue=null,
-		                           bool includeInAll=true)
+		public void CreateNumField(string name, NumType type = NumType.Integer,
+								   string indexName = null,
+								   IndexType index = IndexType.analyzed,
+								   Store store = Store.no,
+								   int precisionStep = 4,
+								   double boost = 1.0,
+								   string nullValue = null,
+								   bool includeInAll = true)
 		{
+			Contract.Ensures(_fieldSettings != null);
+
 			var field = new NumberFieldSetting();
 			field.Name = name;
-			
+
 			var numType = "integer";
 			switch (type)
 			{
@@ -131,15 +146,17 @@ namespace ElasticSearch.Mapping
 		/// <param name="boost">The boost value. Defaults to 1.0.</param>
 		/// <param name="nullValue">When there is a (JSON) null value for the field, use the null_value as the field value. Defaults to not adding the field at all.</param>
 		/// <param name="includeInAll">Should the field be included in the _all field (if enabled). Defaults to true or to the parent object type setting.</param>
-		public void CreateDateField(string name,string indexName=null,
-		                            string format=null,
-		                            Store store=Store.no,
-		                            IndexType index=IndexType.analyzed,
-		                            int precisionStep=4,
-		                            double boost=1.0,
-		                            string nullValue=null,
-		                            bool includeInAll=true)
+		public void CreateDateField(string name, string indexName = null,
+									string format = null,
+									Store store = Store.no,
+									IndexType index = IndexType.analyzed,
+									int precisionStep = 4,
+									double boost = 1.0,
+									string nullValue = null,
+									bool includeInAll = true)
 		{
+			Contract.Ensures(_fieldSettings != null);
+
 			var field = new DateFieldSetting();
 			field.Name = name;
 			field.IndexName = indexName;
@@ -163,6 +180,8 @@ namespace ElasticSearch.Mapping
 									string nullValue = null,
 									bool includeInAll = true)
 		{
+			Contract.Ensures(_fieldSettings != null);
+
 			var field = new BooleanFieldSetting();
 			field.Name = name;
 			field.IndexName = indexName;
@@ -176,6 +195,6 @@ namespace ElasticSearch.Mapping
 		}
 
 		#endregion
-		
+
 	}
 }

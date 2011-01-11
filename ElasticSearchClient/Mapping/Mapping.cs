@@ -56,7 +56,7 @@ namespace ElasticSearch.Mapping
 		}
 	}
 
-	public abstract class AbstractFieldSetting
+	public class AbstractFieldSetting
 	{
 		[JsonIgnore] public string Name;
 
