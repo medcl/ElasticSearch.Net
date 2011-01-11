@@ -2,7 +2,7 @@ h1. ElasticSearch.NET Client
 
 h2. Requirements
 
-version > 0.12.0
+version > 0.14.0
 thrift plugin enabled (non framed)
 
 h2. Tutorial
@@ -42,17 +42,10 @@ Delete:
 Get:
       ESClient.Instance.Get("testindex", "testtype", "testkey");
 
+check my tests to see more examples!
 
+or your can make a wrapper on top of it,and this is what i do
 
-or your can make a wrapper on top of thi,and this is what i do
-
-ps:part of code(queryDSL) copy from http://github.com/Mpdreamz/NEST
-
-h3. TODO Lists
-
-Framed transport
-QueryDSL
-Bulk
     
 h2. Benchmark
 
