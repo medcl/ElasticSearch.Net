@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-//DSL copy from 
-
-namespace ElasticSearch.DSL
+namespace ElasticSearch.Client.QueryDSL
 {
 	public enum Operator 
 	{

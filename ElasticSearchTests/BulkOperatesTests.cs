@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using ElasticSearch.Client;
+using ElasticSearch.Client.EMO;
 using NUnit.Framework;
 
 namespace Tests

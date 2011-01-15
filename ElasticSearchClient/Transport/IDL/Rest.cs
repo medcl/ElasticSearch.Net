@@ -10,7 +10,7 @@ using System.Text;
 using Thrift;
 using Thrift.Protocol;
 
-namespace ElasticSearch.Thrift
+namespace ElasticSearch.Client.Transport.IDL
 {
 	internal class Rest
 	{

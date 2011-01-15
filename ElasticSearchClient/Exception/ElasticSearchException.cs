@@ -1,4 +1,4 @@
-namespace ElasticSearch.Exception
+namespace ElasticSearch.Client.Exception
 {
 	public class ElasticSearchException : System.Exception
 	{

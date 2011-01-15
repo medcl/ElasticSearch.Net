@@ -4,7 +4,7 @@
  * DO NOT EDIT UNLESS YOU ARE SURE THAT YOU KNOW WHAT YOU ARE DOING
  */
 
-namespace ElasticSearch.Thrift
+namespace ElasticSearch.Client.Transport.IDL
 {
 	internal enum Method
 	{

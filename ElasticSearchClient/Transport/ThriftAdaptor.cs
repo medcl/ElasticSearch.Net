@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Text;
-using ElasticSearch.Thrift;
-using ElasticSearch.Utils;
+using ElasticSearch.Client.Transport.IDL;
+using ElasticSearch.Client.Utils;
 
 namespace ElasticSearch.Client.Transport.Thrift
 {

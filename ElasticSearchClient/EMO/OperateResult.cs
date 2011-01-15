@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace ElasticSearch.Client
+namespace ElasticSearch.Client.EMO
 {
 	/// <summary>
 	/// operation result

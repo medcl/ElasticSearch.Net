@@ -2,11 +2,11 @@ using System;
 using System.Configuration;
 using System.IO;
 using System.Xml;
-using ElasticSearch.Exception;
+using ElasticSearch.Client.Exception;
 using Exortech.NetReflector;
 using Thrift.Transport;
 
-namespace ElasticSearch.Config
+namespace ElasticSearch.Client.Config
 {
 	[ReflectorType("ElasticSearchConfig")]
 	public class ElasticSearchConfig

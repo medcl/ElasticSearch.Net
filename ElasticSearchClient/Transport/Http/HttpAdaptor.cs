@@ -2,11 +2,10 @@
 using System.IO;
 using System.Net;
 using System.Text;
-using ElasticSearch.Client.Transport;
-using ElasticSearch.Thrift;
-using ElasticSearch.Utils;
+using ElasticSearch.Client.Transport.IDL;
+using ElasticSearch.Client.Utils;
 
-namespace ElasticSearch.Client
+namespace ElasticSearch.Client.Transport.Http
 {
 	internal class HttpAdaptor : IRestProvider
 	{

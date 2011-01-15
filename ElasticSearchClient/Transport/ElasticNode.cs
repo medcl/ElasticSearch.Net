@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Net.Sockets;
 using System.Threading;
-using ElasticSearch.Config;
-using ElasticSearch.Utils;
+using ElasticSearch.Client.Config;
+using ElasticSearch.Client.Transport.Connection;
+using ElasticSearch.Client.Utils;
 
-namespace ElasticSearch.Client
+namespace ElasticSearch.Client.Transport
 {
 	//TODO reload config
 	internal class ESNode

@@ -1,7 +1,7 @@
 using System;
-using ElasticSearch.Thrift;
+using ElasticSearch.Client.Transport.IDL;
 
-namespace ElasticSearch.Client
+namespace ElasticSearch.Client.Transport.Connection
 {
 	internal interface IConnection : IDisposable
 	{

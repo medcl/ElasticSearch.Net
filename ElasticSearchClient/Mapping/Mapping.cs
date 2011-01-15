@@ -1,7 +1,7 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace ElasticSearch.Mapping
+namespace ElasticSearch.Client.Mapping
 {
 	public class StringFieldSetting : AbstractFieldSetting
 	{

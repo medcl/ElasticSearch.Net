@@ -2,7 +2,7 @@
 using System.Diagnostics.Contracts;
 using Newtonsoft.Json;
 
-namespace ElasticSearch.Mapping
+namespace ElasticSearch.Client.Mapping
 {
 	[JsonObject("_source")]
 	public class SourceSetting
@@ -65,7 +65,7 @@ namespace ElasticSearch.Mapping
 									  bool omitNorms = false, bool omitTermFreqAndPositions = false, string analyzer = null,
 									  string indexAnalyzer = null, string searchAnalyzer = null, bool includeInAll = true)
 		{
-			Contract.Ensures(_fieldSettings != null);
+			Contract.Assert(_fieldSettings != null);
 
 			var field = new StringFieldSetting();
 			field.Name = name;
@@ -105,7 +105,7 @@ namespace ElasticSearch.Mapping
 								   string nullValue = null,
 								   bool includeInAll = true)
 		{
-			Contract.Ensures(_fieldSettings != null);
+			Contract.Assert(_fieldSettings != null);
 
 			var field = new NumberFieldSetting();
 			field.Name = name;
@@ -155,7 +155,7 @@ namespace ElasticSearch.Mapping
 									string nullValue = null,
 									bool includeInAll = true)
 		{
-			Contract.Ensures(_fieldSettings != null);
+			Contract.Assert(_fieldSettings != null);
 
 			var field = new DateFieldSetting();
 			field.Name = name;
@@ -180,7 +180,7 @@ namespace ElasticSearch.Mapping
 									string nullValue = null,
 									bool includeInAll = true)
 		{
-			Contract.Ensures(_fieldSettings != null);
+			Contract.Assert(_fieldSettings != null);
 
 			var field = new BooleanFieldSetting();
 			field.Name = name;

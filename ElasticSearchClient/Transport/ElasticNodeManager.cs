@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using ElasticSearch.Config;
-using ElasticSearch.Exception;
-using ElasticSearch.Utils;
+using ElasticSearch.Client.Config;
+using ElasticSearch.Client.Exception;
+using ElasticSearch.Client.Utils;
 
-namespace ElasticSearch.Client
+namespace ElasticSearch.Client.Transport
 {
 	internal class ESNodeManager
 	{

@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text;
 using Thrift.Transport;
 
-namespace ElasticSearch.Client
+namespace ElasticSearch.Client.Transport.Connection
 {
 	internal class ConnectionBuilder
 	{

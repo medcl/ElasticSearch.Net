@@ -2,12 +2,12 @@
 using System.Diagnostics.Contracts;
 using System.Text;
 using System.Web;
+using ElasticSearch.Client.EMO;
 using ElasticSearch.Client.Mapping;
+using ElasticSearch.Client.QueryDSL;
 using ElasticSearch.Client.Transport;
-using ElasticSearch.DSL;
-using ElasticSearch.Mapping;
-using ElasticSearch.Thrift;
-using ElasticSearch.Utils;
+using ElasticSearch.Client.Transport.IDL;
+using ElasticSearch.Client.Utils;
 using Newtonsoft.Json.Linq;
 
 namespace ElasticSearch.Client
@@ -36,10 +36,10 @@ namespace ElasticSearch.Client
 
 		public OperateResult Index(string index, string type, string indexKey, string jsonData)
 		{
-			Contract.Ensures(!string.IsNullOrEmpty(index));
-			Contract.Ensures(!string.IsNullOrEmpty(type));
-			Contract.Ensures(!string.IsNullOrEmpty(jsonData));
-			Contract.Ensures(!string.IsNullOrEmpty(indexKey));
+			Contract.Assert(!string.IsNullOrEmpty(index));
+			Contract.Assert(!string.IsNullOrEmpty(type));
+			Contract.Assert(!string.IsNullOrEmpty(jsonData));
+			Contract.Assert(!string.IsNullOrEmpty(indexKey));
 
 			var url = "/{0}/{1}/{2}/".F(index.ToLower(), type, indexKey);
 			RestResponse result = RestProvider.Instance.Post(url, jsonData);
@@ -48,22 +48,22 @@ namespace ElasticSearch.Client
 
 		public OperateResult Bulk(IList<BulkObject> bulkObjects)
 		{
-			Contract.Ensures(bulkObjects != null);
-			Contract.Ensures(bulkObjects.Count > 0);
+			Contract.Assert(bulkObjects != null);
+			Contract.Assert(bulkObjects.Count > 0);
 
 			const string url = "/_bulk";
 			string jsonData = bulkObjects.GetJson();
 			RestResponse result = RestProvider.Instance.Post(url, jsonData);
 			var result1= GetOperationResult(result);
-			result1.Success = result.Status == Thrift.Status.OK;
+			result1.Success = result.Status == Transport.IDL.Status.OK;
 			return result1;
 		}
 
 		public Document Get(string index, string type, string indexKey)
 		{
-			Contract.Ensures(!string.IsNullOrEmpty(index));
-			Contract.Ensures(!string.IsNullOrEmpty(type));
-			Contract.Ensures(!string.IsNullOrEmpty(indexKey));
+			Contract.Assert(!string.IsNullOrEmpty(index));
+			Contract.Assert(!string.IsNullOrEmpty(type));
+			Contract.Assert(!string.IsNullOrEmpty(indexKey));
 
 			string url = "/{0}/{1}/{2}".F(index.ToLower(), type, indexKey);
 			RestResponse result = RestProvider.Instance.Get(url);
@@ -89,10 +89,10 @@ namespace ElasticSearch.Client
 
 		public OperateResult Delete(string indexName, string indexType, string[] objectKeys)
 		{
-			Contract.Ensures(!string.IsNullOrEmpty(indexName));
-			Contract.Ensures(!string.IsNullOrEmpty(indexType));
-			Contract.Ensures(objectKeys != null);
-			Contract.Ensures(objectKeys.Length > 0);
+			Contract.Assert(!string.IsNullOrEmpty(indexName));
+			Contract.Assert(!string.IsNullOrEmpty(indexType));
+			Contract.Assert(objectKeys != null);
+			Contract.Assert(objectKeys.Length > 0);
 
 			string url = "/_bulk";
 			var stringBuilder = new StringBuilder(objectKeys.Length);
@@ -105,7 +105,7 @@ namespace ElasticSearch.Client
 			string jsonData = stringBuilder.ToString();
 			RestResponse result = RestProvider.Instance.Post(url, jsonData);
 			var result1= GetOperationResult(result);
-			result1.Success = result.Status == Thrift.Status.OK;
+			result1.Success = result.Status == Transport.IDL.Status.OK;
 			return result1;
 		}
 
@@ -118,12 +118,12 @@ namespace ElasticSearch.Client
 
 		public SearchResult Search(string index, string[] type, string queryString, int from, int size)
 		{
-			Contract.Ensures(!string.IsNullOrEmpty(index));
-			Contract.Ensures(!string.IsNullOrEmpty(queryString));
-			Contract.Ensures(type != null);
-			Contract.Ensures(type.Length > 0);
-			Contract.Ensures(from >= 0);
-			Contract.Ensures(size > 0);
+			Contract.Assert(!string.IsNullOrEmpty(index));
+			Contract.Assert(!string.IsNullOrEmpty(queryString));
+			Contract.Assert(type != null);
+			Contract.Assert(type.Length > 0);
+			Contract.Assert(from >= 0);
+			Contract.Assert(size > 0);
 
 			queryString = HttpUtility.UrlEncode(queryString.Trim());
 
@@ -144,10 +144,10 @@ namespace ElasticSearch.Client
 		/// <returns></returns>
 		public SearchResult Search(string index, string queryString, int from, int size)
 		{
-			Contract.Ensures(!string.IsNullOrEmpty(index));
-			Contract.Ensures(!string.IsNullOrEmpty(queryString));
-			Contract.Ensures(from >= 0);
-			Contract.Ensures(size > 0);
+			Contract.Assert(!string.IsNullOrEmpty(index));
+			Contract.Assert(!string.IsNullOrEmpty(queryString));
+			Contract.Assert(from >= 0);
+			Contract.Assert(size > 0);
 
 			queryString = HttpUtility.UrlEncode(queryString.Trim());
 			string url = "/{0}/_search?q={1}&from={2}&size={3}".F(index.ToLower(), queryString, from, size);
@@ -180,10 +180,10 @@ namespace ElasticSearch.Client
 		public SearchResult Search(string index, string[] type, string queryString, string sortString, string[] fields,
 									 int from, int size)
 		{
-			Contract.Ensures(!string.IsNullOrEmpty(index));
-			Contract.Ensures(type != null);
-			Contract.Ensures(type.Length > 0);
-			Contract.Ensures(!string.IsNullOrEmpty(queryString));
+			Contract.Assert(!string.IsNullOrEmpty(index));
+			Contract.Assert(type != null);
+			Contract.Assert(type.Length > 0);
+			Contract.Assert(!string.IsNullOrEmpty(queryString));
 
 			queryString = HttpUtility.UrlEncode(queryString.Trim());
 			string url = "/{0}/{1}/_search?q={2}&from={3}&size={4}".F(index.ToLower(), string.Join(",", type), queryString, from,
@@ -212,10 +212,10 @@ namespace ElasticSearch.Client
 
 		public List<string> SearchIds(string index, string[] type, string queryString, string sortString, int from, int size)
 		{
-			Contract.Ensures(!string.IsNullOrEmpty(index));
-			Contract.Ensures(type != null);
-			Contract.Ensures(type.Length > 0);
-			Contract.Ensures(!string.IsNullOrEmpty(queryString));
+			Contract.Assert(!string.IsNullOrEmpty(index));
+			Contract.Assert(type != null);
+			Contract.Assert(type.Length > 0);
+			Contract.Assert(!string.IsNullOrEmpty(queryString));
 
 			queryString = HttpUtility.UrlEncode(queryString.Trim());
 			string url = "/{0}/{1}/_search?q={2}&fields=_id&from={3}&size={4}".F(index.ToLower(), string.Join(",", type),
@@ -240,12 +240,12 @@ namespace ElasticSearch.Client
 
 		public SearchResult SearchByDSL(string index, string[] type, string queryString, int from, int size)
 		{
-			Contract.Ensures(!string.IsNullOrEmpty(index));
-			Contract.Ensures(type != null);
-			Contract.Ensures(type.Length > 0);
-			Contract.Ensures(!string.IsNullOrEmpty(queryString));
-			Contract.Ensures(from >= 0);
-			Contract.Ensures(size > 0);
+			Contract.Assert(!string.IsNullOrEmpty(index));
+			Contract.Assert(type != null);
+			Contract.Assert(type.Length > 0);
+			Contract.Assert(!string.IsNullOrEmpty(queryString));
+			Contract.Assert(from >= 0);
+			Contract.Assert(size > 0);
 
 			var query = new QueryString(queryString);
 
@@ -321,8 +321,8 @@ namespace ElasticSearch.Client
 
 		public OperateResult PutMapping(string index, TypeSetting typeSetting)
 		{
-			Contract.Ensures(!string.IsNullOrEmpty(index));
-			Contract.Ensures(typeSetting != null);
+			Contract.Assert(!string.IsNullOrEmpty(index));
+			Contract.Assert(typeSetting != null);
 			var url = "/" + index + "/_mapping";
 
 			var mappings = new Dictionary<string, TypeSetting>();
@@ -336,7 +336,7 @@ namespace ElasticSearch.Client
 			{
 				try
 				{
-					if (response.Status == Thrift.Status.INTERNAL_SERVER_ERROR||response.Status==Thrift.Status.BAD_REQUEST)
+					if (response.Status == Transport.IDL.Status.INTERNAL_SERVER_ERROR||response.Status==Transport.IDL.Status.BAD_REQUEST)
 					{
 						//auto create index
 						CreateIndex(index, new IndexSetting(5, 1));
@@ -366,8 +366,8 @@ namespace ElasticSearch.Client
 
 		public OperateResult CreateIndex(string index, IndexSetting indexSetting)
 		{
-			Contract.Ensures(!string.IsNullOrEmpty(index));
-			Contract.Ensures(indexSetting != null);
+			Contract.Assert(!string.IsNullOrEmpty(index));
+			Contract.Assert(indexSetting != null);
 
 			string url = "/" + index.ToLower() + "/";
 
@@ -380,8 +380,8 @@ namespace ElasticSearch.Client
 
 		public OperateResult ModifyIndex(string index, IndexSetting indexSetting)
 		{
-			Contract.Ensures(!string.IsNullOrEmpty(index));
-			Contract.Ensures(indexSetting != null);
+			Contract.Assert(!string.IsNullOrEmpty(index));
+			Contract.Assert(indexSetting != null);
 
 			string url = "/" + index.ToLower() + "/_settings";
 
@@ -394,7 +394,7 @@ namespace ElasticSearch.Client
 
 		public OperateResult DeleteIndex(string index)
 		{
-			Contract.Ensures(!string.IsNullOrEmpty(index));
+			Contract.Assert(!string.IsNullOrEmpty(index));
 
 			string url = "/{0}".F(index.ToLower());
 
@@ -405,7 +405,7 @@ namespace ElasticSearch.Client
 
 		public OperateResult CreateTemplate(string templateName, TemplateSetting template)
 		{
-			Contract.Ensures(template != null);
+			Contract.Assert(template != null);
 
 			string url = "/_template/{0}".F(templateName);
 
@@ -417,7 +417,7 @@ namespace ElasticSearch.Client
 
 		public Dictionary<string, TemplateSetting> GetTemplate(string templateName)
 		{
-			Contract.Ensures(!string.IsNullOrEmpty(templateName));
+			Contract.Assert(!string.IsNullOrEmpty(templateName));
 
 			string url = "/_template/{0}".F(templateName);
 
@@ -441,8 +441,8 @@ namespace ElasticSearch.Client
 
 		public OperateResult DeleteTemplate(string templateName)
 		{
-			Contract.Ensures(!string.IsNullOrEmpty(templateName));
-			Contract.Ensures(templateName != null);
+			Contract.Assert(!string.IsNullOrEmpty(templateName));
+			Contract.Assert(templateName != null);
 
 			string url = "/_template/{0}".F(templateName);
 			RestResponse result = RestProvider.Instance.Delete(url);
@@ -456,9 +456,9 @@ namespace ElasticSearch.Client
 
 		public OperateResult Delete(string index, string type, string indexKey)
 		{
-			Contract.Ensures(!string.IsNullOrEmpty(index));
-			Contract.Ensures(!string.IsNullOrEmpty(type));
-			Contract.Ensures(!string.IsNullOrEmpty(indexKey));
+			Contract.Assert(!string.IsNullOrEmpty(index));
+			Contract.Assert(!string.IsNullOrEmpty(type));
+			Contract.Assert(!string.IsNullOrEmpty(indexKey));
 
 
 			string url = "/{0}/{1}/{2}/".F(index.ToLower(), type, indexKey);
@@ -475,9 +475,9 @@ namespace ElasticSearch.Client
 		/// <example>DeleteByQueryString('multenant','resume','user:kimchy');</example>
 		public OperateResult DeleteByQueryString(string index, string type, string queryString)
 		{
-			Contract.Ensures(!string.IsNullOrEmpty(index));
-			Contract.Ensures(!string.IsNullOrEmpty(type));
-			Contract.Ensures(!string.IsNullOrEmpty(queryString));
+			Contract.Assert(!string.IsNullOrEmpty(index));
+			Contract.Assert(!string.IsNullOrEmpty(type));
+			Contract.Assert(!string.IsNullOrEmpty(queryString));
 
 			queryString = HttpUtility.UrlEncode(queryString.Trim());
 			string url = "/{0}/{1}/_query?q={2}".F(index.ToLower(), type, queryString);
@@ -500,10 +500,10 @@ namespace ElasticSearch.Client
 
 		public OperateResult DeleteByQueryString(string index, string[] type, string queryString)
 		{
-			Contract.Ensures(!string.IsNullOrEmpty(index));
-			Contract.Ensures(type != null);
-			Contract.Ensures(type.Length > 0);
-			Contract.Ensures(!string.IsNullOrEmpty(queryString));
+			Contract.Assert(!string.IsNullOrEmpty(index));
+			Contract.Assert(type != null);
+			Contract.Assert(type.Length > 0);
+			Contract.Assert(!string.IsNullOrEmpty(queryString));
 
 			queryString = HttpUtility.UrlEncode(queryString.Trim());
 			string url = "/{0}/{1}/_query?q={2}".F(index.ToLower(), string.Join(",", type), queryString);
@@ -520,11 +520,11 @@ namespace ElasticSearch.Client
 
 		public OperateResult DeleteByQueryString(string[] index, string[] type, string queryString)
 		{
-			Contract.Ensures(index != null);
-			Contract.Ensures(type != null);
-			Contract.Ensures(index.Length > 0);
-			Contract.Ensures(type.Length > 0);
-			Contract.Ensures(!string.IsNullOrEmpty(queryString));
+			Contract.Assert(index != null);
+			Contract.Assert(type != null);
+			Contract.Assert(index.Length > 0);
+			Contract.Assert(type.Length > 0);
+			Contract.Assert(!string.IsNullOrEmpty(queryString));
 
 			queryString = HttpUtility.UrlEncode(queryString.Trim());
 			string url = "/{0}/{1}/_query?q=".F(string.Join(",", index).ToLower(), string.Join(",", type), queryString);
@@ -541,8 +541,8 @@ namespace ElasticSearch.Client
 
 		public OperateResult DeleteByQueryString(string index, string queryString)
 		{
-			Contract.Ensures(!string.IsNullOrEmpty(index));
-			Contract.Ensures(!string.IsNullOrEmpty(queryString));
+			Contract.Assert(!string.IsNullOrEmpty(index));
+			Contract.Assert(!string.IsNullOrEmpty(queryString));
 
 			queryString = HttpUtility.UrlEncode(queryString.Trim());
 			string url = "/{0}/_query?q=".F(index.ToLower(), queryString);
@@ -559,9 +559,9 @@ namespace ElasticSearch.Client
 
 		public OperateResult DeleteByQueryString(string[] index, string queryString)
 		{
-			Contract.Ensures(index != null);
-			Contract.Ensures(index.Length > 0);
-			Contract.Ensures(!string.IsNullOrEmpty(queryString));
+			Contract.Assert(index != null);
+			Contract.Assert(index.Length > 0);
+			Contract.Assert(!string.IsNullOrEmpty(queryString));
 
 			queryString = HttpUtility.UrlEncode(queryString.Trim());
 			string url = "/{0}/_query?q={1}".F(string.Join(",", index).ToLower(), queryString);
@@ -582,7 +582,7 @@ namespace ElasticSearch.Client
 		/// <param name="queryString"></param>
 		internal OperateResult DeleteByQueryString(string queryString)
 		{
-			Contract.Ensures(!string.IsNullOrEmpty(queryString));
+			Contract.Assert(!string.IsNullOrEmpty(queryString));
 
 			queryString = HttpUtility.UrlEncode(queryString.Trim());
 			string url = "/_all/_query?q={0}".F(queryString);
@@ -603,10 +603,10 @@ namespace ElasticSearch.Client
 
 		public int Count(string index, string[] type, string queryString)
 		{
-			Contract.Ensures(!string.IsNullOrEmpty(index));
-			Contract.Ensures(!string.IsNullOrEmpty(queryString));
-			Contract.Ensures(type != null);
-			Contract.Ensures(type.Length > 0);
+			Contract.Assert(!string.IsNullOrEmpty(index));
+			Contract.Assert(!string.IsNullOrEmpty(queryString));
+			Contract.Assert(type != null);
+			Contract.Assert(type.Length > 0);
 
 			queryString = HttpUtility.UrlEncode(queryString.Trim());
 			string url = "/{0}/{1}/_count?q={2}".F(index.ToLower(), string.Join(",", type), queryString);
@@ -638,8 +638,8 @@ namespace ElasticSearch.Client
 
 		public int Count(string index, string queryString)
 		{
-			Contract.Ensures(!string.IsNullOrEmpty(index));
-			Contract.Ensures(!string.IsNullOrEmpty(queryString));
+			Contract.Assert(!string.IsNullOrEmpty(index));
+			Contract.Assert(!string.IsNullOrEmpty(queryString));
 
 			queryString = HttpUtility.UrlEncode(queryString.Trim());
 			string url = "/{0}/_count?q={1}".F(index.ToLower(), queryString);
@@ -666,7 +666,7 @@ namespace ElasticSearch.Client
 
 		public int Count(string queryString)
 		{
-			Contract.Ensures(!string.IsNullOrEmpty(queryString));
+			Contract.Assert(!string.IsNullOrEmpty(queryString));
 
 			queryString = HttpUtility.UrlEncode(queryString.Trim());
 			string url = "/_count?q={0}".F(queryString);

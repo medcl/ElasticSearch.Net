@@ -5,7 +5,7 @@ using System.Diagnostics;
 using System.Reflection;
 using System.Text;
 
-namespace ElasticSearch.Utils
+namespace ElasticSearch.Client.Utils
 {
 	internal sealed class JsonBuilder
 	{

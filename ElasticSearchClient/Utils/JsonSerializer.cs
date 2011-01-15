@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 
-namespace ElasticSearch.Utils
+namespace ElasticSearch.Client.Utils
 {
 	public class JsonSerializer
 	{

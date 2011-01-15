@@ -1,8 +1,9 @@
 ﻿using System;
-using ElasticSearch.Exception;
-using ElasticSearch.Thrift;
+using ElasticSearch.Client.Exception;
+using ElasticSearch.Client.Transport.Connection;
+using ElasticSearch.Client.Transport.IDL;
 
-namespace ElasticSearch.Client
+namespace ElasticSearch.Client.Transport
 {
 	/// <summary>
 	/// ElasticSearch session

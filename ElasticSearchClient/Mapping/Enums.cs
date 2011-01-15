@@ -1,4 +1,4 @@
-﻿namespace ElasticSearch.Mapping
+﻿namespace ElasticSearch.Client.Mapping
 {
 	public enum TermVector
 	{

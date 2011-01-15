@@ -61,6 +61,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Admin\ClusterState.cs" />
     <Compile Include="Config\ElasticSearch.cs" />
     <Compile Include="ElasticSearchClient.cs" />
     <Compile Include="EMO\BulkObject.cs" />

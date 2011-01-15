@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace ElasticSearch.Utils
+namespace ElasticSearch.Client.Utils
 {
 	internal abstract class ToJsonDelegates
 	{

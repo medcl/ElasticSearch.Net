@@ -1,4 +1,4 @@
-﻿namespace ElasticSearch.Client
+﻿namespace ElasticSearch.Client.Transport.Connection
 {
 	internal interface IConnectionProvider
 	{

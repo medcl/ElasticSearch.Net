@@ -9,7 +9,7 @@ using System.Web;
 using log4net;
 using log4net.Config;
 
-namespace ElasticSearch.Utils
+namespace ElasticSearch.Client.Utils
 {
 	internal sealed class LogWrapper
 	{

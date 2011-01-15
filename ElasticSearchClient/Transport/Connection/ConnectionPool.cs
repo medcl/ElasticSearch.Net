@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Net.Sockets;
 using System.Threading;
-using ElasticSearch.Config;
-using ElasticSearch.Exception;
-using ElasticSearch.Utils;
+using ElasticSearch.Client.Config;
+using ElasticSearch.Client.Exception;
+using ElasticSearch.Client.Utils;
 using Thrift.Transport;
 
-namespace ElasticSearch.Client
+namespace ElasticSearch.Client.Transport.Connection
 {
 	internal class ConnectionPool : IConnectionProvider
 	{

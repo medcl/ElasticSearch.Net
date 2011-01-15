@@ -6,12 +6,3 @@
 		yes
 	}
 }
-
-namespace ElasticSearch.Mapping
-{
-	public enum Store
-	{
-		no,
-		yes
-	}
-}

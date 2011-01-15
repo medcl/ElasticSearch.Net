@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ElasticSearch.Client
+namespace ElasticSearch.Client.Transport.Connection
 {
 	internal class Server
 	{

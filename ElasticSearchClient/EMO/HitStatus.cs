@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace ElasticSearch.Client
+namespace ElasticSearch.Client.EMO
 {
 	public class HitStatus
 	{

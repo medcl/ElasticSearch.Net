@@ -1,7 +1,8 @@
 using System;
 using ElasticSearch.Client;
-using ElasticSearch.Mapping;
-using ElasticSearch.Utils;
+using ElasticSearch.Client.EMO;
+using ElasticSearch.Client.Mapping;
+using ElasticSearch.Client.Utils;
 using NUnit.Framework;
 
 namespace Tests

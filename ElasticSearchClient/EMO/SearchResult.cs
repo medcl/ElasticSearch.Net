@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using ElasticSearch.Utils;
+using ElasticSearch.Client.Utils;
 using Newtonsoft.Json;
-using JsonSerializer = ElasticSearch.Utils.JsonSerializer;
+using JsonSerializer = ElasticSearch.Client.Utils.JsonSerializer;
 
-namespace ElasticSearch.Client
+namespace ElasticSearch.Client.EMO
 {
 	/// <summary>
 	/// search result

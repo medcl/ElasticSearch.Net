@@ -1,9 +1,9 @@
 ﻿using System;
-using ElasticSearch.Thrift;
+using ElasticSearch.Client.Transport.IDL;
 using Thrift.Protocol;
 using Thrift.Transport;
 
-namespace ElasticSearch.Client
+namespace ElasticSearch.Client.Transport.Connection
 {	
 	internal class Connection : IConnection, IDisposable
 	{

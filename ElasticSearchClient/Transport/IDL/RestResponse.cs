@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Text;
 using Thrift.Protocol;
 
-namespace ElasticSearch.Thrift
+namespace ElasticSearch.Client.Transport.IDL
 {
 	[Serializable]
 	internal class RestResponse : TBase
