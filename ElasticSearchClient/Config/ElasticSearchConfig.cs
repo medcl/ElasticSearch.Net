@@ -68,6 +68,7 @@ namespace ElasticSearch.Client.Config
 
 		[ReflectorCollection("ConnectionPool", InstanceType = typeof(ConnectionPoolConfig), Required = false)]
 		public ConnectionPoolConfig ConnectionPool { set; get; }
+
 		private static T LoadConfig<T>(string xmlPath) where T : class
 		{
 			try
@@ -84,8 +85,7 @@ namespace ElasticSearch.Client.Config
 				throw new ElasticSearchException("Failed on loading config !", exp);
 			}
 		}
-
-
+		
 		public ClusterDefinition GetCluster(string clusterName)
 		{
 			if (Clusters != null) return Clusters.Where(var => var.ClusterName == clusterName).First();

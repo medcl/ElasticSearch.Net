@@ -14,9 +14,9 @@ namespace ElasticSearch.Client.Transport
 		private static readonly LogWrapper logger = LogWrapper.GetLogger();
 		private readonly Random rand;
 		private ElasticSearchConfig config;
-		private Dictionary<string ,List<string>>  ClusterHttpNodes;
-		private Dictionary<string ,List<ESNode>>   ClusterThriftNodes;
-		private Timer aggregateCounterTickTimer;
+		private Dictionary<string ,List<string>>  ClusterHttpNodes=new Dictionary<string, List<string>>();
+		private Dictionary<string ,List<ESNode>>   ClusterThriftNodes=new Dictionary<string, List<ESNode>>();
+		private Timer _aggregateCounterTickTimer;
 		private ESNodeManager()
 		{
 			config = ElasticSearchConfig.Instance;
@@ -28,7 +28,7 @@ namespace ElasticSearch.Client.Transport
 			}
 			rand = new Random((int) DateTime.Now.Ticks);
 			ElasticSearchConfig.ConfigChanged += ElasticSearchConfig_ConfigChanged;
-			aggregateCounterTickTimer = new Timer(AggregateCounterTicker, null, 500, 500);
+			_aggregateCounterTickTimer = new Timer(AggregateCounterTicker, null, 500, 500);
 		}
 
 		private void ElasticSearchConfig_ConfigChanged(object sender, EventArgs e)
