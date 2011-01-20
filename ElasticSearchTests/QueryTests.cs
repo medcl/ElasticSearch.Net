@@ -14,7 +14,7 @@ namespace Tests
 			booleanQuery.Add(new TermQuery(new Term("name","medcl")),BooleanClause.Occur.MUST);
 			booleanQuery.Add(new TermQuery(new Term("age","25")),BooleanClause.Occur.MUST);
 
-			ElasticSearch.Client.ElasticSearchClient.Instance.Search("index", "type", booleanQuery.ToString());
+			new ElasticSearch.Client.ElasticSearchClient("localhost").Search("index", "type", booleanQuery.ToString());
 		}
 	}
 }

@@ -19,7 +19,7 @@ namespace ElasticSearch.Client.Transport.Http
 
 		#region IRestProvider Members
 
-		public RestResponse Process(string strUrl, string reqdata, string encoding, Method method)
+		public RestResponse Process(string clusterName, string strUrl, string reqdata, string encoding, Method method)
 		{
 			DateTime start = DateTime.Now;
 
@@ -31,7 +31,7 @@ namespace ElasticSearch.Client.Transport.Http
 				{
 					strUrl = "/" + strUrl;
 				}
-				WebRequest request = WebRequest.Create(ESNodeManager.Instance.GetHttpNode() + strUrl);
+				WebRequest request = WebRequest.Create(ESNodeManager.Instance.GetHttpNode(clusterName) + strUrl);
 				request.Method = method.ToString();
 				byte[] buf = Encoding.GetEncoding(encoding).GetBytes(reqdata);
 				request.ContentType = "application/json; charset=" + encoding;

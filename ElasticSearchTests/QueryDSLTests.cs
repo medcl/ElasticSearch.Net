@@ -11,12 +11,12 @@ namespace Tests
 	public class QueryDSLTests
 	{
 		string index = "index_search_operate" + Guid.NewGuid().ToString();
-
+		ElasticSearchClient client = new ElasticSearchClient("localhost");
 		[Test]
 		public void TestQuery()
 		{
 			//http://localhost:9200/index/type/_search?q=gender:False&sort=id&from=0
-			var result =  ElasticSearchClient.Instance.SearchByDSL(index, new string[] { "type" }, "gender:true", 0, 5);
+			var result =  client.SearchByDSL(index, new string[] { "type" }, "gender:true", 0, 5);
 
 			Assert.AreEqual(50, result.GetTotalCount());
 			Assert.AreEqual(5, result.GetHits().Hits.Count);
@@ -30,8 +30,8 @@ namespace Tests
 			typesetting.AddFieldSetting("id", new NumberFieldSetting() { });
 			typesetting.AddFieldSetting("gender", new BooleanFieldSetting() { Index = IndexType.not_analyzed });
 
-			ElasticSearchClient.Instance.Index(index, "type", "_medcl", "{}");
-			ElasticSearchClient.Instance.PutMapping(index, typesetting);
+			client.Index(index, "type", "_medcl", "{}");
+			client.PutMapping(index, typesetting);
 			
 			for (int i = 0; i < 100; i++)
 			{
@@ -48,7 +48,7 @@ namespace Tests
 				}
 	
 			
-			ElasticSearchClient.Instance.Index(index,item);
+			client.Index(index,item);
 			}
 			Thread.Sleep(2000);
 		}
@@ -57,7 +57,7 @@ namespace Tests
 		[TestFixtureTearDown]
 		public void Cleanup()
 		{
-			ElasticSearchClient.Instance.DeleteIndex(index);
+			client.DeleteIndex(index);
 		}
 	}
 }

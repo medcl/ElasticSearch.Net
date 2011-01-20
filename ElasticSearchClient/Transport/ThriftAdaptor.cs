@@ -16,9 +16,9 @@ namespace ElasticSearch.Client.Transport.Thrift
 
 		#region IRestProvider Members
 
-		public RestResponse Process(string strUrl, string reqdata, string encoding, Method method)
+		public RestResponse Process(string clusterName,string strUrl, string reqdata, string encoding, Method method)
 		{
-			ESNode node = ESNodeManager.Instance.GetNode();
+			ESNode node = ESNodeManager.Instance.GetNode(clusterName);
 			using (var esSession = new ESSession(node.ConnectionProvider))
 			{
 				var restRequest = new RestRequest();

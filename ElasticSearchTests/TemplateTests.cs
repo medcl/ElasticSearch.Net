@@ -10,6 +10,7 @@ namespace Tests
 	[TestFixture]
 	public class TemplateTests
 	{
+		ElasticSearchClient client=new ElasticSearchClient("localhost");
 		[Test]
 		public void TestTemplate()
 		{
@@ -34,27 +35,27 @@ namespace Tests
 			var jsonstr = JsonSerializer.Get(template);
 			Console.WriteLine(jsonstr);
 
-			var result = ElasticSearchClient.Instance.CreateTemplate(tempkey, template);
+			var result = client.CreateTemplate(tempkey, template);
 			Console.WriteLine(result.JsonString);
 			Assert.AreEqual(true, result.Success);
 
-			result = ElasticSearchClient.Instance.CreateIndex("business_111");
+			result = client.CreateIndex("business_111");
 			Assert.AreEqual(true, result.Success);
-			result = ElasticSearchClient.Instance.CreateIndex("business_132");
+			result = client.CreateIndex("business_132");
 			Assert.AreEqual(true, result.Success);
-			result = ElasticSearchClient.Instance.CreateIndex("business_31003");
+			result = client.CreateIndex("business_31003");
 			Assert.AreEqual(true, result.Success);
 
-			var temp = ElasticSearchClient.Instance.GetTemplate(tempkey);
+			var temp = client.GetTemplate(tempkey);
 
 			TemplateSetting result1;
 			Assert.AreEqual(true, temp.TryGetValue(tempkey, out result1));
 			Assert.AreEqual(template.Order, result1.Order);
 			Assert.AreEqual(template.Template, result1.Template);
 
-			ElasticSearchClient.Instance.DeleteIndex("business_111");
-			ElasticSearchClient.Instance.DeleteIndex("business_132");
-			ElasticSearchClient.Instance.DeleteIndex("business_31003");
+			client.DeleteIndex("business_111");
+			client.DeleteIndex("business_132");
+			client.DeleteIndex("business_31003");
 		}
 	}
 }

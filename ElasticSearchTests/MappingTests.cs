@@ -9,9 +9,11 @@ namespace Tests
 	[TestFixture]
 	public class MappingTests
 	{
+		public ElasticSearchClient client = new ElasticSearchClient("localhost");
 		[Test]
 		public void TestCreatingMapping()
 		{
+			
 			var index = "index_operate" + Guid.NewGuid().ToString();
 			StringFieldSetting stringFieldSetting = new StringFieldSetting() { Analyzer = "standard", Type = "string", NullValue = "mystr" };
 
@@ -22,13 +24,13 @@ namespace Tests
 			var numfield = new NumberFieldSetting() { Store = Store.yes, NullValue = 0.00 };
 			typeSetting2.AddFieldSetting("name", numfield);
 
-			var result = ElasticSearchClient.Instance.PutMapping(index, typeSetting);
+			var result = client.PutMapping(index, typeSetting);
 			Assert.AreEqual(true, result.Success);
 
-			result = ElasticSearchClient.Instance.PutMapping(index, typeSetting2);
+			result = client.PutMapping(index, typeSetting2);
 			Assert.AreEqual(true, result.Success);
 
-			var result2 = ElasticSearchClient.Instance.DeleteIndex(index);
+			var result2 = client.DeleteIndex(index);
 			Assert.AreEqual(true, result2.Success);
 		}
 
@@ -36,19 +38,19 @@ namespace Tests
 		public void TestCreateIndex()
 		{
 			var index = "index_operate" + Guid.NewGuid().ToString();
-			ElasticSearchClient.Instance.CreateIndex(index, new IndexSetting(10, 1));
+			client.CreateIndex(index, new IndexSetting(10, 1));
 
-			var result2 = ElasticSearchClient.Instance.DeleteIndex(index);
+			var result2 = client.DeleteIndex(index);
 			Assert.AreEqual(true, result2.Success);
 		}
 		[Test]
 		public void TestModifyIndex()
 		{
 			var index = "index_operate" + Guid.NewGuid().ToString();
-			ElasticSearchClient.Instance.CreateIndex(index, new IndexSetting(10, 1));
-			ElasticSearchClient.Instance.ModifyIndex(index, new IndexSetting(10, 2));
+			client.CreateIndex(index, new IndexSetting(10, 1));
+			client.ModifyIndex(index, new IndexSetting(10, 2));
 
-			var result2 = ElasticSearchClient.Instance.DeleteIndex(index);
+			var result2 = client.DeleteIndex(index);
 			Assert.AreEqual(true, result2.Success);
 		}
 	}

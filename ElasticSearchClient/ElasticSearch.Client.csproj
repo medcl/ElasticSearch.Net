@@ -62,7 +62,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Admin\ClusterState.cs" />
-    <Compile Include="Config\ElasticSearch.cs" />
+    <Compile Include="Config\ClusterDefinition.cs" />
+    <Compile Include="Config\ConnectionPoolConfig.cs" />
+    <Compile Include="Config\TransportType.cs" />
+    <Compile Include="Config\ElasticSearchConfig.cs" />
+    <Compile Include="Config\NodeDefinition.cs" />
     <Compile Include="ElasticSearchClient.cs" />
     <Compile Include="EMO\BulkObject.cs" />
     <Compile Include="EMO\Document.cs" />

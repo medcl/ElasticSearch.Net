@@ -15,7 +15,6 @@ namespace ElasticSearch.Client.Transport
 		public ESNode(NodeDefinition nodeDefinition)
 		{
 			Enabled = nodeDefinition.Enabled;
-
 			Host = nodeDefinition.Host;
 			Port = nodeDefinition.Port;
 

@@ -23,6 +23,7 @@ namespace ElasticSearch.Client.Transport.Connection
 		private readonly TSocketSettings socketSettings;
 		private readonly Server target;
 		private readonly bool useLimiter;
+		public string ClusterName { get; set; }
 
 		public ConnectionBuilder Builder
 		{

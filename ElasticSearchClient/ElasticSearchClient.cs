@@ -2,6 +2,7 @@
 using System.Diagnostics.Contracts;
 using System.Text;
 using System.Web;
+using ElasticSearch.Client.Admin;
 using ElasticSearch.Client.EMO;
 using ElasticSearch.Client.Mapping;
 using ElasticSearch.Client.QueryDSL;
@@ -17,16 +18,11 @@ namespace ElasticSearch.Client
 	/// </summary>
 	public class ElasticSearchClient
 	{
-		private static readonly ElasticSearchClient _client = new ElasticSearchClient();
 		private LogWrapper _logger = LogWrapper.GetLogger();
-
-		private ElasticSearchClient()
+		private RestProvider provider;
+		public ElasticSearchClient(string clusterName)
 		{
-		}
-
-		public static ElasticSearchClient Instance
-		{
-			get { return _client; }
+			provider=new RestProvider(clusterName);
 		}
 
 		public OperateResult Index(string index, IndexItem indexItem)
@@ -42,7 +38,7 @@ namespace ElasticSearch.Client
 			Contract.Assert(!string.IsNullOrEmpty(indexKey));
 
 			var url = "/{0}/{1}/{2}/".F(index.ToLower(), type, indexKey);
-			RestResponse result = RestProvider.Instance.Post(url, jsonData);
+			RestResponse result = provider.Post(url, jsonData);
 			return GetOperationResult(result);
 		}
 
@@ -53,7 +49,7 @@ namespace ElasticSearch.Client
 
 			const string url = "/_bulk";
 			string jsonData = bulkObjects.GetJson();
-			RestResponse result = RestProvider.Instance.Post(url, jsonData);
+			RestResponse result = provider.Post(url, jsonData);
 			var result1= GetOperationResult(result);
 			result1.Success = result.Status == Transport.IDL.Status.OK;
 			return result1;
@@ -66,7 +62,7 @@ namespace ElasticSearch.Client
 			Contract.Assert(!string.IsNullOrEmpty(indexKey));
 
 			string url = "/{0}/{1}/{2}".F(index.ToLower(), type, indexKey);
-			RestResponse result = RestProvider.Instance.Get(url);
+			RestResponse result = provider.Get(url);
 
 			if (result.Body != null)
 			{
@@ -103,7 +99,7 @@ namespace ElasticSearch.Client
 																											  indexType, variable));
 			}
 			string jsonData = stringBuilder.ToString();
-			RestResponse result = RestProvider.Instance.Post(url, jsonData);
+			RestResponse result = provider.Post(url, jsonData);
 			var result1= GetOperationResult(result);
 			result1.Success = result.Status == Transport.IDL.Status.OK;
 			return result1;
@@ -129,7 +125,7 @@ namespace ElasticSearch.Client
 
 			string url = "/{0}/{1}/_search?q={2}&from={3}&size={4}".F(index.ToLower(), string.Join(",", type), queryString, from,
 																	  size);
-			RestResponse result = RestProvider.Instance.Get(url);
+			RestResponse result = provider.Get(url);
 			var hitResult = new SearchResult(result.GetBody());
 			return hitResult;
 		}
@@ -151,7 +147,7 @@ namespace ElasticSearch.Client
 
 			queryString = HttpUtility.UrlEncode(queryString.Trim());
 			string url = "/{0}/_search?q={1}&from={2}&size={3}".F(index.ToLower(), queryString, from, size);
-			RestResponse result = RestProvider.Instance.Get(url);
+			RestResponse result = provider.Get(url);
 
 			var hitResult = new SearchResult(result.GetBody());
 			return hitResult;
@@ -199,7 +195,7 @@ namespace ElasticSearch.Client
 				url += "&fields=" + string.Join(",", fields);
 			}
 
-			RestResponse result = RestProvider.Instance.Get(url);
+			RestResponse result = provider.Get(url);
 
 			var hitResult = new SearchResult(result.GetBody());
 			return hitResult;
@@ -226,7 +222,7 @@ namespace ElasticSearch.Client
 				url += "&sort=" + sortString;
 			}
 
-			RestResponse result = RestProvider.Instance.Get(url);
+			RestResponse result = provider.Get(url);
 
 			var hitResult = new SearchResult(result.GetBody());
 			return hitResult.GetHitIds();
@@ -255,7 +251,7 @@ namespace ElasticSearch.Client
 			string jsonstr = JsonSerializer.Get(elasticQuery);
 
 			string url = "/{0}/{1}/_search".F(index.ToLower(), string.Join(",", type));
-			RestResponse result = RestProvider.Instance.Post(url, jsonstr);
+			RestResponse result = provider.Post(url, jsonstr);
 			var hitResult = new SearchResult(result.GetBody());
 			return hitResult;
 		}
@@ -273,7 +269,7 @@ namespace ElasticSearch.Client
 			}
 			string url = indexs.ToLower() + "/_refresh";
 
-			RestResponse result = RestProvider.Instance.Get(url);
+			RestResponse result = provider.Get(url);
 			return GetOperationResult(result);
 		}
 
@@ -286,7 +282,7 @@ namespace ElasticSearch.Client
 			}
 			string url = indexs.ToLower() + "/_flush";
 
-			RestResponse result = RestProvider.Instance.Get(url);
+			RestResponse result = provider.Get(url);
 			return GetOperationResult(result);
 		}
 
@@ -299,11 +295,11 @@ namespace ElasticSearch.Client
 			}
 			string url = indexs.ToLower() + "/_optimize";
 
-			RestResponse result = RestProvider.Instance.Get(url);
+			RestResponse result = provider.Get(url);
 			return GetOperationResult(result);
 		}
 
-		public string Status(params string[] index)
+		public ClusterIndexStatus Status(params string[] index)
 		{
 			string indexs = string.Empty;
 			if (index.Length > 0)
@@ -312,7 +308,9 @@ namespace ElasticSearch.Client
 			}
 			string url = indexs.ToLower() + "/_status";
 
-			return RestProvider.Instance.Get(url).GetBody();
+			var json= provider.Get(url).GetBody();
+
+			return JsonSerializer.Get<ClusterIndexStatus>(json);
 		}
 
 		#endregion
@@ -330,7 +328,7 @@ namespace ElasticSearch.Client
 
 			var data = JsonSerializer.Get(mappings);
 
-			var response = RestProvider.Instance.Put(url, data);
+			var response = provider.Put(url, data);
 
 			if (response != null)
 			{
@@ -341,7 +339,7 @@ namespace ElasticSearch.Client
 						//auto create index
 						CreateIndex(index, new IndexSetting(5, 1));
 						//try again
-						response = RestProvider.Instance.Put(url, data);
+						response = provider.Put(url, data);
 
 						return GetOperationResult(response);
 					}
@@ -374,7 +372,7 @@ namespace ElasticSearch.Client
 			string json = JsonSerializer.Get(indexSetting);
 			json = "{    index : " + json + " }";
 
-			RestResponse result = RestProvider.Instance.Post(url, json);
+			RestResponse result = provider.Post(url, json);
 			return GetOperationResult(result);
 		}
 
@@ -388,7 +386,7 @@ namespace ElasticSearch.Client
 			string json = JsonSerializer.Get(indexSetting);
 			json = "{    index : " + json + " }";
 
-			RestResponse result = RestProvider.Instance.Put(url, json);
+			RestResponse result = provider.Put(url, json);
 			return GetOperationResult(result);
 		}
 
@@ -398,7 +396,7 @@ namespace ElasticSearch.Client
 
 			string url = "/{0}".F(index.ToLower());
 
-			RestResponse result = RestProvider.Instance.Delete(url);
+			RestResponse result = provider.Delete(url);
 
 			return GetOperationResult(result);
 		}
@@ -410,7 +408,7 @@ namespace ElasticSearch.Client
 			string url = "/_template/{0}".F(templateName);
 
 			string json = JsonSerializer.Get(template);
-			RestResponse result = RestProvider.Instance.Post(url, json);
+			RestResponse result = provider.Post(url, json);
 
 			return GetOperationResult(result);
 		}
@@ -421,7 +419,7 @@ namespace ElasticSearch.Client
 
 			string url = "/_template/{0}".F(templateName);
 
-			RestResponse result = RestProvider.Instance.Get(url);
+			RestResponse result = provider.Get(url);
 
 			if (result.Body != null)
 			{
@@ -445,7 +443,7 @@ namespace ElasticSearch.Client
 			Contract.Assert(templateName != null);
 
 			string url = "/_template/{0}".F(templateName);
-			RestResponse result = RestProvider.Instance.Delete(url);
+			RestResponse result = provider.Delete(url);
 			
 			return GetOperationResult(result);
 		}
@@ -462,7 +460,7 @@ namespace ElasticSearch.Client
 
 
 			string url = "/{0}/{1}/{2}/".F(index.ToLower(), type, indexKey);
-			RestResponse result = RestProvider.Instance.Delete(url);
+			RestResponse result = provider.Delete(url);
 			return GetOperationResult(result);
 		}
 
@@ -481,7 +479,7 @@ namespace ElasticSearch.Client
 
 			queryString = HttpUtility.UrlEncode(queryString.Trim());
 			string url = "/{0}/{1}/_query?q={2}".F(index.ToLower(), type, queryString);
-			RestResponse result = RestProvider.Instance.Delete(url);
+			RestResponse result = provider.Delete(url);
 
 			return GetOperationResult(result);
 		}
@@ -507,7 +505,7 @@ namespace ElasticSearch.Client
 
 			queryString = HttpUtility.UrlEncode(queryString.Trim());
 			string url = "/{0}/{1}/_query?q={2}".F(index.ToLower(), string.Join(",", type), queryString);
-			RestResponse result = RestProvider.Instance.Delete(url);
+			RestResponse result = provider.Delete(url);
 			string jsonString = result.GetBody();
 			if (jsonString != null)
 			{
@@ -528,7 +526,7 @@ namespace ElasticSearch.Client
 
 			queryString = HttpUtility.UrlEncode(queryString.Trim());
 			string url = "/{0}/{1}/_query?q=".F(string.Join(",", index).ToLower(), string.Join(",", type), queryString);
-			RestResponse result = RestProvider.Instance.Delete(url);
+			RestResponse result = provider.Delete(url);
 			string jsonString = result.GetBody();
 			if (jsonString != null)
 			{
@@ -546,7 +544,7 @@ namespace ElasticSearch.Client
 
 			queryString = HttpUtility.UrlEncode(queryString.Trim());
 			string url = "/{0}/_query?q=".F(index.ToLower(), queryString);
-			RestResponse result = RestProvider.Instance.Delete(url);
+			RestResponse result = provider.Delete(url);
 			string jsonString = result.GetBody();
 			if (jsonString != null)
 			{
@@ -565,7 +563,7 @@ namespace ElasticSearch.Client
 
 			queryString = HttpUtility.UrlEncode(queryString.Trim());
 			string url = "/{0}/_query?q={1}".F(string.Join(",", index).ToLower(), queryString);
-			RestResponse result = RestProvider.Instance.Delete(url);
+			RestResponse result = provider.Delete(url);
 			string jsonString = result.GetBody();
 			if (jsonString != null)
 			{
@@ -586,7 +584,7 @@ namespace ElasticSearch.Client
 
 			queryString = HttpUtility.UrlEncode(queryString.Trim());
 			string url = "/_all/_query?q={0}".F(queryString);
-			RestResponse result = RestProvider.Instance.Delete(url);
+			RestResponse result = provider.Delete(url);
 			string jsonString = result.GetBody();
 			if (jsonString != null)
 			{
@@ -610,7 +608,7 @@ namespace ElasticSearch.Client
 
 			queryString = HttpUtility.UrlEncode(queryString.Trim());
 			string url = "/{0}/{1}/_count?q={2}".F(index.ToLower(), string.Join(",", type), queryString);
-			RestResponse result = RestProvider.Instance.Get(url);
+			RestResponse result = provider.Get(url);
 
 			string restr = result.GetBody();
 
@@ -643,7 +641,7 @@ namespace ElasticSearch.Client
 
 			queryString = HttpUtility.UrlEncode(queryString.Trim());
 			string url = "/{0}/_count?q={1}".F(index.ToLower(), queryString);
-			RestResponse result = RestProvider.Instance.Get(url);
+			RestResponse result = provider.Get(url);
 
 			string restr = result.GetBody();
 
@@ -670,7 +668,7 @@ namespace ElasticSearch.Client
 
 			queryString = HttpUtility.UrlEncode(queryString.Trim());
 			string url = "/_count?q={0}".F(queryString);
-			RestResponse result = RestProvider.Instance.Get(url);
+			RestResponse result = provider.Get(url);
 
 			string restr = result.GetBody();
 
