@@ -24,6 +24,9 @@ namespace ElasticSearch.Client.Config
 
 		[ReflectorCollection("HttpNodes", InstanceType = typeof(NodeDefinition[]), Required = false)]
 		public NodeDefinition[] HttpNodes { get; set; }
-
+		public override string ToString()
+		{
+			return ClusterName;
+		}
 	}
 }

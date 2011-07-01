@@ -9,3 +9,34 @@ E:\.NET Related\ElasticSearch.Net\ElasticSearchClient\obj\Debug\ElasticSearch.Cl
 E:\.NET Related\ElasticSearch.Net\ElasticSearchClient\obj\Debug\ElasticSearch.Client.pdb
 E:\.NET Related\ElasticSearch.Net\ElasticSearchClient\obj\Debug\Decl\ElasticSearch.Client.dll
 E:\.NET Related\ElasticSearch.Net\ElasticSearchClient\obj\Debug\Decl\ElasticSearch.Client.pdb
+C:\Users\medcl\Documents\Visual Studio 2010\Projects\ElasticSearchDataManager\ElasticSearch.Net\ElasticSearchClient\bin\Debug\Config\ElasticSearch.config
+C:\Users\medcl\Documents\Visual Studio 2010\Projects\ElasticSearchDataManager\ElasticSearch.Net\ElasticSearchClient\bin\Debug\ElasticSearch.Client.dll
+C:\Users\medcl\Documents\Visual Studio 2010\Projects\ElasticSearchDataManager\ElasticSearch.Net\ElasticSearchClient\bin\Debug\ElasticSearch.Client.pdb
+C:\Users\medcl\Documents\Visual Studio 2010\Projects\ElasticSearchDataManager\ElasticSearch.Net\ElasticSearchClient\bin\Debug\log4net.dll
+C:\Users\medcl\Documents\Visual Studio 2010\Projects\ElasticSearchDataManager\ElasticSearch.Net\ElasticSearchClient\bin\Debug\NetReflector.dll
+C:\Users\medcl\Documents\Visual Studio 2010\Projects\ElasticSearchDataManager\ElasticSearch.Net\ElasticSearchClient\bin\Debug\Newtonsoft.Json.dll
+C:\Users\medcl\Documents\Visual Studio 2010\Projects\ElasticSearchDataManager\ElasticSearch.Net\ElasticSearchClient\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\medcl\Documents\Visual Studio 2010\Projects\ElasticSearchDataManager\ElasticSearch.Net\ElasticSearchClient\obj\Debug\ElasticSearch.Client.dll
+C:\Users\medcl\Documents\Visual Studio 2010\Projects\ElasticSearchDataManager\ElasticSearch.Net\ElasticSearchClient\obj\Debug\ElasticSearch.Client.pdb
+C:\Users\medcl\Documents\Visual Studio 2010\Projects\ElasticSearchDataManager\ElasticSearch.Net\ElasticSearchClient\obj\Debug\Decl\ElasticSearch.Client.dll
+C:\Users\medcl\Documents\Visual Studio 2010\Projects\ElasticSearchDataManager\ElasticSearch.Net\ElasticSearchClient\obj\Debug\Decl\ElasticSearch.Client.pdb
+E:\ElasticSearchDataManager\ElasticSearch.Net\ElasticSearchClient\bin\Debug\Config\ElasticSearch.config
+E:\ElasticSearchDataManager\ElasticSearch.Net\ElasticSearchClient\bin\Debug\ElasticSearch.Client.dll
+E:\ElasticSearchDataManager\ElasticSearch.Net\ElasticSearchClient\bin\Debug\ElasticSearch.Client.pdb
+E:\ElasticSearchDataManager\ElasticSearch.Net\ElasticSearchClient\bin\Debug\log4net.dll
+E:\ElasticSearchDataManager\ElasticSearch.Net\ElasticSearchClient\bin\Debug\NetReflector.dll
+E:\ElasticSearchDataManager\ElasticSearch.Net\ElasticSearchClient\bin\Debug\Newtonsoft.Json.dll
+E:\ElasticSearchDataManager\ElasticSearch.Net\ElasticSearchClient\obj\Debug\ResolveAssemblyReference.cache
+E:\ElasticSearchDataManager\ElasticSearch.Net\ElasticSearchClient\obj\Debug\ElasticSearch.Client.dll
+E:\ElasticSearchDataManager\ElasticSearch.Net\ElasticSearchClient\obj\Debug\ElasticSearch.Client.pdb
+E:\ElasticSearchDataManager\ElasticSearch.Net\ElasticSearchClient\obj\Debug\Decl\ElasticSearch.Client.dll
+E:\ElasticSearchDataManager\ElasticSearch.Net\ElasticSearchClient\obj\Debug\Decl\ElasticSearch.Client.pdb
+D:\Projects\.NET Related\ElasticSearchDataManager\ElasticSearch.Net\ElasticSearchClient\bin\Debug\Config\ElasticSearch.config
+D:\Projects\.NET Related\ElasticSearchDataManager\ElasticSearch.Net\ElasticSearchClient\bin\Debug\ElasticSearch.Client.dll
+D:\Projects\.NET Related\ElasticSearchDataManager\ElasticSearch.Net\ElasticSearchClient\bin\Debug\ElasticSearch.Client.pdb
+D:\Projects\.NET Related\ElasticSearchDataManager\ElasticSearch.Net\ElasticSearchClient\bin\Debug\log4net.dll
+D:\Projects\.NET Related\ElasticSearchDataManager\ElasticSearch.Net\ElasticSearchClient\bin\Debug\NetReflector.dll
+D:\Projects\.NET Related\ElasticSearchDataManager\ElasticSearch.Net\ElasticSearchClient\bin\Debug\Newtonsoft.Json.dll
+D:\Projects\.NET Related\ElasticSearchDataManager\ElasticSearch.Net\ElasticSearchClient\obj\Debug\ResolveAssemblyReference.cache
+D:\Projects\.NET Related\ElasticSearchDataManager\ElasticSearch.Net\ElasticSearchClient\obj\Debug\ElasticSearch.Client.dll
+D:\Projects\.NET Related\ElasticSearchDataManager\ElasticSearch.Net\ElasticSearchClient\obj\Debug\ElasticSearch.Client.pdb

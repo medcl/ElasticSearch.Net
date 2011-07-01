@@ -27,8 +27,8 @@ namespace ElasticSearch.Client.Transport
 
 		public RestResponse Process(string clusterName,string strUrl, string reqdata, string encoding, Method method)
 		{
-			var cluster = ElasticSearchConfig.Instance.GetCluster(clusterName);
-			switch (cluster.TransportType)
+			var transportType= ESNodeManager.Instance.GetClusterType(clusterName);
+			switch (transportType)
 			{
 				case TransportType.Thrift:
 					return ThriftAdaptor.Instance.Process(clusterName, strUrl, reqdata, encoding, method);

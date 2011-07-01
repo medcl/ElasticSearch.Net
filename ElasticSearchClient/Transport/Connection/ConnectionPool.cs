@@ -15,14 +15,14 @@ namespace ElasticSearch.Client.Transport.Connection
 
 		private static readonly LogWrapper logger = LogWrapper.GetLogger();
 
-		private readonly ConnectionPoolConfig config;
-		private readonly Semaphore connectionLimiter;
+		private readonly ConnectionPoolConfig _config;
+		private readonly Semaphore _connectionLimiter;
 
-		private readonly Queue<IConnection> connections = new Queue<IConnection>();
-		private readonly object padlock = new object();
-		private readonly TSocketSettings socketSettings;
-		private readonly Server target;
-		private readonly bool useLimiter;
+		private readonly Queue<IConnection> _connections = new Queue<IConnection>();
+		private readonly object _padlock = new object();
+		private readonly TSocketSettings _socketSettings;
+		private readonly Server _target;
+		private readonly bool _useLimiter;
 		public string ClusterName { get; set; }
 
 		public ConnectionBuilder Builder
@@ -38,14 +38,14 @@ namespace ElasticSearch.Client.Transport.Connection
 		{
 			if (config == null) throw new ArgumentNullException("config");
 
-			target = new Server(host, port);
-			this.config = config;
-			socketSettings = config.SocketSettings ?? TSocketSettings.DefaultSettings;
+			_target = new Server(host, port);
+			_config = config;
+			_socketSettings = config.SocketSettings ?? TSocketSettings.DefaultSettings;
 
 			if (config.PoolSize > 0)
 			{
-				useLimiter = true;
-				connectionLimiter = new Semaphore(config.PoolSize, config.PoolSize);
+				_useLimiter = true;
+				_connectionLimiter = new Semaphore(config.PoolSize, config.PoolSize);
 			}
 		}
 
@@ -59,11 +59,11 @@ namespace ElasticSearch.Client.Transport.Connection
 			{
 				try
 				{
-					lock (padlock)
+					lock (_padlock)
 					{
-						while (connections.Count > 0)
+						while (_connections.Count > 0)
 						{
-							IConnection connection = connections.Dequeue();
+							IConnection connection = _connections.Dequeue();
 							if (!IsAlive(connection))
 							{
 								ReleaseConnection(connection);
@@ -82,15 +82,15 @@ namespace ElasticSearch.Client.Transport.Connection
 				}
 			}
 
-			throw new ElasticSearchException("Too many connections to " + target);
+			throw new ElasticSearchException("Too many connections to " + _target);
 		}
 
 		public bool Close(IConnection connection)
 		{
-			lock (padlock)
+			lock (_padlock)
 			{
 				if (IsAlive(connection))
-					connections.Enqueue(connection);
+					_connections.Enqueue(connection);
 				else
 					ReleaseConnection(connection);
 
@@ -109,8 +109,8 @@ namespace ElasticSearch.Client.Transport.Connection
 
 		private bool IsAlive(IConnection connection)
 		{
-			if (config.ConnectionLifetimeMinutes > 0
-			    && connection.Created.AddMinutes(config.ConnectionLifetimeMinutes) < DateTime.Now)
+			if (_config.ConnectionLifetimeMinutes > 0
+			    && connection.Created.AddMinutes(_config.ConnectionLifetimeMinutes) < DateTime.Now)
 				return false;
 
 			return connection.IsOpen;
@@ -118,9 +118,9 @@ namespace ElasticSearch.Client.Transport.Connection
 
 		private bool EnterLimiter()
 		{
-			if (useLimiter)
+			if (_useLimiter)
 			{
-				if (connectionLimiter.WaitOne(socketSettings.ConnectTimeout, false))
+				if (_connectionLimiter.WaitOne(_socketSettings.ConnectTimeout, false))
 					return true;
 				return false;
 			}
@@ -129,15 +129,15 @@ namespace ElasticSearch.Client.Transport.Connection
 
 		private void ExitLimiter()
 		{
-			if (useLimiter)
+			if (_useLimiter)
 			{
 				try
 				{
-					connectionLimiter.Release();
+					_connectionLimiter.Release();
 				}
 				catch (SemaphoreFullException)
 				{
-					logger.ErrorFormat("Connection pool for {0} released a connection too many times", target);
+					logger.ErrorFormat("Connection pool for {0} released a connection too many times", _target);
 				}
 			}
 		}
@@ -149,9 +149,9 @@ namespace ElasticSearch.Client.Transport.Connection
 
 		public void ReleaseAll()
 		{
-			lock (padlock)
+			lock (_padlock)
 			{
-				foreach (IConnection connection in connections)
+				foreach (IConnection connection in _connections)
 				{
 					try
 					{
@@ -169,7 +169,7 @@ namespace ElasticSearch.Client.Transport.Connection
 
 		private IConnection NewConnection()
 		{
-			var connection = new Connection(target, socketSettings);
+			var connection = new Connection(_target, _socketSettings);
 			connection.Open();
 			return connection;
 		}

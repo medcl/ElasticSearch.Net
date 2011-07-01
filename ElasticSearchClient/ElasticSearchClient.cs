@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Text;
 using System.Web;
 using ElasticSearch.Client.Admin;
+using ElasticSearch.Client.Config;
 using ElasticSearch.Client.EMO;
 using ElasticSearch.Client.Mapping;
 using ElasticSearch.Client.QueryDSL;
@@ -25,7 +27,13 @@ namespace ElasticSearch.Client
 			provider=new RestProvider(clusterName);
 		}
 
-		public OperateResult Index(string index, IndexItem indexItem)
+		public	ElasticSearchClient(string host,int port,TransportType transportType)
+		{
+			ESNodeManager.Instance.BuildCustomNodes(host,host,port,transportType);
+			provider=new RestProvider(host);
+		}
+
+		public  OperateResult Index(string index, IndexItem indexItem)
 		{
 			return Index(index, indexItem.IndexType, indexItem.IndexKey, indexItem.ToJson());
 		}
@@ -690,5 +698,28 @@ namespace ElasticSearch.Client
 		}
 
 		#endregion
+
+		public List<string> GetIndices()
+		{
+			var status= Status("");
+			var result = new List<string>();
+			var e= status.IndexStatus.Keys;
+			foreach (var variable in e)
+			{
+				result .Add(variable);
+			}
+			return result;
+		}
+
+		public DocStatus GetIndexDocStatus(string index)
+		{
+			var url = "/{0}/_status".F(index);
+			var response = provider.Get(url);
+			JObject jObject = JObject.Parse(response.GetBody());
+			var indexDocStatus = JsonSerializer.Get<DocStatus>(jObject["indices"][index]["docs"].ToString());
+			return indexDocStatus;
+		}
+	
 	}
+	
 }

@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using ElasticSearch.Client.Config;
 using ElasticSearch.Client.Exception;
 using ElasticSearch.Client.Utils;
+using Thrift.Transport;
 
 namespace ElasticSearch.Client.Transport
 {
@@ -12,23 +12,24 @@ namespace ElasticSearch.Client.Transport
 	{
 		public static readonly ESNodeManager Instance = new ESNodeManager();
 		private static readonly LogWrapper logger = LogWrapper.GetLogger();
-		private readonly Random rand;
-		private ElasticSearchConfig config;
+		private readonly Random _rand;
+		private ElasticSearchConfig _config;
+		private Dictionary<string,TransportType>Clusters=new Dictionary<string, TransportType>();
 		private Dictionary<string ,List<string>>  ClusterHttpNodes=new Dictionary<string, List<string>>();
 		private Dictionary<string ,List<ESNode>>   ClusterThriftNodes=new Dictionary<string, List<ESNode>>();
-		private Timer _aggregateCounterTickTimer;
+
 		private ESNodeManager()
 		{
-			config = ElasticSearchConfig.Instance;
+			_config = ElasticSearchConfig.Instance;
 
-			foreach (var esNode in config.Clusters)
+			foreach (var esNode in _config.Clusters)
 			{
-				ClusterThriftNodes[esNode.ClusterName] = BuildNodes(esNode.ThriftNodes);
+				BuildCluster(esNode.ClusterName,esNode.TransportType);
+				ClusterThriftNodes[esNode.ClusterName] = BuildThriftNodes(esNode.ThriftNodes);
 				ClusterHttpNodes[esNode.ClusterName] = BuildHttpNodes(esNode.HttpNodes);
 			}
-			rand = new Random((int) DateTime.Now.Ticks);
+			_rand = new Random((int) DateTime.Now.Ticks);
 			ElasticSearchConfig.ConfigChanged += ElasticSearchConfig_ConfigChanged;
-			_aggregateCounterTickTimer = new Timer(AggregateCounterTicker, null, 500, 500);
 		}
 
 		private void ElasticSearchConfig_ConfigChanged(object sender, EventArgs e)
@@ -37,10 +38,11 @@ namespace ElasticSearch.Client.Transport
 			if (elasticSearchConfig != null)
 			{
 				logger.Info("ElasticSearchConfig config reloading");
-				config = elasticSearchConfig;
-				foreach (var esNode in config.Clusters)
+				_config = elasticSearchConfig;
+				foreach (var esNode in _config.Clusters)
 				{
-					 ClusterThriftNodes[esNode.ClusterName] = BuildNodes(esNode.ThriftNodes);
+					 BuildCluster(esNode.ClusterName,esNode.TransportType);
+					 ClusterThriftNodes[esNode.ClusterName] = BuildThriftNodes(esNode.ThriftNodes);
 					 ClusterHttpNodes[esNode.ClusterName] = BuildHttpNodes(esNode.HttpNodes);	
 				}
 				logger.Info("ElasticSearchConfig config reloaded");
@@ -60,7 +62,7 @@ namespace ElasticSearch.Client.Transport
 				{
 					if (nodeDefinition.Enabled)
 					{
-						if (nodeDefinition.Port <= 0)
+						if (nodeDefinition.Port <= 0||nodeDefinition.Port>65534)
 						{
 							nodeDefinition.Port = 80;
 						}
@@ -71,29 +73,62 @@ namespace ElasticSearch.Client.Transport
 			return result;
 		}
 
-		private static List<ESNode> BuildNodes(NodeDefinition[] definitions)
+		/// <summary>
+		/// Dynamic Adding Cluster Definition
+		/// </summary>
+		/// <param name="clusterName"></param>
+		/// <param name="ip"></param>
+		/// <param name="port"></param>
+		/// <param name="transportType"></param>
+		public void BuildCustomNodes(string clusterName,string ip,int port,TransportType transportType)
+		{
+			BuildCluster(clusterName,transportType);
+
+			if (transportType == TransportType.Thrift)
+			{	List<ESNode> nodes;
+				ClusterThriftNodes.TryGetValue(clusterName, out nodes);
+				if(nodes==null)nodes=new List<ESNode>();
+				nodes.Add(new ESNode(ip, port));
+				ClusterThriftNodes[clusterName] = nodes;
+			}
+			else
+			{
+				List<string> nodes;
+				ClusterHttpNodes.TryGetValue(clusterName, out nodes);
+				if (nodes == null)nodes=new List<string>();
+				nodes.Add("http://" + ip.Trim() + ":" + port);
+				ClusterHttpNodes[clusterName] = nodes;
+			}
+		}
+
+		private static List<ESNode> BuildThriftNodes(NodeDefinition[] definitions)
 		{
 			var result = new List<ESNode>();
 			if (definitions != null && definitions.Length > 0)
 			{
 				foreach (NodeDefinition nodeDefinition in definitions)
-					result.Add(new ESNode(nodeDefinition));
+				{
+					if (nodeDefinition.Enabled)
+					{
+						result.Add(new ESNode(nodeDefinition));
+					}
+				}
 			}
 			return result;
 		}
 		
-		public ESNode GetNode(string clusterName)
+		public ESNode GetThriftNode(string clusterName)
 		{
 			List<ESNode> nodes;
 			ClusterThriftNodes.TryGetValue(clusterName, out nodes);
 			if (nodes != null)
 			{
 				var candidates = new List<ESNode>(from node in nodes
-				                                  where node.Enabled && !node.InDangerZone
+				                                  where  !node.InDangerZone
 				                                  select node);
 				if (candidates.Count > 0)
 				{
-					return candidates[rand.Next(candidates.Count)];
+					return candidates[_rand.Next(candidates.Count)];
 				}
 			}
 			throw new ElasticSearchException("no live node available");
@@ -106,7 +141,7 @@ namespace ElasticSearch.Client.Transport
 			if (httpNodes != null)
 				if (httpNodes.Count > 0)
 				{
-					return httpNodes[rand.Next(httpNodes.Count)];
+					return httpNodes[_rand.Next(httpNodes.Count)];
 				}
 			throw new ElasticSearchException("no live node available");
 		}
@@ -119,6 +154,19 @@ namespace ElasticSearch.Client.Transport
 					node.AggregateCounterTicker();	
 			}
 			
+		}
+
+		public void BuildCluster(string clustetName,TransportType transportType)
+		{
+			Clusters[clustetName]=transportType;
+		}
+		public TransportType GetClusterType(string clusterName)
+		{
+			if (Clusters.ContainsKey(clusterName))
+			{
+				return Clusters[clusterName];
+			}
+			throw new ElasticSearchException("cluster not found");
 		}
 	}
 }

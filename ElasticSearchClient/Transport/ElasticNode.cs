@@ -4,6 +4,7 @@ using System.Threading;
 using ElasticSearch.Client.Config;
 using ElasticSearch.Client.Transport.Connection;
 using ElasticSearch.Client.Utils;
+using Thrift.Transport;
 
 namespace ElasticSearch.Client.Transport
 {
@@ -22,6 +23,13 @@ namespace ElasticSearch.Client.Transport
 			DangerZoneSeconds = nodeDefinition.DangerZoneSeconds;
 			ConnectionProvider = new ConnectionPool(nodeDefinition.Host, nodeDefinition.Port, nodeDefinition.ConnectionPool??ElasticSearchConfig.Instance.ConnectionPool);
 		}
+		public ESNode(string ip,int port)
+		{
+			Host = ip;
+			Port = port;
+			Enabled = true;
+			ConnectionProvider = new ConnectionPool(Host, Port, ElasticSearchConfig.Instance.ConnectionPool);
+		}
 
 		public bool Enabled { get; private set; }
 		public string Host { get; private set; }
@@ -34,8 +42,8 @@ namespace ElasticSearch.Client.Transport
 		{
 			get
 			{
-				return (serverUnreachableErrors > 0
-				        && lastServerUnreachable.AddSeconds(serverUnreachableWaitSeconds) > DateTime.Now);
+				return (_serverUnreachableErrors > 0
+				        && _lastServerUnreachable.AddSeconds(_serverUnreachableWaitSeconds) > DateTime.Now);
 			}
 		}
 
@@ -45,9 +53,9 @@ namespace ElasticSearch.Client.Transport
 			{
 				if (Unreachable) return true;
 
-				if (serverDownErrors > 0
-				    && serverDownErrorsLast30Seconds > DangerZoneThreshold
-				    && lastServerDownTime.AddSeconds(DangerZoneSeconds) > DateTime.Now)
+				if (_serverDownErrors > 0
+				    && _serverDownErrorsLast30Seconds > DangerZoneThreshold
+				    && _lastServerDownTime.AddSeconds(DangerZoneSeconds) > DateTime.Now)
 				{
 					return true;
 				}
@@ -60,16 +68,16 @@ namespace ElasticSearch.Client.Transport
 
 		private const int ServerUnreachableBaseWaitSeconds = 30;
 		private const int ServerUnreachableMaxWaitSeconds = 60*5;
-		private readonly AggregateCounter serverDownCounter = new AggregateCounter(60); // 30 seconds, tricked every 500 ms
-		private DateTime lastServerDownTime;
-		private DateTime lastServerUnreachable;
-		private int serverDownErrors;
-		private int serverDownErrorsLast30Seconds;
-		private AggregateCounter serverUnreachableCounter = new AggregateCounter(120); // 60 seconds, ticked every 500 ms
+		private readonly AggregateCounter _serverDownCounter = new AggregateCounter(60); // 30 seconds, tricked every 500 ms
+		private DateTime _lastServerDownTime;
+		private DateTime _lastServerUnreachable;
+		private int _serverDownErrors;
+		private int _serverDownErrorsLast30Seconds;
+		private AggregateCounter _serverUnreachableCounter = new AggregateCounter(120); // 60 seconds, ticked every 500 ms
 
-		private int serverUnreachableErrors;
-		private int serverUnreachableErrorsLast2WaitPeriods;
-		private int serverUnreachableWaitSeconds = 60; // initial value, will be increased as errors are encountered
+		private int _serverUnreachableErrors;
+		private int _serverUnreachableErrorsLast2WaitPeriods;
+		private int _serverUnreachableWaitSeconds = 60; // initial value, will be increased as errors are encountered
 
 		public void LogException(System.Exception ex)
 		{
@@ -96,40 +104,40 @@ namespace ElasticSearch.Client.Transport
 
 		private void IncrementServerDown()
 		{
-			Interlocked.Increment(ref serverDownErrors);
-			serverDownCounter.IncrementCounter();
-			lastServerDownTime = DateTime.Now;
+			Interlocked.Increment(ref _serverDownErrors);
+			_serverDownCounter.IncrementCounter();
+			_lastServerDownTime = DateTime.Now;
 		}
 
 		private void IncrementServerUnreachable()
 		{
 			// If we've gotten too many in the last 2 wait period, then increase the wait time
-			if (serverUnreachableErrorsLast2WaitPeriods >= 2)
+			if (_serverUnreachableErrorsLast2WaitPeriods >= 2)
 			{
-				if (serverUnreachableWaitSeconds <= ServerUnreachableMaxWaitSeconds)
+				if (_serverUnreachableWaitSeconds <= ServerUnreachableMaxWaitSeconds)
 				{
-					serverUnreachableWaitSeconds = (int) (serverUnreachableWaitSeconds*1.5);
+					_serverUnreachableWaitSeconds = (int) (_serverUnreachableWaitSeconds*1.5);
 					// want twice the wait period, and then twice that many seconds because it's ticked every 500ms	
-					serverUnreachableCounter = new AggregateCounter(serverUnreachableWaitSeconds*4);
+					_serverUnreachableCounter = new AggregateCounter(_serverUnreachableWaitSeconds*4);
 				}
 			}
-			else if (serverUnreachableErrorsLast2WaitPeriods == 0 && serverUnreachableWaitSeconds != ServerUnreachableBaseWaitSeconds)
+			else if (_serverUnreachableErrorsLast2WaitPeriods == 0 && _serverUnreachableWaitSeconds != ServerUnreachableBaseWaitSeconds)
 			{
-				serverUnreachableWaitSeconds = ServerUnreachableBaseWaitSeconds;
-				serverUnreachableCounter = new AggregateCounter(serverUnreachableWaitSeconds*4);
+				_serverUnreachableWaitSeconds = ServerUnreachableBaseWaitSeconds;
+				_serverUnreachableCounter = new AggregateCounter(_serverUnreachableWaitSeconds*4);
 			}
 
-			Interlocked.Increment(ref serverUnreachableErrors);
-			serverUnreachableCounter.IncrementCounter();
-			lastServerUnreachable = DateTime.Now;
+			Interlocked.Increment(ref _serverUnreachableErrors);
+			_serverUnreachableCounter.IncrementCounter();
+			_lastServerUnreachable = DateTime.Now;
 		}
 
 		internal void AggregateCounterTicker()
 		{
-			int count = serverDownCounter.Tick();
+			int count = _serverDownCounter.Tick();
 			if (count != -1)
 			{
-				serverDownErrorsLast30Seconds = serverDownCounter.Tick();
+				_serverDownErrorsLast30Seconds = _serverDownCounter.Tick();
 			}
 			else
 			{
@@ -137,10 +145,10 @@ namespace ElasticSearch.Client.Transport
 					logger.DebugFormat("Node {0} tried to tick its aggregate counters simultaneously!", this);
 			}
 
-			count = serverUnreachableCounter.Tick();
+			count = _serverUnreachableCounter.Tick();
 			if (count != -1)
 			{
-				serverUnreachableErrorsLast2WaitPeriods = serverUnreachableCounter.Tick();
+				_serverUnreachableErrorsLast2WaitPeriods = _serverUnreachableCounter.Tick();
 			}
 			else
 			{

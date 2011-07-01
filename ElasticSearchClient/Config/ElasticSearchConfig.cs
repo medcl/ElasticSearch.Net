@@ -86,10 +86,5 @@ namespace ElasticSearch.Client.Config
 			}
 		}
 		
-		public ClusterDefinition GetCluster(string clusterName)
-		{
-			if (Clusters != null) return Clusters.Where(var => var.ClusterName == clusterName).First();
-			throw new ElasticSearchException("cluster not found");
-		}
 	}
 }

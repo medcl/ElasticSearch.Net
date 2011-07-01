@@ -518,7 +518,7 @@ namespace ElasticSearch.Client.Utils
 			}
 
 			var log = new LogWrapper(loggerName);
-			_logs.Add(loggerName, log);
+			_logs[loggerName]= log;
 			return log;
 		}
 

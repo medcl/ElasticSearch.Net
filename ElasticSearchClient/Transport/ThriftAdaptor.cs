@@ -18,7 +18,7 @@ namespace ElasticSearch.Client.Transport.Thrift
 
 		public RestResponse Process(string clusterName,string strUrl, string reqdata, string encoding, Method method)
 		{
-			ESNode node = ESNodeManager.Instance.GetNode(clusterName);
+			ESNode node = ESNodeManager.Instance.GetThriftNode(clusterName);
 			using (var esSession = new ESSession(node.ConnectionProvider))
 			{
 				var restRequest = new RestRequest();
