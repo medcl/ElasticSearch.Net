@@ -2,8 +2,14 @@ h1. ElasticSearch.NET Client
 
 h2. Requirements
 
-version > 0.14.0
+version  0.16.0 or upper
 thrift plugin enabled (non framed)
+
+h2. Features
+Thrift supported
+ConnectionPool Supported
+Multi-Cluster Supported
+
 
 h2. Tutorial
 
@@ -45,13 +51,3 @@ Get:
 check my tests to see more examples!
 
 or your can make a wrapper on top of it,and this is what i do
-
-    
-h2. Benchmark
-
-(single thread,single ES node,without manual ES optimize or flush,on my laptop:T6570 2.1GHz/4.00GB)
-
-iteration:1000, elapsed time:00:00:01.3296450, avg time:1.329645 ms
-
-(indices already have num of docs:173909,size:91mb)
-iteration:5000,failure:0,elapsed time:00:00:18.8170762,avg time:3.76341524ms 
