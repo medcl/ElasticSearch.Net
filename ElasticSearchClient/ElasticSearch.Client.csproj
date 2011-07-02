@@ -80,6 +80,10 @@
     <Compile Include="EMO\ShardStatus.cs" />
     <Compile Include="EMO\TemplateSetting.cs" />
     <Compile Include="Exception\ElasticSearchException.cs" />
+    <Compile Include="Exception\ExceptionHandler.cs" />
+    <Compile Include="Exception\IndexMissingException.cs" />
+    <Compile Include="Exception\SearchPhaseExecutionException.cs" />
+    <Compile Include="Exception\TypeMissingException.cs" />
     <Compile Include="Mapping\Enums.cs" />
     <Compile Include="Mapping\IndexType.cs" />
     <Compile Include="Mapping\Mapping.cs" />

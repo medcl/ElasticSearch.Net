@@ -22,7 +22,10 @@ namespace ElasticSearch.Client.Transport
 			ConnectionProvider = connectionProvider;
 			Current = this;
 		}
-
+		public Server CurrentServer
+		{
+			get { return _connection.Server; }
+		}
 		public static ESSession Current
 		{
 			get { return _current; }

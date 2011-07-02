@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Text;
+using ElasticSearch.Client.Exception;
 using ElasticSearch.Client.Transport.IDL;
 using ElasticSearch.Client.Utils;
 
@@ -37,7 +38,16 @@ namespace ElasticSearch.Client.Transport.Thrift
 				//				restRequest.Headers.Add("charset", encoding);
 
 				RestResponse response = esSession.GetClient().execute(restRequest);
+				if (response.Status != Status.OK && response.Status != Status.CREATED)
+				{
+					var formatedMessage = string.Format("Method:{5},Status:{0},Url:{1}{2},ReqData{3},Response:{4}",
+								  response.Status, esSession.CurrentServer, strUrl, reqdata,
+								  response.GetBody(), method);
+					ExceptionHandler.HandleExceptionResponse(response.GetBody(), formatedMessage);
 
+
+
+				}
 				return response;
 			}
 		}

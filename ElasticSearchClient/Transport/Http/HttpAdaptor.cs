@@ -2,6 +2,7 @@
 using System.IO;
 using System.Net;
 using System.Text;
+using ElasticSearch.Client.Exception;
 using ElasticSearch.Client.Transport.IDL;
 using ElasticSearch.Client.Utils;
 
@@ -25,13 +26,15 @@ namespace ElasticSearch.Client.Transport.Http
 
 			var result = new RestResponse();
 			string responseStr = string.Empty;
+			string url = null;
 			try
 			{
 				if (!strUrl.StartsWith("/"))
 				{
 					strUrl = "/" + strUrl;
 				}
-				WebRequest request = WebRequest.Create(ESNodeManager.Instance.GetHttpNode(clusterName) + strUrl);
+				url = ESNodeManager.Instance.GetHttpNode(clusterName) + strUrl;
+				WebRequest request = WebRequest.Create(url);
 				request.Method = method.ToString();
 				byte[] buf = Encoding.GetEncoding(encoding).GetBytes(reqdata);
 				request.ContentType = "application/json; charset=" + encoding;
@@ -53,14 +56,19 @@ namespace ElasticSearch.Client.Transport.Http
 				reader.Close();
 				reader.Dispose();
 				response.Close();
+
+				DateTime endtime = DateTime.Now;
+				_logger.InfoFormat("Request Success,Method:{2},Url:{0},Body:{1},Time:{3}", url, reqdata, method, endtime - start);
+
 			}
 			catch (WebException e)
 			{
-				result.Status = Status.INTERNAL_SERVER_ERROR;
 				DateTime endtime = DateTime.Now;
-				_logger.ErrorFormat("REQUEST> url: {0},body:{1},method,{2},encoding:{3},time:{5},\n\r RESPONSE>:{4}", strUrl, reqdata,
-				                    method, encoding, responseStr, endtime - start);
-				_logger.ErrorFormat(e, "Error happend while process the request");
+				var msg = string.Format("Method:{2}, Url: {0},Body:{1},Encoding:{3},Time:{5},Response:{4}", url,
+										reqdata,
+										method, encoding, responseStr, endtime - start);
+				result.Status = Status.INTERNAL_SERVER_ERROR;
+				ExceptionHandler.HandleExceptionResponse(responseStr, msg);
 			}
 			return result;
 		}
