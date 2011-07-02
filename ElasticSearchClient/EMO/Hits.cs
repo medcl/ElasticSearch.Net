@@ -15,5 +15,7 @@ namespace ElasticSearch.Client.EMO
 		public string Score;
 		[JsonProperty("_type")] 
 		public string Type;
+		[JsonProperty("_version")]
+		public int Version;
 	}
 }
