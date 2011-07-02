@@ -6,23 +6,78 @@ version  0.16.0 or upper
 thrift plugin enabled (non framed)
 
 h2. Features
+
 Thrift supported
 ConnectionPool Supported
 Multi-Cluster Supported
+
+h2. Sample Project
+
+ElasticSearch.DataManager
+  index relocate:reindex data from exist index(_source enabled)
+  index manage:bulk delete,quick sample view,search
+  etc.
+
 
 
 h2. Tutorial
 
 h3. How to use
 
+thrift config
+
+in order to use thrift,you have to config to support cluster
+first download the thrift-plugin
+second edit the config/elasticsearch.yml with below:
+
+  thrift.port : 9500
+  thrift.protocol : 'binary'
+
+
+client config
+
+edit the cluster config file:ElasticSearch.config
+you can specify the cluster,and nodes,and also config the connection pool,and you can even specify the socket settings
+here is simple example
+
+<pre>
+
+<?xml version="1.0" encoding="utf-8"?>
+<ElasticSearchConfig>  
+  <Clusters>
+    <Cluster Name="Prod">
+      <TransportType>Thrift</TransportType>
+      <ThriftNodes>
+        <Node Host="127.0.0.1" Port="9500" Enabled="true" IsFramed="false" >         
+        </Node>
+      </ThriftNodes>      
+    </Cluster>
+    <Cluster Name="localhost">
+      <TransportType>Http</TransportType>
+      <HttpNodes>
+        <Node Host="localhost" Port="9200" Enabled="true"  >          
+        </Node>
+      </HttpNodes>      
+    </Cluster>
+  </Clusters>  
+</ElasticSearchConfig>
+
+</pre>
+
+
+and now rock with elasticsearch.net
+
+var client = new ElasticSearchClient("localhost");
+
+
 CreateIndex:
-      ElasticSearchClient.Instance.CreateIndex("index", new IndexSetting(5, 1));
+      client.CreateIndex("index", new IndexSetting(5, 1));
 
 ModifyIndex:
-      ElasticSearchClient.Instance.ModifyIndex(index, new IndexSetting(10, 2));
+      client.ModifyIndex(index, new IndexSetting(10, 2));
 
 DeleteIndex:
-      ElasticSearchClient.Instance.DeleteIndex("index");
+      client.DeleteIndex("index");
 
 CreateMapping:
       var index = "index_operate" + Guid.NewGuid().ToString();
@@ -35,19 +90,17 @@ CreateMapping:
 			var numfield = new NumberFieldSetting() { Store = Store.yes, NullValue = 0.00 };
 			typeSetting2.AddFieldSetting("name", numfield);
 
-			var result = ElasticSearchClient.Instance.PutMapping(index, typeSetting);
+			var result = client.PutMapping(index, typeSetting);
 
 
 
 Index:
-      ESClient.Instance.Index("testindex", "testtype", "testkey", "{\"a\":\"b\"}");
+      client.Index("testindex", "testtype", "testkey", "{\"a\":\"b\"}");
 Search:
-      ESClient.Instance.Search("testindex", "testtype", "_id:testkey");
+      client.Search("testindex", "testtype", "_id:testkey");
 Delete:
-      ESClient.Instance.Delete("testindex", "testtype", "testkey");
+      client.Delete("testindex", "testtype", "testkey");
 Get:
-      ESClient.Instance.Get("testindex", "testtype", "testkey");
+      client.Get("testindex", "testtype", "testkey");
 
 check my tests to see more examples!
-
-or your can make a wrapper on top of it,and this is what i do
