@@ -403,8 +403,7 @@ namespace ElasticSearch.Client
 
 			string url = "/" + index.ToLower() + "/_settings";
 
-			string json = JsonSerializer.Get(indexSetting);
-			json = "{    index : " + json + " }";
+			var json = "{{\"number_of_replicas\" : {0}}}".F(indexSetting.NumberOfReplicas);
 
 			RestResponse result = provider.Put(url, json);
 			return GetOperationResult(result);
