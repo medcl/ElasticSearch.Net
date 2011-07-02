@@ -15,8 +15,7 @@ h2. Sample Project
 
 ElasticSearch.DataManager
   index relocate:reindex data from exist index(_source enabled)
-  index manage:bulk delete,quick sample view,search
-  etc.
+  index manage:bulk delete,quick data sample,search etc.
 
 
 
@@ -29,10 +28,10 @@ thrift config
 in order to use thrift,you have to config to support cluster
 first download the thrift-plugin
 second edit the config/elasticsearch.yml with below:
-
+<pre>
   thrift.port : 9500
   thrift.protocol : 'binary'
-
+</pre>
 
 client config
 
@@ -66,7 +65,7 @@ here is simple example
 
 
 and now rock with elasticsearch.net
-
+<pre>
 var client = new ElasticSearchClient("localhost");
 
 
@@ -102,5 +101,6 @@ Delete:
       client.Delete("testindex", "testtype", "testkey");
 Get:
       client.Get("testindex", "testtype", "testkey");
+</pre>
 
 check my tests to see more examples!
