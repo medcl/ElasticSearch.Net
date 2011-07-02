@@ -1,2 +1,0 @@
-E:\.NET Related\ElasticSearch.Net\Tests\obj\Release\ResolveAssemblyReference.cache
-E:\.NET Related\ElasticSearch.Net\ESTests\obj\Release\ResolveAssemblyReference.cache
