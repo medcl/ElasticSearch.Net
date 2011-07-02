@@ -170,6 +170,10 @@ namespace ElasticSearch.Client
 		{
 			return Search(index, new[] { type }, queryString, from, size);
 		}
+		public SearchResult Search(string index,string queryString,int from,int size,string sortString)
+		{
+			return Search(index, new string[]{}, queryString, sortString, from, size);
+		}
 
 		public SearchResult Search(string index, string type, string queryString, string sortString, int from, int size)
 		{
@@ -185,13 +189,21 @@ namespace ElasticSearch.Client
 									 int from, int size)
 		{
 			Contract.Assert(!string.IsNullOrEmpty(index));
-			Contract.Assert(type != null);
-			Contract.Assert(type.Length > 0);
 			Contract.Assert(!string.IsNullOrEmpty(queryString));
 
 			queryString = HttpUtility.UrlEncode(queryString.Trim());
-			string url = "/{0}/{1}/_search?q={2}&from={3}&size={4}".F(index.ToLower(), string.Join(",", type), queryString, from,
+			string url =string.Empty;
+
+			if(type==null||type.Length==0)
+			{
+				url = "/{0}/_search?q={2}&from={3}&size={4}".F(index.ToLower(), string.Join(",", type), queryString, from,
 																	  size);
+			}
+			else
+			{
+				url = "/{0}/{1}/_search?q={2}&from={3}&size={4}".F(index.ToLower(), string.Join(",", type), queryString, from,
+																	  size);
+			}
 
 			if (!string.IsNullOrEmpty(sortString))
 			{
@@ -329,7 +341,7 @@ namespace ElasticSearch.Client
 		{
 			Contract.Assert(!string.IsNullOrEmpty(index));
 			Contract.Assert(typeSetting != null);
-			var url = "/" + index + "/_mapping";
+			string url = "/{0}/{1}/_mapping".F(index.ToLower(), typeSetting.Type);
 
 			var mappings = new Dictionary<string, TypeSetting>();
 			mappings.Add(typeSetting.Type, typeSetting);
@@ -495,7 +507,7 @@ namespace ElasticSearch.Client
 		private OperateResult GetOperationResult(RestResponse result)
 		{
 			string jsonString = result.GetBody();
-			if (jsonString != null)
+			if (!string.IsNullOrEmpty(jsonString))
 			{
 				var hitResult = JsonSerializer.Get<OperateResult>(jsonString);
 				hitResult.JsonString = jsonString;

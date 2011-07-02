@@ -52,5 +52,10 @@ namespace ElasticSearch.Client.Admin
 
 		[JsonProperty("deleted_docs")] 
 		public int DeletedDocs;
+
+		public override string ToString()
+		{
+			return string.Format("Num:{0},Del:{1},Max:{2}", NumDocs, DeletedDocs, MaxDoc);
+		}
 	}
 }
