@@ -13,18 +13,15 @@ namespace ElasticSearch.Client.Exception
 				{
 					throw new IndexMissingException(formatedMessage);
 				}
-				else if (response.IndexOf("TypeMissingException") > -1)
+				if (response.IndexOf("TypeMissingException") > -1)
 				{
 					throw new TypeMissingException(formatedMessage);
 				}
-				else if (response.IndexOf("SearchPhaseExecutionException") > -1)
+				if (response.IndexOf("SearchPhaseExecutionException") > -1)
 				{
 					throw new SearchPhaseExecutionException(formatedMessage);
 				}
-				else
-				{
-					_logger.HandleException(new ElasticSearchException(formatedMessage), "ElasticSearchException");
-				}
+				_logger.HandleException(new ElasticSearchException(formatedMessage), "ElasticSearchException");
 			}
 			_logger.InfoFormat("{0}\r\n{1}", response, formatedMessage);
 		}
