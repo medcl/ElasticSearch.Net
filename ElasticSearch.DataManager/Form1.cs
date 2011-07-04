@@ -252,6 +252,9 @@ namespace ElasticSearchDataManager
 		/// <param name="e"></param>
 		private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
 		{
+			if (MessageBox.Show("are you sure you really wanna delete these index?", "hey", MessageBoxButtons.YesNo) == DialogResult.Yes)
+			{
+
 			List<ElasticNode> pendingDelete = new List<ElasticNode>(treeViewAdv1.SelectedNodes.Count);
 			foreach (TreeNodeAdv selectedNode in treeViewAdv1.SelectedNodes)
 			{
@@ -265,6 +268,8 @@ namespace ElasticSearchDataManager
 			foreach (var selectedNode in pendingDelete)
 			{
 				selectedNode.Parent = null;
+			}
+
 			}
 		}
 		/// <summary>
