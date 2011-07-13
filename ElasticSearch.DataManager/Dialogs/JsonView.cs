@@ -10,22 +10,36 @@ using EPocalipse.Json.Viewer;
 
 namespace ElasticSearch.DataManager.Dialogs
 {
-	public partial class JsonView : Form
+	public partial class JsonView : FormBase
 	{
 		private EPocalipse.Json.Viewer.JsonViewer jsonViewer;
-		public JsonView()
+		public JsonView():base()
 		{
-			InitializeComponent();
+			
 			jsonViewer = new JsonViewer();
 			jsonViewer.ShowTab(Tabs.Viewer);
 			jsonViewer.Dock = DockStyle.Fill;
-			this.Controls.Add(jsonViewer);
+			panel1.Controls.Add(jsonViewer);
+			InitializeComponent();
 			
 		}
 		public void LoadJson(string json)
 		{
 			jsonViewer.Clear();
 			jsonViewer.Json = json;
+		}
+
+		private void InitializeComponent()
+		{
+			this.SuspendLayout();
+			// 
+			// panel1
+			// 
+				// JsonView
+			// 
+		this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
+			this.Name = "JsonView";
+		
 		}
 
 	}

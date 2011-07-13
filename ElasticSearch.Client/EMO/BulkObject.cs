@@ -9,8 +9,23 @@ namespace ElasticSearch.Client.EMO
 		public string Index;
 		public string Type;
 		public string Id;
-
 		public Dictionary<string, object> Fields = new Dictionary<string, object>();
+		public string JsonData;
+		public BulkObject(){}
+		public BulkObject(string index,string type,string id,string jsonData)
+		{
+			Index = index;
+			Type = type;
+			Id = id;
+			JsonData = jsonData;
+		}
+		public BulkObject(string index, string type, string id, Dictionary<string, object> fields)
+		{
+			Index = index;
+			Type = type;
+			Id = id;
+			Fields = fields;
+		}
 	}
 
 	internal static class BulkObjectExtension
@@ -21,12 +36,16 @@ namespace ElasticSearch.Client.EMO
 
 			foreach (var bulkObject in bulkObjects)
 			{
-				if (bulkObject.Fields.Count > 0)
-				{
 					stringBuilder.AppendLine("{ \"index\" : { \"_index\" : \"" + bulkObject.Index + "\", \"_type\" : \"" +
 											 bulkObject.Type + "\", \"_id\" : \"" + bulkObject.Id + "\" } }");
-					stringBuilder.AppendLine(JsonSerializer.Get(bulkObject.Fields));
-				}
+					if(bulkObject.Fields.Count>0)
+					{
+						stringBuilder.AppendLine(JsonSerializer.Get(bulkObject.Fields));
+					}
+					else
+					{
+						stringBuilder.AppendLine(bulkObject.JsonData);
+					}
 			}
 			return stringBuilder.ToString();
 		}

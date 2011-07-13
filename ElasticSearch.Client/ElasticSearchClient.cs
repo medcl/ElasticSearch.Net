@@ -29,8 +29,9 @@ namespace ElasticSearch.Client
 
 		public	ElasticSearchClient(string host,int port,TransportType transportType)
 		{
-			ESNodeManager.Instance.BuildCustomNodes(host,host,port,transportType);
-			provider=new RestProvider(host);
+			var cluster = string.Format("{0}:{1}", host, port);
+			ESNodeManager.Instance.BuildCustomNodes(cluster,host,port,transportType);
+			provider=new RestProvider(cluster);
 		}
 
 		public  OperateResult Index(string index, IndexItem indexItem)
@@ -177,7 +178,9 @@ namespace ElasticSearch.Client
 
 		public SearchResult Search(string index, string type, string queryString, string sortString, int from, int size)
 		{
-			return Search(index, new[] { type }, queryString, sortString, from, size);
+			string[] strings=null;
+			if (string.IsNullOrEmpty(type)) { strings = new string[] { type }; }
+			return Search(index, strings, queryString, sortString, from, size);
 		}
 
 		public SearchResult Search(string index, string[] type, string queryString, string sortString, int from, int size)
@@ -196,7 +199,7 @@ namespace ElasticSearch.Client
 
 			if(type==null||type.Length==0)
 			{
-				url = "/{0}/_search?q={2}&from={3}&size={4}".F(index.ToLower(), string.Join(",", type), queryString, from,
+				url = "/{0}/_search?q={1}&from={2}&size={3}".F(index.ToLower(), queryString, from,
 																	  size);
 			}
 			else
@@ -512,7 +515,7 @@ namespace ElasticSearch.Client
 				hitResult.JsonString = jsonString;
 				return hitResult;
 			}
-			return null;
+			return new OperateResult();
 		}
 
 		public OperateResult DeleteByQueryString(string index, string[] type, string queryString)

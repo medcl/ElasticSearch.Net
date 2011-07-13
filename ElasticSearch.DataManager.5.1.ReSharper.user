@@ -1,0 +1,187 @@
+<Configuration>
+  <SettingsComponent>
+    <string />
+    <integer />
+    <boolean>
+      <setting name="livetemplates.csharp.usevar">True</setting>
+      <setting name="SolutionAnalysisEnabled">False</setting>
+    </boolean>
+  </SettingsComponent>
+  <RecentFiles>
+    <RecentFiles>
+      <File id="03C890A0-B8D6-427B-B1B3-02FD630C8ED9/f:Form1.resx" caret="6625" fromTop="4" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:Utils/f:Extensions.cs" caret="183" fromTop="6" />
+      <File id="03C890A0-B8D6-427B-B1B3-02FD630C8ED9/f:Form1.Designer.cs" caret="11920" fromTop="1" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:EMO/f:SearchHits.cs" caret="60" fromTop="2" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:EMO/f:HitStatus.cs" caret="171" fromTop="8" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:Transport/d:Connection/f:ConnectionPool.cs" caret="2162" fromTop="6" />
+      <File id="03C890A0-B8D6-427B-B1B3-02FD630C8ED9/d:Dialogs/f:Export.cs" caret="1056" fromTop="22" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:EMO/f:BulkObject.cs" caret="1326" fromTop="19" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/f:ElasticSearchClient.cs" caret="15477" fromTop="22" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:EMO/f:Hits.cs" caret="258" fromTop="9" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:EMO/f:SearchResult.cs" caret="1251" fromTop="9" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:EMO/f:Document.cs" caret="214" fromTop="7" />
+      <File id="03C890A0-B8D6-427B-B1B3-02FD630C8ED9/f:Form1.cs" caret="5722" fromTop="15" />
+    </RecentFiles>
+    <RecentEdits>
+      <File id="03C890A0-B8D6-427B-B1B3-02FD630C8ED9/f:Form1.cs" caret="6968" fromTop="16" />
+      <File id="03C890A0-B8D6-427B-B1B3-02FD630C8ED9/f:Form1.cs" caret="6968" fromTop="15" />
+      <File id="03C890A0-B8D6-427B-B1B3-02FD630C8ED9/f:Form1.cs" caret="6968" fromTop="19" />
+      <File id="03C890A0-B8D6-427B-B1B3-02FD630C8ED9/d:Dialogs/f:Export.cs" caret="1056" fromTop="22" />
+      <File id="03C890A0-B8D6-427B-B1B3-02FD630C8ED9/f:Form1.cs" caret="3565" fromTop="11" />
+      <File id="03C890A0-B8D6-427B-B1B3-02FD630C8ED9/f:Form1.cs" caret="4547" fromTop="16" />
+      <File id="03C890A0-B8D6-427B-B1B3-02FD630C8ED9/f:Form1.cs" caret="4935" fromTop="13" />
+      <File id="03C890A0-B8D6-427B-B1B3-02FD630C8ED9/f:Form1.cs" caret="5168" fromTop="5" />
+      <File id="03C890A0-B8D6-427B-B1B3-02FD630C8ED9/f:Form1.cs" caret="5627" fromTop="13" />
+      <File id="03C890A0-B8D6-427B-B1B3-02FD630C8ED9/f:Form1.cs" caret="5777" fromTop="19" />
+      <File id="03C890A0-B8D6-427B-B1B3-02FD630C8ED9/f:Form1.cs" caret="6968" fromTop="12" />
+      <File id="03C890A0-B8D6-427B-B1B3-02FD630C8ED9/f:Form1.cs" caret="6968" fromTop="3" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:EMO/f:BulkObject.cs" caret="927" fromTop="5" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:EMO/f:BulkObject.cs" caret="1320" fromTop="18" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/f:ElasticSearchClient.cs" caret="15477" fromTop="22" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:EMO/f:Hits.cs" caret="196" fromTop="12" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:EMO/f:Hits.cs" caret="489" fromTop="19" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:EMO/f:Hits.cs" caret="180" fromTop="8" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:EMO/f:Document.cs" caret="345" fromTop="12" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:EMO/f:SearchResult.cs" caret="1661" fromTop="7" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:EMO/f:SearchResult.cs" caret="1794" fromTop="12" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:EMO/f:SearchResult.cs" caret="1407" fromTop="9" />
+      <File id="03C890A0-B8D6-427B-B1B3-02FD630C8ED9/f:Form1.cs" caret="5459" fromTop="26" />
+      <File id="03C890A0-B8D6-427B-B1B3-02FD630C8ED9/f:Form1.cs" caret="5864" fromTop="26" />
+      <File id="03C890A0-B8D6-427B-B1B3-02FD630C8ED9/f:Form1.cs" caret="11056" fromTop="26" />
+      <File id="03C890A0-B8D6-427B-B1B3-02FD630C8ED9/f:Form1.cs" caret="9854" fromTop="14" />
+      <File id="03C890A0-B8D6-427B-B1B3-02FD630C8ED9/f:Form1.cs" caret="9466" fromTop="6" />
+      <File id="03C890A0-B8D6-427B-B1B3-02FD630C8ED9/f:Form1.cs" caret="10982" fromTop="13" />
+      <File id="03C890A0-B8D6-427B-B1B3-02FD630C8ED9/f:Form1.cs" caret="2149" fromTop="13" />
+      <File id="03C890A0-B8D6-427B-B1B3-02FD630C8ED9/f:Form1.cs" caret="2413" fromTop="21" />
+    </RecentEdits>
+  </RecentFiles>
+  <NAntValidationSettings>
+    <NAntPath value="" />
+  </NAntValidationSettings>
+  <UnitTestRunner>
+    <Providers />
+  </UnitTestRunner>
+  <UnitTestRunnerNUnit>
+    <NUnitInstallDir IsNull="False">
+    </NUnitInstallDir>
+    <UseAddins>Never</UseAddins>
+  </UnitTestRunnerNUnit>
+  <CompletionStatisticsManager>
+    <ItemStatistics item="Default">
+      <Item value="docs" priority="1" />
+      <Item value="public" priority="6" />
+      <Item value="string" priority="12" />
+      <Item value="Hits" priority="0" />
+      <Item value="var" priority="7" />
+      <Item value="dict" priority="0" />
+      <Item value="return" priority="2" />
+      <Item value="fields" priority="1" />
+      <Item value="void" priority="0" />
+      <Item value="JsonSerializer`0" priority="1" />
+      <Item value="ElasticSearch" priority="0" />
+      <Item value="Client" priority="0" />
+      <Item value="Utils" priority="0" />
+      <Item value="Source" priority="0" />
+      <Item value="object" priority="0" />
+      <Item value="JsonArray" priority="0" />
+      <Item value="class" priority="0" />
+      <Item value="Source`0" priority="0" />
+      <Item value="obj" priority="0" />
+      <Item value="foreach" priority="0" />
+      <Item value="hit" priority="3" />
+      <Item value="BulkObject`0" priority="1" />
+      <Item value="Index" priority="0" />
+      <Item value="index" priority="0" />
+      <Item value="Type" priority="0" />
+      <Item value="type" priority="0" />
+      <Item value="Id" priority="0" />
+      <Item value="id" priority="0" />
+      <Item value="JsonData" priority="0" />
+      <Item value="jsonData" priority="0" />
+      <Item value="Fields" priority="0" />
+      <Item value="if" priority="1" />
+      <Item value="bulkObject" priority="1" />
+      <Item value="else" priority="1" />
+      <Item value="stringBuilder" priority="0" />
+      <Item value="private" priority="0" />
+      <Item value="_id" priority="1" />
+      <Item value="_index" priority="0" />
+      <Item value="toIndex" priority="0" />
+      <Item value="_type" priority="0" />
+      <Item value="source" priority="0" />
+      <Item value="bool" priority="0" />
+      <Item value="checkBox1" priority="0" />
+      <Item value="export" priority="0" />
+      <Item value="complicatedSource" priority="0" />
+      <Item value="new" priority="0" />
+      <Item value="OperateResult" priority="0" />
+      <Item value="InitTree`0" priority="0" />
+      <Item value="elasticNode" priority="0" />
+      <Item value="treeViewAdv1" priority="0" />
+      <Item value="as" priority="0" />
+      <Item value="ElasticNode`0" priority="0" />
+      <Item value="clusterName" priority="0" />
+      <Item value="currentCluster" priority="0" />
+      <Item value="ElasticSearchClient`0" priority="0" />
+      <Item value="indices" priority="0" />
+      <Item value="instance" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:ElasticSearch.Client.EMO.SearchResult">
+      <Item value="JsonString" priority="1" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:ElasticSearch.Client.EMO.Hits">
+      <Item value="Source" priority="2" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@ElasticSearch.Client.Utils.JsonSerializer">
+      <Item value="Get`1" priority="1" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@System.String">
+      <Item value="Empty" priority="1" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Object">
+      <Item value="ToString`0" priority="2" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@Newtonsoft.Json.Linq.JObject">
+      <Item value="Parse`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:Newtonsoft.Json.Linq.JObject">
+      <Item value="Indexer" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:Newtonsoft.Json.Linq.JToken">
+      <Item value="Indexer" priority="0" />
+      <Item value="ToString`0" priority="0" />
+      <Item value="Value`1" priority="1" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:ElasticSearch.Client.EMO.BulkObject">
+      <Item value="Fields" priority="0" />
+      <Item value="JsonData" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Collections.Generic.Dictionary`2">
+      <Item value="Count" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Text.StringBuilder">
+      <Item value="AppendLine`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Windows.Forms.CheckBox">
+      <Item value="Checked" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:ElasticSearch.DataManager.Dialogs.Export">
+      <Item value="ComplicatedSource" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.String">
+      <Item value="Replace`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:ElasticSearchDataManager.Form1+ElasticNode">
+      <Item value="ElasticSearchInstance" priority="0" />
+      <Item value="Text" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:Aga.Controls.Tree.TreeViewAdv">
+      <Item value="Root" priority="1" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:Aga.Controls.Tree.TreeNodeAdv">
+      <Item value="Tag" priority="1" />
+      <Item value="NextNode" priority="0" />
+    </ItemStatistics>
+  </CompletionStatisticsManager>
+</Configuration>

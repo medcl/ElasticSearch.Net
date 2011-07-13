@@ -48,11 +48,16 @@ namespace ElasticSearchDataManager
 			this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
 			this.viewTop5ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
+			this.refreshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
+			this.newIndexToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.nodeTextBox1 = new Aga.Controls.Tree.NodeControls.NodeTextBox();
 			this.richTextBox1 = new System.Windows.Forms.RichTextBox();
 			this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.clearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+			this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
+			this.searchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
 			this.splitContainer1.SuspendLayout();
@@ -86,16 +91,16 @@ namespace ElasticSearchDataManager
 			this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1});
 			this.statusStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
-			this.statusStrip1.Location = new System.Drawing.Point(0, 398);
+			this.statusStrip1.Location = new System.Drawing.Point(0, 412);
 			this.statusStrip1.Name = "statusStrip1";
-			this.statusStrip1.Size = new System.Drawing.Size(306, 19);
+			this.statusStrip1.Size = new System.Drawing.Size(306, 5);
 			this.statusStrip1.TabIndex = 2;
 			this.statusStrip1.Text = "statusStrip1";
 			// 
 			// toolStripStatusLabel1
 			// 
 			this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-			this.toolStripStatusLabel1.Size = new System.Drawing.Size(0, 17);
+			this.toolStripStatusLabel1.Size = new System.Drawing.Size(0, 0);
 			// 
 			// menuStrip1
 			// 
@@ -166,21 +171,27 @@ namespace ElasticSearchDataManager
             this.导出数据ToolStripMenuItem,
             this.deleteToolStripMenuItem,
             this.toolStripMenuItem1,
-            this.viewTop5ToolStripMenuItem});
+            this.viewTop5ToolStripMenuItem,
+            this.toolStripMenuItem2,
+            this.refreshToolStripMenuItem,
+            this.toolStripMenuItem3,
+            this.newIndexToolStripMenuItem,
+            this.toolStripMenuItem4,
+            this.searchToolStripMenuItem});
 			this.contextMenuStrip1.Name = "contextMenuStrip1";
-			this.contextMenuStrip1.Size = new System.Drawing.Size(153, 98);
+			this.contextMenuStrip1.Size = new System.Drawing.Size(153, 182);
 			// 
 			// 导出数据ToolStripMenuItem
 			// 
 			this.导出数据ToolStripMenuItem.Name = "导出数据ToolStripMenuItem";
-			this.导出数据ToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
-			this.导出数据ToolStripMenuItem.Text = "&Export";
+			this.导出数据ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.导出数据ToolStripMenuItem.Text = "&Migrate";
 			this.导出数据ToolStripMenuItem.Click += new System.EventHandler(this.ExportDataToolStripMenuItem_Click);
 			// 
 			// deleteToolStripMenuItem
 			// 
 			this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-			this.deleteToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+			this.deleteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
 			this.deleteToolStripMenuItem.Text = "&Delete";
 			this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
 			// 
@@ -195,6 +206,30 @@ namespace ElasticSearchDataManager
 			this.viewTop5ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
 			this.viewTop5ToolStripMenuItem.Text = "&ViewTop5";
 			this.viewTop5ToolStripMenuItem.Click += new System.EventHandler(this.viewTop5ToolStripMenuItem_Click);
+			// 
+			// toolStripMenuItem2
+			// 
+			this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+			this.toolStripMenuItem2.Size = new System.Drawing.Size(149, 6);
+			// 
+			// refreshToolStripMenuItem
+			// 
+			this.refreshToolStripMenuItem.Name = "refreshToolStripMenuItem";
+			this.refreshToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.refreshToolStripMenuItem.Text = "&Refresh";
+			this.refreshToolStripMenuItem.Click += new System.EventHandler(this.refreshToolStripMenuItem_Click);
+			// 
+			// toolStripMenuItem3
+			// 
+			this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+			this.toolStripMenuItem3.Size = new System.Drawing.Size(149, 6);
+			// 
+			// newIndexToolStripMenuItem
+			// 
+			this.newIndexToolStripMenuItem.Name = "newIndexToolStripMenuItem";
+			this.newIndexToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.newIndexToolStripMenuItem.Text = "&NewIndex";
+			this.newIndexToolStripMenuItem.Click += new System.EventHandler(this.newIndexToolStripMenuItem_Click);
 			// 
 			// nodeTextBox1
 			// 
@@ -227,6 +262,18 @@ namespace ElasticSearchDataManager
 			this.clearToolStripMenuItem.Text = "&Clear";
 			this.clearToolStripMenuItem.Click += new System.EventHandler(this.clearToolStripMenuItem_Click);
 			// 
+			// toolStripMenuItem4
+			// 
+			this.toolStripMenuItem4.Name = "toolStripMenuItem4";
+			this.toolStripMenuItem4.Size = new System.Drawing.Size(149, 6);
+			// 
+			// searchToolStripMenuItem
+			// 
+			this.searchToolStripMenuItem.Name = "searchToolStripMenuItem";
+			this.searchToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.searchToolStripMenuItem.Text = "&Search";
+			this.searchToolStripMenuItem.Click += new System.EventHandler(this.searchToolStripMenuItem_Click);
+			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -239,7 +286,6 @@ namespace ElasticSearchDataManager
 			this.splitContainer1.Panel1.ResumeLayout(false);
 			this.splitContainer1.Panel1.PerformLayout();
 			this.splitContainer1.Panel2.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
 			this.splitContainer1.ResumeLayout(false);
 			this.statusStrip1.ResumeLayout(false);
 			this.statusStrip1.PerformLayout();
@@ -271,6 +317,12 @@ namespace ElasticSearchDataManager
 		private ToolStripMenuItem viewTop5ToolStripMenuItem;
 		private StatusStrip statusStrip1;
 		private ToolStripStatusLabel toolStripStatusLabel1;
+		private ToolStripSeparator toolStripMenuItem2;
+		private ToolStripMenuItem refreshToolStripMenuItem;
+		private ToolStripSeparator toolStripMenuItem3;
+		private ToolStripMenuItem newIndexToolStripMenuItem;
+		private ToolStripSeparator toolStripMenuItem4;
+		private ToolStripMenuItem searchToolStripMenuItem;
 	}
 }
 

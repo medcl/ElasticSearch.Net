@@ -15,6 +15,7 @@ using ElasticSearch.Client.Admin;
 using ElasticSearch.Client.Config;
 using ElasticSearch.Client.EMO;
 using ElasticSearch.DataManager.Dialogs;
+using Newtonsoft.Json.Linq;
 
 namespace ElasticSearchDataManager
 {
@@ -29,31 +30,46 @@ namespace ElasticSearchDataManager
 			{
 				toolStripComboBox1.Items.Add(variable);
 			}
-			//			DuplicateCheck();
+					
 		}
-
+		Dictionary<string,int > cache=new Dictionary<string, int>();
 		private void DuplicateCheck()
 		{
-			//			var result= descClient.Search("setting.tms.beisen.com", "*", 0, 500);
-			//			foreach (var hitse in result.GetHits().Hits)
-			//			{
-			//				if (hitse.Fields.ContainsKey("_tenantid") && hitse.Fields.ContainsKey("Userid"))
-			//				{
-			//					var key = string.Format("{0}-{1}-{2}", hitse.Fields["_tenantid"], hitse.Fields["Userid"], hitse.Type);
-			//					if(cache.ContainsKey(key))
-			//					{
-			//						var temp = cache[key];
-			//						cache[key] = ++temp;
-			//					}
-			//					else
-			//					{
-			//						cache[key] = 1;
-			//					}}
-			//			}
-			//			foreach (var i in cache)
-			//			{
-			//				if(i.Value>1){WriteLog("{0} : {1}",i.Key,i.Value);}
-			//			}
+			cache=new Dictionary<string, int>();
+			var result = currentElasticSearchInstance.Search("setting.tms.beisen.com", "*", 0, 500);
+			foreach (var hitse in result.GetHits().Hits)
+			{
+				if (hitse.Fields.ContainsKey("_tenantid") && hitse.Fields.ContainsKey("Userid"))
+				{
+					var key = string.Format("{0}-{1}-{2}", hitse.Fields["_tenantid"], hitse.Fields["Userid"], hitse.Type);
+					if (cache.ContainsKey(key))
+					{
+						var temp = cache[key];
+						cache[key] = ++temp;
+					}
+					else
+					{
+						cache[key] = 1;
+					}
+				}
+				else if (hitse.Fields.ContainsKey("Userid"))
+				{
+					var key = string.Format("{0}-{1}-{2}", hitse.Fields["__TENANTID"], hitse.Fields["Userid"], hitse.Type);
+					if (cache.ContainsKey(key))
+					{
+						var temp = cache[key];
+						cache[key] = ++temp;
+					}
+					else
+					{
+						cache[key] = 1;
+					}
+				}
+			}
+			foreach (var i in cache)
+			{
+				if (i.Value > 1) { WriteLog("{0} : {1}", i.Key, i.Value); }
+			}
 		}
 
 		Regex tenantRegex = new Regex("[0-9]+");
@@ -70,12 +86,16 @@ namespace ElasticSearchDataManager
 			}
 		}
 
+		private string currentCluster;
+		private ElasticSearchClient currentElasticSearchInstance;
 		private void InitTree(string clusterName, ElasticSearchClient instance)
 		{
 			var model = new TreeModel();
 			if (instance != null)
 			{
 				var indices = instance.Status();
+				currentCluster = clusterName;
+				currentElasticSearchInstance = instance;
 				var node = new ElasticNode(clusterName);
 				model.Root.Nodes.Add(node);
 				var sortedIndices = indices.IndexStatus.OrderBy(d => d.Key);
@@ -108,6 +128,8 @@ namespace ElasticSearchDataManager
 					var limit = export.LimitSize;
 					var buffer = export.BufferSize;
 					var bulkSize = export.BulkSize;
+					var complicatedSource = export.ComplicatedSource;
+					var resolveTenant = export.ResolveTenant;
 
 					foreach (var selectedNode in treeViewAdv1.SelectedNodes)
 					{
@@ -129,7 +151,7 @@ namespace ElasticSearchDataManager
 
 														for (int i = 0; i < limitSize; i += bufferSize)
 														{
-															IndexTransfer(index, toIndex, i, bufferSize, bulkSize, elasticNode.ElasticSearchInstance, descClient);
+															IndexTransfer(index, toIndex, i, bufferSize, bulkSize, elasticNode.ElasticSearchInstance, descClient, complicatedSource,resolveTenant);
 														}
 
 
@@ -143,14 +165,57 @@ namespace ElasticSearchDataManager
 
 		}
 
-		private void IndexTransfer(string index, string toIndex, int from, int limit, int bulkSize, ElasticSearchClient srcClient, ElasticSearchClient descClient)
+		private void IndexTransfer(string index, string toIndex, int from, int limit, int bulkSize, ElasticSearchClient srcClient, ElasticSearchClient descClient, bool complicatedSource,bool resolveTenant)
 		{
 			var docs = srcClient.Search(index, "*", from, limit, "_id:asc");
 			WriteLog("Search:{0},{1},{2}", index, from, limit);
 			int i = 0;
 			var bulkObjects = new List<BulkObject>();
+			
+			if(complicatedSource)
+			{
+				//complicated object
+				if (!string.IsNullOrEmpty(docs.JsonString))
+				{
+					var obj = JObject.Parse(docs.JsonString);
+					var hits = obj["hits"]["hits"];
+					foreach (var hit in hits)
+					{
+						var source = ((Newtonsoft.Json.Linq.JObject)(hit["_source"])).ToString().Replace("\r\n",string.Empty);// hit["_source"].Value<string>();
+						var _type = hit["_type"].Value<string>();
+						var _id = hit["_id"].Value<string>();
+
+						if (resolveTenant)
+						{
+							//methond for setting
+							if (index.StartsWith("setting") || index.StartsWith("labs.setting") || index.StartsWith("demo.setting"))
+							{
+								var fields = ElasticSearch.Client.Utils.JsonSerializer.Get<Dictionary<string, object>>(source);
+								fields["_tenantid"] = fields["__TENANTID"];
+								fields.Remove("__TENANTID");
+								fields.Remove("__TYPEID");
+								source = ElasticSearch.Client.Utils.JsonSerializer.Get(fields);
+							}
+						}
+
+
+						i++;
+						bulkObjects.Add(new BulkObject(toIndex,_type, _id, source));
+						if (i > bulkSize)
+						{
+							descClient.Bulk(bulkObjects);
+							bulkObjects.Clear();
+							i = 0;
+							WriteLog("Buik Commit.");
+						}
+					}
+				}
+			}
+			else
+			{
 			foreach (var variable in docs.GetHits().Hits)
 			{
+				
 				#region logging
 
 				//				WriteLog("\tIndex:{0}", variable.Index);
@@ -169,14 +234,16 @@ namespace ElasticSearchDataManager
 				//					                           			}
 
 				#endregion
-
+				
 				#region multi-tenant
-
-				if (index.StartsWith("setting"))
+				if (resolveTenant)
 				{
-					fields["_tenantid"] = fields["__TENANTID"];
-					fields.Remove("__TENANTID");
-					fields.Remove("__TYPEID");
+					if (index.StartsWith("setting") || index.StartsWith("labs.setting") || index.StartsWith("demo.setting"))
+					{
+						fields["_tenantid"] = fields["__TENANTID"];
+						fields.Remove("__TENANTID");
+						fields.Remove("__TYPEID");
+					}
 				}
 
 				#endregion
@@ -184,13 +251,8 @@ namespace ElasticSearchDataManager
 				#region BulkInsert
 
 				i++;
-				bulkObjects.Add(new BulkObject()
-									{
-										Id = variable.Id,
-										Index = toIndex,
-										Type = variable.Type,
-										Fields = fields
-									});
+				bulkObjects.Add(new BulkObject( toIndex, variable.Type,variable.Id, fields));
+
 
 				if (i > bulkSize)
 				{
@@ -201,6 +263,7 @@ namespace ElasticSearchDataManager
 				}
 
 				#endregion
+			}
 			}
 
 			#region final cleanup
@@ -272,6 +335,7 @@ namespace ElasticSearchDataManager
 
 			}
 		}
+		Connect connect = new Connect();
 		/// <summary>
 		/// reload tree
 		/// </summary>
@@ -279,15 +343,16 @@ namespace ElasticSearchDataManager
 		/// <param name="e"></param>
 		private void aDDToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			var connect = new Connect();
+			
 			if (connect.ShowDialog() == DialogResult.OK)
 			{
 				var srcClient = new ElasticSearchClient(connect.Host, connect.Port, connect.Type);
-
-				InitTree(connect.Host, srcClient);
+				var cluster = string.Format("{0}:{1}", connect.Host, connect.Port);
+				InitTree(cluster, srcClient);
+				DuplicateCheck();
 			}
 		}
-
+		JsonView 	jsonView = new JsonView();
 		/// <summary>
 		/// show top 5
 		/// </summary>
@@ -295,16 +360,17 @@ namespace ElasticSearchDataManager
 		/// <param name="e"></param>
 		private void viewTop5ToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			foreach (var selectedNode in treeViewAdv1.SelectedNodes)
-			{
+			var selectedNode = treeViewAdv1.SelectedNode;
+			
 				var elasticNode = ((ElasticNode)(selectedNode.Tag));
 				var index = elasticNode.IndexName; //treeViewAdv1.SelectedNode.Tag as string;
 				WriteLog("View Index: {0}", selectedNode.Tag);
 				var result = elasticNode.ElasticSearchInstance.Search(index, "*", 0, 5);
-				JsonView jsonView = new JsonView();
-				jsonView.LoadJson(result.JsonString);
+				
+		
+			jsonView.LoadJson(result.JsonString);
 				jsonView.ShowDialog();
-			}
+			
 		}
 
 		private void treeViewAdv1_NodeMouseClick(object sender, TreeNodeAdvMouseEventArgs e)
@@ -344,5 +410,40 @@ namespace ElasticSearchDataManager
 			}
 		}
 		internal delegate void CallDelegate();
+
+		private void refreshToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			InitTree(currentCluster, currentElasticSearchInstance);
+		}
+		NewIndex newIndex = new NewIndex();
+		private void newIndexToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+
+			
+			if(newIndex.ShowDialog()==DialogResult.OK)
+			{
+				WriteLog("Create New Index: {0},{1},{2}", newIndex.IndexName, newIndex.Shard, newIndex.Replica);
+				var result = currentElasticSearchInstance.CreateIndex(newIndex.IndexName,
+				                                                           new IndexSetting(newIndex.Shard, newIndex.Replica));
+			}
+		}
+		Search search = new Search();
+		private void searchToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			if (treeViewAdv1.SelectedNodes.Count == 1)
+			{
+				var tempNode = (ElasticNode) treeViewAdv1.SelectedNode.Tag;
+				
+				
+				if (search.ShowDialog() == DialogResult.OK)
+				{
+					WriteLog("Search Index: {0},{1},{2},{3},{4}",search.IndexType, search.Query, search.Sort, search.GetFrom, search.GetSize);
+					var result = currentElasticSearchInstance.Search(tempNode.IndexName, search.IndexType, search.Query, search.Sort,
+					                                                 search.GetFrom, search.GetSize);
+					jsonView.LoadJson(result.JsonString);
+					jsonView.ShowDialog();
+				}
+			}
+		}
 	}
 }
