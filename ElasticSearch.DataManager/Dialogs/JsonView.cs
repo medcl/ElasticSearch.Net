@@ -33,13 +33,14 @@ namespace ElasticSearch.DataManager.Dialogs
 		{
 			this.SuspendLayout();
 			// 
-			// panel1
+			// JsonView
 			// 
-				// JsonView
-			// 
-		this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
+			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+			this.ClientSize = new System.Drawing.Size(284, 165);
+			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
 			this.Name = "JsonView";
-		
+			this.ResumeLayout(false);
+
 		}
 
 	}

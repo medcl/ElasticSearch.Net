@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElasticSearch.DataManager",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElasticSearch.Client", "ElasticSearch.Client\ElasticSearch.Client.csproj", "{7DBBC255-BB21-487D-91A7-A3424CB87D97}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElasticSearch.Tests", "ElasticSearch.Tests\ElasticSearch.Tests.csproj", "{60BC8E61-E258-4F5D-8BBB-49E9A87536C7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,16 @@ Global
 		{7DBBC255-BB21-487D-91A7-A3424CB87D97}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{7DBBC255-BB21-487D-91A7-A3424CB87D97}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{7DBBC255-BB21-487D-91A7-A3424CB87D97}.Release|x86.ActiveCfg = Release|Any CPU
+		{60BC8E61-E258-4F5D-8BBB-49E9A87536C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60BC8E61-E258-4F5D-8BBB-49E9A87536C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60BC8E61-E258-4F5D-8BBB-49E9A87536C7}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{60BC8E61-E258-4F5D-8BBB-49E9A87536C7}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{60BC8E61-E258-4F5D-8BBB-49E9A87536C7}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{60BC8E61-E258-4F5D-8BBB-49E9A87536C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60BC8E61-E258-4F5D-8BBB-49E9A87536C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60BC8E61-E258-4F5D-8BBB-49E9A87536C7}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{60BC8E61-E258-4F5D-8BBB-49E9A87536C7}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{60BC8E61-E258-4F5D-8BBB-49E9A87536C7}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

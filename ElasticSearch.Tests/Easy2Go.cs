@@ -31,7 +31,7 @@ namespace Tests
 			client.Refresh(indexName);
 
 			var doc1 = client.Get(indexName, indexType, "testkey");
-			Assert.AreEqual(0, doc1.GetFields().Count);
+			Assert.AreEqual(null,doc1);
 
 			client.DeleteIndex(indexName);
 		}

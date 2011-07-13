@@ -38,6 +38,9 @@
     <Reference Include="Aga.Controls">
       <HintPath>..\libs\Aga.Controls.dll</HintPath>
     </Reference>
+    <Reference Include="Json.Net.3.5">
+      <HintPath>..\libs\Json.Net.3.5.dll</HintPath>
+    </Reference>
     <Reference Include="JsonViewer">
       <HintPath>..\libs\JsonViewer.dll</HintPath>
     </Reference>
