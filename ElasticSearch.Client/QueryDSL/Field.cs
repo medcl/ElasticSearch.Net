@@ -1,5 +1,6 @@
 ﻿namespace ElasticSearch.Client.QueryDSL
 {
+
 	public class Field
 	{
 		public string Name { get; private set; }

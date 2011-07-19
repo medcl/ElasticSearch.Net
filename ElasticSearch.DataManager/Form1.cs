@@ -36,7 +36,7 @@ namespace ElasticSearchDataManager
 		private void DuplicateCheck()
 		{
 			cache=new Dictionary<string, int>();
-			var result = currentElasticSearchInstance.Search("setting.tms.beisen.com", "*", 0, 500);
+			var result = currentElasticSearchInstance.Search("index", "*", 0, 500);
 			foreach (var hitse in result.GetHits().Hits)
 			{
 				if (hitse.Fields.ContainsKey("_tenantid") && hitse.Fields.ContainsKey("Userid"))
@@ -130,6 +130,7 @@ namespace ElasticSearchDataManager
 					var bulkSize = export.BulkSize;
 					var complicatedSource = export.ComplicatedSource;
 					var resolveTenant = export.ResolveTenant;
+					var showLog = export.ShowLog;
 
 					foreach (var selectedNode in treeViewAdv1.SelectedNodes)
 					{
@@ -151,7 +152,7 @@ namespace ElasticSearchDataManager
 
 														for (int i = 0; i < limitSize; i += bufferSize)
 														{
-															IndexTransfer(index, toIndex, i, bufferSize, bulkSize, elasticNode.ElasticSearchInstance, descClient, complicatedSource,resolveTenant);
+															IndexTransfer(index, toIndex, i, bufferSize, bulkSize, elasticNode.ElasticSearchInstance, descClient, complicatedSource, resolveTenant, showLog);
 														}
 
 
@@ -165,7 +166,7 @@ namespace ElasticSearchDataManager
 
 		}
 
-		private void IndexTransfer(string index, string toIndex, int from, int limit, int bulkSize, ElasticSearchClient srcClient, ElasticSearchClient descClient, bool complicatedSource,bool resolveTenant)
+		private void IndexTransfer(string index, string toIndex, int from, int limit, int bulkSize, ElasticSearchClient srcClient, ElasticSearchClient descClient, bool complicatedSource,bool resolveTenant,bool showLog)
 		{
 			var docs = srcClient.Search(index, "*", from, limit, "_id:asc");
 			WriteLog("Search:{0},{1},{2}", index, from, limit);
@@ -188,18 +189,23 @@ namespace ElasticSearchDataManager
 						if (resolveTenant)
 						{
 							//methond for setting
-							if (index.StartsWith("setting") || index.StartsWith("labs.setting") || index.StartsWith("demo.setting"))
+							//if (index.StartsWith("setting") || index.StartsWith("labs.setting") || index.StartsWith("demo.setting"))
 							{
 								var fields = ElasticSearch.Client.Utils.JsonSerializer.Get<Dictionary<string, object>>(source);
-								fields["_tenantid"] = fields["__TENANTID"];
-								fields.Remove("__TENANTID");
-								fields.Remove("__TYPEID");
+
+								fields=ParseFieldValue(fields);
 								source = ElasticSearch.Client.Utils.JsonSerializer.Get(fields);
 							}
 						}
 
 
 						i++;
+						
+						if(showLog)
+						{
+							WriteLog("curl -XPOST http://localhost:9200/{0}/{1}/{2} -d'{3}'", toIndex, _type, _id, source);
+						}
+
 						bulkObjects.Add(new BulkObject(toIndex,_type, _id, source));
 						if (i > bulkSize)
 						{
@@ -240,9 +246,11 @@ namespace ElasticSearchDataManager
 				{
 					if (index.StartsWith("setting") || index.StartsWith("labs.setting") || index.StartsWith("demo.setting"))
 					{
-						fields["_tenantid"] = fields["__TENANTID"];
-						fields.Remove("__TENANTID");
-						fields.Remove("__TYPEID");
+
+ 						fields= ParseFieldValue(fields);
+//						fields["_tenantid"] = fields["__TENANTID"];
+//						fields.Remove("__TENANTID");
+//						fields.Remove("__TYPEID");
 					}
 				}
 
@@ -277,6 +285,25 @@ namespace ElasticSearchDataManager
 
 			#endregion
 
+		}
+
+		private static Dictionary<string, object> ParseFieldValue(Dictionary<string, object> fields)
+		{
+			if (fields.ContainsKey("__TENANTID"))
+			{
+				fields["_tenantid"] = int.Parse(fields["__TENANTID"].ToString());
+				fields.Remove("__TENANTID");
+			}
+			if (fields.ContainsKey("_tenantid"))
+			{
+				fields["_tenantid"] = int.Parse(fields["_tenantid"].ToString());
+			}
+
+			if (fields.ContainsKey("__TYPEID"))
+			{
+				fields.Remove("__TYPEID");
+			}
+			return fields;
 		}
 
 		void WriteLog(string format, params object[] args)

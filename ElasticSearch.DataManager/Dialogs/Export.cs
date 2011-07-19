@@ -11,6 +11,8 @@ namespace ElasticSearch.DataManager.Dialogs
 {
 	public partial class Export : Form
 	{
+		public bool ShowLog{get { return checkBox3.Checked; }}
+
 		public Export()
 		{
 			InitializeComponent();

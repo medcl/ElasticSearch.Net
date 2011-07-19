@@ -98,6 +98,7 @@
     </Compile>
     <Compile Include="QueryDSL\IQuery.cs" />
     <Compile Include="QueryDSL\QueryString.cs" />
+    <Compile Include="QueryDSL\TermQuery.cs" />
     <Compile Include="Transport\Connection\Connection.cs" />
     <Compile Include="Transport\Connection\ConnectionBuilder.cs" />
     <Compile Include="Transport\Connection\ConnectionPool.cs" />

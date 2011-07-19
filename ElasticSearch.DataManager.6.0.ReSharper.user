@@ -1,0 +1,371 @@
+<Configuration>
+  <SettingsComponent>
+    <string />
+    <integer />
+    <boolean>
+      <setting name="livetemplates.csharp.usevar">True</setting>
+      <setting name="SolutionAnalysisEnabled">False</setting>
+    </boolean>
+  </SettingsComponent>
+  <RecentFiles>
+    <RecentFiles>
+      <File id="03C890A0-B8D6-427B-B1B3-02FD630C8ED9/f:Form1.Designer.cs" caret="13436" fromTop="13" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:Properties/f:AssemblyInfo.cs" caret="450" fromTop="9" />
+      <File id="60BC8E61-E258-4F5D-8BBB-49E9A87536C7/d:Properties/f:AssemblyInfo.cs" caret="452" fromTop="7" />
+      <File id="03C890A0-B8D6-427B-B1B3-02FD630C8ED9/f:Form1.resx" caret="6625" fromTop="4" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:EMO/f:TemplateSetting.cs" caret="438" fromTop="15" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:EMO/f:IndexSetting.cs" caret="113" fromTop="5" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/f:ElasticSearchClient.cs" caret="8398" fromTop="14" />
+      <File id="03C890A0-B8D6-427B-B1B3-02FD630C8ED9/f:Form1.cs" caret="1453" fromTop="16" />
+      <File id="60BC8E61-E258-4F5D-8BBB-49E9A87536C7/f:ExceptionTests.cs" caret="253" fromTop="9" />
+      <File id="60BC8E61-E258-4F5D-8BBB-49E9A87536C7/f:BulkOperatesTests.cs" caret="141" fromTop="6" />
+      <File id="60BC8E61-E258-4F5D-8BBB-49E9A87536C7/d:QueryDSL/f:QueryDSLTests.cs" caret="691" fromTop="0" />
+      <File id="03C890A0-B8D6-427B-B1B3-02FD630C8ED9/d:Dialogs/f:Export.cs" caret="335" fromTop="6" />
+      <File id="60BC8E61-E258-4F5D-8BBB-49E9A87536C7/f:TemplateTests.cs" caret="1817" fromTop="45" />
+      <File id="60BC8E61-E258-4F5D-8BBB-49E9A87536C7/f:QueryTests.cs" caret="0" fromTop="0" />
+      <File id="60BC8E61-E258-4F5D-8BBB-49E9A87536C7/f:ClusterSetupTests.cs" caret="0" fromTop="0" />
+      <File id="60BC8E61-E258-4F5D-8BBB-49E9A87536C7/f:Easy2Go.cs" caret="163" fromTop="4" />
+      <File id="03C890A0-B8D6-427B-B1B3-02FD630C8ED9/d:Dialogs/f:JsonView.cs" caret="1067" fromTop="11" />
+      <File id="03C890A0-B8D6-427B-B1B3-02FD630C8ED9/d:Dialogs/f:NewIndex.Designer.cs" caret="783" fromTop="0" />
+      <File id="03C890A0-B8D6-427B-B1B3-02FD630C8ED9/d:Dialogs/f:NewIndex.cs" caret="327" fromTop="8" />
+      <File id="03C890A0-B8D6-427B-B1B3-02FD630C8ED9/d:Dialogs/f:Search.cs" caret="4895" fromTop="4" />
+      <File id="03C890A0-B8D6-427B-B1B3-02FD630C8ED9/d:Dialogs/f:FormBase.cs" caret="326" fromTop="12" />
+      <File id="03C890A0-B8D6-427B-B1B3-02FD630C8ED9/d:Dialogs/f:FormBase.Designer.cs" caret="3152" fromTop="13" />
+      <File id="03C890A0-B8D6-427B-B1B3-02FD630C8ED9/f:app.config" caret="0" fromTop="0" />
+      <File id="03C890A0-B8D6-427B-B1B3-02FD630C8ED9/d:Config/f:ElasticSearch.config" caret="423" fromTop="9" />
+      <File id="60BC8E61-E258-4F5D-8BBB-49E9A87536C7/f:MappingTests.cs" caret="3433" fromTop="12" />
+    </RecentFiles>
+    <RecentEdits>
+      <File id="03C890A0-B8D6-427B-B1B3-02FD630C8ED9/f:Form1.cs" caret="5407" fromTop="22" />
+      <File id="03C890A0-B8D6-427B-B1B3-02FD630C8ED9/f:Form1.cs" caret="6636" fromTop="18" />
+      <File id="03C890A0-B8D6-427B-B1B3-02FD630C8ED9/f:Form1.cs" caret="6422" fromTop="20" />
+      <File id="03C890A0-B8D6-427B-B1B3-02FD630C8ED9/f:Form1.cs" caret="7941" fromTop="17" />
+      <File id="03C890A0-B8D6-427B-B1B3-02FD630C8ED9/f:Form1.cs" caret="8519" fromTop="10" />
+      <File id="03C890A0-B8D6-427B-B1B3-02FD630C8ED9/f:Form1.cs" caret="8962" fromTop="20" />
+      <File id="03C890A0-B8D6-427B-B1B3-02FD630C8ED9/f:Form1.cs" caret="6398" fromTop="13" />
+      <File id="03C890A0-B8D6-427B-B1B3-02FD630C8ED9/f:Form1.cs" caret="7789" fromTop="13" />
+      <File id="60BC8E61-E258-4F5D-8BBB-49E9A87536C7/f:BulkOperatesTests.cs" caret="143" fromTop="8" />
+      <File id="60BC8E61-E258-4F5D-8BBB-49E9A87536C7/f:BulkOperatesTests.cs" caret="141" fromTop="39" />
+      <File id="60BC8E61-E258-4F5D-8BBB-49E9A87536C7/f:BulkOperatesTests.cs" caret="262" fromTop="9" />
+      <File id="60BC8E61-E258-4F5D-8BBB-49E9A87536C7/f:ExceptionTests.cs" caret="957" fromTop="13" />
+      <File id="60BC8E61-E258-4F5D-8BBB-49E9A87536C7/f:ExceptionTests.cs" caret="378" fromTop="13" />
+      <File id="60BC8E61-E258-4F5D-8BBB-49E9A87536C7/f:ExceptionTests.cs" caret="253" fromTop="9" />
+      <File id="60BC8E61-E258-4F5D-8BBB-49E9A87536C7/f:MappingTests.cs" caret="1971" fromTop="14" />
+      <File id="60BC8E61-E258-4F5D-8BBB-49E9A87536C7/f:MappingTests.cs" caret="9042" fromTop="17" />
+      <File id="60BC8E61-E258-4F5D-8BBB-49E9A87536C7/f:MappingTests.cs" caret="2308" fromTop="0" />
+      <File id="60BC8E61-E258-4F5D-8BBB-49E9A87536C7/f:MappingTests.cs" caret="8810" fromTop="8" />
+      <File id="60BC8E61-E258-4F5D-8BBB-49E9A87536C7/f:MappingTests.cs" caret="3962" fromTop="7" />
+      <File id="60BC8E61-E258-4F5D-8BBB-49E9A87536C7/f:MappingTests.cs" caret="3789" fromTop="3" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:Properties/f:AssemblyInfo.cs" caret="286" fromTop="5" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:Properties/f:AssemblyInfo.cs" caret="450" fromTop="9" />
+      <File id="60BC8E61-E258-4F5D-8BBB-49E9A87536C7/d:Properties/f:AssemblyInfo.cs" caret="452" fromTop="7" />
+      <File id="60BC8E61-E258-4F5D-8BBB-49E9A87536C7/f:MappingTests.cs" caret="5399" fromTop="7" />
+      <File id="60BC8E61-E258-4F5D-8BBB-49E9A87536C7/f:MappingTests.cs" caret="5730" fromTop="13" />
+      <File id="60BC8E61-E258-4F5D-8BBB-49E9A87536C7/f:MappingTests.cs" caret="2727" fromTop="12" />
+      <File id="60BC8E61-E258-4F5D-8BBB-49E9A87536C7/f:MappingTests.cs" caret="4630" fromTop="10" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:EMO/f:IndexSetting.cs" caret="233" fromTop="10" />
+      <File id="03C890A0-B8D6-427B-B1B3-02FD630C8ED9/f:Form1.cs" caret="1108" fromTop="11" />
+      <File id="60BC8E61-E258-4F5D-8BBB-49E9A87536C7/f:MappingTests.cs" caret="3433" fromTop="12" />
+    </RecentEdits>
+  </RecentFiles>
+  <NAntValidationSettings>
+    <NAntPath value="" />
+  </NAntValidationSettings>
+  <UnitTestRunner>
+    <Providers />
+  </UnitTestRunner>
+  <UnitTestRunnerNUnit>
+    <NUnitInstallDir IsNull="False">
+    </NUnitInstallDir>
+    <UseAddins>Never</UseAddins>
+  </UnitTestRunnerNUnit>
+  <CompletionStatisticsManager>
+    <ItemStatistics item="Default">
+      <Item value="docs" priority="1" />
+      <Item value="public" priority="6" />
+      <Item value="string" priority="12" />
+      <Item value="Hits" priority="0" />
+      <Item value="var" priority="7" />
+      <Item value="dict" priority="0" />
+      <Item value="return" priority="2" />
+      <Item value="fields" priority="1" />
+      <Item value="void" priority="0" />
+      <Item value="JsonSerializer`0" priority="1" />
+      <Item value="ElasticSearch" priority="0" />
+      <Item value="Client" priority="0" />
+      <Item value="Utils" priority="0" />
+      <Item value="Source" priority="0" />
+      <Item value="object" priority="0" />
+      <Item value="JsonArray" priority="0" />
+      <Item value="class" priority="0" />
+      <Item value="Source`0" priority="0" />
+      <Item value="obj" priority="0" />
+      <Item value="foreach" priority="0" />
+      <Item value="hit" priority="3" />
+      <Item value="BulkObject`0" priority="1" />
+      <Item value="Index" priority="0" />
+      <Item value="index" priority="0" />
+      <Item value="Type" priority="0" />
+      <Item value="type" priority="0" />
+      <Item value="Id" priority="0" />
+      <Item value="id" priority="0" />
+      <Item value="JsonData" priority="0" />
+      <Item value="jsonData" priority="0" />
+      <Item value="Fields" priority="0" />
+      <Item value="if" priority="1" />
+      <Item value="bulkObject" priority="1" />
+      <Item value="else" priority="1" />
+      <Item value="stringBuilder" priority="0" />
+      <Item value="private" priority="0" />
+      <Item value="_id" priority="1" />
+      <Item value="_index" priority="0" />
+      <Item value="toIndex" priority="0" />
+      <Item value="_type" priority="0" />
+      <Item value="source" priority="0" />
+      <Item value="bool" priority="0" />
+      <Item value="checkBox1" priority="0" />
+      <Item value="export" priority="0" />
+      <Item value="complicatedSource" priority="0" />
+      <Item value="new" priority="0" />
+      <Item value="OperateResult" priority="0" />
+      <Item value="InitTree`0" priority="0" />
+      <Item value="elasticNode" priority="0" />
+      <Item value="treeViewAdv1" priority="0" />
+      <Item value="as" priority="0" />
+      <Item value="ElasticNode`0" priority="0" />
+      <Item value="clusterName" priority="0" />
+      <Item value="currentCluster" priority="0" />
+      <Item value="ElasticSearchClient`0" priority="0" />
+      <Item value="indices" priority="0" />
+      <Item value="instance" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:ElasticSearch.Client.EMO.SearchResult">
+      <Item value="JsonString" priority="1" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:ElasticSearch.Client.EMO.Hits">
+      <Item value="Source" priority="2" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@ElasticSearch.Client.Utils.JsonSerializer">
+      <Item value="Get`1" priority="55" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@System.String">
+      <Item value="Empty" priority="1" />
+      <Item value="IsNullOrEmpty`0" priority="53" />
+      <Item value="Format`0" priority="53" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Object">
+      <Item value="ToString`0" priority="2" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@Newtonsoft.Json.Linq.JObject">
+      <Item value="Parse`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:Newtonsoft.Json.Linq.JObject">
+      <Item value="Indexer" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:Newtonsoft.Json.Linq.JToken">
+      <Item value="Indexer" priority="0" />
+      <Item value="ToString`0" priority="0" />
+      <Item value="Value`1" priority="1" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:ElasticSearch.Client.EMO.BulkObject">
+      <Item value="Fields" priority="0" />
+      <Item value="JsonData" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Collections.Generic.Dictionary`2">
+      <Item value="Count" priority="0" />
+      <Item value="ContainsKey`0" priority="110" />
+      <Item value="Keys" priority="26" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Text.StringBuilder">
+      <Item value="AppendLine`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Windows.Forms.CheckBox">
+      <Item value="Checked" priority="28" />
+      <Item value="Text" priority="26" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:ElasticSearch.DataManager.Dialogs.Export">
+      <Item value="ComplicatedSource" priority="0" />
+      <Item value="ResolveTenant" priority="27" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.String">
+      <Item value="Replace`0" priority="0" />
+      <Item value="Trim`0" priority="53" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:ElasticSearchDataManager.Form1+ElasticNode">
+      <Item value="ElasticSearchInstance" priority="0" />
+      <Item value="Text" priority="0" />
+      <Item value="IndexName" priority="26" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:Aga.Controls.Tree.TreeViewAdv">
+      <Item value="Root" priority="1" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:Aga.Controls.Tree.TreeNodeAdv">
+      <Item value="Tag" priority="1" />
+      <Item value="NextNode" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="CSharpCodeCompletionContext">
+      <Item value="ElasticSearch" priority="60" />
+      <Item value="Client" priority="52" />
+      <Item value="Utils" priority="26" />
+      <Item value="JsonSerializer`0" priority="26" />
+      <Item value="Dictionary" priority="63" />
+      <Item value="string" priority="345" />
+      <Item value="var" priority="127" />
+      <Item value="host" priority="31" />
+      <Item value="port" priority="31" />
+      <Item value="cluster" priority="63" />
+      <Item value="connect" priority="63" />
+      <Item value="resolveTenant" priority="95" />
+      <Item value="export" priority="63" />
+      <Item value="currentCluster" priority="31" />
+      <Item value="currentElasticSearchInstance" priority="63" />
+      <Item value="EnvironmentVariableTarget`0" priority="31" />
+      <Item value="Dictionary&lt;string,int&gt;" priority="57" />
+      <Item value="cache" priority="31" />
+      <Item value="DialogResult" priority="223" />
+      <Item value="public" priority="159" />
+      <Item value="get" priority="32" />
+      <Item value="return" priority="95" />
+      <Item value="textBox1" priority="63" />
+      <Item value="indexer" priority="31" />
+      <Item value="maskedTextBox1" priority="31" />
+      <Item value="NewIndex`0" priority="31" />
+      <Item value="NewIndex" priority="29" />
+      <Item value="newIndex" priority="95" />
+      <Item value="new" priority="127" />
+      <Item value="IndexSetting" priority="28" />
+      <Item value="FormBase`0" priority="31" />
+      <Item value="Search`0" priority="63" />
+      <Item value="search" priority="352" />
+      <Item value="Search" priority="28" />
+      <Item value="sender" priority="31" />
+      <Item value="tempNode" priority="31" />
+      <Item value="base" priority="63" />
+      <Item value="if" priority="127" />
+      <Item value="queryString" priority="31" />
+      <Item value="size" priority="31" />
+      <Item value="null" priority="223" />
+      <Item value="strings" priority="31" />
+      <Item value="type" priority="31" />
+      <Item value="panel1" priority="31" />
+      <Item value="types" priority="159" />
+      <Item value="index" priority="127" />
+      <Item value="doc1" priority="31" />
+      <Item value="bool" priority="63" />
+      <Item value="checkBox3" priority="31" />
+      <Item value="showLog" priority="31" />
+      <Item value="WriteLog`0" priority="31" />
+      <Item value="fields" priority="159" />
+      <Item value="ElasticSearchClient" priority="25" />
+      <Item value="client" priority="63" />
+      <Item value="template_key" priority="95" />
+      <Item value="result" priority="63" />
+      <Item value="Assert`0" priority="95" />
+      <Item value="true" priority="31" />
+      <Item value="temp2" priority="127" />
+      <Item value="Console`0" priority="31" />
+      <Item value="result2" priority="31" />
+      <Item value="Thread`0" priority="31" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:ElasticSearch.DataManager.Dialogs.Connect">
+      <Item value="Host" priority="27" />
+      <Item value="Port" priority="27" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:ElasticSearch.DataManager.Dialogs.NewIndex">
+      <Item value="DialogResult" priority="26" />
+      <Item value="ShowDialog`0" priority="27" />
+      <Item value="IndexName" priority="53" />
+      <Item value="Shard" priority="26" />
+      <Item value="Replica" priority="26" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Windows.Forms.DialogResult">
+      <Item value="OK" priority="107" />
+      <Item value="Cancel" priority="54" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Windows.Forms.TextBox">
+      <Item value="Text" priority="53" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Windows.Forms.MaskedTextBox">
+      <Item value="Text" priority="26" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:ElasticSearch.Client.ElasticSearchClient">
+      <Item value="CreateIndex`0" priority="27" />
+      <Item value="Search`0" priority="26" />
+      <Item value="DeleteTemplate`0" priority="26" />
+      <Item value="GetTemplate`0" priority="26" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:ElasticSearch.DataManager.Dialogs.Search">
+      <Item value="ShowDialog`0" priority="26" />
+      <Item value="Query" priority="54" />
+      <Item value="Sort" priority="53" />
+      <Item value="GetFrom" priority="53" />
+      <Item value="GetSize" priority="53" />
+      <Item value="IndexType" priority="53" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Windows.Forms.Panel">
+      <Item value="Controls" priority="26" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@System.Int32">
+      <Item value="Parse`0" priority="26" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:ElasticSearch.Client.EMO.OperateResult">
+      <Item value="Success" priority="190" />
+      <Item value="JsonString" priority="26" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@NUnit.Framework.Assert">
+      <Item value="AreEqual`0" priority="137" />
+      <Item value="Contains`0" priority="26" />
+      <Item value="True`0" priority="27" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:ElasticSearch.Client.EMO.TemplateSetting">
+      <Item value="Order" priority="26" />
+      <Item value="IndexSetting" priority="26" />
+      <Item value="Template" priority="54" />
+      <Item value="Mappings" priority="26" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:ElasticSearch.Client.EMO.IndexSetting">
+      <Item value="NumberOfReplicas" priority="26" />
+      <Item value="NumberOfShards" priority="27" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@System.Console">
+      <Item value="WriteLine`0" priority="26" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@System.Threading.Thread">
+      <Item value="Sleep`0" priority="26" />
+    </ItemStatistics>
+  </CompletionStatisticsManager>
+  <UnitTestSessions>
+    <Session>
+      <Name>Session #1</Name>
+      <Elements>
+        <UnitTestElement Provider="nUnit" Id="Tests.BulkOperatesTests" type="NUnitTestFixtureElement" Project="60BC8E61-E258-4F5D-8BBB-49E9A87536C7" />
+        <UnitTestElement Provider="nUnit" Id="Tests.ClusterSetupTests" type="NUnitTestFixtureElement" Project="60BC8E61-E258-4F5D-8BBB-49E9A87536C7" />
+        <UnitTestElement Provider="nUnit" Id="Tests.Easy2Go" type="NUnitTestFixtureElement" Project="60BC8E61-E258-4F5D-8BBB-49E9A87536C7" />
+        <UnitTestElement Provider="nUnit" Id="Tests.ExceptionTests" type="NUnitTestFixtureElement" Project="60BC8E61-E258-4F5D-8BBB-49E9A87536C7" />
+        <UnitTestElement Provider="nUnit" Id="Tests.MappingTests" type="NUnitTestFixtureElement" Project="60BC8E61-E258-4F5D-8BBB-49E9A87536C7" />
+        <UnitTestElement Provider="nUnit" Id="Tests.MappingTests2" type="NUnitTestFixtureElement" Project="60BC8E61-E258-4F5D-8BBB-49E9A87536C7" />
+        <UnitTestElement Provider="nUnit" Id="Tests.QueryDSLTests" type="NUnitTestFixtureElement" Project="60BC8E61-E258-4F5D-8BBB-49E9A87536C7" />
+        <UnitTestElement Provider="nUnit" Id="Tests.QueryTests" type="NUnitTestFixtureElement" Project="60BC8E61-E258-4F5D-8BBB-49E9A87536C7" />
+        <UnitTestElement Provider="nUnit" Id="Tests.TemplateTests" type="NUnitTestFixtureElement" Project="60BC8E61-E258-4F5D-8BBB-49E9A87536C7" />
+        <UnitTestElement Provider="nUnit" Id="Tests.Easy2Go.SimpleTests" ParentId="Tests.Easy2Go" type="NUnitTestElement" TypeName="Tests.Easy2Go" MethodName="SimpleTests" Project="60BC8E61-E258-4F5D-8BBB-49E9A87536C7" />
+        <UnitTestElement Provider="nUnit" Id="Tests.BulkOperatesTests.TestBulk" ParentId="Tests.BulkOperatesTests" type="NUnitTestElement" TypeName="Tests.BulkOperatesTests" MethodName="TestBulk" Project="60BC8E61-E258-4F5D-8BBB-49E9A87536C7" />
+        <UnitTestElement Provider="nUnit" Id="Tests.MappingTests2.TestCreateAnalysisMapping" ParentId="Tests.MappingTests2" type="NUnitTestElement" TypeName="Tests.MappingTests2" MethodName="TestCreateAnalysisMapping" Project="60BC8E61-E258-4F5D-8BBB-49E9A87536C7" />
+        <UnitTestElement Provider="nUnit" Id="Tests.MappingTests.TestCreateIndex" ParentId="Tests.MappingTests" type="NUnitTestElement" TypeName="Tests.MappingTests" MethodName="TestCreateIndex" Project="60BC8E61-E258-4F5D-8BBB-49E9A87536C7" />
+        <UnitTestElement Provider="nUnit" Id="Tests.MappingTests2.TestCreateIndex" ParentId="Tests.MappingTests2" type="NUnitTestElement" TypeName="Tests.MappingTests2" MethodName="TestCreateIndex" Project="60BC8E61-E258-4F5D-8BBB-49E9A87536C7" />
+        <UnitTestElement Provider="nUnit" Id="Tests.MappingTests2.TestCreateUser" ParentId="Tests.MappingTests2" type="NUnitTestElement" TypeName="Tests.MappingTests2" MethodName="TestCreateUser" Project="60BC8E61-E258-4F5D-8BBB-49E9A87536C7" />
+        <UnitTestElement Provider="nUnit" Id="Tests.MappingTests.TestCreatingMapping" ParentId="Tests.MappingTests" type="NUnitTestElement" TypeName="Tests.MappingTests" MethodName="TestCreatingMapping" Project="60BC8E61-E258-4F5D-8BBB-49E9A87536C7" />
+        <UnitTestElement Provider="nUnit" Id="Tests.MappingTests2.TestCreatingMapping" ParentId="Tests.MappingTests2" type="NUnitTestElement" TypeName="Tests.MappingTests2" MethodName="TestCreatingMapping" Project="60BC8E61-E258-4F5D-8BBB-49E9A87536C7" />
+        <UnitTestElement Provider="nUnit" Id="Tests.ExceptionTests.TestDoubleDelete" ParentId="Tests.ExceptionTests" type="NUnitTestElement" TypeName="Tests.ExceptionTests" MethodName="TestDoubleDelete" Project="60BC8E61-E258-4F5D-8BBB-49E9A87536C7" />
+        <UnitTestElement Provider="nUnit" Id="Tests.ClusterSetupTests.TestDynamicUserClusters" ParentId="Tests.ClusterSetupTests" type="NUnitTestElement" TypeName="Tests.ClusterSetupTests" MethodName="TestDynamicUserClusters" Project="60BC8E61-E258-4F5D-8BBB-49E9A87536C7" />
+        <UnitTestElement Provider="nUnit" Id="Tests.ExceptionTests.TestIndexMissingException" ParentId="Tests.ExceptionTests" type="NUnitTestElement" TypeName="Tests.ExceptionTests" MethodName="TestIndexMissingException" Project="60BC8E61-E258-4F5D-8BBB-49E9A87536C7" />
+        <UnitTestElement Provider="nUnit" Id="Tests.MappingTests.TestModifyIndex" ParentId="Tests.MappingTests" type="NUnitTestElement" TypeName="Tests.MappingTests" MethodName="TestModifyIndex" Project="60BC8E61-E258-4F5D-8BBB-49E9A87536C7" />
+        <UnitTestElement Provider="nUnit" Id="Tests.MappingTests2.TestModifyIndex" ParentId="Tests.MappingTests2" type="NUnitTestElement" TypeName="Tests.MappingTests2" MethodName="TestModifyIndex" Project="60BC8E61-E258-4F5D-8BBB-49E9A87536C7" />
+        <UnitTestElement Provider="nUnit" Id="Tests.QueryTests.TestQuery" ParentId="Tests.QueryTests" type="NUnitTestElement" TypeName="Tests.QueryTests" MethodName="TestQuery" Project="60BC8E61-E258-4F5D-8BBB-49E9A87536C7" />
+        <UnitTestElement Provider="nUnit" Id="Tests.QueryDSLTests.TestQuery" ParentId="Tests.QueryDSLTests" type="NUnitTestElement" TypeName="Tests.QueryDSLTests" MethodName="TestQuery" Project="60BC8E61-E258-4F5D-8BBB-49E9A87536C7" />
+        <UnitTestElement Provider="nUnit" Id="Tests.MappingTests2.TestTemplate" ParentId="Tests.MappingTests2" type="NUnitTestElement" TypeName="Tests.MappingTests2" MethodName="TestTemplate" Project="60BC8E61-E258-4F5D-8BBB-49E9A87536C7" />
+        <UnitTestElement Provider="nUnit" Id="Tests.TemplateTests.TestTemplate" ParentId="Tests.TemplateTests" type="NUnitTestElement" TypeName="Tests.TemplateTests" MethodName="TestTemplate" Project="60BC8E61-E258-4F5D-8BBB-49E9A87536C7" />
+        <UnitTestElement Provider="nUnit" Id="Tests.ExceptionTests.TestTypeMissingException" ParentId="Tests.ExceptionTests" type="NUnitTestElement" TypeName="Tests.ExceptionTests" MethodName="TestTypeMissingException" Project="60BC8E61-E258-4F5D-8BBB-49E9A87536C7" />
+      </Elements>
+    </Session>
+  </UnitTestSessions>
+</Configuration>

@@ -9,6 +9,11 @@ namespace ElasticSearch.Client.QueryDSL
 		OR, 
 		AND
 	}
+
+	/// <summary>
+	/// A query that uses a query parser in order to parse its content.
+	/// </summary>
+	[JsonObject("query_string")]
 	public class QueryString : IQuery
 	{
 		#region Properties
@@ -88,8 +93,18 @@ namespace ElasticSearch.Client.QueryDSL
 		/// </summary>
 		[JsonProperty("tie_breaker")]
 		public int TieBreaker { get; private set; }
-		
-		
+
+		/// <summary>
+		/// By default, wildcards terms in a query string are not analyzed. By setting this value to true, a best effort will be made to analyze those as well.
+		/// </summary>
+		[JsonProperty("analyze_wildcard")]
+		public bool AnalyzeWildcard { get; set; }
+
+		/// <summary>
+		/// Default to false.
+		/// </summary>
+		[JsonProperty("auto_generate_phrase_queries")]
+		public bool AutoGeneratePhraseQueries { get; set; }
 		#endregion
 		
 		public QueryString(string query) 

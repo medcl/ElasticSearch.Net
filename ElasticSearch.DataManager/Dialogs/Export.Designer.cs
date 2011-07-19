@@ -40,6 +40,7 @@
 			this.label4 = new System.Windows.Forms.Label();
 			this.checkBox1 = new System.Windows.Forms.CheckBox();
 			this.checkBox2 = new System.Windows.Forms.CheckBox();
+			this.checkBox3 = new System.Windows.Forms.CheckBox();
 			this.SuspendLayout();
 			// 
 			// textBox1
@@ -94,7 +95,7 @@
 			// 
 			// button1
 			// 
-			this.button1.Location = new System.Drawing.Point(130, 136);
+			this.button1.Location = new System.Drawing.Point(130, 159);
 			this.button1.Name = "button1";
 			this.button1.Size = new System.Drawing.Size(75, 23);
 			this.button1.TabIndex = 4;
@@ -105,7 +106,7 @@
 			// button2
 			// 
 			this.button2.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.button2.Location = new System.Drawing.Point(12, 185);
+			this.button2.Location = new System.Drawing.Point(12, 214);
 			this.button2.Name = "button2";
 			this.button2.Size = new System.Drawing.Size(75, 23);
 			this.button2.TabIndex = 2;
@@ -135,9 +136,9 @@
 			this.checkBox1.AutoSize = true;
 			this.checkBox1.Location = new System.Drawing.Point(12, 119);
 			this.checkBox1.Name = "checkBox1";
-			this.checkBox1.Size = new System.Drawing.Size(102, 17);
+			this.checkBox1.Size = new System.Drawing.Size(100, 17);
 			this.checkBox1.TabIndex = 3;
-			this.checkBox1.Text = "Source is object";
+			this.checkBox1.Text = "source is object";
 			this.checkBox1.UseVisualStyleBackColor = true;
 			// 
 			// checkBox2
@@ -145,10 +146,20 @@
 			this.checkBox2.AutoSize = true;
 			this.checkBox2.Location = new System.Drawing.Point(12, 142);
 			this.checkBox2.Name = "checkBox2";
-			this.checkBox2.Size = new System.Drawing.Size(98, 17);
+			this.checkBox2.Size = new System.Drawing.Size(93, 17);
 			this.checkBox2.TabIndex = 3;
-			this.checkBox2.Text = "Resolve tenant";
+			this.checkBox2.Text = "resolve tenant";
 			this.checkBox2.UseVisualStyleBackColor = true;
+			// 
+			// checkBox3
+			// 
+			this.checkBox3.AutoSize = true;
+			this.checkBox3.Location = new System.Drawing.Point(12, 165);
+			this.checkBox3.Name = "checkBox3";
+			this.checkBox3.Size = new System.Drawing.Size(74, 17);
+			this.checkBox3.TabIndex = 3;
+			this.checkBox3.Text = "print detail";
+			this.checkBox3.UseVisualStyleBackColor = true;
 			// 
 			// Export
 			// 
@@ -156,7 +167,8 @@
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.CancelButton = this.button2;
-			this.ClientSize = new System.Drawing.Size(238, 174);
+			this.ClientSize = new System.Drawing.Size(238, 189);
+			this.Controls.Add(this.checkBox3);
 			this.Controls.Add(this.checkBox2);
 			this.Controls.Add(this.checkBox1);
 			this.Controls.Add(this.button2);
@@ -192,5 +204,6 @@
 		private System.Windows.Forms.Label label4;
 		private System.Windows.Forms.CheckBox checkBox1;
 		private System.Windows.Forms.CheckBox checkBox2;
+		private System.Windows.Forms.CheckBox checkBox3;
 	}
 }

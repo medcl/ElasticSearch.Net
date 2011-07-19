@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("ElasticSearch.Tests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Beisen")]
+[assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("ElasticSearch.Tests")]
-[assembly: AssemblyCopyright("Copyright © Beisen 2010")]
+[assembly: AssemblyCopyright("Copyright ©  2010")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

@@ -55,9 +55,10 @@
     <Compile Include="BulkOperatesTests.cs" />
     <Compile Include="ClusterSetupTests.cs" />
     <Compile Include="Easy2Go.cs" />
+    <Compile Include="ExceptionTests.cs" />
     <Compile Include="MappingTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="QueryDSLTests.cs" />
+    <Compile Include="QueryDSL\QueryDSLTests.cs" />
     <Compile Include="QueryTests.cs" />
     <Compile Include="TemplateTests.cs" />
   </ItemGroup>
@@ -67,6 +68,7 @@
       <Name>ElasticSearch.Client</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
