@@ -4,6 +4,7 @@ using ElasticSearch.Client;
 using ElasticSearch.Client.EMO;
 using ElasticSearch.Client.Mapping;
 using ElasticSearch.Client.QueryDSL;
+using ElasticSearch.Client.Utils;
 using NUnit.Framework;
 
 namespace Tests
@@ -85,24 +86,6 @@ namespace Tests
 		[Test]
 		public void TestWildcardQuery()
 		{
-			var item = new IndexItem("type","addition_key2");
-			item.Add("name", "张");
-			client.Index(index, item);
-
-			 item = new IndexItem("type","addition_key3");
-			item.Add("name", "张三");
-			client.Index(index, item);
-
-			item = new IndexItem("type", "addition_key4");
-			item.Add("name", "张三丰");
-			client.Index(index, item);
-
-			item = new IndexItem("type","addition_key5");
-			item.Add("name", "二张三张");
-			client.Index(index, item);
-
-			Thread.Sleep(1000);
-
 			var query = new WildcardQuery("name","张*");
 			var result = client.QueryDSL.Search(index, new string[] { "type" }, query, 0, 5);
 			Assert.AreEqual(3, result.GetTotalCount());
@@ -121,7 +104,44 @@ namespace Tests
 			{
 				Console.WriteLine(VARIABLE.Fields["name"]);
 			}
+		}
 
+		[Test]
+		public void TestBoolQuery()
+		{
+			var query = new BoolQuery();
+			query.Must(new TermQuery("type", "common"));
+			query.SetBoost(5);
+			var result = client.QueryDSL.Search(index, new string[] { "type" }, query, 0, 5);
+			foreach (var VARIABLE in result.GetHits().Hits)
+			{
+				Console.WriteLine(VARIABLE.Fields["name"]);
+			}
+			Assert.AreEqual(3, result.GetTotalCount());
+			Assert.AreEqual(3, result.GetHits().Hits.Count);
+
+			query.Must(new WildcardQuery("name", "张三*"));
+//			query.SetMinimumNumberShouldMatch(1);
+			result = client.QueryDSL.Search(index, new string[] { "type" }, query, 0, 5);
+			foreach (var VARIABLE in result.GetHits().Hits)
+			{
+				Console.WriteLine(VARIABLE.Fields["name"]);
+			}
+			Assert.AreEqual(2, result.GetTotalCount());
+			Assert.AreEqual(2, result.GetHits().Hits.Count);
+
+
+			query.MustNot(new TermQuery("age", 24));
+			result = client.QueryDSL.Search(index, new string[] { "type" }, query, 0, 5);
+			foreach (var VARIABLE in result.GetHits().Hits)
+			{
+				Console.WriteLine(VARIABLE.Fields["name"]);
+			}
+			Assert.AreEqual(1, result.GetTotalCount());
+			Assert.AreEqual(1, result.GetHits().Hits.Count);
+			Assert.AreEqual("addition_key4", result.GetHitIds()[0]);
+
+		
 		}
 
 		[TestFixtureSetUp]
@@ -134,12 +154,14 @@ namespace Tests
 
 			client.Index(index, "type", "_medcl", "{}");
 			client.PutMapping(index, typesetting);
-			
+
+			IndexItem item;
 			for (int i = 0; i < 100; i++)
 			{
-				var item = new IndexItem("type", i.ToString());
+				item = new IndexItem("type", i.ToString());
 				item.Add("name", Guid.NewGuid().ToString());
 				item.Add("id", i);
+				item.Add("ids","ids_{0}".Fill(i));
 				if (i >= 50)
 				{
 					item.Add("gender", true);
@@ -152,6 +174,32 @@ namespace Tests
 			
 			client.Index(index,item);
 			}
+
+
+			item = new IndexItem("type", "addition_key2");
+			item.Add("name", "张");
+			item.Add("age",25);
+			item.Add("type","common");
+			client.Index(index, item);
+
+			item = new IndexItem("type", "addition_key3");
+			item.Add("name", "张三");
+			item.Add("age", 24);
+			item.Add("type", "common");
+			client.Index(index, item);
+
+			item = new IndexItem("type", "addition_key4");
+			item.Add("name", "张三丰");
+			item.Add("age", 23);
+			item.Add("type", "common");
+			client.Index(index, item);
+
+			item = new IndexItem("type", "addition_key5");
+			item.Add("name", "二张三张");
+			item.Add("age", 22);
+			item.Add("type", "common2");
+			client.Index(index, item);
+
 			Thread.Sleep(1000);
 		}
 

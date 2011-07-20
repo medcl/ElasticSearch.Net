@@ -10,7 +10,7 @@ namespace ElasticSearch.Client.QueryDSL
 			WildcardQuery term = (WildcardQuery)value;
 
 			if (term != null)
-				writer.WriteRaw(string.Format("{{ \"{0}\" : {{ \"wildcard\" : \"{1}\", \"boost\":{2} }}}}", term.Field, term.WildCardPattern, term.Boost));
+				writer.WriteRawValue(string.Format("{{ wildcard: {{ \"{0}\" : {{ \"wildcard\" : \"{1}\", \"boost\":{2} }}}} }}", term.Field, term.WildCardPattern, term.Boost));
 		}
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)

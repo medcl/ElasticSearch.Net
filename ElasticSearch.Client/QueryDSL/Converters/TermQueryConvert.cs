@@ -9,7 +9,7 @@ namespace ElasticSearch.Client.QueryDSL
 		{
 			TermQuery term = (TermQuery)value;
 			if (term != null)
-				writer.WriteRaw(string.Format("{{ \"{0}\" : {{ \"term\" : \"{1}\", \"boost\":{2} }}}}",term.Field,term.Value,term.Boost));
+				writer.WriteRawValue(string.Format("{{term: {{ \"{0}\" : {{ \"term\" : \"{1}\", \"boost\":{2} }}}} }}", term.Field, term.Value, term.Boost));
 		}
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)

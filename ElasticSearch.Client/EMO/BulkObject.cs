@@ -9,6 +9,7 @@ namespace ElasticSearch.Client.EMO
 		public string Index;
 		public string Type;
 		public string Id;
+		//TODO: replace dictionary to list
 		public Dictionary<string, object> Fields = new Dictionary<string, object>();
 		public string JsonData;
 		public BulkObject(){}

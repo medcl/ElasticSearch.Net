@@ -92,6 +92,9 @@
     <Compile Include="Mapping\Store.cs" />
     <Compile Include="Mapping\TypeSetting.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QueryDSL\BooleanType.cs" />
+    <Compile Include="QueryDSL\BoolQuery.cs" />
+    <Compile Include="QueryDSL\Converters\BoolQueryConverter.cs" />
     <Compile Include="QueryDSL\ElasticQuery.cs" />
     <Compile Include="QueryDSL\Field.cs">
       <SubType>Code</SubType>

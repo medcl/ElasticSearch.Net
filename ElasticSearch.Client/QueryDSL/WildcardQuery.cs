@@ -8,7 +8,8 @@ namespace ElasticSearch.Client.QueryDSL
 	/// N ote this query can be slow, as it needs to iterate over many terms. In order to prevent extremely slow wildcard queries, a wildcard term should not start with one of the wildcards * or ?. The wildcard query maps to Lucene WildcardQuery
 	/// {"wildcard" : { "user" : { "value" : "ki*y", "boost" : 2.0 } }} 
 	/// </summary>
-[JsonConverter(typeof(WildcardQueryConverter))]
+	[JsonConverter(typeof(WildcardQueryConverter))]
+	[JsonObject("wildcard")]
 	public class WildcardQuery:IQuery
 	{
 		public string Field { get; set; }

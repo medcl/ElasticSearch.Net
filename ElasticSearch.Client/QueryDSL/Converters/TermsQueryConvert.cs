@@ -11,6 +11,7 @@ namespace ElasticSearch.Client.QueryDSL
 			//{    "terms" : {        "tags" : [ "blue", "pill" ],        "minimum_match" : 1    }}
 			if (term != null)
 			{
+				writer.WriteRaw("{terms:");
 				writer.WriteStartObject();
 				writer.WritePropertyName(term.Field);
 				writer.WriteStartArray();
@@ -22,6 +23,7 @@ namespace ElasticSearch.Client.QueryDSL
 				writer.WritePropertyName("minimum_match");
 				writer.WriteValue(term.MinimumMatch);
 				writer.WriteEndObject();
+				writer.WriteRaw("}");
 			}
 
 		}

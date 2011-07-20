@@ -29,6 +29,11 @@ namespace ElasticSearch.Client.QueryDSL
 			MinimumMatch = minimunMatch;
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="minimunMatch">default 1</param>
+		/// <returns></returns>
 		public TermsQuery SetMinimumMatch(int minimunMatch)
 		{
 			MinimumMatch = minimunMatch;
