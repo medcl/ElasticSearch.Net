@@ -1,0 +1,11 @@
+/ElasticSearch.Client/bin
+/ElasticSearch.Client/obj
+
+/ElasticSearch.DataManager/bin
+/ElasticSearch.DataManager/obj
+
+/ElasticSearch.Tests/bin
+/ElasticSearch.Tests/obj
+
+/BenchmarkTests/bin
+/BenchmarkTests/obj
