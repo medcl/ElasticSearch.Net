@@ -153,7 +153,7 @@
     <Compile Include="Transport\Thrift\Transport\TTransportException.cs" />
     <Compile Include="Transport\Thrift\Transport\TTransportFactory.cs" />
     <Compile Include="Utils\AggregateCounter.cs" />
-    <Compile Include="Utils\Extensions.cs" />
+    <Compile Include="Utils\ElasticSearchExtensions.cs" />
     <Compile Include="Utils\JsonBuilder.cs" />
     <Compile Include="Utils\JsonSerializer.cs" />
     <Compile Include="Utils\LogWrapper.cs" />

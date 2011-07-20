@@ -11,7 +11,8 @@ using ElasticSearch.Client.QueryDSL;
 using ElasticSearch.Client.Transport;
 using ElasticSearch.Client.Transport.IDL;
 using ElasticSearch.Client.Utils;
-using Newtonsoft.Json.Linq;
+
+
 
 namespace ElasticSearch.Client
 {
@@ -26,6 +27,7 @@ namespace ElasticSearch.Client
 		public ElasticSearchClient(string clusterName)
 		{
 			_provider = new RestProvider(clusterName);
+			QueryDSL=new DSL(_provider);
 		}
 
 		public ElasticSearchClient(string host, int port, TransportType transportType)
@@ -33,7 +35,10 @@ namespace ElasticSearch.Client
 			string cluster = string.Format("{0}:{1}", host, port);
 			ESNodeManager.Instance.BuildCustomNodes(cluster, host, port, transportType);
 			_provider = new RestProvider(cluster);
+			QueryDSL = new DSL(_provider);
 		}
+
+		#region index
 
 		public OperateResult Index(string index, IndexItem indexItem)
 		{
@@ -47,7 +52,7 @@ namespace ElasticSearch.Client
 			Contract.Assert(!string.IsNullOrEmpty(jsonData));
 			Contract.Assert(!string.IsNullOrEmpty(indexKey));
 
-			string url = "/{0}/{1}/{2}/".F(index.ToLower(), type, indexKey);
+			string url = "/{0}/{1}/{2}/".Fill(index.ToLower(), type, indexKey);
 			RestResponse result = _provider.Post(url, jsonData);
 			return GetOperationResult(result);
 		}
@@ -65,13 +70,15 @@ namespace ElasticSearch.Client
 			return result1;
 		}
 
+		#endregion
+
 		public Document Get(string index, string type, string indexKey)
 		{
 			Contract.Assert(!string.IsNullOrEmpty(index));
 			Contract.Assert(!string.IsNullOrEmpty(type));
 			Contract.Assert(!string.IsNullOrEmpty(indexKey));
 
-			string url = "/{0}/{1}/{2}".F(index.ToLower(), type, indexKey);
+			string url = "/{0}/{1}/{2}".Fill(index.ToLower(), type, indexKey);
 			RestResponse result = _provider.Get(url);
 
 			if (result.Body != null)
@@ -105,7 +112,7 @@ namespace ElasticSearch.Client
 			foreach (string variable in objectKeys)
 			{
 				stringBuilder.AppendLine(
-					"{{ \"delete\" : {{ \"_index\" : \"{0}\", \"_type\" : \"{1}\", \"_id\" : \"{2}\" }} }}".F(indexName.ToLower(),
+					"{{ \"delete\" : {{ \"_index\" : \"{0}\", \"_type\" : \"{1}\", \"_id\" : \"{2}\" }} }}".Fill(indexName.ToLower(),
 					                                                                                          indexType, variable));
 			}
 			string jsonData = stringBuilder.ToString();
@@ -129,9 +136,9 @@ namespace ElasticSearch.Client
 
 		public DocStatus GetIndexDocStatus(string index)
 		{
-			string url = "/{0}/_status".F(index);
+			string url = "/{0}/_status".Fill(index);
 			RestResponse response = _provider.Get(url);
-			JObject jObject = JObject.Parse(response.GetBody());
+			var jObject = Newtonsoft.Json.Linq.JObject.Parse(response.GetBody());
 			var indexDocStatus = JsonSerializer.Get<DocStatus>(jObject["indices"][index]["docs"].ToString());
 			return indexDocStatus;
 		}
@@ -157,12 +164,12 @@ namespace ElasticSearch.Client
 
 			if (type == null || type.Length == 0)
 			{
-				url = "/{0}/_search?q={1}&from={2}&size={3}".F(index.ToLower(), queryString, from,
+				url = "/{0}/_search?q={1}&from={2}&size={3}".Fill(index.ToLower(), queryString, from,
 				                                               size);
 			}
 			else
 			{
-				url = "/{0}/{1}/_search?q={2}&from={3}&size={4}".F(index.ToLower(), string.Join(",", type), queryString, from,
+				url = "/{0}/{1}/_search?q={2}&from={3}&size={4}".Fill(index.ToLower(), string.Join(",", type), queryString, from,
 				                                                   size);
 			}
 			RestResponse result = _provider.Get(url);
@@ -186,7 +193,7 @@ namespace ElasticSearch.Client
 			Contract.Assert(size > 0);
 
 			queryString = HttpUtility.UrlEncode(queryString.Trim());
-			string url = "/{0}/_search?q={1}&from={2}&size={3}".F(index.ToLower(), queryString, from, size);
+			string url = "/{0}/_search?q={1}&from={2}&size={3}".Fill(index.ToLower(), queryString, from, size);
 			RestResponse result = _provider.Get(url);
 
 			var hitResult = new SearchResult(result.GetBody());
@@ -246,12 +253,12 @@ namespace ElasticSearch.Client
 
 			if (type == null || type.Length == 0)
 			{
-				url = "/{0}/_search?q={1}&from={2}&size={3}".F(index.ToLower(), queryString, from,
+				url = "/{0}/_search?q={1}&from={2}&size={3}".Fill(index.ToLower(), queryString, from,
 				                                               size);
 			}
 			else
 			{
-				url = "/{0}/{1}/_search?q={2}&from={3}&size={4}".F(index.ToLower(), string.Join(",", type), queryString, from,
+				url = "/{0}/{1}/_search?q={2}&from={3}&size={4}".Fill(index.ToLower(), string.Join(",", type), queryString, from,
 				                                                   size);
 			}
 
@@ -292,12 +299,12 @@ namespace ElasticSearch.Client
 
 			if (type == null || type.Length == 0)
 			{
-				url = "/{0}/_search?q={1}&from={2}&size={3}".F(index.ToLower(), queryString, from,
+				url = "/{0}/_search?q={1}&from={2}&size={3}".Fill(index.ToLower(), queryString, from,
 				                                               size);
 			}
 			else
 			{
-				url = "/{0}/{1}/_search?q={2}&fields=_id&from={3}&size={4}".F(index.ToLower(), string.Join(",", type),
+				url = "/{0}/{1}/_search?q={2}&fields=_id&from={3}&size={4}".Fill(index.ToLower(), string.Join(",", type),
 				                                                              queryString, from, size);
 			}
 
@@ -321,35 +328,6 @@ namespace ElasticSearch.Client
 				types = new[] {type};
 			}
 			return Search(index, types, queryString, size);
-		}
-
-		public SearchResult SearchByDSL(string index, string[] type, string queryString, int from, int size)
-		{
-			Contract.Assert(!string.IsNullOrEmpty(index));
-			Contract.Assert(!string.IsNullOrEmpty(queryString));
-			Contract.Assert(from >= 0);
-			Contract.Assert(size > 0);
-
-			var query = new QueryString(queryString);
-
-			var elasticQuery = new ElasticQuery(from, size);
-			elasticQuery.AddQuery(query);
-
-			string jsonstr = JsonSerializer.Get(elasticQuery);
-
-			string url = string.Empty;
-
-			if (type == null || type.Length == 0)
-			{
-				url = "/{0}/_search".F(index.ToLower());
-			}
-			else
-			{
-				url = "/{0}/{1}/_search".F(index.ToLower(), string.Join(",", type));
-			}
-			RestResponse result = _provider.Post(url, jsonstr);
-			var hitResult = new SearchResult(result.GetBody());
-			return hitResult;
 		}
 
 		#endregion
@@ -417,7 +395,7 @@ namespace ElasticSearch.Client
 		{
 			Contract.Assert(!string.IsNullOrEmpty(index));
 			Contract.Assert(typeSetting != null);
-			string url = "/{0}/{1}/_mapping".F(index.ToLower(), typeSetting.Type);
+			string url = "/{0}/{1}/_mapping".Fill(index.ToLower(), typeSetting.Type);
 
 			var mappings = new Dictionary<string, TypeSetting>();
 			mappings.Add(typeSetting.Type, typeSetting);
@@ -479,7 +457,7 @@ namespace ElasticSearch.Client
 
 			string url = "/" + index.ToLower() + "/_settings";
 
-			string json = "{{\"number_of_replicas\" : {0}}}".F(indexSetting.NumberOfReplicas);
+			string json = "{{\"number_of_replicas\" : {0}}}".Fill(indexSetting.NumberOfReplicas);
 
 			RestResponse result = _provider.Put(url, json);
 			return GetOperationResult(result);
@@ -489,7 +467,7 @@ namespace ElasticSearch.Client
 		{
 			Contract.Assert(!string.IsNullOrEmpty(index));
 
-			string url = "/{0}".F(index.ToLower());
+			string url = "/{0}".Fill(index.ToLower());
 
 			RestResponse result = _provider.Delete(url);
 
@@ -500,7 +478,7 @@ namespace ElasticSearch.Client
 		{
 			Contract.Assert(template != null);
 
-			string url = "/_template/{0}".F(templateName);
+			string url = "/_template/{0}".Fill(templateName);
 
 			string json = JsonSerializer.Get(template);
 			RestResponse result = _provider.Post(url, json);
@@ -512,7 +490,7 @@ namespace ElasticSearch.Client
 		{
 			Contract.Assert(!string.IsNullOrEmpty(templateName));
 
-			string url = "/_template/{0}".F(templateName);
+			string url = "/_template/{0}".Fill(templateName);
 
 			RestResponse result = _provider.Get(url);
 
@@ -537,7 +515,7 @@ namespace ElasticSearch.Client
 			Contract.Assert(!string.IsNullOrEmpty(templateName));
 			Contract.Assert(templateName != null);
 
-			string url = "/_template/{0}".F(templateName);
+			string url = "/_template/{0}".Fill(templateName);
 			RestResponse result = _provider.Delete(url);
 
 			return GetOperationResult(result);
@@ -554,7 +532,7 @@ namespace ElasticSearch.Client
 			Contract.Assert(!string.IsNullOrEmpty(indexKey));
 
 
-			string url = "/{0}/{1}/{2}/".F(index.ToLower(), type, indexKey);
+			string url = "/{0}/{1}/{2}/".Fill(index.ToLower(), type, indexKey);
 			RestResponse result = _provider.Delete(url);
 			return GetOperationResult(result);
 		}
@@ -573,7 +551,7 @@ namespace ElasticSearch.Client
 			Contract.Assert(!string.IsNullOrEmpty(queryString));
 
 			queryString = HttpUtility.UrlEncode(queryString.Trim());
-			string url = "/{0}/{1}/_query?q={2}".F(index.ToLower(), type, queryString);
+			string url = "/{0}/{1}/_query?q={2}".Fill(index.ToLower(), type, queryString);
 			RestResponse result = _provider.Delete(url);
 
 			return GetOperationResult(result);
@@ -601,11 +579,11 @@ namespace ElasticSearch.Client
 
 			if (type == null || type.Length == 0)
 			{
-				url = "/{0}/_query?q={1}".F(index.ToLower(), queryString);
+				url = "/{0}/_query?q={1}".Fill(index.ToLower(), queryString);
 			}
 			else
 			{
-				url = "/{0}/{1}/_query?q={2}".F(index.ToLower(), string.Join(",", type), queryString);
+				url = "/{0}/{1}/_query?q={2}".Fill(index.ToLower(), string.Join(",", type), queryString);
 			}
 			RestResponse result = _provider.Delete(url);
 			string jsonString = result.GetBody();
@@ -629,11 +607,11 @@ namespace ElasticSearch.Client
 
 			if (type == null || type.Length == 0)
 			{
-				url = "/{0}/_query?q={1}".F(string.Join(",", index).ToLower(), queryString);
+				url = "/{0}/_query?q={1}".Fill(string.Join(",", index).ToLower(), queryString);
 			}
 			else
 			{
-				url = "/{0}/{1}/_query?q=".F(string.Join(",", index).ToLower(), string.Join(",", type), queryString);
+				url = "/{0}/{1}/_query?q=".Fill(string.Join(",", index).ToLower(), string.Join(",", type), queryString);
 			}
 			RestResponse result = _provider.Delete(url);
 			string jsonString = result.GetBody();
@@ -652,7 +630,7 @@ namespace ElasticSearch.Client
 			Contract.Assert(!string.IsNullOrEmpty(queryString));
 
 			queryString = HttpUtility.UrlEncode(queryString.Trim());
-			string url = "/{0}/_query?q=".F(index.ToLower(), queryString);
+			string url = "/{0}/_query?q=".Fill(index.ToLower(), queryString);
 			RestResponse result = _provider.Delete(url);
 			string jsonString = result.GetBody();
 			if (jsonString != null)
@@ -671,7 +649,7 @@ namespace ElasticSearch.Client
 			Contract.Assert(!string.IsNullOrEmpty(queryString));
 
 			queryString = HttpUtility.UrlEncode(queryString.Trim());
-			string url = "/{0}/_query?q={1}".F(string.Join(",", index).ToLower(), queryString);
+			string url = "/{0}/_query?q={1}".Fill(string.Join(",", index).ToLower(), queryString);
 			RestResponse result = _provider.Delete(url);
 			string jsonString = result.GetBody();
 			if (jsonString != null)
@@ -692,7 +670,7 @@ namespace ElasticSearch.Client
 			Contract.Assert(!string.IsNullOrEmpty(queryString));
 
 			queryString = HttpUtility.UrlEncode(queryString.Trim());
-			string url = "/_all/_query?q={0}".F(queryString);
+			string url = "/_all/_query?q={0}".Fill(queryString);
 			RestResponse result = _provider.Delete(url);
 			string jsonString = result.GetBody();
 			if (jsonString != null)
@@ -718,11 +696,11 @@ namespace ElasticSearch.Client
 
 			if (type == null || type.Length == 0)
 			{
-				url = "/{0}/_count?q={1}".F(index.ToLower(), queryString);
+				url = "/{0}/_count?q={1}".Fill(index.ToLower(), queryString);
 			}
 			else
 			{
-				url = "/{0}/{1}/_count?q={2}".F(index.ToLower(), string.Join(",", type), queryString);
+				url = "/{0}/{1}/_count?q={2}".Fill(index.ToLower(), string.Join(",", type), queryString);
 			}
 			RestResponse result = _provider.Get(url);
 
@@ -732,7 +710,7 @@ namespace ElasticSearch.Client
 			{
 				try
 				{
-					JObject o = JObject.Parse(restr);
+					Newtonsoft.Json.Linq.JObject o = Newtonsoft.Json.Linq.JObject.Parse(restr);
 					var count = (int) o["count"];
 
 					return count;
@@ -761,7 +739,7 @@ namespace ElasticSearch.Client
 			Contract.Assert(!string.IsNullOrEmpty(queryString));
 
 			queryString = HttpUtility.UrlEncode(queryString.Trim());
-			string url = "/{0}/_count?q={1}".F(index.ToLower(), queryString);
+			string url = "/{0}/_count?q={1}".Fill(index.ToLower(), queryString);
 			RestResponse result = _provider.Get(url);
 
 			string restr = result.GetBody();
@@ -770,7 +748,7 @@ namespace ElasticSearch.Client
 			{
 				try
 				{
-					JObject o = JObject.Parse(restr);
+					Newtonsoft.Json.Linq.JObject o = Newtonsoft.Json.Linq.JObject.Parse(restr);
 					var count = (int) o["count"];
 
 					return count;
@@ -788,7 +766,7 @@ namespace ElasticSearch.Client
 			Contract.Assert(!string.IsNullOrEmpty(queryString));
 
 			queryString = HttpUtility.UrlEncode(queryString.Trim());
-			string url = "/_count?q={0}".F(queryString);
+			string url = "/_count?q={0}".Fill(queryString);
 			RestResponse result = _provider.Get(url);
 
 			string restr = result.GetBody();
@@ -797,7 +775,7 @@ namespace ElasticSearch.Client
 			{
 				try
 				{
-					JObject o = JObject.Parse(restr);
+					Newtonsoft.Json.Linq.JObject o = Newtonsoft.Json.Linq.JObject.Parse(restr);
 					var count = (int) o["count"];
 
 					return count;
@@ -811,5 +789,76 @@ namespace ElasticSearch.Client
 		}
 
 		#endregion
+
+
+		public DSL QueryDSL { get; set; }
+
+		public  class DSL
+		{
+			private RestProvider _provider;
+
+			internal DSL(RestProvider provider)
+			{
+				_provider = provider;
+			}
+
+			public SearchResult Search(string index,string[] type,IQuery query,int from,int size)
+			{
+				Contract.Assert(!string.IsNullOrEmpty(index));
+				Contract.Assert(query!=null);
+				Contract.Assert(from >= 0);
+				Contract.Assert(size > 0);
+
+				var elasticQuery = new ElasticQuery(from, size);
+				elasticQuery.AddQuery(query);
+
+				string jsonstr = JsonSerializer.Get(elasticQuery);
+
+				string url = string.Empty;
+
+				if (type == null || type.Length == 0)
+				{
+					url = "/{0}/_search".Fill(index.ToLower());
+				}
+				else
+				{
+					url = "/{0}/{1}/_search".Fill(index.ToLower(), string.Join(",", type));
+				}
+				RestResponse result = _provider.Post(url, jsonstr);
+				var hitResult = new SearchResult(result.GetBody());
+				return hitResult;
+			}
+
+			//TEST
+			public SearchResult SearchByDSL(string index, string[] type, string queryString, int from, int size)
+			{
+				Contract.Assert(!string.IsNullOrEmpty(index));
+				Contract.Assert(!string.IsNullOrEmpty(queryString));
+				Contract.Assert(from >= 0);
+				Contract.Assert(size > 0);
+
+				var query = new QueryString(queryString);
+
+				var elasticQuery = new ElasticQuery(from, size);
+				elasticQuery.AddQuery(query);
+
+				string jsonstr = JsonSerializer.Get(elasticQuery);
+
+				string url = string.Empty;
+
+				if (type == null || type.Length == 0)
+				{
+					url = "/{0}/_search".Fill(index.ToLower());
+				}
+				else
+				{
+					url = "/{0}/{1}/_search".Fill(index.ToLower(), string.Join(",", type));
+				}
+				RestResponse result = _provider.Post(url, jsonstr);
+				var hitResult = new SearchResult(result.GetBody());
+				return hitResult;
+			} 
+		}
+
 	}
 }

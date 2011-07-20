@@ -49,10 +49,5 @@ namespace ElasticSearch.Client.EMO
 			}
 			return stringBuilder.ToString();
 		}
-
-		internal static string Fill(this string format, params object[] args)
-		{
-			return string.Format(format, args);
-		}
 	}
 }

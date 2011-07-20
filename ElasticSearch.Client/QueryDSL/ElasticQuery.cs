@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace ElasticSearch.Client.QueryDSL
 {
@@ -12,11 +13,14 @@ namespace ElasticSearch.Client.QueryDSL
 			Explain = explatin;
 		}
 
+		[DefaultValue(0)]
 		public int From { get; private set; }
+		[DefaultValue(5)]
 		public int Size { get; private set; }
+		[DefaultValue(false)]
 		public bool Explain { set; get; }
-	
-		public List<string > Fields=new List<string>();
+
+		public List<string> Fields;
 
 		public Dictionary<string, IQuery> Query = new Dictionary<string, IQuery>();
 
@@ -27,8 +31,18 @@ namespace ElasticSearch.Client.QueryDSL
 				Query.Add("query_string",query);
 				return;
 			}
+			if(query is TermQuery)
+			{
+				Query.Add("term", query);
+				return;
+			}
 			throw new NotSupportedException();
 		}
 
+		public void AddField(string field)
+		{
+			if(Fields==null){Fields=new List<string>();}
+			Fields.Add(field);
+		}
 	}
 }

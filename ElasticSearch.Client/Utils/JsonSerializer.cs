@@ -13,6 +13,7 @@ namespace ElasticSearch.Client.Utils
 		{
 			ContractResolver = new CamelCasePropertyNamesContractResolver(),
 			NullValueHandling = NullValueHandling.Ignore,
+			DefaultValueHandling = DefaultValueHandling.Ignore,
 			Converters = new List<JsonConverter> { new IsoDateTimeConverter() }
 		};
 
@@ -36,20 +37,5 @@ namespace ElasticSearch.Client.Utils
 			
 		}
 	}
-
-
-	/**
-     * @Author : Hu Changwei, CN,
-     * Simple Json builder
-     * email : koqiui@163.com
-     * personal site : http://koqiui.pip.verisignlabs.com/
-     */
-
 	internal delegate string ToJSONDelegate(object value, bool useSingleQuote);
-
-	/**
- * @author: Hu Changwei
- * used for Simple Json builder
- * predefined  ToJSON convertor Delegates
- */
-}
+	}

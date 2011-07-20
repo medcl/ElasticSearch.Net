@@ -9,3 +9,8 @@
 
 /BenchmarkTests/bin
 /BenchmarkTests/obj
+
+*.suo
+*.ReSharper.user
+*.Cache
+*.user

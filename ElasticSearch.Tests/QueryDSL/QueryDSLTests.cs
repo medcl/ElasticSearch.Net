@@ -3,6 +3,7 @@ using System.Threading;
 using ElasticSearch.Client;
 using ElasticSearch.Client.EMO;
 using ElasticSearch.Client.Mapping;
+using ElasticSearch.Client.QueryDSL;
 using NUnit.Framework;
 
 namespace Tests
@@ -13,11 +14,25 @@ namespace Tests
 		string index = "index_search_operate" + Guid.NewGuid().ToString();
 		ElasticSearchClient client = new ElasticSearchClient("localhost");
 		[Test]
-		public void TestQuery()
+		public void TestQueryString()
 		{
 			//http://localhost:9200/index/type/_search?q=gender:False&sort=id&from=0
-			var result =  client.SearchByDSL(index, new string[] { "type" }, "gender:true", 0, 5);
+			var result =  client.QueryDSL.SearchByDSL(index, new string[] { "type" }, "gender:true", 0, 5);
 
+			Assert.AreEqual(50, result.GetTotalCount());
+			Assert.AreEqual(5, result.GetHits().Hits.Count);
+
+			var query = new QueryString("gender:true");
+			result = client.QueryDSL.Search(index, new string[] { "type" }, query, 0, 5);
+			Assert.AreEqual(50, result.GetTotalCount());
+			Assert.AreEqual(5, result.GetHits().Hits.Count);
+		}
+
+		[Test]
+		public void TestTermQuery()
+		{
+			var query = new TermQuery("gender","true");
+			var result = client.QueryDSL.Search(index, new string[] {"type"}, query, 0, 5);
 			Assert.AreEqual(50, result.GetTotalCount());
 			Assert.AreEqual(5, result.GetHits().Hits.Count);
 		}

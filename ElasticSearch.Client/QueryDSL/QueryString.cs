@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
@@ -81,6 +82,8 @@ namespace ElasticSearch.Client.QueryDSL
 		/// <summary>
 		/// Get the boost value of the query. Defaults to 1.0.
 		/// </summary>
+		[JsonProperty("boost")]
+		[DefaultValue(1.0)]
 		public double Boost { get; private set; }
 		
 		/// <summary>
