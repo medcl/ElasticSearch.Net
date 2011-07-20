@@ -23,5 +23,11 @@ namespace ElasticSearch.Client.QueryDSL
 			Value = value;
 			Boost = boost;
 		}
+
+		public TermQuery SetBoost(double boost)
+		{
+			Boost = boost;
+			return this;
+		}
 	}
 }

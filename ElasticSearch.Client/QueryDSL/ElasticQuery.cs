@@ -41,6 +41,11 @@ namespace ElasticSearch.Client.QueryDSL
 				Query.Add("terms", query); //terms or in
 				return;
 			}
+			if (query is WildcardQuery)
+			{
+				Query.Add("wildcard", query);
+				return;
+			}
 			throw new NotSupportedException();
 		}
 

@@ -102,6 +102,8 @@
     <Compile Include="QueryDSL\Converters\TermQueryConvert.cs" />
     <Compile Include="QueryDSL\TermsQuery.cs" />
     <Compile Include="QueryDSL\Converters\TermsQueryConvert.cs" />
+    <Compile Include="QueryDSL\WildcardQuery.cs" />
+    <Compile Include="QueryDSL\Converters\WildcardQueryConverter.cs" />
     <Compile Include="Transport\Connection\Connection.cs" />
     <Compile Include="Transport\Connection\ConnectionBuilder.cs" />
     <Compile Include="Transport\Connection\ConnectionPool.cs" />

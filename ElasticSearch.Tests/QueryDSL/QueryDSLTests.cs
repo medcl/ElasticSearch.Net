@@ -58,7 +58,71 @@ namespace Tests
 			Assert.AreEqual(100, result.GetTotalCount());
 			Assert.AreEqual(5, result.GetHits().Hits.Count);
 		}
+		[Test]
+		public void TestTermsQueryWithMinuMatch()
+		{
+			var query = new TermsQuery("gender",2, "true", "false");
+			var result = client.QueryDSL.Search(index, new string[] { "type" }, query, 0, 5);
+			Assert.AreEqual(0, result.GetTotalCount());
+			Assert.AreEqual(0, result.GetHits().Hits.Count);
+			
+			
+			var item = new IndexItem("type","addition_key1");
+			item.Add("name", Guid.NewGuid().ToString());
+			item.Add("id", 2012);
+			item.Add("gender", true);
+			item.Add("gender", false);
+			client.Index(index, item);
 
+			Thread.Sleep(1000);
+			result = client.QueryDSL.Search(index, new string[] { "type" }, query, 0, 5);
+			Assert.AreEqual(1, result.GetTotalCount());
+			Assert.AreEqual(1, result.GetHits().Hits.Count);
+
+		}
+
+
+		[Test]
+		public void TestWildcardQuery()
+		{
+			var item = new IndexItem("type","addition_key2");
+			item.Add("name", "张");
+			client.Index(index, item);
+
+			 item = new IndexItem("type","addition_key3");
+			item.Add("name", "张三");
+			client.Index(index, item);
+
+			item = new IndexItem("type", "addition_key4");
+			item.Add("name", "张三丰");
+			client.Index(index, item);
+
+			item = new IndexItem("type","addition_key5");
+			item.Add("name", "二张三张");
+			client.Index(index, item);
+
+			Thread.Sleep(1000);
+
+			var query = new WildcardQuery("name","张*");
+			var result = client.QueryDSL.Search(index, new string[] { "type" }, query, 0, 5);
+			Assert.AreEqual(3, result.GetTotalCount());
+			Assert.AreEqual(3, result.GetHits().Hits.Count);
+			foreach (var VARIABLE in result.GetHits().Hits)
+			{
+				Console.WriteLine(VARIABLE.Fields["name"]);
+			}
+
+			Console.WriteLine("--");
+			query = new WildcardQuery("name", "张三*");
+			result = client.QueryDSL.Search(index, new string[] { "type" }, query, 0, 5);
+			Assert.AreEqual(2, result.GetTotalCount());
+			Assert.AreEqual(2, result.GetHits().Hits.Count);
+			foreach (var VARIABLE in result.GetHits().Hits)
+			{
+				Console.WriteLine(VARIABLE.Fields["name"]);
+			}
+
+		}
 
 		[TestFixtureSetUp]
 		public void Init()
@@ -74,7 +138,7 @@ namespace Tests
 			for (int i = 0; i < 100; i++)
 			{
 				var item = new IndexItem("type", i.ToString());
-				item.Add("name", new Guid().ToString());
+				item.Add("name", Guid.NewGuid().ToString());
 				item.Add("id", i);
 				if (i >= 50)
 				{
@@ -88,7 +152,7 @@ namespace Tests
 			
 			client.Index(index,item);
 			}
-			Thread.Sleep(2000);
+			Thread.Sleep(1000);
 		}
 
 
