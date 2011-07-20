@@ -1,30 +1,9 @@
-using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using Newtonsoft.Json;
 
 namespace ElasticSearch.Client.QueryDSL
 {
-	internal class TermQueryConvert:JsonConverter
-	{
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-		{
-			TermQuery term = (TermQuery)value;
-			if (term != null)
-				writer.WriteRaw(string.Format("{{ \"{0}\" : {{ \"term\" : \"{1}\", \"boost\":{2} }}}}",term.Field,term.Value,term.Boost));
-		}
-
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-		{
-			throw new NotImplementedException();
-		}
-
-		public override bool CanConvert(Type objectType)
-		{
-			return typeof(TermQuery).IsAssignableFrom(objectType);
-		}
-	}
-
 	/// <summary>
 	/// Matches documents that have fields that contain a term (not analyzed). The term query maps to Lucene TermQuery. 
 	/// </summary>

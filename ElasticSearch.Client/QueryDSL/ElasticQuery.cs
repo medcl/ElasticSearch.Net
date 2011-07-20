@@ -36,6 +36,11 @@ namespace ElasticSearch.Client.QueryDSL
 				Query.Add("term", query);
 				return;
 			}
+			if (query is TermsQuery)
+			{
+				Query.Add("terms", query); //terms or in
+				return;
+			}
 			throw new NotSupportedException();
 		}
 

@@ -37,6 +37,29 @@ namespace Tests
 			Assert.AreEqual(5, result.GetHits().Hits.Count);
 		}
 
+
+
+		[Test]
+		public void TestTermQueryWithBoost()
+		{
+			var query = new TermQuery("gender", "true",2);
+			var result = client.QueryDSL.Search(index, new string[] { "type" }, query, 0, 5);
+			Assert.AreEqual(50, result.GetTotalCount());
+			Assert.AreEqual(5, result.GetHits().Hits.Count);
+		}
+
+
+
+		[Test]
+		public void TestTermsQuery()
+		{
+			var query = new TermsQuery("gender", "true","false");
+			var result = client.QueryDSL.Search(index, new string[] { "type" }, query, 0, 5);
+			Assert.AreEqual(100, result.GetTotalCount());
+			Assert.AreEqual(5, result.GetHits().Hits.Count);
+		}
+
+
 		[TestFixtureSetUp]
 		public void Init()
 		{
