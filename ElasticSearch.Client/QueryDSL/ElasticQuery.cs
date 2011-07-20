@@ -15,7 +15,7 @@ namespace ElasticSearch.Client.QueryDSL
 
 		[DefaultValue(0)]
 		public int From { get; private set; }
-		[DefaultValue(5)]
+		[DefaultValue(10)]
 		public int Size { get; private set; }
 		[DefaultValue(false)]
 		public bool Explain { set; get; }
