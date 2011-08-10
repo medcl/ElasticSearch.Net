@@ -59,6 +59,8 @@ namespace ElasticSearchDataManager
 			this.richTextBox1 = new System.Windows.Forms.RichTextBox();
 			this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.clearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripSeparator();
+			this.analyzeTestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
 			this.splitContainer1.SuspendLayout();
@@ -179,9 +181,11 @@ namespace ElasticSearchDataManager
             this.newIndexToolStripMenuItem,
             this.toolStripMenuItem4,
             this.searchToolStripMenuItem,
-            this.mappingToolStripMenuItem});
+            this.mappingToolStripMenuItem,
+            this.toolStripMenuItem5,
+            this.analyzeTestToolStripMenuItem});
 			this.contextMenuStrip1.Name = "contextMenuStrip1";
-			this.contextMenuStrip1.Size = new System.Drawing.Size(153, 204);
+			this.contextMenuStrip1.Size = new System.Drawing.Size(153, 232);
 			// 
 			// 导出数据ToolStripMenuItem
 			// 
@@ -283,6 +287,18 @@ namespace ElasticSearchDataManager
 			this.clearToolStripMenuItem.Text = "&Clear";
 			this.clearToolStripMenuItem.Click += new System.EventHandler(this.clearToolStripMenuItem_Click);
 			// 
+			// toolStripMenuItem5
+			// 
+			this.toolStripMenuItem5.Name = "toolStripMenuItem5";
+			this.toolStripMenuItem5.Size = new System.Drawing.Size(149, 6);
+			// 
+			// analyzeTestToolStripMenuItem
+			// 
+			this.analyzeTestToolStripMenuItem.Name = "analyzeTestToolStripMenuItem";
+			this.analyzeTestToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.analyzeTestToolStripMenuItem.Text = "AnalyzeTest";
+			this.analyzeTestToolStripMenuItem.Click += new System.EventHandler(this.analyzeTestToolStripMenuItem_Click);
+			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -333,6 +349,8 @@ namespace ElasticSearchDataManager
 		private ToolStripSeparator toolStripMenuItem4;
 		private ToolStripMenuItem searchToolStripMenuItem;
 		private ToolStripMenuItem mappingToolStripMenuItem;
+		private ToolStripSeparator toolStripMenuItem5;
+		private ToolStripMenuItem analyzeTestToolStripMenuItem;
 	}
 }
 

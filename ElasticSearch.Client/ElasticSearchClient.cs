@@ -848,5 +848,12 @@ namespace ElasticSearch.Client
 			}
 		}
 
+		public string Analyze(string indexName,string analyzer, string text, string format)
+		{
+			var url = "/{0}/_analyze?analyzer={1}&format={2}".Fill(indexName.ToLower(),analyzer,format);
+			var data = text;
+			var result=_provider.Post(url, data);
+			return result.GetBody();
+		}
 	}
 }

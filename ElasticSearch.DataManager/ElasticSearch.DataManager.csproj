@@ -63,6 +63,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dialogs\AnalyzeTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Dialogs\Connect.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -101,6 +104,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Dialogs\AnalyzeTest.resx">
+      <DependentUpon>AnalyzeTest.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\Connect.resx">
       <DependentUpon>Connect.cs</DependentUpon>
     </EmbeddedResource>

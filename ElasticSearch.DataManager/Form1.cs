@@ -514,9 +514,18 @@ namespace ElasticSearchDataManager
 				}
 			}
 			
-//			WriteLog("Create New Index: {0},{1},{2}", newIndex.IndexName, newIndex.Shard, newIndex.Replica);
-//			var result = currentElasticSearchInstance.CreateIndex(newIndex.IndexName,
-//																	   new IndexSetting(newIndex.Shard, newIndex.Replica));
+		}
+
+		private void analyzeTestToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			var tempNode = (ElasticNode)treeViewAdv1.SelectedNode.Tag;
+			if (tempNode != null)
+			{
+				AnalyzeTest analyzeTest = new AnalyzeTest(currentElasticSearchInstance,tempNode.IndexName);
+				analyzeTest.ShowDialog();
+			}
+
+
 		}
 	}
 }
