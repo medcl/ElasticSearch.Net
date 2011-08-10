@@ -9,68 +9,68 @@
   </SettingsComponent>
   <RecentFiles>
     <RecentFiles>
-      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:EMO/f:IndexItem.cs" caret="0" fromTop="0" />
-      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:EMO/f:SearchResult.cs" caret="0" fromTop="0" />
-      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:Transport/f:RestProvider.cs" caret="0" fromTop="0" />
-      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:Transport/d:Http/f:HttpAdaptor.cs" caret="0" fromTop="0" />
-      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:QueryDSL/f:Field.cs" caret="0" fromTop="0" />
-      <File id="FC972BCB-AE66-402E-93F3-CCA8D70ACC32/f:JsonConverter.cs" caret="0" fromTop="0" />
-      <File id="60BC8E61-E258-4F5D-8BBB-49E9A87536C7/f:ExceptionTests.cs" caret="0" fromTop="0" />
-      <File id="60BC8E61-E258-4F5D-8BBB-49E9A87536C7/f:MappingTests.cs" caret="0" fromTop="0" />
-      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:Transport/d:Thrift/d:Protocol/f:TList.cs" caret="0" fromTop="0" />
-      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:Transport/d:Thrift/d:Protocol/f:TJSONProtocol.cs" caret="0" fromTop="0" />
-      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:Utils/f:ElasticSearchExtensions.cs" caret="0" fromTop="0" />
-      <File id="03C890A0-B8D6-427B-B1B3-02FD630C8ED9/f:Form1.cs" caret="0" fromTop="0" />
-      <File id="60BC8E61-E258-4F5D-8BBB-49E9A87536C7/f:BulkOperatesTests.cs" caret="0" fromTop="0" />
-      <File id="03C890A0-B8D6-427B-B1B3-02FD630C8ED9/d:Dialogs/f:Export.cs" caret="0" fromTop="0" />
-      <File id="60BC8E61-E258-4F5D-8BBB-49E9A87536C7/f:TemplateTests.cs" caret="0" fromTop="0" />
-      <File id="60BC8E61-E258-4F5D-8BBB-49E9A87536C7/f:QueryTests.cs" caret="0" fromTop="0" />
-      <File id="60BC8E61-E258-4F5D-8BBB-49E9A87536C7/f:ClusterSetupTests.cs" caret="0" fromTop="0" />
-      <File id="60BC8E61-E258-4F5D-8BBB-49E9A87536C7/f:Easy2Go.cs" caret="0" fromTop="0" />
-      <File id="03C890A0-B8D6-427B-B1B3-02FD630C8ED9/d:Dialogs/f:JsonView.cs" caret="0" fromTop="0" />
-      <File id="03C890A0-B8D6-427B-B1B3-02FD630C8ED9/d:Dialogs/f:NewIndex.Designer.cs" caret="0" fromTop="0" />
-      <File id="03C890A0-B8D6-427B-B1B3-02FD630C8ED9/d:Dialogs/f:NewIndex.cs" caret="0" fromTop="0" />
-      <File id="03C890A0-B8D6-427B-B1B3-02FD630C8ED9/d:Dialogs/f:Search.cs" caret="0" fromTop="0" />
       <File id="03C890A0-B8D6-427B-B1B3-02FD630C8ED9/d:Dialogs/f:FormBase.cs" caret="0" fromTop="0" />
       <File id="03C890A0-B8D6-427B-B1B3-02FD630C8ED9/d:Dialogs/f:FormBase.Designer.cs" caret="0" fromTop="0" />
       <File id="03C890A0-B8D6-427B-B1B3-02FD630C8ED9/f:app.config" caret="0" fromTop="0" />
       <File id="03C890A0-B8D6-427B-B1B3-02FD630C8ED9/d:Config/f:ElasticSearch.config" caret="0" fromTop="0" />
-      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:QueryDSL/d:Converters/f:TermsQueryConvert.cs" caret="730" fromTop="23" />
-      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:QueryDSL/d:Converters/f:WildcardQueryConverter.cs" caret="420" fromTop="12" />
-      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:QueryDSL/d:Converters/f:TermQueryConvert.cs" caret="338" fromTop="11" />
-      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:QueryDSL/d:Converters/f:BoolQueryConverter.cs" caret="1493" fromTop="21" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:Transport/f:RestProvider.cs" caret="1512" fromTop="25" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:Transport/d:Http/f:HttpAdaptor.cs" caret="2277" fromTop="13" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:QueryDSL/f:BoolQuery.cs" caret="1654" fromTop="48" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:QueryDSL/f:TermsQuery.cs" caret="562" fromTop="10" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:QueryDSL/f:QueryString.cs" caret="10083" fromTop="19" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:Utils/f:JsonSerializer.cs" caret="744" fromTop="14" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:QueryDSL/f:Field.cs" caret="427" fromTop="13" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:QueryDSL/f:TermQuery.cs" caret="778" fromTop="6" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:QueryDSL/f:BooleanType.cs" caret="596" fromTop="8" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:QueryDSL/f:ElasticQuery.cs" caret="1349" fromTop="7" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:QueryDSL/f:BoostingQuery.cs" caret="813" fromTop="20" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:QueryDSL/d:Converters/f:WildcardQueryConverter.cs" caret="311" fromTop="12" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:QueryDSL/d:Converters/f:TermQueryConvert.cs" caret="239" fromTop="9" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:QueryDSL/d:Converters/f:ElasticQueryConverter.cs" caret="1000" fromTop="9" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:QueryDSL/d:Converters/f:BoostingQueryConvert.cs" caret="733" fromTop="5" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:QueryDSL/d:Converters/f:TermsQueryConvert.cs" caret="571" fromTop="17" />
+      <File id="60BC8E61-E258-4F5D-8BBB-49E9A87536C7/f:ExceptionTests.cs" caret="378" fromTop="5" />
+      <File id="60BC8E61-E258-4F5D-8BBB-49E9A87536C7/f:BulkOperatesTests.cs" caret="220" fromTop="0" />
+      <File id="60BC8E61-E258-4F5D-8BBB-49E9A87536C7/f:ClusterSetupTests.cs" caret="223" fromTop="11" />
+      <File id="60BC8E61-E258-4F5D-8BBB-49E9A87536C7/f:Easy2Go.cs" caret="331" fromTop="16" />
+      <File id="60BC8E61-E258-4F5D-8BBB-49E9A87536C7/d:QueryDSL/f:QueryDSLTests.cs" caret="6443" fromTop="12" />
+      <File id="60BC8E61-E258-4F5D-8BBB-49E9A87536C7/f:MappingTests.cs" caret="1503" fromTop="15" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:QueryDSL/d:Converters/f:BoolQueryConverter.cs" caret="982" fromTop="15" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/f:ElasticSearchClient.cs" caret="11457" fromTop="9" />
+      <File id="03C890A0-B8D6-427B-B1B3-02FD630C8ED9/d:Dialogs/f:Export.cs" caret="458" fromTop="1" />
+      <File id="03C890A0-B8D6-427B-B1B3-02FD630C8ED9/f:Form1.cs" caret="7644" fromTop="11" />
     </RecentFiles>
     <RecentEdits>
-      <File id="60BC8E61-E258-4F5D-8BBB-49E9A87536C7/d:QueryDSL/f:QueryDSLTests.cs" caret="4142" fromTop="3" />
-      <File id="60BC8E61-E258-4F5D-8BBB-49E9A87536C7/d:QueryDSL/f:QueryDSLTests.cs" caret="4976" fromTop="19" />
-      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:QueryDSL/f:ElasticQuery.cs" caret="1120" fromTop="22" />
-      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:QueryDSL/f:ElasticQuery.cs" caret="1091" fromTop="20" />
-      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:QueryDSL/d:Converters/f:TermQueryConvert.cs" caret="397" fromTop="11" />
-      <File id="60BC8E61-E258-4F5D-8BBB-49E9A87536C7/d:QueryDSL/f:QueryDSLTests.cs" caret="6044" fromTop="11" />
-      <File id="60BC8E61-E258-4F5D-8BBB-49E9A87536C7/d:QueryDSL/f:QueryDSLTests.cs" caret="4834" fromTop="18" />
-      <File id="60BC8E61-E258-4F5D-8BBB-49E9A87536C7/d:QueryDSL/f:QueryDSLTests.cs" caret="5018" fromTop="20" />
-      <File id="60BC8E61-E258-4F5D-8BBB-49E9A87536C7/d:QueryDSL/f:QueryDSLTests.cs" caret="5359" fromTop="22" />
-      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:EMO/f:BulkObject.cs" caret="265" fromTop="11" />
-      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:QueryDSL/d:Converters/f:BoolQueryConverter.cs" caret="1457" fromTop="14" />
-      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:QueryDSL/d:Converters/f:BoolQueryConverter.cs" caret="1457" fromTop="22" />
-      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:QueryDSL/d:Converters/f:BoolQueryConverter.cs" caret="337" fromTop="11" />
-      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:QueryDSL/d:Converters/f:BoolQueryConverter.cs" caret="1457" fromTop="21" />
-      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:QueryDSL/d:Converters/f:BoolQueryConverter.cs" caret="1281" fromTop="16" />
-      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:QueryDSL/d:Converters/f:BoolQueryConverter.cs" caret="1279" fromTop="12" />
-      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:QueryDSL/d:Converters/f:BoolQueryConverter.cs" caret="1152" fromTop="6" />
-      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:QueryDSL/f:BoolQuery.cs" caret="1236" fromTop="16" />
-      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:QueryDSL/f:BoolQuery.cs" caret="1435" fromTop="25" />
-      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:QueryDSL/f:TermsQuery.cs" caret="1101" fromTop="20" />
-      <File id="60BC8E61-E258-4F5D-8BBB-49E9A87536C7/d:QueryDSL/f:QueryDSLTests.cs" caret="4282" fromTop="11" />
-      <File id="60BC8E61-E258-4F5D-8BBB-49E9A87536C7/d:QueryDSL/f:QueryDSLTests.cs" caret="4682" fromTop="12" />
-      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:QueryDSL/d:Converters/f:BoolQueryConverter.cs" caret="1332" fromTop="19" />
-      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:QueryDSL/f:BoolQuery.cs" caret="706" fromTop="7" />
-      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:QueryDSL/d:Converters/f:BoolQueryConverter.cs" caret="1027" fromTop="24" />
-      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:QueryDSL/d:Converters/f:BoolQueryConverter.cs" caret="444" fromTop="9" />
-      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:QueryDSL/d:Converters/f:BoolQueryConverter.cs" caret="636" fromTop="10" />
-      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:QueryDSL/d:Converters/f:BoolQueryConverter.cs" caret="843" fromTop="17" />
-      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:QueryDSL/d:Converters/f:BoolQueryConverter.cs" caret="305" fromTop="11" />
-      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:QueryDSL/d:Converters/f:WildcardQueryConverter.cs" caret="420" fromTop="12" />
+      <File id="60BC8E61-E258-4F5D-8BBB-49E9A87536C7/d:QueryDSL/f:QueryDSLTests.cs" caret="5929" fromTop="6" />
+      <File id="60BC8E61-E258-4F5D-8BBB-49E9A87536C7/d:QueryDSL/f:QueryDSLTests.cs" caret="6101" fromTop="12" />
+      <File id="60BC8E61-E258-4F5D-8BBB-49E9A87536C7/d:QueryDSL/f:QueryDSLTests.cs" caret="6271" fromTop="18" />
+      <File id="60BC8E61-E258-4F5D-8BBB-49E9A87536C7/d:QueryDSL/f:QueryDSLTests.cs" caret="6440" fromTop="21" />
+      <File id="60BC8E61-E258-4F5D-8BBB-49E9A87536C7/d:QueryDSL/f:QueryDSLTests.cs" caret="3292" fromTop="12" />
+      <File id="60BC8E61-E258-4F5D-8BBB-49E9A87536C7/d:QueryDSL/f:QueryDSLTests.cs" caret="3508" fromTop="14" />
+      <File id="60BC8E61-E258-4F5D-8BBB-49E9A87536C7/d:QueryDSL/f:QueryDSLTests.cs" caret="4245" fromTop="13" />
+      <File id="60BC8E61-E258-4F5D-8BBB-49E9A87536C7/d:QueryDSL/f:QueryDSLTests.cs" caret="3667" fromTop="15" />
+      <File id="60BC8E61-E258-4F5D-8BBB-49E9A87536C7/d:QueryDSL/f:QueryDSLTests.cs" caret="4057" fromTop="17" />
+      <File id="60BC8E61-E258-4F5D-8BBB-49E9A87536C7/d:QueryDSL/f:QueryDSLTests.cs" caret="2445" fromTop="4" />
+      <File id="60BC8E61-E258-4F5D-8BBB-49E9A87536C7/d:QueryDSL/f:QueryDSLTests.cs" caret="3161" fromTop="6" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/f:ElasticSearchClient.cs" caret="23916" fromTop="5" />
+      <File id="60BC8E61-E258-4F5D-8BBB-49E9A87536C7/d:QueryDSL/f:QueryDSLTests.cs" caret="493" fromTop="9" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:QueryDSL/f:ElasticQuery.cs" caret="646" fromTop="12" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:QueryDSL/f:ElasticQuery.cs" caret="646" fromTop="12" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:QueryDSL/f:QueryString.cs" caret="388" fromTop="11" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:QueryDSL/f:QueryString.cs" caret="9661" fromTop="25" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:QueryDSL/f:ElasticQuery.cs" caret="1366" fromTop="8" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:QueryDSL/f:TermQuery.cs" caret="778" fromTop="17" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:QueryDSL/f:TermQuery.cs" caret="779" fromTop="12" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:QueryDSL/f:Field.cs" caret="124" fromTop="6" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:QueryDSL/f:Field.cs" caret="306" fromTop="10" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:QueryDSL/d:Converters/f:BoostingQueryConvert.cs" caret="1484" fromTop="19" />
+      <File id="60BC8E61-E258-4F5D-8BBB-49E9A87536C7/d:QueryDSL/f:QueryDSLTests.cs" caret="4920" fromTop="22" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:QueryDSL/d:Converters/f:BoostingQueryConvert.cs" caret="813" fromTop="17" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:QueryDSL/d:Converters/f:BoostingQueryConvert.cs" caret="1008" fromTop="22" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:QueryDSL/d:Converters/f:BoostingQueryConvert.cs" caret="1089" fromTop="16" />
+      <File id="7DBBC255-BB21-487D-91A7-A3424CB87D97/d:QueryDSL/f:BoostingQuery.cs" caret="813" fromTop="20" />
+      <File id="60BC8E61-E258-4F5D-8BBB-49E9A87536C7/d:QueryDSL/f:QueryDSLTests.cs" caret="4724" fromTop="16" />
+      <File id="60BC8E61-E258-4F5D-8BBB-49E9A87536C7/d:QueryDSL/f:QueryDSLTests.cs" caret="13472" fromTop="12" />
     </RecentEdits>
   </RecentFiles>
   <NAntValidationSettings>
@@ -217,7 +217,7 @@
       <Item value="Utils" priority="80" />
       <Item value="JsonSerializer`0" priority="53" />
       <Item value="Dictionary" priority="63" />
-      <Item value="string" priority="883" />
+      <Item value="string" priority="915" />
       <Item value="var" priority="191" />
       <Item value="host" priority="31" />
       <Item value="port" priority="31" />
@@ -231,7 +231,7 @@
       <Item value="Dictionary&lt;string,int&gt;" priority="57" />
       <Item value="cache" priority="31" />
       <Item value="DialogResult" priority="223" />
-      <Item value="public" priority="1082" />
+      <Item value="public" priority="1274" />
       <Item value="get" priority="32" />
       <Item value="return" priority="383" />
       <Item value="textBox1" priority="63" />
@@ -240,7 +240,7 @@
       <Item value="NewIndex`0" priority="31" />
       <Item value="NewIndex" priority="29" />
       <Item value="newIndex" priority="95" />
-      <Item value="new" priority="511" />
+      <Item value="new" priority="575" />
       <Item value="IndexSetting" priority="28" />
       <Item value="FormBase`0" priority="31" />
       <Item value="Search`0" priority="63" />
@@ -249,17 +249,17 @@
       <Item value="sender" priority="31" />
       <Item value="tempNode" priority="31" />
       <Item value="base" priority="63" />
-      <Item value="if" priority="319" />
+      <Item value="if" priority="351" />
       <Item value="queryString" priority="31" />
       <Item value="size" priority="31" />
-      <Item value="null" priority="351" />
+      <Item value="null" priority="415" />
       <Item value="strings" priority="31" />
       <Item value="type" priority="31" />
       <Item value="panel1" priority="31" />
       <Item value="types" priority="159" />
       <Item value="index" priority="223" />
       <Item value="doc1" priority="31" />
-      <Item value="bool" priority="252" />
+      <Item value="bool" priority="284" />
       <Item value="checkBox3" priority="31" />
       <Item value="showLog" priority="31" />
       <Item value="WriteLog`0" priority="31" />
@@ -274,30 +274,30 @@
       <Item value="Console`0" priority="63" />
       <Item value="result2" priority="31" />
       <Item value="Thread`0" priority="63" />
-      <Item value="class" priority="218" />
+      <Item value="class" priority="249" />
       <Item value="static" priority="31" />
-      <Item value="void" priority="223" />
+      <Item value="void" priority="319" />
       <Item value="DSL`0" priority="31" />
       <Item value="DSL" priority="28" />
       <Item value="_provider" priority="31" />
       <Item value="protected" priority="95" />
       <Item value="internal" priority="252" />
-      <Item value="IQuery`0" priority="319" />
-      <Item value="query" priority="448" />
+      <Item value="IQuery`0" priority="351" />
+      <Item value="query" priority="704" />
       <Item value="int" priority="319" />
-      <Item value="TermQuery" priority="87" />
+      <Item value="TermQuery" priority="117" />
       <Item value="QueryString" priority="28" />
       <Item value="is" priority="31" />
       <Item value="TermQuery`0" priority="159" />
-      <Item value="object" priority="223" />
-      <Item value="Field" priority="127" />
+      <Item value="object" priority="351" />
+      <Item value="Field" priority="156" />
       <Item value="field" priority="287" />
       <Item value="Value" priority="95" />
-      <Item value="value" priority="192" />
+      <Item value="value" priority="224" />
       <Item value="decimal" priority="31" />
-      <Item value="double" priority="287" />
+      <Item value="double" priority="351" />
       <Item value="Boost" priority="255" />
-      <Item value="boost" priority="287" />
+      <Item value="boost" priority="319" />
       <Item value="this" priority="319" />
       <Item value="private" priority="31" />
       <Item value="KeyValuePair" priority="64" />
@@ -305,7 +305,7 @@
       <Item value="JsonProperty" priority="127" />
       <Item value="TermValue`0" priority="95" />
       <Item value="Term" priority="31" />
-      <Item value="term" priority="447" />
+      <Item value="term" priority="671" />
       <Item value="KeyValuePair&lt;string,object&gt;" priority="28" />
       <Item value="TermValue" priority="28" />
       <Item value="DefaultValueHandling" priority="32" />
@@ -314,10 +314,10 @@
       <Item value="Fields" priority="95" />
       <Item value="List&lt;string&gt;" priority="28" />
       <Item value="Type`0" priority="31" />
-      <Item value="typeof" priority="95" />
+      <Item value="typeof" priority="127" />
       <Item value="objectType" priority="31" />
-      <Item value="writer" priority="927" />
-      <Item value="JsonConverter`0" priority="63" />
+      <Item value="writer" priority="1791" />
+      <Item value="JsonConverter`0" priority="159" />
       <Item value="TermValueConvert`0" priority="31" />
       <Item value="using" priority="61" />
       <Item value="Newtonsoft" priority="30" />
@@ -329,13 +329,13 @@
       <Item value="values" priority="63" />
       <Item value="MinimumMatch" priority="95" />
       <Item value="minimunMatch" priority="63" />
-      <Item value="item" priority="63" />
+      <Item value="item" priority="127" />
       <Item value="WildcardQuery`0" priority="127" />
-      <Item value="filed" priority="31" />
+      <Item value="filed" priority="63" />
       <Item value="WildCardPattern" priority="31" />
       <Item value="pattern" priority="31" />
-      <Item value="WildcardQuery" priority="58" />
-      <Item value="foreach" priority="63" />
+      <Item value="WildcardQuery" priority="88" />
+      <Item value="foreach" priority="127" />
       <Item value="VARIABLE" priority="31" />
       <Item value="enum" priority="30" />
       <Item value="List&lt;IQuery&gt;" priority="28" />
@@ -345,14 +345,26 @@
       <Item value="mustNot" priority="31" />
       <Item value="BoolQuery`0" priority="255" />
       <Item value="BoolQueryConverter`0" priority="31" />
-      <Item value="serializer" priority="63" />
-      <Item value="WeakReference`0" priority="31" />
+      <Item value="serializer" priority="95" />
+      <Item value="WeakReference`0" priority="95" />
       <Item value="shouldQuery" priority="31" />
       <Item value="MinimumNumberShouldMatch" priority="63" />
       <Item value="number" priority="31" />
       <Item value="SetBoost`0" priority="31" />
       <Item value="WriteJson`0" priority="31" />
       <Item value="pre" priority="63" />
+      <Item value="ElasticQuery`0" priority="128" />
+      <Item value="Query" priority="63" />
+      <Item value="else" priority="63" />
+      <Item value="MustNotQueries" priority="63" />
+      <Item value="QueryString`0" priority="31" />
+      <Item value="Field`0" priority="63" />
+      <Item value="BoostingQuery`0" priority="31" />
+      <Item value="Positive" priority="31" />
+      <Item value="Negative" priority="31" />
+      <Item value="NegativeBoost" priority="31" />
+      <Item value="query2" priority="31" />
+      <Item value="TermsQuery" priority="29" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:ElasticSearch.DataManager.Dialogs.Connect">
       <Item value="Host" priority="27" />
@@ -434,22 +446,25 @@
       <Item value="Ignore" priority="27" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:System.Collections.Generic.List`1">
-      <Item value="Add`0" priority="53" />
-      <Item value="Count" priority="26" />
+      <Item value="Add`0" priority="134" />
+      <Item value="Count" priority="80" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:System.Type">
       <Item value="IsAssignableFrom`0" priority="26" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:Newtonsoft.Json.JsonWriter">
-      <Item value="WriteStartObject`0" priority="134" />
-      <Item value="WriteRaw`0" priority="136" />
-      <Item value="WritePropertyName`0" priority="107" />
-      <Item value="WriteValue`0" priority="53" />
-      <Item value="WriteStartArray`0" priority="53" />
-      <Item value="WriteEndArray`0" priority="53" />
-      <Item value="WriteEndObject`0" priority="108" />
+      <Item value="WriteStartObject`0" priority="188" />
+      <Item value="WriteRaw`0" priority="471" />
+      <Item value="WritePropertyName`0" priority="323" />
+      <Item value="WriteValue`0" priority="164" />
+      <Item value="WriteStartArray`0" priority="135" />
+      <Item value="WriteEndArray`0" priority="162" />
+      <Item value="WriteEndObject`0" priority="162" />
       <Item value="WriteState" priority="26" />
-      <Item value="WriteStartConstructor`0" priority="26" />
+      <Item value="WriteStartConstructor`0" priority="53" />
+      <Item value="WriteEndConstructor`0" priority="26" />
+      <Item value="WriteRawValue`0" priority="445" />
+      <Item value="WriteEnd`0" priority="26" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:ElasticSearch.Client.QueryDSL.TermQuery">
       <Item value="Field" priority="26" />
@@ -469,25 +484,38 @@
       <Item value="mustNot" priority="55" />
       <Item value="should" priority="26" />
       <Item value="ShouldQueries" priority="26" />
-      <Item value="MinimumNumberShouldMatch" priority="81" />
-      <Item value="Boost" priority="111" />
-      <Item value="Must`0" priority="53" />
+      <Item value="MinimumNumberShouldMatch" priority="108" />
+      <Item value="Boost" priority="138" />
+      <Item value="Must`0" priority="108" />
       <Item value="Should`0" priority="53" />
       <Item value="MustNot`0" priority="26" />
-      <Item value="DisableCoord" priority="83" />
+      <Item value="DisableCoord" priority="110" />
       <Item value="SetBoost`0" priority="27" />
       <Item value="SetMinimumNumberShouldMatch`0" priority="26" />
+      <Item value="MustNotQuery" priority="26" />
+      <Item value="MustQuery" priority="26" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:Newtonsoft.Json.JsonSerializer">
-      <Item value="Serialize`0" priority="53" />
+      <Item value="Serialize`0" priority="80" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:ElasticSearch.Client.EMO.IndexItem">
-      <Item value="Add`0" priority="26" />
+      <Item value="Add`0" priority="80" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:ElasticSearch.Client.QueryDSL.ElasticQuery">
+      <Item value="Query" priority="53" />
+      <Item value="Explain" priority="26" />
+      <Item value="From" priority="26" />
+      <Item value="Size" priority="27" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:ElasticSearch.Client.QueryDSL.BoostingQuery">
+      <Item value="SetNegative`0" priority="26" />
+      <Item value="SetPositive`0" priority="27" />
+      <Item value="SetNegativeBoost`0" priority="26" />
     </ItemStatistics>
   </CompletionStatisticsManager>
   <UnitTestSessions>
     <Session>
-      <Name>Session #1</Name>
+      <Name>Session #3</Name>
       <Elements>
         <UnitTestElement Provider="nUnit" Id="Tests.BulkOperatesTests" type="NUnitTestFixtureElement" Project="60BC8E61-E258-4F5D-8BBB-49E9A87536C7" />
         <UnitTestElement Provider="nUnit" Id="Tests.ClusterSetupTests" type="NUnitTestFixtureElement" Project="60BC8E61-E258-4F5D-8BBB-49E9A87536C7" />
@@ -500,18 +528,19 @@
         <UnitTestElement Provider="nUnit" Id="Tests.TemplateTests" type="NUnitTestFixtureElement" Project="60BC8E61-E258-4F5D-8BBB-49E9A87536C7" />
         <UnitTestElement Provider="nUnit" Id="Tests.Easy2Go.SimpleTests" ParentId="Tests.Easy2Go" type="NUnitTestElement" TypeName="Tests.Easy2Go" MethodName="SimpleTests" Project="60BC8E61-E258-4F5D-8BBB-49E9A87536C7" />
         <UnitTestElement Provider="nUnit" Id="Tests.QueryDSLTests.TestBoolQuery" ParentId="Tests.QueryDSLTests" type="NUnitTestElement" TypeName="Tests.QueryDSLTests" MethodName="TestBoolQuery" Project="60BC8E61-E258-4F5D-8BBB-49E9A87536C7" />
+        <UnitTestElement Provider="nUnit" Id="Tests.QueryDSLTests.TestBoostingQuery" ParentId="Tests.QueryDSLTests" type="NUnitTestElement" TypeName="Tests.QueryDSLTests" MethodName="TestBoostingQuery" Project="60BC8E61-E258-4F5D-8BBB-49E9A87536C7" />
         <UnitTestElement Provider="nUnit" Id="Tests.BulkOperatesTests.TestBulk" ParentId="Tests.BulkOperatesTests" type="NUnitTestElement" TypeName="Tests.BulkOperatesTests" MethodName="TestBulk" Project="60BC8E61-E258-4F5D-8BBB-49E9A87536C7" />
         <UnitTestElement Provider="nUnit" Id="Tests.MappingTests2.TestCreateAnalysisMapping" ParentId="Tests.MappingTests2" type="NUnitTestElement" TypeName="Tests.MappingTests2" MethodName="TestCreateAnalysisMapping" Project="60BC8E61-E258-4F5D-8BBB-49E9A87536C7" />
-        <UnitTestElement Provider="nUnit" Id="Tests.MappingTests2.TestCreateIndex" ParentId="Tests.MappingTests2" type="NUnitTestElement" TypeName="Tests.MappingTests2" MethodName="TestCreateIndex" Project="60BC8E61-E258-4F5D-8BBB-49E9A87536C7" />
         <UnitTestElement Provider="nUnit" Id="Tests.MappingTests.TestCreateIndex" ParentId="Tests.MappingTests" type="NUnitTestElement" TypeName="Tests.MappingTests" MethodName="TestCreateIndex" Project="60BC8E61-E258-4F5D-8BBB-49E9A87536C7" />
+        <UnitTestElement Provider="nUnit" Id="Tests.MappingTests2.TestCreateIndex" ParentId="Tests.MappingTests2" type="NUnitTestElement" TypeName="Tests.MappingTests2" MethodName="TestCreateIndex" Project="60BC8E61-E258-4F5D-8BBB-49E9A87536C7" />
         <UnitTestElement Provider="nUnit" Id="Tests.MappingTests2.TestCreateUser" ParentId="Tests.MappingTests2" type="NUnitTestElement" TypeName="Tests.MappingTests2" MethodName="TestCreateUser" Project="60BC8E61-E258-4F5D-8BBB-49E9A87536C7" />
         <UnitTestElement Provider="nUnit" Id="Tests.MappingTests2.TestCreatingMapping" ParentId="Tests.MappingTests2" type="NUnitTestElement" TypeName="Tests.MappingTests2" MethodName="TestCreatingMapping" Project="60BC8E61-E258-4F5D-8BBB-49E9A87536C7" />
         <UnitTestElement Provider="nUnit" Id="Tests.MappingTests.TestCreatingMapping" ParentId="Tests.MappingTests" type="NUnitTestElement" TypeName="Tests.MappingTests" MethodName="TestCreatingMapping" Project="60BC8E61-E258-4F5D-8BBB-49E9A87536C7" />
         <UnitTestElement Provider="nUnit" Id="Tests.ExceptionTests.TestDoubleDelete" ParentId="Tests.ExceptionTests" type="NUnitTestElement" TypeName="Tests.ExceptionTests" MethodName="TestDoubleDelete" Project="60BC8E61-E258-4F5D-8BBB-49E9A87536C7" />
         <UnitTestElement Provider="nUnit" Id="Tests.ClusterSetupTests.TestDynamicUserClusters" ParentId="Tests.ClusterSetupTests" type="NUnitTestElement" TypeName="Tests.ClusterSetupTests" MethodName="TestDynamicUserClusters" Project="60BC8E61-E258-4F5D-8BBB-49E9A87536C7" />
         <UnitTestElement Provider="nUnit" Id="Tests.ExceptionTests.TestIndexMissingException" ParentId="Tests.ExceptionTests" type="NUnitTestElement" TypeName="Tests.ExceptionTests" MethodName="TestIndexMissingException" Project="60BC8E61-E258-4F5D-8BBB-49E9A87536C7" />
-        <UnitTestElement Provider="nUnit" Id="Tests.MappingTests2.TestModifyIndex" ParentId="Tests.MappingTests2" type="NUnitTestElement" TypeName="Tests.MappingTests2" MethodName="TestModifyIndex" Project="60BC8E61-E258-4F5D-8BBB-49E9A87536C7" />
         <UnitTestElement Provider="nUnit" Id="Tests.MappingTests.TestModifyIndex" ParentId="Tests.MappingTests" type="NUnitTestElement" TypeName="Tests.MappingTests" MethodName="TestModifyIndex" Project="60BC8E61-E258-4F5D-8BBB-49E9A87536C7" />
+        <UnitTestElement Provider="nUnit" Id="Tests.MappingTests2.TestModifyIndex" ParentId="Tests.MappingTests2" type="NUnitTestElement" TypeName="Tests.MappingTests2" MethodName="TestModifyIndex" Project="60BC8E61-E258-4F5D-8BBB-49E9A87536C7" />
         <UnitTestElement Provider="nUnit" Id="Tests.QueryTests.TestQuery" ParentId="Tests.QueryTests" type="NUnitTestElement" TypeName="Tests.QueryTests" MethodName="TestQuery" Project="60BC8E61-E258-4F5D-8BBB-49E9A87536C7" />
         <UnitTestElement Provider="nUnit" Id="Tests.QueryDSLTests.TestQueryString" ParentId="Tests.QueryDSLTests" type="NUnitTestElement" TypeName="Tests.QueryDSLTests" MethodName="TestQueryString" Project="60BC8E61-E258-4F5D-8BBB-49E9A87536C7" />
         <UnitTestElement Provider="nUnit" Id="Tests.MappingTests2.TestTemplate" ParentId="Tests.MappingTests2" type="NUnitTestElement" TypeName="Tests.MappingTests2" MethodName="TestTemplate" Project="60BC8E61-E258-4F5D-8BBB-49E9A87536C7" />
@@ -521,17 +550,6 @@
         <UnitTestElement Provider="nUnit" Id="Tests.QueryDSLTests.TestTermsQuery" ParentId="Tests.QueryDSLTests" type="NUnitTestElement" TypeName="Tests.QueryDSLTests" MethodName="TestTermsQuery" Project="60BC8E61-E258-4F5D-8BBB-49E9A87536C7" />
         <UnitTestElement Provider="nUnit" Id="Tests.QueryDSLTests.TestTermsQueryWithMinuMatch" ParentId="Tests.QueryDSLTests" type="NUnitTestElement" TypeName="Tests.QueryDSLTests" MethodName="TestTermsQueryWithMinuMatch" Project="60BC8E61-E258-4F5D-8BBB-49E9A87536C7" />
         <UnitTestElement Provider="nUnit" Id="Tests.ExceptionTests.TestTypeMissingException" ParentId="Tests.ExceptionTests" type="NUnitTestElement" TypeName="Tests.ExceptionTests" MethodName="TestTypeMissingException" Project="60BC8E61-E258-4F5D-8BBB-49E9A87536C7" />
-        <UnitTestElement Provider="nUnit" Id="Tests.QueryDSLTests.TestWildcardQuery" ParentId="Tests.QueryDSLTests" type="NUnitTestElement" TypeName="Tests.QueryDSLTests" MethodName="TestWildcardQuery" Project="60BC8E61-E258-4F5D-8BBB-49E9A87536C7" />
-      </Elements>
-    </Session>
-    <Session>
-      <Name>Session #3</Name>
-      <Elements>
-        <UnitTestElement Provider="nUnit" Id="Tests.QueryDSLTests" type="NUnitTestFixtureElement" Project="60BC8E61-E258-4F5D-8BBB-49E9A87536C7" />
-        <UnitTestElement Provider="nUnit" Id="Tests.QueryDSLTests.TestBoolQuery" ParentId="Tests.QueryDSLTests" type="NUnitTestElement" TypeName="Tests.QueryDSLTests" MethodName="TestBoolQuery" Project="60BC8E61-E258-4F5D-8BBB-49E9A87536C7" />
-        <UnitTestElement Provider="nUnit" Id="Tests.QueryDSLTests.TestTermQueryWithBoost" ParentId="Tests.QueryDSLTests" type="NUnitTestElement" TypeName="Tests.QueryDSLTests" MethodName="TestTermQueryWithBoost" Project="60BC8E61-E258-4F5D-8BBB-49E9A87536C7" />
-        <UnitTestElement Provider="nUnit" Id="Tests.QueryDSLTests.TestTermsQuery" ParentId="Tests.QueryDSLTests" type="NUnitTestElement" TypeName="Tests.QueryDSLTests" MethodName="TestTermsQuery" Project="60BC8E61-E258-4F5D-8BBB-49E9A87536C7" />
-        <UnitTestElement Provider="nUnit" Id="Tests.QueryDSLTests.TestTermsQueryWithMinuMatch" ParentId="Tests.QueryDSLTests" type="NUnitTestElement" TypeName="Tests.QueryDSLTests" MethodName="TestTermsQueryWithMinuMatch" Project="60BC8E61-E258-4F5D-8BBB-49E9A87536C7" />
         <UnitTestElement Provider="nUnit" Id="Tests.QueryDSLTests.TestWildcardQuery" ParentId="Tests.QueryDSLTests" type="NUnitTestElement" TypeName="Tests.QueryDSLTests" MethodName="TestWildcardQuery" Project="60BC8E61-E258-4F5D-8BBB-49E9A87536C7" />
       </Elements>
     </Session>

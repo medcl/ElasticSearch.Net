@@ -427,6 +427,24 @@ namespace ElasticSearch.Client
 			return GetOperationResult(response);
 		}
 
+		public string GetMapping(string index,params string[] types)
+		{
+			Contract.Assert(!string.IsNullOrEmpty(index));
+//			string url = "/{0}/{1}/_mapping".Fill(index.ToLower());
+
+			string url;
+
+			if (types == null || types.Length == 0)
+			{
+				url = "/{0}/_mapping".Fill(index.ToLower());
+			}
+			else
+			{
+				url = "/{0}/{1}/_query?q=".Fill(index.ToLower(), string.Join(",", types));
+			}
+			var result=_provider.Get(url);
+			return result.GetBody();
+		}
 		#endregion
 
 		#region indexAdmin
@@ -810,7 +828,7 @@ namespace ElasticSearch.Client
 				Contract.Assert(size > 0);
 
 				var elasticQuery = new ElasticQuery(from, size);
-				elasticQuery.AddQuery(query);
+				elasticQuery.SetQuery(query);
 
 				string jsonstr = JsonSerializer.Get(elasticQuery);
 
@@ -828,36 +846,6 @@ namespace ElasticSearch.Client
 				var hitResult = new SearchResult(result.GetBody());
 				return hitResult;
 			}
-
-			//TEST
-			public SearchResult SearchByDSL(string index, string[] type, string queryString, int from, int size)
-			{
-				Contract.Assert(!string.IsNullOrEmpty(index));
-				Contract.Assert(!string.IsNullOrEmpty(queryString));
-				Contract.Assert(from >= 0);
-				Contract.Assert(size > 0);
-
-				var query = new QueryString(queryString);
-
-				var elasticQuery = new ElasticQuery(from, size);
-				elasticQuery.AddQuery(query);
-
-				string jsonstr = JsonSerializer.Get(elasticQuery);
-
-				string url = string.Empty;
-
-				if (type == null || type.Length == 0)
-				{
-					url = "/{0}/_search".Fill(index.ToLower());
-				}
-				else
-				{
-					url = "/{0}/{1}/_search".Fill(index.ToLower(), string.Join(",", type));
-				}
-				RestResponse result = _provider.Post(url, jsonstr);
-				var hitResult = new SearchResult(result.GetBody());
-				return hitResult;
-			} 
 		}
 
 	}

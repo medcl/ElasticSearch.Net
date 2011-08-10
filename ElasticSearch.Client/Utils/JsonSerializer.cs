@@ -36,6 +36,19 @@ namespace ElasticSearch.Client.Utils
 			}
 			
 		}
+		public static T Get<T>(string json,bool pretty) where T : class
+		{
+			try
+			{
+				var t = JsonConvert.DeserializeObject(json, typeof(T), SerializationSettings);
+				return t as T;
+			}
+			catch (System.Exception e)
+			{
+				_logger.Error(e);
+				throw;
+			}	
+		} 
 	}
 	internal delegate string ToJSONDelegate(object value, bool useSingleQuote);
 	}

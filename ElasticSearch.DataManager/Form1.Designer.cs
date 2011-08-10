@@ -52,12 +52,13 @@ namespace ElasticSearchDataManager
 			this.refreshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
 			this.newIndexToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
+			this.searchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.mappingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.nodeTextBox1 = new Aga.Controls.Tree.NodeControls.NodeTextBox();
 			this.richTextBox1 = new System.Windows.Forms.RichTextBox();
 			this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.clearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
-			this.searchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
 			this.splitContainer1.SuspendLayout();
@@ -177,9 +178,10 @@ namespace ElasticSearchDataManager
             this.toolStripMenuItem3,
             this.newIndexToolStripMenuItem,
             this.toolStripMenuItem4,
-            this.searchToolStripMenuItem});
+            this.searchToolStripMenuItem,
+            this.mappingToolStripMenuItem});
 			this.contextMenuStrip1.Name = "contextMenuStrip1";
-			this.contextMenuStrip1.Size = new System.Drawing.Size(153, 182);
+			this.contextMenuStrip1.Size = new System.Drawing.Size(153, 204);
 			// 
 			// 导出数据ToolStripMenuItem
 			// 
@@ -231,6 +233,25 @@ namespace ElasticSearchDataManager
 			this.newIndexToolStripMenuItem.Text = "&NewIndex";
 			this.newIndexToolStripMenuItem.Click += new System.EventHandler(this.newIndexToolStripMenuItem_Click);
 			// 
+			// toolStripMenuItem4
+			// 
+			this.toolStripMenuItem4.Name = "toolStripMenuItem4";
+			this.toolStripMenuItem4.Size = new System.Drawing.Size(149, 6);
+			// 
+			// searchToolStripMenuItem
+			// 
+			this.searchToolStripMenuItem.Name = "searchToolStripMenuItem";
+			this.searchToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.searchToolStripMenuItem.Text = "&Search";
+			this.searchToolStripMenuItem.Click += new System.EventHandler(this.searchToolStripMenuItem_Click);
+			// 
+			// mappingToolStripMenuItem
+			// 
+			this.mappingToolStripMenuItem.Name = "mappingToolStripMenuItem";
+			this.mappingToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.mappingToolStripMenuItem.Text = "Mapping";
+			this.mappingToolStripMenuItem.Click += new System.EventHandler(this.mappingToolStripMenuItem_Click);
+			// 
 			// nodeTextBox1
 			// 
 			this.nodeTextBox1.DataPropertyName = "Text";
@@ -261,18 +282,6 @@ namespace ElasticSearchDataManager
 			this.clearToolStripMenuItem.Size = new System.Drawing.Size(101, 22);
 			this.clearToolStripMenuItem.Text = "&Clear";
 			this.clearToolStripMenuItem.Click += new System.EventHandler(this.clearToolStripMenuItem_Click);
-			// 
-			// toolStripMenuItem4
-			// 
-			this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-			this.toolStripMenuItem4.Size = new System.Drawing.Size(149, 6);
-			// 
-			// searchToolStripMenuItem
-			// 
-			this.searchToolStripMenuItem.Name = "searchToolStripMenuItem";
-			this.searchToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-			this.searchToolStripMenuItem.Text = "&Search";
-			this.searchToolStripMenuItem.Click += new System.EventHandler(this.searchToolStripMenuItem_Click);
 			// 
 			// Form1
 			// 
@@ -323,6 +332,7 @@ namespace ElasticSearchDataManager
 		private ToolStripMenuItem newIndexToolStripMenuItem;
 		private ToolStripSeparator toolStripMenuItem4;
 		private ToolStripMenuItem searchToolStripMenuItem;
+		private ToolStripMenuItem mappingToolStripMenuItem;
 	}
 }
 

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using Newtonsoft.Json;
 
@@ -26,10 +25,11 @@ namespace ElasticSearch.Client.QueryDSL
 
 		public IQuery Query;
 
-		public void AddQuery(IQuery query)
+		public Facets Facets;
+
+		public void SetQuery(IQuery query)
 		{
 			Query = query;
-
 //			//TODO Top Children Query  Nested Query
 //			if(query is QueryString)
 //			{
@@ -64,40 +64,26 @@ namespace ElasticSearch.Client.QueryDSL
 			if(Fields==null){Fields=new List<string>();}
 			Fields.Add(field);
 		}
+
+		public void SetFacets()
+		{
+			
+		}
+
 	}
 
-	public class ElasticQueryConverter:JsonConverter
+	public class Facets
 	{
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+//		public Dictionary<string ,IQuery> 
+
+		public void AddFacet(string facertName,string filterClause)
 		{
-			ElasticQuery term = (ElasticQuery)value;
-			if (term != null)
-			{
-				writer.WriteStartObject();
-				writer.WritePropertyName("query");
-				serializer.Serialize(writer,term.Query);
-
-				writer.WritePropertyName("explain");
-				writer.WriteValue(term.Explain);
-
-				writer.WritePropertyName("from");
-				writer.WriteValue(term.From);
-
-				writer.WritePropertyName("size");
-				writer.WriteValue(term.Size);
-
-				writer.WriteEndObject();
-			}
+			
 		}
+	}
 
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-		{
-			throw new NotImplementedException();
-		}
-
-		public override bool CanConvert(Type objectType)
-		{
-			return typeof(ElasticQuery).IsAssignableFrom(objectType); 
-		}
+	public class Filter
+	{
+		public IQuery Query;
 	}
 }

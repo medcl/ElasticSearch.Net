@@ -34,6 +34,9 @@ namespace ElasticSearch.Client.Mapping
 			_fieldSettings[filedName] = fieldSetting;
 		}
 
+		[JsonIgnore]
+		public Dictionary<string, AbstractFieldSetting> FieldSettings{get { return _fieldSettings; }}
+
 		[JsonProperty("properties")]
 		Dictionary<string, AbstractFieldSetting> _fieldSettings = new Dictionary<string, AbstractFieldSetting>();
 

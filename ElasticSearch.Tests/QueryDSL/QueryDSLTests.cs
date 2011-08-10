@@ -17,14 +17,8 @@ namespace Tests
 		[Test]
 		public void TestQueryString()
 		{
-			//http://localhost:9200/index/type/_search?q=gender:False&sort=id&from=0
-			var result =  client.QueryDSL.SearchByDSL(index, new string[] { "type" }, "gender:true", 0, 5);
-
-			Assert.AreEqual(50, result.GetTotalCount());
-			Assert.AreEqual(5, result.GetHits().Hits.Count);
-
 			var query = new QueryString("gender:true");
-			result = client.QueryDSL.Search(index, new string[] { "type" }, query, 0, 5);
+			var result = client.QueryDSL.Search(index, new string[] { "type" }, query, 0, 5);
 			Assert.AreEqual(50, result.GetTotalCount());
 			Assert.AreEqual(5, result.GetHits().Hits.Count);
 		}
@@ -143,6 +137,26 @@ namespace Tests
 
 		
 		}
+
+		[Test]
+		public void TestBoostingQuery()
+		{
+			var query = new BoostingQuery();
+			query.SetPositive("name","张");
+			query.SetNegative("name","张三");
+			query.SetNegativeBoost(0.2);
+
+			var query2 = new BoolQuery();
+			query2.Must(query);
+			query2.Must(new TermsQuery("name", "张三"));
+
+			var result = client.QueryDSL.Search(index, new string[] { "type" }, query2, 0, 5);
+			foreach (var VARIABLE in result.GetHits().Hits)
+			{
+				Console.WriteLine(VARIABLE.Fields["name"]);
+			}
+		}
+
 
 		[TestFixtureSetUp]
 		public void Init()

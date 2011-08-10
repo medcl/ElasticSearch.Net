@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.Remoting;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -14,6 +15,8 @@ using ElasticSearch.Client;
 using ElasticSearch.Client.Admin;
 using ElasticSearch.Client.Config;
 using ElasticSearch.Client.EMO;
+using ElasticSearch.Client.Mapping;
+using ElasticSearch.Client.Utils;
 using ElasticSearch.DataManager.Dialogs;
 using Newtonsoft.Json.Linq;
 
@@ -94,6 +97,7 @@ namespace ElasticSearchDataManager
 			if (instance != null)
 			{
 				var indices = instance.Status();
+				if(indices==null){throw new ServerException("can't connect to server");}
 				currentCluster = clusterName;
 				currentElasticSearchInstance = instance;
 				var node = new ElasticNode(clusterName);
@@ -306,9 +310,8 @@ namespace ElasticSearchDataManager
 			return fields;
 		}
 
-		void WriteLog(string format, params object[] args)
+		void WriteLog(string message)
 		{
-			var message = string.Format(format + "\r\n", args);
 			CallDelegate callDelegate = delegate
 			{
 				this.richTextBox1.AppendText(message);
@@ -326,7 +329,11 @@ namespace ElasticSearchDataManager
 				this.richTextBox1.SelectionStart = richTextBox1.Text.Length;
 				richTextBox1.Focus();
 			}
-
+		}
+		void WriteLog(string format, params object[] args)
+		{
+			var message = string.Format(format + "\r\n", args);
+			WriteLog(message);
 		}
 
 
@@ -409,6 +416,13 @@ namespace ElasticSearchDataManager
 				{
 					toolStripStatusLabel1.Text = tempNode.IndexStatus.ToString();
 				}
+				else if(treeViewAdv1.SelectedNode.Level==4)
+				{
+					WriteLog("\r\n-----\r\n");
+					WriteLog("\r\n");
+					var type = (treeViewAdv1.SelectedNode.Tag as ElasticNode).Tag as TypeSetting;
+					WriteLog(JsonSerializer.Get(type));
+				}
 			}
 		}
 
@@ -471,6 +485,38 @@ namespace ElasticSearchDataManager
 					jsonView.ShowDialog();
 				}
 			}
+		}
+
+		private void mappingToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			foreach (TreeNodeAdv selectedNode in treeViewAdv1.SelectedNodes)
+			{
+				var elasticNode = (ElasticNode)(selectedNode.Tag);
+				var index = elasticNode.IndexName;
+				WriteLog("Get Index Mapping: {0}", selectedNode.Tag);
+				elasticNode.Nodes.Clear();//NOTE
+				var mapNode = new ElasticNode("mapping");
+				elasticNode.Nodes.Add(mapNode);
+
+				var mappings= currentElasticSearchInstance.GetMapping(index);
+				JObject j = JObject.Parse(mappings);
+				var VARIABLE =j[index];
+				var typeSetting = JsonSerializer.Get<Dictionary<string, TypeSetting>>(VARIABLE.ToString());
+				foreach (var setting in typeSetting)
+				{
+					var item = new ElasticNode(setting.Key);
+					item.Tag = setting.Value;
+					mapNode.Nodes.Add(item);
+					foreach (var typeSetting1 in setting.Value.FieldSettings)
+					{
+						item.Nodes.Add(new ElasticNode(typeSetting1.Key));
+					}
+				}
+			}
+			
+//			WriteLog("Create New Index: {0},{1},{2}", newIndex.IndexName, newIndex.Shard, newIndex.Replica);
+//			var result = currentElasticSearchInstance.CreateIndex(newIndex.IndexName,
+//																	   new IndexSetting(newIndex.Shard, newIndex.Replica));
 		}
 	}
 }

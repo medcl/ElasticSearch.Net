@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -15,6 +16,7 @@ namespace ElasticSearch.Client.QueryDSL
 	/// A query that uses a query parser in order to parse its content.
 	/// </summary>
 	[JsonObject("query_string")]
+	[JsonConverter(typeof(QueryStringConverter))]
 	public class QueryString : IQuery
 	{
 		#region Properties
@@ -263,5 +265,23 @@ namespace ElasticSearch.Client.QueryDSL
 			return this;
 		}
 		
+	}
+
+	public class QueryStringConverter:JsonConverter
+	{
+		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+		{
+			throw new NotImplementedException();
+		}
+
+		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+		{
+			throw new NotImplementedException();
+		}
+
+		public override bool CanConvert(Type objectType)
+		{
+			throw new NotImplementedException();
+		}
 	}
 }
