@@ -421,7 +421,7 @@ namespace ElasticSearchDataManager
 					WriteLog("\r\n-----\r\n");
 					WriteLog("\r\n");
 					var type = (treeViewAdv1.SelectedNode.Tag as ElasticNode).Tag as TypeSetting;
-					WriteLog(JsonSerializer.Get(type));
+					WriteLog(JsonSerializer.Get(type,true));
 				}
 			}
 		}
