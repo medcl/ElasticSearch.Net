@@ -52,7 +52,7 @@ namespace ElasticSearch.Client
 			Contract.Assert(!string.IsNullOrEmpty(jsonData));
 			Contract.Assert(!string.IsNullOrEmpty(indexKey));
 
-			string url = "/{0}/{1}/{2}/".Fill(index.ToLower(), type, indexKey);
+			string url = "/{0}/{1}/{2}/".Fill(index.Trim().ToLower(), type.Trim(), indexKey);
 			RestResponse result = _provider.Post(url, jsonData);
 			return GetOperationResult(result);
 		}

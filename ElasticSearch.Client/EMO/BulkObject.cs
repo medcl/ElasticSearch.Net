@@ -15,15 +15,15 @@ namespace ElasticSearch.Client.EMO
 		public BulkObject(){}
 		public BulkObject(string index,string type,string id,string jsonData)
 		{
-			Index = index;
-			Type = type;
+			Index = index.Trim().ToLower();
+			Type = type.Trim();
 			Id = id;
 			JsonData = jsonData;
 		}
 		public BulkObject(string index, string type, string id, Dictionary<string, object> fields)
 		{
-			Index = index;
-			Type = type;
+			Index = index.Trim().ToLower();
+			Type = type.Trim();
 			Id = id;
 			Fields = fields;
 		}
