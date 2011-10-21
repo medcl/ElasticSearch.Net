@@ -46,6 +46,9 @@
     <Reference Include="log4net">
       <HintPath>..\libs\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="Lucene">
+      <HintPath>..\libs\Lucene.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Contracts">
       <HintPath>..\libs\Microsoft.Contracts.dll</HintPath>
     </Reference>
@@ -110,6 +113,8 @@
     <Compile Include="QueryDSL\Converters\TermsQueryConvert.cs" />
     <Compile Include="QueryDSL\WildcardQuery.cs" />
     <Compile Include="QueryDSL\Converters\WildcardQueryConverter.cs" />
+    <Compile Include="QueryString\Conditional.cs" />
+    <Compile Include="QueryString\ExpressionEx.cs" />
     <Compile Include="Transport\Connection\Connection.cs" />
     <Compile Include="Transport\Connection\ConnectionBuilder.cs" />
     <Compile Include="Transport\Connection\ConnectionPool.cs" />

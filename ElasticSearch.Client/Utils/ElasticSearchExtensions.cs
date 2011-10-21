@@ -10,5 +10,30 @@ namespace ElasticSearch.Client.Utils
 			Contract.Assert(args != null);
 			return string.Format(formatString, args);
 		}
+		
+		/// <summary>
+		///  Resolve Lucene Keyword
+		/// </summary>
+		/// <param name="searchKeyword"></param>
+		/// <returns></returns>
+		public static string ReplaceLuceneKeywordChar(this string searchKeyword)
+		{
+			if(searchKeyword.Length==1)
+			{
+				if (searchKeyword.StartsWith("!"))
+				{
+					searchKeyword = "*";
+				}
+			}
+
+			searchKeyword = searchKeyword.Replace(@"\", @"\\");
+			string strFilter = ":*?~!@^-+'\"\\{}[]()";
+			char[] arrFilterChar = strFilter.ToCharArray();
+			foreach (char c in arrFilterChar)
+			{
+				searchKeyword = searchKeyword.Replace("" + c, @"\" + c);
+			}
+			return searchKeyword;
+		}
 	}
 }

@@ -19,6 +19,8 @@ namespace ElasticSearch.Client.EMO
 		/// </summary>
 		public string IndexKey { get; private set; }
 
+		public string ParentKey { get; protected set; }
+
 		public string IndexType { set; get; }
 
 		/// <summary>
@@ -99,7 +101,7 @@ namespace ElasticSearch.Client.EMO
 			return str;
 		}
 
-		public string ToJson()
+		public string FieldsToJson()
 		{
 			var jsonBuilder = new JsonBuilder();
 			jsonBuilder.startObject();

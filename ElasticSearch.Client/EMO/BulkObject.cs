@@ -12,8 +12,9 @@ namespace ElasticSearch.Client.EMO
 		//TODO: replace dictionary to list
 		public Dictionary<string, object> Fields = new Dictionary<string, object>();
 		public string JsonData;
+		public string ParentId;
 		public BulkObject(){}
-		public BulkObject(string index,string type,string id,string jsonData)
+		public BulkObject(string index,string type,string id,string jsonData,string parentKey=null)
 		{
 			Index = index.Trim().ToLower();
 			Type = type.Trim();
@@ -26,6 +27,7 @@ namespace ElasticSearch.Client.EMO
 			Type = type.Trim();
 			Id = id;
 			Fields = fields;
+			
 		}
 	}
 
@@ -37,8 +39,17 @@ namespace ElasticSearch.Client.EMO
 
 			foreach (var bulkObject in bulkObjects)
 			{
-					stringBuilder.AppendLine("{ \"index\" : { \"_index\" : \"" + bulkObject.Index + "\", \"_type\" : \"" +
-											 bulkObject.Type + "\", \"_id\" : \"" + bulkObject.Id + "\" } }");
+					//stringBuilder.AppendLine("{ \"index\" : { \"_index\" : \"" + bulkObject.Index + "\", \"_type\" : \"" +
+						//					 bulkObject.Type + "\", \"_id\" : \"" + bulkObject.Id + "\" } }");
+					stringBuilder.Append("{ \"index\" : { \"_index\" : \"" + bulkObject.Index.ToLower());
+					if (!string.IsNullOrEmpty(bulkObject.ParentId))
+					{
+						stringBuilder.Append("\", \"_parent\" : \"" + bulkObject.ParentId);
+					}
+					stringBuilder.Append("\", \"_type\" : \"" + bulkObject.Type);
+					stringBuilder.Append("\", \"_id\" : \"" + bulkObject.Id + "\" } }");
+					stringBuilder.Append("\n");    
+
 					if(bulkObject.Fields.Count>0)
 					{
 						stringBuilder.AppendLine(JsonSerializer.Get(bulkObject.Fields));

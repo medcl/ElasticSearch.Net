@@ -8,6 +8,7 @@ using ElasticSearch.Client.Config;
 using ElasticSearch.Client.EMO;
 using ElasticSearch.Client.Mapping;
 using ElasticSearch.Client.QueryDSL;
+using ElasticSearch.Client.QueryString;
 using ElasticSearch.Client.Transport;
 using ElasticSearch.Client.Transport.IDL;
 using ElasticSearch.Client.Utils;
@@ -42,10 +43,30 @@ namespace ElasticSearch.Client
 
 		public OperateResult Index(string index, IndexItem indexItem)
 		{
-			return Index(index, indexItem.IndexType, indexItem.IndexKey, indexItem.ToJson());
+			return Index(index, indexItem.IndexType, indexItem.IndexKey, indexItem.FieldsToJson(),indexItem.ParentKey);
 		}
 
-		public OperateResult Index(string index, string type, string indexKey, string jsonData)
+		public OperateResult Index(string index,IEnumerable<IndexItem> indexItems)
+		{
+			IList<BulkObject> bulkObject = new List<BulkObject>();
+			foreach (var indexItem in indexItems)
+			{
+				bulkObject.Add(new BulkObject(index, indexItem.IndexType, indexItem.IndexKey, indexItem.FieldsToJson(), indexItem.ParentKey));
+			}
+			return Bulk(bulkObject);
+		}
+
+		public OperateResult Index(string index,string type,string indexKey,Dictionary<string,object> dictionary)
+		{
+			Contract.Assert(!string.IsNullOrEmpty(index));
+			Contract.Assert(!string.IsNullOrEmpty(type));
+			Contract.Assert(!string.IsNullOrEmpty(indexKey));
+			var jsonData = JsonSerializer.Get(dictionary);
+			Contract.Assert(!string.IsNullOrEmpty(jsonData));
+
+			return Index(index, type, indexKey, jsonData);
+		}
+		public OperateResult Index(string index, string type, string indexKey, string jsonData,string parentKey=null)
 		{
 			Contract.Assert(!string.IsNullOrEmpty(index));
 			Contract.Assert(!string.IsNullOrEmpty(type));
@@ -53,6 +74,11 @@ namespace ElasticSearch.Client
 			Contract.Assert(!string.IsNullOrEmpty(indexKey));
 
 			string url = "/{0}/{1}/{2}/".Fill(index.Trim().ToLower(), type.Trim(), indexKey);
+			//set parent-child relation
+			if (!string.IsNullOrEmpty(parentKey))
+			{
+				url = url + string.Format("?parent={0}", parentKey);
+			}
 			RestResponse result = _provider.Post(url, jsonData);
 			return GetOperationResult(result);
 		}
@@ -72,13 +98,18 @@ namespace ElasticSearch.Client
 
 		#endregion
 
-		public Document Get(string index, string type, string indexKey)
+		public Document Get(string index, string type, string indexKey,string routing=null)
 		{
 			Contract.Assert(!string.IsNullOrEmpty(index));
 			Contract.Assert(!string.IsNullOrEmpty(type));
 			Contract.Assert(!string.IsNullOrEmpty(indexKey));
 
 			string url = "/{0}/{1}/{2}".Fill(index.ToLower(), type, indexKey);
+			if (!string.IsNullOrEmpty(routing))
+			{
+				url = url + string.Format("?routing={0}", routing);
+			}
+
 			RestResponse result = _provider.Get(url);
 
 			if (result.Body != null)
@@ -318,7 +349,11 @@ namespace ElasticSearch.Client
 			var hitResult = new SearchResult(result.GetBody());
 			return hitResult.GetHitIds();
 		}
-
+		
+		public List<string>  SearchIds(string index,string[] type,Conditional conditional,string sortString,int from,int size)
+		{
+			return SearchIds(index, type, conditional.Query, sortString, from, size);
+		}
 
 		public SearchResult Search(string index, string type, string queryString, int size)
 		{
@@ -426,6 +461,38 @@ namespace ElasticSearch.Client
 			}
 			return GetOperationResult(response);
 		}
+
+		public OperateResult PutMapping(string index, string type,string typeJson)
+		{
+			Contract.Assert(!string.IsNullOrEmpty(index));
+			Contract.Assert(typeJson != null);
+			string url = "/{0}/{1}/_mapping".Fill(index.ToLower(), type);
+			
+			RestResponse response = _provider.Put(url, typeJson);
+
+			if (response != null)
+			{
+				try
+				{
+					if (response.Status == Transport.IDL.Status.INTERNAL_SERVER_ERROR ||
+						response.Status == Transport.IDL.Status.BAD_REQUEST)
+					{
+						//auto create index
+						CreateIndex(index, new IndexSetting(5, 1));
+						//try again
+						response = _provider.Put(url, typeJson);
+
+						return GetOperationResult(response);
+					}
+				}
+				catch (System.Exception e)
+				{
+					_logger.Error(e);
+				}
+			}
+			return GetOperationResult(response);
+		}
+
 
 		public string GetMapping(string index,params string[] types)
 		{
@@ -846,6 +913,26 @@ namespace ElasticSearch.Client
 				var hitResult = new SearchResult(result.GetBody());
 				return hitResult;
 			}
+		}
+		
+		public SearchResult Search(string index,string[] type, Conditional conditional,int from,int size)
+		{
+			return Search(index, type, conditional.Query, from, size);
+		}
+
+		public SearchResult Search(string index, string[] type, ExpressionEx expression, int from, int size)
+		{
+			return Search(index, type, QueryString.Conditional.Get(expression), from, size);
+		}
+
+		public int Count(string index,string type,Conditional conditional)
+		{
+			return Count(index, type, conditional.Query);
+		}
+
+		public int Count(string index,string type,ExpressionEx expression)
+		{
+			return Count(index, type, Conditional.Get(expression).Query);
 		}
 
 		public string Analyze(string indexName,string analyzer, string text, string format)
