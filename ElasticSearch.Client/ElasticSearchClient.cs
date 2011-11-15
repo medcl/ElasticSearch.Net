@@ -56,7 +56,7 @@ namespace ElasticSearch.Client
 			return Bulk(bulkObject);
 		}
 
-		public OperateResult Index(string index,string type,string indexKey,Dictionary<string,object> dictionary)
+		public OperateResult Index(string index,string type,string indexKey,Dictionary<string,object> dictionary,string parentKey=null)
 		{
 			Contract.Assert(!string.IsNullOrEmpty(index));
 			Contract.Assert(!string.IsNullOrEmpty(type));
@@ -64,7 +64,7 @@ namespace ElasticSearch.Client
 			var jsonData = JsonSerializer.Get(dictionary);
 			Contract.Assert(!string.IsNullOrEmpty(jsonData));
 
-			return Index(index, type, indexKey, jsonData);
+			return Index(index, type, indexKey, jsonData,parentKey);
 		}
 		public OperateResult Index(string index, string type, string indexKey, string jsonData,string parentKey=null)
 		{
@@ -887,7 +887,7 @@ namespace ElasticSearch.Client
 				_provider = provider;
 			}
 
-			public SearchResult Search(string index,string[] type,IQuery query,int from,int size)
+			public SearchResult Search(string index,string[] type,IQuery query,int from,int size,string[] fields=null)
 			{
 				Contract.Assert(!string.IsNullOrEmpty(index));
 				Contract.Assert(query!=null);
@@ -897,7 +897,9 @@ namespace ElasticSearch.Client
 				var elasticQuery = new ElasticQuery(from, size);
 				elasticQuery.SetQuery(query);
 
-				string jsonstr = JsonSerializer.Get(elasticQuery);
+			    if (fields != null) elasticQuery.AddFields(fields);
+
+			    string jsonstr = JsonSerializer.Get(elasticQuery);
 
 				string url = string.Empty;
 

@@ -11,19 +11,26 @@ namespace ElasticSearch.Client.QueryDSL
 			if (term != null)
 			{
 				writer.WriteStartObject();
+
+                writer.WriteRaw("\"from\": " + term.From);
+                writer.WriteRaw(",\"size\": " + term.Size+",");
 				writer.WritePropertyName("query");
 				serializer.Serialize(writer,term.Query);
+               
+                if(term.Fields!=null&&term.Fields.Count>0)
+                {
+                    writer.WritePropertyName("fields");
+                    writer.WriteStartArray();
+                    foreach (var field in term.Fields)
+                    {
+                        writer.WriteRawValue("\"" + field + "\"");
+                    }
+                    writer.WriteEndArray();
+                }
 
-				writer.WritePropertyName("explain");
-				writer.WriteValue(term.Explain);
+                writer.WriteRaw(",\"explain\": " + term.Explain.ToString().ToLower());
 
-				writer.WritePropertyName("from");
-				writer.WriteValue(term.From);
-
-				writer.WritePropertyName("size");
-				writer.WriteValue(term.Size);
-
-				writer.WriteEndObject();
+                writer.WriteEndObject();
 			}
 		}
 

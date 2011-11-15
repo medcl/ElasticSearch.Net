@@ -98,6 +98,8 @@
     <Compile Include="QueryDSL\BooleanType.cs" />
     <Compile Include="QueryDSL\BoolQuery.cs" />
     <Compile Include="QueryDSL\BoostingQuery.cs" />
+    <Compile Include="QueryDSL\ConstantScoreQuery.cs" />
+    <Compile Include="QueryDSL\Converters\ConstantScoreQueryConvert.cs" />
     <Compile Include="QueryDSL\Converters\BoostingQueryConvert.cs" />
     <Compile Include="QueryDSL\Converters\BoolQueryConverter.cs" />
     <Compile Include="QueryDSL\ElasticQuery.cs" />
@@ -105,8 +107,13 @@
     <Compile Include="QueryDSL\Field.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="QueryDSL\Converters\FilteredQueryConvert.cs" />
     <Compile Include="QueryDSL\IQuery.cs" />
+    <Compile Include="QueryDSL\Converters\QueryFilterConvert.cs" />
     <Compile Include="QueryDSL\QueryString.cs" />
+    <Compile Include="QueryDSL\Converters\QueryStringConverter.cs" />
+    <Compile Include="QueryDSL\Converters\TermFilterConvert.cs" />
+    <Compile Include="QueryDSL\TermFilter.cs" />
     <Compile Include="QueryDSL\TermQuery.cs" />
     <Compile Include="QueryDSL\Converters\TermQueryConvert.cs" />
     <Compile Include="QueryDSL\TermsQuery.cs" />

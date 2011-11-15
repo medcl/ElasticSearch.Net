@@ -70,6 +70,11 @@ namespace ElasticSearch.Client.QueryDSL
 			
 		}
 
+	    public void AddFields(string[] fields)
+	    {
+            if (Fields == null) { Fields = new List<string>(); }
+            Fields.AddRange(fields);
+	    }
 	}
 
 	public class Facets

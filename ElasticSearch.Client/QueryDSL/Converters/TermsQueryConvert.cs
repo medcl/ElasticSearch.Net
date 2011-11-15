@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 using Newtonsoft.Json;
 
 namespace ElasticSearch.Client.QueryDSL
@@ -11,19 +12,25 @@ namespace ElasticSearch.Client.QueryDSL
 			//{    "terms" : {        "tags" : [ "blue", "pill" ],        "minimum_match" : 1    }}
 			if (term != null)
 			{
-				writer.WriteRaw("{terms:");
-				writer.WriteStartObject();
-				writer.WritePropertyName(term.Field);
-				writer.WriteStartArray();
+
+			    var stringBuilder = new StringBuilder();
+
+                stringBuilder.Append("{    \"terms\" : {        \"" + term.Field + "\" : [");
+
+			    var i = 0;
 				foreach(var t in term.Values)
 				{
-					writer.WriteValue(t);
+                    if(i>0)
+                    {
+                        stringBuilder.Append(",");
+                    }
+                    stringBuilder.Append("\""+t+"\"");
+				    i++;
 				}
-				writer.WriteEndArray();
-				writer.WritePropertyName("minimum_match");
-				writer.WriteValue(term.MinimumMatch);
-				writer.WriteEndObject();
-				writer.WriteRaw("}");
+
+                stringBuilder.Append("],  \"minimum_match\" : "+term.MinimumMatch+"    }}");
+
+                writer.WriteRaw(stringBuilder.ToString());
 			}
 
 		}
