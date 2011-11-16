@@ -903,7 +903,7 @@ namespace ElasticSearch.Client
 
 				string url = string.Empty;
 
-				if (type == null || type.Length == 0)
+                if (type == null|| type.Length == 0)
 				{
 					url = "/{0}/_search".Fill(index.ToLower());
 				}

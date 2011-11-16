@@ -103,6 +103,11 @@ namespace ElasticSearch.Client.EMO
 
 		public string FieldsToJson()
 		{
+            if (Fields == null || Fields.Count == 0)
+            {
+                throw new ArgumentException("fields cant't be null or empty");
+            }
+
 			var jsonBuilder = new JsonBuilder();
 			jsonBuilder.startObject();
 			foreach (var variable in Fields)

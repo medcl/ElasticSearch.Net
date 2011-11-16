@@ -483,6 +483,45 @@ namespace Tests
             var result = client.QueryDSL.Search(index, new string[] { "type" }, constantScoreQuery, 0, 5);
             Assert.AreEqual(3, result.GetTotalCount());
             Assert.AreEqual(3, result.GetHits().Hits.Count);
+
+            constantScoreQuery = new ConstantScoreQuery(new IdsFilter("type", "1", "2", "3","1121"));
+            result = client.QueryDSL.Search(index, new string[] { "type" }, constantScoreQuery, 0, 5);
+            Assert.AreEqual(3, result.GetTotalCount());
+            Assert.AreEqual(3, result.GetHits().Hits.Count);
+
+
+           var item = new IndexItem("type1", "uk111");
+           item.Add("iid", 1);
+            client.Index(index, item);
+            item = new IndexItem("type1", "dk222");
+            item.Add("iid", 2);
+            client.Index(index, item);
+
+            constantScoreQuery = new ConstantScoreQuery(new IdsFilter("type", "1", "2", "3", "1121", "uk111"));
+            result = client.QueryDSL.Search(index, new string[] { "type" }, constantScoreQuery, 0, 5);
+            Assert.AreEqual(3, result.GetTotalCount());
+            Assert.AreEqual(3, result.GetHits().Hits.Count);
+
+
+            //ids can't query corss type
+            constantScoreQuery = new ConstantScoreQuery(new IdsFilter(new string[] { "type", "type1" }, "1", "2", "3", "1121", "uk111"));
+            result = client.QueryDSL.Search(index, new string[] { "type" }, constantScoreQuery, 0, 5);
+            Assert.AreEqual(3, result.GetTotalCount());
+            Assert.AreEqual(3, result.GetHits().Hits.Count);
+
+            //waiting for refresh
+            Thread.Sleep(1000);
+
+            constantScoreQuery = new ConstantScoreQuery(new IdsFilter(new string[] { "type", "type1" }, "1", "2", "3", "1121", "uk111"));
+            result = client.QueryDSL.Search(index, new string[] {  }, constantScoreQuery, 0, 5);
+            Assert.AreEqual(4, result.GetTotalCount());
+            Assert.AreEqual(4, result.GetHits().Hits.Count);
+
+
+            constantScoreQuery = new ConstantScoreQuery(new IdsFilter(new string[] { "type", "type1" }, "1", "2", "3", "1121", "uk111", "dk222"));
+            result = client.QueryDSL.Search(index, new string[] {}, constantScoreQuery, 0, 5);
+            Assert.AreEqual(5, result.GetTotalCount());
+            Assert.AreEqual(5, result.GetHits().Hits.Count);
         }
 
 	    #endregion

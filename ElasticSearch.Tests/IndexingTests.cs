@@ -7,7 +7,7 @@ namespace Tests
 	[TestFixture]
 	public class IndexingTests
 	{
-		 [Test]
+		 [Test,Ignore]
 		public void TestIndexingWithParentId()
 		 {
 
