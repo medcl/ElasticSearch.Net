@@ -16,12 +16,12 @@ namespace ElasticSearch.DataManager.Dialogs
 			InitializeComponent();
 		}
 
-		private void button1_Click(object sender, EventArgs e)
+		protected virtual void button1_Click(object sender, EventArgs e)
 		{
 			DialogResult = DialogResult.OK;
 		}
 
-		private void button2_Click(object sender, EventArgs e)
+		protected virtual void button2_Click(object sender, EventArgs e)
 		{
 			DialogResult = DialogResult.Cancel;
 		}

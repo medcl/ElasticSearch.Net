@@ -33,8 +33,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Lucene.Net">
-      <HintPath>..\libs\Lucene.Net.dll</HintPath>
+    <Reference Include="Lucene.Net.2.9">
+      <HintPath>..\libs\Lucene.Net.2.9.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=736440c9b414ea16, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -54,8 +54,10 @@
   <ItemGroup>
     <Compile Include="BulkOperatesTests.cs" />
     <Compile Include="ClusterSetupTests.cs" />
+    <Compile Include="Conditional\QueryByConditionalTests.cs" />
     <Compile Include="Easy2Go.cs" />
     <Compile Include="ExceptionTests.cs" />
+    <Compile Include="IndexingTests.cs" />
     <Compile Include="MappingTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueryDSL\QueryDSLTests.cs" />
@@ -68,7 +70,6 @@
       <Name>ElasticSearch.Client</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

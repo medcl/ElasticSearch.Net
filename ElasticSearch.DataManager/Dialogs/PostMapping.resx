@@ -117,10 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="contextMenuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
-  <data name="textBox1.Text" xml:space="preserve">
-    <value>8月8日夜间，各地铁路局对外发布消息，将于当天起将目前实行火车票预售期从10天改为5天。铁路内部人士透露，此举是为即将进行的全国铁路线路运行图调整做准备。令人意外的是，此次调图，距离上一次调整仅仅过了两个月。“通常调图间隔在半年以上。”一位不愿透露姓名的铁路局工作人员向记者表示，此次调图的原因与“7·23”甬温线动车追尾特大交通事故有关。铁道部知情人士还告诉本报记者，出于安全的考虑，中国高铁将从9月左右全面降速，除了京沪、津京和沪杭三条高铁线以外，其他高铁或客运专线将全部降回设计时速。相应的，整个铁路系统，尤其是8000多公里的客运专线将面临运营大挑战。</value>
-  </data>
 </root>

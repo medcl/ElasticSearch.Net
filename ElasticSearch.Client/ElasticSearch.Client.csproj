@@ -46,8 +46,8 @@
     <Reference Include="log4net">
       <HintPath>..\libs\log4net.dll</HintPath>
     </Reference>
-    <Reference Include="Lucene">
-      <HintPath>..\libs\Lucene.dll</HintPath>
+    <Reference Include="Lucene.Net.2.9">
+      <HintPath>..\libs\Lucene.Net.2.9.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Contracts">
       <HintPath>..\libs\Microsoft.Contracts.dll</HintPath>
@@ -96,9 +96,15 @@
     <Compile Include="Mapping\TypeSetting.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueryDSL\BooleanType.cs" />
-    <Compile Include="QueryDSL\BoolQuery.cs" />
-    <Compile Include="QueryDSL\BoostingQuery.cs" />
-    <Compile Include="QueryDSL\ConstantScoreQuery.cs" />
+    <Compile Include="QueryDSL\Converters\AndFilterConvert.cs" />
+    <Compile Include="QueryDSL\Filter\AndFilter.cs" />
+    <Compile Include="QueryDSL\Converters\BoolFilterConvert.cs" />
+    <Compile Include="QueryDSL\Filter\BoolFilter.cs" />
+    <Compile Include="QueryDSL\Filter\ExistsFilter.cs" />
+    <Compile Include="QueryDSL\Converters\ExistsFilterConvert.cs" />
+    <Compile Include="QueryDSL\Query\BoolQuery.cs" />
+    <Compile Include="QueryDSL\Query\BoostingQuery.cs" />
+    <Compile Include="QueryDSL\Query\ConstantScoreQuery.cs" />
     <Compile Include="QueryDSL\Converters\ConstantScoreQueryConvert.cs" />
     <Compile Include="QueryDSL\Converters\BoostingQueryConvert.cs" />
     <Compile Include="QueryDSL\Converters\BoolQueryConverter.cs" />
@@ -108,17 +114,19 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="QueryDSL\Converters\FilteredQueryConvert.cs" />
+    <Compile Include="QueryDSL\Query\FilteredQuery.cs" />
     <Compile Include="QueryDSL\IQuery.cs" />
     <Compile Include="QueryDSL\Converters\QueryFilterConvert.cs" />
-    <Compile Include="QueryDSL\QueryString.cs" />
+    <Compile Include="QueryDSL\Filter\QueryFilter.cs" />
+    <Compile Include="QueryDSL\Query\QueryString.cs" />
     <Compile Include="QueryDSL\Converters\QueryStringConverter.cs" />
     <Compile Include="QueryDSL\Converters\TermFilterConvert.cs" />
-    <Compile Include="QueryDSL\TermFilter.cs" />
-    <Compile Include="QueryDSL\TermQuery.cs" />
+    <Compile Include="QueryDSL\Filter\TermFilter.cs" />
+    <Compile Include="QueryDSL\Query\TermQuery.cs" />
     <Compile Include="QueryDSL\Converters\TermQueryConvert.cs" />
-    <Compile Include="QueryDSL\TermsQuery.cs" />
+    <Compile Include="QueryDSL\Query\TermsQuery.cs" />
     <Compile Include="QueryDSL\Converters\TermsQueryConvert.cs" />
-    <Compile Include="QueryDSL\WildcardQuery.cs" />
+    <Compile Include="QueryDSL\Query\WildcardQuery.cs" />
     <Compile Include="QueryDSL\Converters\WildcardQueryConverter.cs" />
     <Compile Include="QueryString\Conditional.cs" />
     <Compile Include="QueryString\ExpressionEx.cs" />

@@ -66,6 +66,9 @@
     <Compile Include="Dialogs\AnalyzeTest.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Dialogs\BulkIndex.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Dialogs\Connect.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -87,11 +90,17 @@
     <Compile Include="Dialogs\JsonView.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Dialogs\ModifyShard.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Dialogs\NewIndex.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Dialogs\NewIndex.Designer.cs">
       <DependentUpon>NewIndex.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\PostMapping.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Dialogs\Search.cs">
       <SubType>Form</SubType>
@@ -107,6 +116,9 @@
     <EmbeddedResource Include="Dialogs\AnalyzeTest.resx">
       <DependentUpon>AnalyzeTest.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\BulkIndex.resx">
+      <DependentUpon>BulkIndex.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\Connect.resx">
       <DependentUpon>Connect.cs</DependentUpon>
     </EmbeddedResource>
@@ -119,8 +131,14 @@
     <EmbeddedResource Include="Dialogs\JsonView.resx">
       <DependentUpon>JsonView.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\ModifyShard.resx">
+      <DependentUpon>ModifyShard.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\NewIndex.resx">
       <DependentUpon>NewIndex.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\PostMapping.resx">
+      <DependentUpon>PostMapping.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\Search.resx">
       <DependentUpon>Search.cs</DependentUpon>

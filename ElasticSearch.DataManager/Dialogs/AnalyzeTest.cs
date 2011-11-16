@@ -18,6 +18,9 @@ namespace ElasticSearch.DataManager.Dialogs
 		private Client.ElasticSearchClient currentElasticSearchInstance;
 		private System.Windows.Forms.Button button3;
 		private System.Windows.Forms.CheckBox checkBox2;
+		private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+		private System.ComponentModel.IContainer components;
+		private System.Windows.Forms.ToolStripMenuItem clearToolStripMenuItem;
 
 		private string indexName;
 		public AnalyzeTest(ElasticSearchClient currentElasticSearchInstance, string indexName)
@@ -30,6 +33,7 @@ namespace ElasticSearch.DataManager.Dialogs
 
 		private void InitializeComponent()
 		{
+			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AnalyzeTest));
 			this.comboBox1 = new System.Windows.Forms.ComboBox();
 			this.label1 = new System.Windows.Forms.Label();
@@ -40,7 +44,10 @@ namespace ElasticSearch.DataManager.Dialogs
 			this.checkBox1 = new System.Windows.Forms.CheckBox();
 			this.button3 = new System.Windows.Forms.Button();
 			this.checkBox2 = new System.Windows.Forms.CheckBox();
+			this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+			this.clearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.panel1.SuspendLayout();
+			this.contextMenuStrip1.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// button1
@@ -86,6 +93,7 @@ namespace ElasticSearch.DataManager.Dialogs
 			// 
 			// textBox1
 			// 
+			this.textBox1.ContextMenuStrip = this.contextMenuStrip1;
 			this.textBox1.Location = new System.Drawing.Point(112, 49);
 			this.textBox1.Multiline = true;
 			this.textBox1.Name = "textBox1";
@@ -151,14 +159,32 @@ namespace ElasticSearch.DataManager.Dialogs
 			this.checkBox2.Text = "OnlyToken";
 			this.checkBox2.UseVisualStyleBackColor = true;
 			// 
+			// contextMenuStrip1
+			// 
+			this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.clearToolStripMenuItem});
+			this.contextMenuStrip1.Name = "contextMenuStrip1";
+			this.contextMenuStrip1.Size = new System.Drawing.Size(153, 48);
+			// 
+			// clearToolStripMenuItem
+			// 
+			this.clearToolStripMenuItem.Name = "clearToolStripMenuItem";
+			this.clearToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.clearToolStripMenuItem.Text = "Clear";
+			this.clearToolStripMenuItem.Click += new System.EventHandler(this.clearToolStripMenuItem_Click);
+			// 
 			// AnalyzeTest
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.ClientSize = new System.Drawing.Size(513, 366);
 			this.Name = "AnalyzeTest";
 			this.Text = "AnalyzeTest";
+			this.Controls.SetChildIndex(this.button2, 0);
+			this.Controls.SetChildIndex(this.panel1, 0);
+			this.Controls.SetChildIndex(this.button1, 0);
 			this.panel1.ResumeLayout(false);
 			this.panel1.PerformLayout();
+			this.contextMenuStrip1.ResumeLayout(false);
 			this.ResumeLayout(false);
 
 		}
@@ -189,6 +215,11 @@ namespace ElasticSearch.DataManager.Dialogs
 			{
 				textBox2.Text = result;
 			}
+		}
+
+		private void clearToolStripMenuItem_Click(object sender, System.EventArgs e)
+		{
+			textBox1.Clear();
 		}
 	}
 }

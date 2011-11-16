@@ -10,7 +10,7 @@ namespace Tests
 		[Test,Ignore]
 		public void TestQuery()
 		{
-			Lucene.Net.Search.BooleanQuery booleanQuery=new BooleanQuery();
+			BooleanQuery booleanQuery=new BooleanQuery();
 			booleanQuery.Add(new TermQuery(new Term("name","medcl")),BooleanClause.Occur.MUST);
 			booleanQuery.Add(new TermQuery(new Term("age","25")),BooleanClause.Occur.MUST);
 

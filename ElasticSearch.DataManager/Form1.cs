@@ -383,7 +383,7 @@ namespace ElasticSearchDataManager
 				var srcClient = new ElasticSearchClient(connect.Host, connect.Port, connect.Type);
 				var cluster = string.Format("{0}:{1}", connect.Host, connect.Port);
 				InitTree(cluster, srcClient);
-				DuplicateCheck();
+				//DuplicateCheck();
 			}
 		}
 		JsonView 	jsonView = new JsonView();
@@ -527,5 +527,40 @@ namespace ElasticSearchDataManager
 
 
 		}
+
+		private void bulkIndexToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			var tempNode = (ElasticNode)treeViewAdv1.SelectedNode.Tag;
+			if (tempNode != null)
+			{
+				BulkIndex analyzeTest = new BulkIndex(currentElasticSearchInstance, tempNode.IndexName);
+				analyzeTest.ShowDialog();
+			}
+		}
+
+		private void createTypeMappingToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			var tempNode = (ElasticNode)treeViewAdv1.SelectedNode.Tag;
+			if (tempNode != null)
+			{
+				PostMapping analyzeTest = new PostMapping(currentElasticSearchInstance, tempNode.IndexName,string.Empty);
+				analyzeTest.ShowDialog();
+			}
+		}
+
+        private void modifyShardToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var tempNode = (ElasticNode)treeViewAdv1.SelectedNode.Tag;
+            if (tempNode != null)
+            {
+                ModifyShard modifyShard=new ModifyShard();
+                if(modifyShard.ShowDialog()==DialogResult.OK)
+                {
+                    currentElasticSearchInstance.ModifyIndex(tempNode.IndexName, new IndexSetting(5,modifyShard.Replica));
+                    WriteLog("Index:{0} now have {1} shards".Fill(tempNode.IndexName,modifyShard.Replica));
+                }
+
+            }
+        }
 	}
 }
