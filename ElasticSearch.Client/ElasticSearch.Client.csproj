@@ -65,7 +65,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Admin\ClusterState.cs" />
+    <Compile Include="EMO\ClusterState.cs" />
     <Compile Include="Config\ClusterDefinition.cs" />
     <Compile Include="Config\ConnectionPoolConfig.cs" />
     <Compile Include="Config\TransportType.cs" />
@@ -110,7 +110,7 @@
     <Compile Include="QueryDSL\Converters\BoolQueryConverter.cs" />
     <Compile Include="QueryDSL\ElasticQuery.cs" />
     <Compile Include="QueryDSL\Converters\ElasticQueryConverter.cs" />
-    <Compile Include="QueryDSL\Field.cs">
+    <Compile Include="EMO\Field.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="QueryDSL\Converters\FilteredQueryConvert.cs" />
@@ -118,6 +118,8 @@
     <Compile Include="QueryDSL\IQuery.cs" />
     <Compile Include="QueryDSL\Converters\QueryFilterConvert.cs" />
     <Compile Include="QueryDSL\Filter\QueryFilter.cs" />
+    <Compile Include="QueryDSL\Filter\IdsFilter.cs" />
+    <Compile Include="QueryDSL\Converters\IdsFilterConvert.cs" />
     <Compile Include="QueryDSL\Query\QueryString.cs" />
     <Compile Include="QueryDSL\Converters\QueryStringConverter.cs" />
     <Compile Include="QueryDSL\Converters\TermFilterConvert.cs" />

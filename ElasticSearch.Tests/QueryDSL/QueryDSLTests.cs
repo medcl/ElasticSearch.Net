@@ -476,6 +476,15 @@ namespace Tests
             Assert.AreEqual(5, result.GetHits().Hits.Count);
         }
 
+        [Test]
+        public void TestIdsFilter()
+        {
+            var constantScoreQuery = new ConstantScoreQuery(new IdsFilter("type","1","2","3"));
+            var result = client.QueryDSL.Search(index, new string[] { "type" }, constantScoreQuery, 0, 5);
+            Assert.AreEqual(3, result.GetTotalCount());
+            Assert.AreEqual(3, result.GetHits().Hits.Count);
+        }
+
 	    #endregion
 
 

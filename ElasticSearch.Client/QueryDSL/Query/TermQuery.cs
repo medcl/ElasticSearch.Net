@@ -32,7 +32,4 @@ namespace ElasticSearch.Client.QueryDSL
 	
 
     }
-
-
-
 }
