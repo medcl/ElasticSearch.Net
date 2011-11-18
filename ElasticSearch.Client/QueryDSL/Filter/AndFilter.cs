@@ -7,7 +7,7 @@ namespace ElasticSearch.Client.QueryDSL
     /// A filter that matches documents using AND boolean operator on other queries. This filter is more performant then bool filter. Can be placed within queries that accept a filter.
     /// </summary>
     [JsonObject("and")]
-    [JsonConverter(typeof(AndFilterConvert))]
+    [JsonConverter(typeof(AndFilterConverter))]
     public class AndFilter:IFilter
     {
         /// <summary>

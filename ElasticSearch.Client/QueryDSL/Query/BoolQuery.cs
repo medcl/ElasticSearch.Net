@@ -9,7 +9,7 @@ namespace ElasticSearch.Client.QueryDSL
 	/// The bool query also supports disable_coord parameter (defaults to false).
 	/// </summary>
 	[JsonObject("bool")]
-	[JsonConverter(typeof(BoolQueryConverter))]
+	[JsonConverter(typeof(BoolQueryConverterer))]
 	public class BoolQuery:IQuery
 	{
 		internal List<IQuery> ShouldQueries;

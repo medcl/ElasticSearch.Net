@@ -6,7 +6,7 @@ namespace ElasticSearch.Client.QueryDSL
     /// Wraps any query to be used as a filter. Can be placed within queries that accept a filter.
     /// </summary>
     [JsonObject("query")]
-    [JsonConverter(typeof(QueryFilterConvert))]
+    [JsonConverter(typeof(QueryFilterConverter))]
     public class QueryFilter : IFilter
     {
         public bool Cache { get; set; }

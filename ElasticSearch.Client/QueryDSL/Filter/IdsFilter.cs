@@ -8,7 +8,7 @@ namespace ElasticSearch.Client.QueryDSL
     ///The type is optional and can be omitted, and can also accept an array of values.
     /// </summary>
     [JsonObject("ids")]
-    [JsonConverter(typeof(IdsFilterConvert))]
+    [JsonConverter(typeof(IdsFilterConverter))]
     public class IdsFilter:IFilter
     {
         public List<string> Types;

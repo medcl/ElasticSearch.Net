@@ -8,7 +8,7 @@ namespace ElasticSearch.Client.QueryDSL
 	/// Matches documents that have fields that contain a term (not analyzed). The term query maps to Lucene TermQuery. 
 	/// </summary>
 	[JsonObject("term")]
-	[JsonConverter(typeof(TermQueryConvert))]
+	[JsonConverter(typeof(TermQueryConverter))]
 	public class TermQuery:IQuery
 	{
 		public string Field { get; set; }

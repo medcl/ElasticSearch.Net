@@ -6,7 +6,7 @@ namespace ElasticSearch.Client.QueryDSL
     /// Filters documents that exists within a range from a specific point:
     /// </summary>
     [JsonObject("geo_distance_range")]
-    [JsonConverter(typeof(GeoDistanceRangeFilterConvert))]
+    [JsonConverter(typeof(GeoDistanceRangeFilterConverter))]
     public class GeoDistanceRangeFilter:IFilter
     {
         //TODO

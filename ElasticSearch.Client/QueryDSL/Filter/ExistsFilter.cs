@@ -7,7 +7,7 @@ namespace ElasticSearch.Client.QueryDSL
     /// The result of the filter is always cached.
     /// </summary>
     [JsonObject("exists")]
-    [JsonConverter(typeof(ExistsFilterConvert))]
+    [JsonConverter(typeof(ExistsFilterConverter))]
     public class ExistsFilter:IFilter
     {
         public string Filed;

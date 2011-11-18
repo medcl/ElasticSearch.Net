@@ -22,6 +22,26 @@ namespace ElasticSearch.Client.Mapping
         }
     }
 
+
+    [JsonObject("_timestamp")]
+    public class TimeStampSetting
+    {
+        [JsonProperty("enabled")]
+        public bool Enabled = false;
+
+        /// <summary>
+        /// The _timestamp value can be provided as an external value when indexing. But, it can also be automatically extracted from the document to index based on a path. For example, having the following mapping:
+        /// </summary>
+        [JsonProperty("path")]
+        public string Path;
+
+        /// <summary>
+        ///"format" : "YYYY-MM-dd", the default format is dateOptionalTime,The timestamp value will first be parsed as a number and if it fails the format will be tried.
+        /// </summary>
+        [JsonProperty("format")]
+        public string Format;
+    }
+
 	public class TypeSetting
 	{
         public TypeSetting(){}
@@ -54,6 +74,12 @@ namespace ElasticSearch.Client.Mapping
         /// </summary>
         [JsonProperty("_parent")]
         public ParentSetting ParentSetting;
+
+        /// <summary>
+        /// The _timestamp field allows to automatically index the timestamp of a document. It can be provided externally via the index request or in the _source. If it is not provided externally it will be automatically set to the date the document was processed by the indexing chain.
+        /// </summary>
+        [JsonProperty("_timestamp")]
+        public TimeStampSetting TimeStampSetting;
 
 		[JsonProperty("_source")]
 		public SourceSetting SourceSetting;
@@ -238,4 +264,6 @@ namespace ElasticSearch.Client.Mapping
 		#endregion
 
 	}
+
+
 }

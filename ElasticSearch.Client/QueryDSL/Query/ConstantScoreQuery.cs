@@ -7,7 +7,7 @@ namespace ElasticSearch.Client.QueryDSL
     /// A query that wraps a filter or another query and simply returns a constant score equal to the query boost for every document in the filter. Maps to Lucene ConstantScoreQuery.
     /// </summary>
     [JsonObject("constant_score")]
-    [JsonConverter(typeof(ConstantScoreQueryConvert))]
+    [JsonConverter(typeof(ConstantScoreQueryConverter))]
     public class ConstantScoreQuery:IQuery
     {
         /// <summary>

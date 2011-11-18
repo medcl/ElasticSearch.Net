@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace ElasticSearch.Client.QueryDSL
 {
-	[JsonConverter(typeof(ElasticQueryConverter))]
+	[JsonConverter(typeof(ElasticQueryConverterer))]
 	public class ElasticQuery
 	{
 		public ElasticQuery(int from,int size,bool explatin=false)

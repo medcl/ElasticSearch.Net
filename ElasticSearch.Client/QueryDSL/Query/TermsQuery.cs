@@ -9,7 +9,7 @@ namespace ElasticSearch.Client.QueryDSL
 	/// The terms query is also aliased with in as the query name for simpler usage.
 	/// </summary>
 	[JsonObject("terms")]
-	[JsonConverter(typeof(TermsQueryConvert))]
+	[JsonConverter(typeof(TermsQueryConverter))]
 	public class TermsQuery:IQuery
 	{
 		public string Field { get; set; }

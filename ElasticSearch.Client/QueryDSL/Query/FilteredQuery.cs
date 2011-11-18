@@ -18,7 +18,7 @@ namespace ElasticSearch.Client.QueryDSL
     //}
     /// </summary>
     [JsonObject("filtered")]
-    [JsonConverter(typeof(FilteredQueryConvert))]
+    [JsonConverter(typeof(FilteredQueryConverter))]
     public class FilteredQuery:IQuery
     {
         public IQuery  Query { get; set; }

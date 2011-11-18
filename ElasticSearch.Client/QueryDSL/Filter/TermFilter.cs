@@ -1,10 +1,11 @@
+using System;
 using System.ComponentModel;
 using Newtonsoft.Json;
 
 namespace ElasticSearch.Client.QueryDSL
 {
     [JsonObject("term")]
-    [JsonConverter(typeof(TermFilterConvert))]
+    [JsonConverter(typeof(TermFilterConverter))]
     public class TermFilter:IFilter
     {
         public string Field { get; set; }
@@ -24,6 +25,32 @@ namespace ElasticSearch.Client.QueryDSL
         {
             Boost = boost;
             return this;
+        }
+    }
+
+
+    [JsonObject("match_all")]
+    [JsonConverter(typeof(MatchAllFilterConverter))]
+    public class MatchAllFilter:IFilter
+    {
+        
+    }
+
+    public class MatchAllFilterConverter:JsonConverter
+    {
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override bool CanConvert(Type objectType)
+        {
+            throw new NotImplementedException();
         }
     }
 }

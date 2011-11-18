@@ -6,7 +6,7 @@ namespace ElasticSearch.Client.QueryDSL
     /// A filter allowing to include hits that only fall within a polygon of points.
     /// </summary>
     [JsonObject("geo_polygon")]
-    [JsonConverter(typeof(GeoPolygonFilterConvert))]
+    [JsonConverter(typeof(GeoPolygonFilterConverter))]
     public class GeoPolygonFilter:IFilter
     {
         //TODO

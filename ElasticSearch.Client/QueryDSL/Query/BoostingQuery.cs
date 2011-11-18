@@ -6,7 +6,7 @@ namespace ElasticSearch.Client.QueryDSL
 	/// The boosting query can be used to effectively demote results that match a given query. Unlike the ¡°NOT¡± clause in bool query, this still selects documents that contain undesirable terms, but reduces their overall score.
 	/// </summary>
 	[JsonObject("boosting")]
-	[JsonConverter(typeof(BoostingQueryConvert))]
+	[JsonConverter(typeof(BoostingQueryConverter))]
 	public class BoostingQuery:IQuery
 	{
 		public Field Positive;

@@ -6,7 +6,7 @@ namespace ElasticSearch.Client.QueryDSL
     /// A limit filter limits the number of documents (per shard) to execute on.
     /// </summary>
     [JsonObject("limit")]
-    [JsonConverter(typeof(LimitFilterConvert))]
+    [JsonConverter(typeof(LimitFilterConverter))]
     public class LimitFilter:IFilter
     {
         public int Limit;

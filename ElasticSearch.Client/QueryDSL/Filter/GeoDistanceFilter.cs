@@ -6,7 +6,7 @@ namespace ElasticSearch.Client.QueryDSL
     /// Filters documents that include only hits that exists within a specific distance from a geo point. 
     /// </summary>
     [JsonObject("geo_distance")]
-    [JsonConverter(typeof(GeoDistanceFilterConvert))]
+    [JsonConverter(typeof(GeoDistanceFilterConverter))]
     public class GeoDistanceFilter:IFilter
     {
         //TODO

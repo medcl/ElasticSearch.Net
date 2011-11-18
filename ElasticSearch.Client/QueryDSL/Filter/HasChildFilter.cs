@@ -7,7 +7,7 @@ namespace ElasticSearch.Client.QueryDSL
     /// With the current implementation, all _id values are loaded to memory (heap) in order to support fast lookups, so make sure there is enough mem for it.
     ///  </summary>
     [JsonObject("has_child")]
-    [JsonConverter(typeof(HasChildFilterConvert))]
+    [JsonConverter(typeof(HasChildFilterConverter))]
     public class HasChildFilter:IFilter
     {
         /// <summary>
