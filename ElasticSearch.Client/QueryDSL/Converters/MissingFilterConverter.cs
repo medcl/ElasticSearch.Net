@@ -4,19 +4,18 @@ using Newtonsoft.Json;
 
 namespace ElasticSearch.Client.QueryDSL
 {
-    public class ExistsFilterConverter:JsonConverter
+    public class MissingFilterConverter:JsonConverter
     {
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            // {"exists" : { "field" : "user" }}
-            ExistsFilter term = (ExistsFilter)value;
+            MissingFilter term = (MissingFilter)value;
             if (term != null)
             {
                 var stringBuilder = new StringBuilder();
-                stringBuilder.Append("{exists:{ \"field\" : \"");
+                stringBuilder.Append("{missing:{ \"field\" : \"");
                 stringBuilder.Append(term.Filed);
                 stringBuilder.Append("\"}}");
-                
+
                 writer.WriteRawValue(stringBuilder.ToString());
             }
         }
@@ -28,7 +27,7 @@ namespace ElasticSearch.Client.QueryDSL
 
         public override bool CanConvert(Type objectType)
         {
-            return typeof(ExistsFilter).IsAssignableFrom(objectType);
+            return typeof(MissingFilter).IsAssignableFrom(objectType);
         }
     }
 }

@@ -415,7 +415,7 @@ namespace Tests
         public void TestAndFilter()
         {
             var termFilter = new TermFilter("age", 24);
-            var termFilter1 = new TermFilter("name", "张三");
+//            var termFilter1 = new TermFilter("name", "张三");
             var andFilter = new AndFilter(termFilter);
 
             var termQuery = new TermQuery("type", "common");
@@ -438,6 +438,20 @@ namespace Tests
 
         }
 
+        [Test]
+        public void TestNotFilter()
+        {
+            var termFilter = new TermFilter("age", 24);
+            var notFilter = new NotFilter(termFilter);
+
+            var termQuery = new TermQuery("type", "common");
+
+            var q = new FilteredQuery(termQuery, notFilter);
+
+            var result2 = client.QueryDSL.Search(index, new string[] { "type" }, q, 0, 5);
+            Assert.AreEqual(2, result2.GetTotalCount());
+            Assert.AreEqual(2, result2.GetHits().Hits.Count);
+        }
 
         [Test]
         public void TestBoolFilterWithTwoCondition()
@@ -476,6 +490,22 @@ namespace Tests
             result = client.QueryDSL.Search(index, new string[] { "type" }, constantScoreQuery, 0, 5);
             Assert.AreEqual(100, result.GetTotalCount());
             Assert.AreEqual(5, result.GetHits().Hits.Count);
+        }
+
+        [Test]
+        public void TestMissingFiledFilter()
+        {
+            var constantScoreQuery = new ConstantScoreQuery(new MissingFilter("age"));
+            var result = client.QueryDSL.Search(index, new string[] { "type" }, constantScoreQuery, 0, 5);
+            Assert.AreEqual(100, result.GetTotalCount());
+            Assert.AreEqual(5, result.GetHits().Hits.Count); 
+
+
+
+            constantScoreQuery = new ConstantScoreQuery(new MissingFilter("ids"));
+            result = client.QueryDSL.Search(index, new string[] { "type" }, constantScoreQuery, 0, 5);
+         Assert.AreEqual(4, result.GetTotalCount());
+            Assert.AreEqual(4, result.GetHits().Hits.Count);
         }
 
         [Test]

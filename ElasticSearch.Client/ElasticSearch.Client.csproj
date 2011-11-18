@@ -114,6 +114,12 @@
     <Compile Include="QueryDSL\Filter\HasChildFilter.cs" />
     <Compile Include="QueryDSL\Converters\HasChildFilterConvert.cs" />
     <Compile Include="QueryDSL\Filter\LimitFilter.cs" />
+    <Compile Include="QueryDSL\Filter\MatchAllFilter.cs" />
+    <Compile Include="QueryDSL\Converters\MatchAllFilterConverter.cs" />
+    <Compile Include="QueryDSL\Filter\MissingFilter.cs" />
+    <Compile Include="QueryDSL\Converters\MissingFilterConverter.cs" />
+    <Compile Include="QueryDSL\Filter\NotFilter.cs" />
+    <Compile Include="QueryDSL\Converters\NotFilterConverter.cs" />
     <Compile Include="QueryDSL\Filter\TypeFilter.cs" />
     <Compile Include="QueryDSL\Converters\TypeFilterConvert.cs" />
     <Compile Include="QueryDSL\Query\BoolQuery.cs" />
