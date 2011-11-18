@@ -76,5 +76,6 @@ namespace ElasticSearch.Client.Mapping
 		[JsonProperty("store")]
 		[JsonConverter(typeof(StringEnumConverter))]
 		public Store Store = Store.no;
+
 	}
 }

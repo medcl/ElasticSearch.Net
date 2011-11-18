@@ -18,7 +18,7 @@ using ElasticSearch.Client.Utils;
 namespace ElasticSearch.Client
 {
 	/// <summary>
-	/// ElasticSearchClient
+	/// ElasticSearch.Client
 	/// </summary>
 	public class ElasticSearchClient
 	{
@@ -430,10 +430,10 @@ namespace ElasticSearch.Client
 		{
 			Contract.Assert(!string.IsNullOrEmpty(index));
 			Contract.Assert(typeSetting != null);
-			string url = "/{0}/{1}/_mapping".Fill(index.ToLower(), typeSetting.Type);
+			string url = "/{0}/{1}/_mapping".Fill(index.ToLower(), typeSetting.TypeName);
 
 			var mappings = new Dictionary<string, TypeSetting>();
-			mappings.Add(typeSetting.Type, typeSetting);
+			mappings.Add(typeSetting.TypeName, typeSetting);
 
 			string data = JsonSerializer.Get(mappings);
 
@@ -507,7 +507,7 @@ namespace ElasticSearch.Client
 			}
 			else
 			{
-				url = "/{0}/{1}/_query?q=".Fill(index.ToLower(), string.Join(",", types));
+				url = "/{0}/{1}/_mapping".Fill(index.ToLower(), string.Join(",", types));
 			}
 			var result=_provider.Get(url);
 			return result.GetBody();

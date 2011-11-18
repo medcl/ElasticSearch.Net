@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
 using ElasticSearch.Client;
@@ -227,6 +228,7 @@ namespace Tests
             
             client.QueryDSL.Search(index, new string[] {"type"}, q, 0, 5,new string[]{"_id"});
         }
+
 #endregion
 
 
@@ -522,6 +524,140 @@ namespace Tests
             result = client.QueryDSL.Search(index, new string[] {}, constantScoreQuery, 0, 5);
             Assert.AreEqual(5, result.GetTotalCount());
             Assert.AreEqual(5, result.GetHits().Hits.Count);
+        }
+
+        [Test]
+        public void TestLimitFilter()
+        {
+            string testForShard = "test_for_shard";
+            client.CreateIndex(testForShard, new IndexSetting(6, 0));
+            for (int i = 0; i < 200; i++)
+            {
+                Dictionary<string, object> dict = new Dictionary<string, object>();
+                dict["a"] = i;
+                client.Index(testForShard, "type", i.ToString(), dict);
+            }
+
+            Thread.Sleep(1000);
+            var constantScoreQuery = new ConstantScoreQuery(new LimitFilter(1));
+            var result = client.QueryDSL.Search(testForShard, new string[] { "type" }, constantScoreQuery, 0, 25);
+            Assert.AreEqual(6, result.GetTotalCount());
+            Assert.AreEqual(6, result.GetHits().Hits.Count);
+
+
+             constantScoreQuery = new ConstantScoreQuery(new LimitFilter(2));
+             result = client.QueryDSL.Search(testForShard, new string[] { "type" }, constantScoreQuery, 0, 25);
+            Assert.AreEqual(12, result.GetTotalCount());
+            Assert.AreEqual(12, result.GetHits().Hits.Count);
+
+            constantScoreQuery = new ConstantScoreQuery(new LimitFilter(3));
+            result = client.QueryDSL.Search(testForShard, new string[] { "type" }, constantScoreQuery, 0, 25);
+            Assert.AreEqual(18, result.GetTotalCount());
+            Assert.AreEqual(18, result.GetHits().Hits.Count);
+
+            client.DeleteIndex(testForShard);
+        }
+
+        [Test]
+        public void TestTypeFilter()
+        {
+            string testForShard = "test_for_shard_123";
+            client.CreateIndex(testForShard, new IndexSetting(6, 0));
+            for (int i = 0; i < 10; i++)
+            {
+                Dictionary<string, object> dict = new Dictionary<string, object>();
+                dict["a"] = i;
+                client.Index(testForShard, "type1", i.ToString(), dict);
+            }
+
+            for (int i = 0; i < 10; i++)
+            {
+                Dictionary<string, object> dict = new Dictionary<string, object>();
+                dict["a"] = i;
+                client.Index(testForShard, "type2", i.ToString(), dict);
+            }
+
+            Thread.Sleep(1000);
+            var constantScoreQuery = new ConstantScoreQuery(new TypeFilter("type2"));
+            var result = client.QueryDSL.Search(testForShard, new string[] { }, constantScoreQuery, 0, 25);
+            Assert.AreEqual(10, result.GetTotalCount());
+            Assert.AreEqual(10, result.GetHits().Hits.Count);
+
+            client.DeleteIndex(testForShard);
+        }
+
+
+        [Test]
+        public void TestHasChildFilter()
+        {
+            var index = "index_test_parent_child_type123_with_has_child_query";
+
+            #region preparing mapping
+
+            var parentType = new TypeSetting("blog");
+            parentType.AddStringField("title");
+
+            var op = client.PutMapping(index, parentType);
+
+            Assert.AreEqual(true, op.Acknowledged);
+
+            var childType = new TypeSetting("comment", parentType);
+            childType.AddStringField("comments");
+
+            op = client.PutMapping(index, childType);
+            Assert.AreEqual(true, op.Acknowledged);
+
+            var mapping = client.GetMapping(index, "comment");
+
+            Assert.True(mapping.IndexOf("_parent") > 0);
+
+            client.Refresh();
+
+            #endregion
+
+
+            #region preparing test data
+
+            Dictionary<string, object> dict=new Dictionary<string, object>();
+            dict["title"] = "this is the blog title";
+            client.Index(index, "blog", "1", dict);
+
+            dict = new Dictionary<string, object>();
+            dict["title"] = "hello.elasticsearch";
+            client.Index(index, "blog", "2", dict);
+
+            //child docs
+            dict = new Dictionary<string, object>();
+            dict["title"] = "awful,that's bullshit";
+            dict["author"] = "lol";
+            client.Index(index, "comment", "c1", dict,"1");
+
+            dict = new Dictionary<string, object>();
+            dict["title"] = "hey,lol,i can't agree more!";
+            dict["author"] = "laday-guagua";
+            client.Index(index, "comment", "c2", dict, "1");
+
+            dict = new Dictionary<string, object>();
+            dict["title"] = "it rocks";
+            dict["author"] = "laday-guagua";
+            client.Index(index, "comment", "c3", dict, "2");
+            #endregion
+
+            client.Refresh();
+
+            var q=new ConstantScoreQuery(new HasChildFilter("comment",new TermQuery("author","lol")));
+            var result=client.QueryDSL.Search(index, new string[]{"blog"}, q,0,5);
+
+            Assert.AreEqual(1,result.GetTotalCount());
+            Assert.AreEqual("1",result.GetHitIds()[0]);
+
+
+            q = new ConstantScoreQuery(new HasChildFilter("comment", new TermQuery("author", "laday-guagua")));
+            result = client.QueryDSL.Search(index, new string[] { "blog" }, q, 0, 5);
+
+            Assert.AreEqual(2, result.GetTotalCount());
+             
+            client.DeleteIndex(index);
         }
 
 	    #endregion

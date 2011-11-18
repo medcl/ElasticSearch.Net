@@ -65,24 +65,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EMO\ClusterState.cs" />
+    <Compile Include="Domain\ClusterState.cs" />
     <Compile Include="Config\ClusterDefinition.cs" />
     <Compile Include="Config\ConnectionPoolConfig.cs" />
     <Compile Include="Config\TransportType.cs" />
     <Compile Include="Config\ElasticSearchConfig.cs" />
     <Compile Include="Config\NodeDefinition.cs" />
     <Compile Include="ElasticSearchClient.cs" />
-    <Compile Include="EMO\BulkObject.cs" />
-    <Compile Include="EMO\Document.cs" />
-    <Compile Include="EMO\Hits.cs" />
-    <Compile Include="EMO\HitStatus.cs" />
-    <Compile Include="EMO\IndexItem.cs" />
-    <Compile Include="EMO\IndexSetting.cs" />
-    <Compile Include="EMO\OperateResult.cs" />
-    <Compile Include="EMO\SearchHits.cs" />
-    <Compile Include="EMO\SearchResult.cs" />
-    <Compile Include="EMO\ShardStatus.cs" />
-    <Compile Include="EMO\TemplateSetting.cs" />
+    <Compile Include="Domain\BulkObject.cs" />
+    <Compile Include="Domain\Document.cs" />
+    <Compile Include="Domain\Hits.cs" />
+    <Compile Include="Domain\HitStatus.cs" />
+    <Compile Include="Domain\IndexItem.cs" />
+    <Compile Include="Domain\IndexSetting.cs" />
+    <Compile Include="Domain\OperateResult.cs" />
+    <Compile Include="Domain\SearchHits.cs" />
+    <Compile Include="Domain\SearchResult.cs" />
+    <Compile Include="Domain\ShardStatus.cs" />
+    <Compile Include="Domain\TemplateSetting.cs" />
     <Compile Include="Exception\ElasticSearchException.cs" />
     <Compile Include="Exception\ExceptionHandler.cs" />
     <Compile Include="Exception\IndexMissingException.cs" />
@@ -102,6 +102,20 @@
     <Compile Include="QueryDSL\Filter\BoolFilter.cs" />
     <Compile Include="QueryDSL\Filter\ExistsFilter.cs" />
     <Compile Include="QueryDSL\Converters\ExistsFilterConvert.cs" />
+    <Compile Include="QueryDSL\Converters\LimitFilterConvert.cs" />
+    <Compile Include="QueryDSL\Converters\GeoBBoxFilterConvert.cs" />
+    <Compile Include="QueryDSL\Converters\GeoDistanceFilterConvert.cs" />
+    <Compile Include="QueryDSL\Filter\GeoBoundingBoxFilter.cs" />
+    <Compile Include="QueryDSL\Filter\GeoDistanceFilter.cs" />
+    <Compile Include="QueryDSL\Filter\GeoDistanceRangeFilter.cs" />
+    <Compile Include="QueryDSL\Converters\GeoDistanceRangeFilterConvert.cs" />
+    <Compile Include="QueryDSL\Filter\GeoPolygonFilter.cs" />
+    <Compile Include="QueryDSL\Converters\GeoPolygonFilterConvert.cs" />
+    <Compile Include="QueryDSL\Filter\HasChildFilter.cs" />
+    <Compile Include="QueryDSL\Converters\HasChildFilterConvert.cs" />
+    <Compile Include="QueryDSL\Filter\LimitFilter.cs" />
+    <Compile Include="QueryDSL\Filter\TypeFilter.cs" />
+    <Compile Include="QueryDSL\Converters\TypeFilterConvert.cs" />
     <Compile Include="QueryDSL\Query\BoolQuery.cs" />
     <Compile Include="QueryDSL\Query\BoostingQuery.cs" />
     <Compile Include="QueryDSL\Query\ConstantScoreQuery.cs" />
@@ -110,7 +124,7 @@
     <Compile Include="QueryDSL\Converters\BoolQueryConverter.cs" />
     <Compile Include="QueryDSL\ElasticQuery.cs" />
     <Compile Include="QueryDSL\Converters\ElasticQueryConverter.cs" />
-    <Compile Include="EMO\Field.cs">
+    <Compile Include="Domain\Field.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="QueryDSL\Converters\FilteredQueryConvert.cs" />

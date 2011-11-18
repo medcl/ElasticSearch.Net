@@ -11,20 +11,54 @@ namespace ElasticSearch.Client.Mapping
 		public bool Enabled = true;
 	}
 
+    [JsonObject("_parent")]
+    public  class ParentSetting
+    {
+        [JsonProperty("type")]
+        public string Type;
+        public ParentSetting(string type)
+        {
+            Type = type;
+        }
+    }
+
 	public class TypeSetting
 	{
-		public TypeSetting(string typeName)
+        public TypeSetting(){}
+		public TypeSetting(string typeNameName,ParentSetting parentType)
 		{
-			Type = typeName;
+			TypeName = typeNameName;
+		    ParentSetting = parentType;
 		}
+        public TypeSetting(string typeNameName)
+        {
+            TypeName = typeNameName;
+        }
+        public TypeSetting(string typeNameName, TypeSetting parentType)
+        {
+            TypeName = typeNameName;
+            ParentSetting = new ParentSetting(parentType.TypeName);
+        }  
+        
+        public TypeSetting(string typeNameName, string parentType)
+        {
+            TypeName = typeNameName;
+            ParentSetting = new ParentSetting(parentType);
+        }
 
 		[JsonIgnore]
-		internal string Type;
+		internal string TypeName;
+
+        /// <summary>
+        /// The parent field mapping is defined on a child mapping, and points to the parent type this child relates to. 
+        /// </summary>
+        [JsonProperty("_parent")]
+        public ParentSetting ParentSetting;
 
 		[JsonProperty("_source")]
 		public SourceSetting SourceSetting;
 
-		public void AddFieldSetting(AbstractFieldSetting fieldSetting)
+		internal void AddFieldSetting(AbstractFieldSetting fieldSetting)
 		{
 			_fieldSettings[fieldSetting.Name] = fieldSetting;
 		}
@@ -63,7 +97,7 @@ namespace ElasticSearch.Client.Mapping
 		/// <param name="indexAnalyzer">The analyzer used to analyze the text contents when analyzed during indexing.</param>
 		/// <param name="searchAnalyzer">The analyzer used to analyze the field when part of a query string.</param>
 		/// <param name="includeInAll">Should the field be included in the _all field (if enabled). Defaults to true or to the parent object type setting.</param>
-		public void CreateStringField(string name, string indexName = null, Store store = Store.no, IndexType index = IndexType.analyzed,
+        public StringFieldSetting AddStringField(string name, string indexName = null, Store store = Store.no, IndexType index = IndexType.analyzed,
 									  TermVector termVector = TermVector.no, double boost = 1.0, string nullValue = null,
 									  bool omitNorms = false, bool omitTermFreqAndPositions = false, string analyzer = null,
 									  string indexAnalyzer = null, string searchAnalyzer = null, bool includeInAll = true)
@@ -86,6 +120,7 @@ namespace ElasticSearch.Client.Mapping
 			field.IncludeInAll = includeInAll;
 
 			_fieldSettings[name] = field;
+		    return field;
 		}
 
 		/// <summary>
@@ -99,7 +134,7 @@ namespace ElasticSearch.Client.Mapping
 		/// <param name="boost">The boost value. Defaults to 1.0.</param>
 		/// <param name="nullValue">When there is a (JSON) null value for the field, use the null_value as the field value. Defaults to not adding the field at all.</param>
 		/// <param name="includeInAll">Should the field be included in the _all field (if enabled). Defaults to true or to the parent object type setting.</param>
-		public void CreateNumField(string name, NumType type = NumType.Integer,
+        public NumberFieldSetting AddNumField(string name, NumType type = NumType.Integer,
 								   string indexName = null,
 								   IndexType index = IndexType.analyzed,
 								   Store store = Store.no,
@@ -136,6 +171,7 @@ namespace ElasticSearch.Client.Mapping
 			field.IncludeInAll = includeInAll;
 
 			_fieldSettings[name] = field;
+		    return field;
 		}
 
 		/// <summary>
@@ -149,7 +185,7 @@ namespace ElasticSearch.Client.Mapping
 		/// <param name="boost">The boost value. Defaults to 1.0.</param>
 		/// <param name="nullValue">When there is a (JSON) null value for the field, use the null_value as the field value. Defaults to not adding the field at all.</param>
 		/// <param name="includeInAll">Should the field be included in the _all field (if enabled). Defaults to true or to the parent object type setting.</param>
-		public void CreateDateField(string name, string indexName = null,
+        public DateFieldSetting AddDateField(string name, string indexName = null,
 									string format = null,
 									Store store = Store.no,
 									IndexType index = IndexType.analyzed,
@@ -172,9 +208,10 @@ namespace ElasticSearch.Client.Mapping
 			field.IncludeInAll = includeInAll;
 
 			_fieldSettings[name] = field;
+		    return field;
 		}
 
-		public void CreateBooleanField(string name, string indexName = null,
+        public BooleanFieldSetting AddBooleanField(string name, string indexName = null,
 									string format = null,
 									Store store = Store.no,
 									IndexType index = IndexType.analyzed,
@@ -195,6 +232,7 @@ namespace ElasticSearch.Client.Mapping
 			field.IncludeInAll = includeInAll;
 
 			_fieldSettings[name] = field;
+            return field;
 		}
 
 		#endregion

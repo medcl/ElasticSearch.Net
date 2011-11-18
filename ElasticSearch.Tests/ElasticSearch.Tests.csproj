@@ -58,7 +58,9 @@
     <Compile Include="Easy2Go.cs" />
     <Compile Include="ExceptionTests.cs" />
     <Compile Include="IndexingTests.cs" />
+    <Compile Include="MappingTest3.cs" />
     <Compile Include="MappingTests.cs" />
+    <Compile Include="MappingTests2.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueryDSL\QueryDSLTests.cs" />
     <Compile Include="QueryTests.cs" />

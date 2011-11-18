@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using ElasticSearch.Client;
 using ElasticSearch.Client.EMO;
 using ElasticSearch.Client.Mapping;
@@ -17,14 +18,14 @@ namespace Tests
 			var tempkey = "test_template_key1";
 			var template = new TemplateSetting(tempkey);
 			template.Template = "business_*";
-			template.IndexSetting = new IndexSetting(3, 2);
+			template.IndexSetting = new TemplateIndexSetting(3, 2);
 
 			var type1 = new TypeSetting("mytype") { };
-			type1.CreateNumField("identity", NumType.Float);
-			type1.CreateDateField("datetime");
+			type1.AddNumField("identity", NumType.Float);
+			type1.AddDateField("datetime");
 
 			var type2 = new TypeSetting("mypersontype");
-			type2.CreateStringField("personid");
+			type2.AddStringField("personid");
 
 			type2.SourceSetting = new SourceSetting();
 			type2.SourceSetting.Enabled = false;
@@ -45,7 +46,8 @@ namespace Tests
 			Assert.AreEqual(true, result.Success);
 			result = client.CreateIndex("business_31003");
 			Assert.AreEqual(true, result.Success);
-
+            
+		    client.Refresh();
 			var temp = client.GetTemplate(tempkey);
 
 			TemplateSetting result1;
