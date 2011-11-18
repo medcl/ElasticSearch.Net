@@ -588,6 +588,22 @@ namespace Tests
 
 
         [Test]
+        public void TestMatchAllFilter()
+        {
+            var query = new TermQuery("gender","true");//new TermsQuery("gender", "true", "false");
+            var filterQuery = new FilteredQuery(query, new MatchAllFilter());
+            var result = client.QueryDSL.Search(index, new string[] { "type" }, filterQuery, 0, 5);
+            Assert.AreEqual(50, result.GetTotalCount());
+            Assert.AreEqual(5, result.GetHits().Hits.Count);
+
+            var query1 = new TermsQuery("gender", "true");
+            filterQuery = new FilteredQuery(query1, new MatchAllFilter());
+            result = client.QueryDSL.Search(index, new string[] { "type" }, filterQuery, 0, 5);
+            Assert.AreEqual(50, result.GetTotalCount());
+            Assert.AreEqual(5, result.GetHits().Hits.Count);
+        }
+
+        [Test]
         public void TestHasChildFilter()
         {
             var index = "index_test_parent_child_type123_with_has_child_query";

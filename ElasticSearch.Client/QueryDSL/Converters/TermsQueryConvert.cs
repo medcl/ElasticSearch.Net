@@ -30,7 +30,7 @@ namespace ElasticSearch.Client.QueryDSL
 
                 stringBuilder.Append("],  \"minimum_match\" : "+term.MinimumMatch+"    }}");
 
-                writer.WriteRaw(stringBuilder.ToString());
+                writer.WriteRawValue(stringBuilder.ToString());
 			}
 
 		}

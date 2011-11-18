@@ -10,7 +10,7 @@ namespace ElasticSearch.Client.QueryDSL
 			BoostingQuery term = (BoostingQuery)value;
 			if (term != null)
 			{
-				writer.WriteRaw("{boosting:");
+                writer.WriteValue("{boosting:");
 				writer.WriteStartObject();
 				if (term.Positive!=null)
 				{
@@ -36,7 +36,7 @@ namespace ElasticSearch.Client.QueryDSL
 				}
 				writer.WritePropertyName("negative_boost");
 				writer.WriteValue(term.NegativeBoost);
-				writer.WriteRaw("}");
+                writer.WriteEndObject();
 			}
 		}
 

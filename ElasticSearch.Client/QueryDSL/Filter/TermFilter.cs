@@ -28,7 +28,9 @@ namespace ElasticSearch.Client.QueryDSL
         }
     }
 
-
+    /// <summary>
+    /// A filter that matches on all documents
+    /// </summary>
     [JsonObject("match_all")]
     [JsonConverter(typeof(MatchAllFilterConverter))]
     public class MatchAllFilter:IFilter
@@ -40,7 +42,11 @@ namespace ElasticSearch.Client.QueryDSL
     {
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            throw new NotImplementedException();
+            MatchAllFilter term = (MatchAllFilter)value;
+            if (term != null)
+            {
+                writer.WriteRawValue("{\"match_all\" : { }}");
+            }
         }
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
@@ -50,7 +56,7 @@ namespace ElasticSearch.Client.QueryDSL
 
         public override bool CanConvert(Type objectType)
         {
-            throw new NotImplementedException();
+            return typeof(MatchAllFilter).IsAssignableFrom(objectType);
         }
     }
 }
