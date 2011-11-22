@@ -120,6 +120,8 @@
     <Compile Include="QueryDSL\Converters\MissingFilterConverter.cs" />
     <Compile Include="QueryDSL\Filter\NotFilter.cs" />
     <Compile Include="QueryDSL\Converters\NotFilterConverter.cs" />
+    <Compile Include="QueryDSL\Filter\NumericRangeFilter.cs" />
+    <Compile Include="QueryDSL\Converters\NumericRangeFilterConverter.cs" />
     <Compile Include="QueryDSL\Filter\TypeFilter.cs" />
     <Compile Include="QueryDSL\Converters\TypeFilterConvert.cs" />
     <Compile Include="QueryDSL\Query\BoolQuery.cs" />

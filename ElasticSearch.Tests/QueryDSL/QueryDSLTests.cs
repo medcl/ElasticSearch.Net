@@ -706,6 +706,33 @@ namespace Tests
             client.DeleteIndex(index);
         }
 
+
+        [Test]
+        public void TestNumRangeFilter()
+        {
+            var rangefilter = new NumericRangeFilter("age", 22, 25, true, true);
+            ConstantScoreQuery query=new ConstantScoreQuery(rangefilter);
+
+            var result= client.QueryDSL.Search(index, new string[] {"type"}, query, 0, 5);
+
+            Assert.AreEqual(4, result.GetTotalCount());
+
+
+            rangefilter = new NumericRangeFilter("age", 22, 25, false, true);
+            query = new ConstantScoreQuery(rangefilter);
+
+            result = client.QueryDSL.Search(index, new string[] { "type" }, query, 0, 5);
+
+            Assert.AreEqual(3, result.GetTotalCount());
+
+            rangefilter = new NumericRangeFilter("age", 22, 25, false, false);
+            query = new ConstantScoreQuery(rangefilter);
+
+            result = client.QueryDSL.Search(index, new string[] { "type" }, query, 0, 5);
+
+            Assert.AreEqual(2, result.GetTotalCount());
+        }
+
 	    #endregion
 
 
