@@ -3,27 +3,31 @@ using Newtonsoft.Json;
 
 namespace ElasticSearch.Client.QueryDSL
 {
-	internal class RangeQueryConverter:JsonConverter
+	internal class FieldQueryConverter:JsonConverter
 	{
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
-			RangeQuery term = (RangeQuery)value;
+			FieldQuery term = (FieldQuery)value;
 			if (term != null)
 			{
 				writer.WriteStartObject();
-				writer.WritePropertyName("range");
+				writer.WritePropertyName("field");
 				writer.WriteStartObject();
 				writer.WritePropertyName(term.Field);
-				writer.WriteStartObject();
-				writer.WritePropertyName("from");
-				writer.WriteValue(term.From);
-				writer.WritePropertyName("to");
-				writer.WriteValue(term.To);
-				writer.WritePropertyName("include_lower");
-				writer.WriteValue(term.IncludeLower);
-				writer.WritePropertyName("include_upper");
-				writer.WriteValue(term.IncludeUpper);
-				writer.WriteEndObject();
+				writer.WriteValue(term.QueryString);
+				
+				if(!term.Boost.Equals(default(float)))
+				{
+					writer.WritePropertyName("boost");
+					writer.WriteValue(term.Boost);	
+				}
+
+				if (term.EnablePositionIncrements != default(bool))
+				{
+					writer.WritePropertyName("enable_position_increments");
+					writer.WriteValue(term.EnablePositionIncrements.ToString().ToLower());
+				}
+
 				writer.WriteEndObject();
 				writer.WriteEndObject();
 			}
@@ -36,7 +40,7 @@ namespace ElasticSearch.Client.QueryDSL
 
 		public override bool CanConvert(Type objectType)
 		{
-			return typeof(RangeQuery).IsAssignableFrom(objectType);
+			return typeof(FieldQuery).IsAssignableFrom(objectType);
 		}
 	}
 }
