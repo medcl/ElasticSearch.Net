@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using ElasticSearch.Client.Mapping;
 using Newtonsoft.Json;
 
-namespace ElasticSearch.Client.EMO
+namespace ElasticSearch.Client.Domain
 {
 
 	public class TemplateSetting

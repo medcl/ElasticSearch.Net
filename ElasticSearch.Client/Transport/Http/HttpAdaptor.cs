@@ -36,15 +36,18 @@ namespace ElasticSearch.Client.Transport.Http
 				url = ESNodeManager.Instance.GetHttpNode(clusterName) + strUrl;
 				WebRequest request = WebRequest.Create(url);
 				request.Method = method.ToString();
-				byte[] buf = Encoding.GetEncoding(encoding).GetBytes(reqdata);
-				request.ContentType = "application/json; charset=" + encoding;
-				request.ContentLength = buf.Length;
-
-				if (method != Method.GET || reqdata.Length > 0)
+				if (reqdata != null)
 				{
-					Stream s = request.GetRequestStream();
-					s.Write(buf, 0, buf.Length);
-					s.Close();
+					byte[] buf = Encoding.GetEncoding(encoding).GetBytes(reqdata);
+					request.ContentType = "application/json; charset=" + encoding;
+					request.ContentLength = buf.Length;
+
+					if (method != Method.GET || reqdata.Length > 0)
+					{
+						Stream s = request.GetRequestStream();
+						s.Write(buf, 0, buf.Length);
+						s.Close();
+					}
 				}
 
 				WebResponse response = request.GetResponse();
@@ -64,6 +67,17 @@ namespace ElasticSearch.Client.Transport.Http
 			catch (WebException e)
 			{
 				DateTime endtime = DateTime.Now;
+				if (e.Response != null)
+				{
+					var stream = e.Response.GetResponseStream();
+					if (stream != null)
+					{
+						var reader = new StreamReader(stream,
+						                              Encoding.GetEncoding(encoding));
+						responseStr = reader.ReadToEnd();
+						result.SetBody(responseStr);
+					}
+				}
 				var msg = string.Format("Method:{2}, Url: {0},Body:{1},Encoding:{3},Time:{5},Response:{4}", url,
 										reqdata,
 										method, encoding, responseStr, endtime - start);

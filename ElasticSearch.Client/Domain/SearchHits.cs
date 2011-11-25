@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace ElasticSearch.Client.EMO
+namespace ElasticSearch.Client.Domain
 {
 	/// <summary>
 	/// 含多个结果的搜索结果

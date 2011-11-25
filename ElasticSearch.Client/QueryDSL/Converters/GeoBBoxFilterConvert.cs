@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace ElasticSearch.Client.QueryDSL
 {
-    public class GeoBBoxFilterConverter:JsonConverter
+    internal class GeoBBoxFilterConverter : JsonConverter
     {
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {

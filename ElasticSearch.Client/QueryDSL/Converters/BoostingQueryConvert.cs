@@ -3,14 +3,15 @@ using Newtonsoft.Json;
 
 namespace ElasticSearch.Client.QueryDSL
 {
-	public class BoostingQueryConverter:JsonConverter
+    internal class BoostingQueryConverter : JsonConverter
 	{
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
 			BoostingQuery term = (BoostingQuery)value;
 			if (term != null)
 			{
-                writer.WriteValue("{boosting:");
+				writer.WriteStartObject();
+				writer.WritePropertyName("boosting");
 				writer.WriteStartObject();
 				if (term.Positive!=null)
 				{
@@ -36,6 +37,7 @@ namespace ElasticSearch.Client.QueryDSL
 				}
 				writer.WritePropertyName("negative_boost");
 				writer.WriteValue(term.NegativeBoost);
+                writer.WriteEndObject();
                 writer.WriteEndObject();
 			}
 		}

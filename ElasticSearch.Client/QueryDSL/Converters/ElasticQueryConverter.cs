@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace ElasticSearch.Client.QueryDSL
 {
-	public class ElasticQueryConverterer:JsonConverter
+    internal class ElasticQueryConverterer : JsonConverter
 	{
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{

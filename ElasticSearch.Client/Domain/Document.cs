@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace ElasticSearch.Client.EMO
+namespace ElasticSearch.Client.Domain
 {
 	/// <summary>
 	/// single document result

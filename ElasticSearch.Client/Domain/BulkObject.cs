@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Text;
 using ElasticSearch.Client.Utils;
 
-namespace ElasticSearch.Client.EMO
+namespace ElasticSearch.Client.Domain
 {
 	public class BulkObject
 	{

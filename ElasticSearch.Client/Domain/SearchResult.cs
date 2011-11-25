@@ -4,7 +4,7 @@ using ElasticSearch.Client.Utils;
 using Newtonsoft.Json;
 using JsonSerializer = ElasticSearch.Client.Utils.JsonSerializer;
 
-namespace ElasticSearch.Client.EMO
+namespace ElasticSearch.Client.Domain
 {
 	/// <summary>
 	/// search result

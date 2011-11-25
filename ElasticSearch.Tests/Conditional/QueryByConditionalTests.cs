@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using ElasticSearch.Client;
 using ElasticSearch.Client.Config;
-using ElasticSearch.Client.EMO;
+using ElasticSearch.Client.Domain;
 using ElasticSearch.Client.QueryString;
 using NUnit.Framework;
 

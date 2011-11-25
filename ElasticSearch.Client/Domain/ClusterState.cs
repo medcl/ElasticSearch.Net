@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using ElasticSearch.Client.EMO;
+using ElasticSearch.Client.Domain;
 using Newtonsoft.Json;
 
 namespace ElasticSearch.Client.Admin

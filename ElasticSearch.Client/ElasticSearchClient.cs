@@ -1,19 +1,17 @@
 ﻿using System.Collections.Generic;
-using System.Diagnostics;
 using System.Diagnostics.Contracts;
 using System.Text;
 using System.Web;
 using ElasticSearch.Client.Admin;
 using ElasticSearch.Client.Config;
-using ElasticSearch.Client.EMO;
+using ElasticSearch.Client.Domain;
 using ElasticSearch.Client.Mapping;
 using ElasticSearch.Client.QueryDSL;
 using ElasticSearch.Client.QueryString;
 using ElasticSearch.Client.Transport;
 using ElasticSearch.Client.Transport.IDL;
 using ElasticSearch.Client.Utils;
-
-
+using Newtonsoft.Json.Linq;
 
 namespace ElasticSearch.Client
 {
@@ -28,7 +26,6 @@ namespace ElasticSearch.Client
 		public ElasticSearchClient(string clusterName)
 		{
 			_provider = new RestProvider(clusterName);
-			QueryDSL=new DSL(_provider);
 		}
 
 		public ElasticSearchClient(string host, int port, TransportType transportType)
@@ -36,37 +33,39 @@ namespace ElasticSearch.Client
 			string cluster = string.Format("{0}:{1}", host, port);
 			ESNodeManager.Instance.BuildCustomNodes(cluster, host, port, transportType);
 			_provider = new RestProvider(cluster);
-			QueryDSL = new DSL(_provider);
 		}
 
 		#region index
 
 		public OperateResult Index(string index, IndexItem indexItem)
 		{
-			return Index(index, indexItem.IndexType, indexItem.IndexKey, indexItem.FieldsToJson(),indexItem.ParentKey);
+			return Index(index, indexItem.IndexType, indexItem.IndexKey, indexItem.FieldsToJson(), indexItem.ParentKey);
 		}
 
-		public OperateResult Index(string index,IEnumerable<IndexItem> indexItems)
+		public OperateResult Index(string index, IEnumerable<IndexItem> indexItems)
 		{
 			IList<BulkObject> bulkObject = new List<BulkObject>();
-			foreach (var indexItem in indexItems)
+			foreach (IndexItem indexItem in indexItems)
 			{
-				bulkObject.Add(new BulkObject(index, indexItem.IndexType, indexItem.IndexKey, indexItem.FieldsToJson(), indexItem.ParentKey));
+				bulkObject.Add(new BulkObject(index, indexItem.IndexType, indexItem.IndexKey, indexItem.FieldsToJson(),
+				                              indexItem.ParentKey));
 			}
 			return Bulk(bulkObject);
 		}
 
-		public OperateResult Index(string index,string type,string indexKey,Dictionary<string,object> dictionary,string parentKey=null)
+		public OperateResult Index(string index, string type, string indexKey, Dictionary<string, object> dictionary,
+		                           string parentKey = null)
 		{
 			Contract.Assert(!string.IsNullOrEmpty(index));
 			Contract.Assert(!string.IsNullOrEmpty(type));
 			Contract.Assert(!string.IsNullOrEmpty(indexKey));
-			var jsonData = JsonSerializer.Get(dictionary);
+			string jsonData = JsonSerializer.Get(dictionary);
 			Contract.Assert(!string.IsNullOrEmpty(jsonData));
 
-			return Index(index, type, indexKey, jsonData,parentKey);
+			return Index(index, type, indexKey, jsonData, parentKey);
 		}
-		public OperateResult Index(string index, string type, string indexKey, string jsonData,string parentKey=null)
+
+		public OperateResult Index(string index, string type, string indexKey, string jsonData, string parentKey = null)
 		{
 			Contract.Assert(!string.IsNullOrEmpty(index));
 			Contract.Assert(!string.IsNullOrEmpty(type));
@@ -98,7 +97,7 @@ namespace ElasticSearch.Client
 
 		#endregion
 
-		public Document Get(string index, string type, string indexKey,string routing=null)
+		public Document Get(string index, string type, string indexKey, string routing = null)
 		{
 			Contract.Assert(!string.IsNullOrEmpty(index));
 			Contract.Assert(!string.IsNullOrEmpty(type));
@@ -111,8 +110,8 @@ namespace ElasticSearch.Client
 			}
 
 			RestResponse result = _provider.Get(url);
-
-			if (result.Body != null)
+			
+			if (result.Body != null&&(int)result.Status<400)
 			{
 				var document = new Document();
 				document.JsonString = result.GetBody();
@@ -144,7 +143,7 @@ namespace ElasticSearch.Client
 			{
 				stringBuilder.AppendLine(
 					"{{ \"delete\" : {{ \"_index\" : \"{0}\", \"_type\" : \"{1}\", \"_id\" : \"{2}\" }} }}".Fill(indexName.ToLower(),
-					                                                                                          indexType, variable));
+					                                                                                             indexType, variable));
 			}
 			string jsonData = stringBuilder.ToString();
 			RestResponse result = _provider.Post(url, jsonData);
@@ -169,9 +168,37 @@ namespace ElasticSearch.Client
 		{
 			string url = "/{0}/_status".Fill(index);
 			RestResponse response = _provider.Get(url);
-			var jObject = Newtonsoft.Json.Linq.JObject.Parse(response.GetBody());
+			JObject jObject = JObject.Parse(response.GetBody());
 			var indexDocStatus = JsonSerializer.Get<DocStatus>(jObject["indices"][index]["docs"].ToString());
 			return indexDocStatus;
+		}
+
+		public SearchResult Search(string index, string[] type, Conditional conditional, int from, int size)
+		{
+			return Search(index, type, conditional.Query, from, size);
+		}
+
+		public SearchResult Search(string index, string[] type, ExpressionEx expression, int from, int size)
+		{
+			return Search(index, type, Conditional.Get(expression), from, size);
+		}
+
+		public int Count(string index, string type, Conditional conditional)
+		{
+			return Count(index, type, conditional.Query);
+		}
+
+		public int Count(string index, string type, ExpressionEx expression)
+		{
+			return Count(index, type, Conditional.Get(expression).Query);
+		}
+
+		public string Analyze(string indexName, string analyzer, string text, string format)
+		{
+			string url = "/{0}/_analyze?analyzer={1}&format={2}".Fill(indexName.ToLower(), analyzer, format);
+			string data = text;
+			RestResponse result = _provider.Post(url, data);
+			return result.GetBody();
 		}
 
 		#region search
@@ -196,12 +223,12 @@ namespace ElasticSearch.Client
 			if (type == null || type.Length == 0)
 			{
 				url = "/{0}/_search?q={1}&from={2}&size={3}".Fill(index.ToLower(), queryString, from,
-				                                               size);
+				                                                  size);
 			}
 			else
 			{
 				url = "/{0}/{1}/_search?q={2}&from={3}&size={4}".Fill(index.ToLower(), string.Join(",", type), queryString, from,
-				                                                   size);
+				                                                      size);
 			}
 			RestResponse result = _provider.Get(url);
 			var hitResult = new SearchResult(result.GetBody());
@@ -285,12 +312,12 @@ namespace ElasticSearch.Client
 			if (type == null || type.Length == 0)
 			{
 				url = "/{0}/_search?q={1}&from={2}&size={3}".Fill(index.ToLower(), queryString, from,
-				                                               size);
+				                                                  size);
 			}
 			else
 			{
 				url = "/{0}/{1}/_search?q={2}&from={3}&size={4}".Fill(index.ToLower(), string.Join(",", type), queryString, from,
-				                                                   size);
+				                                                      size);
 			}
 
 			if (!string.IsNullOrEmpty(sortString))
@@ -331,12 +358,12 @@ namespace ElasticSearch.Client
 			if (type == null || type.Length == 0)
 			{
 				url = "/{0}/_search?q={1}&from={2}&size={3}".Fill(index.ToLower(), queryString, from,
-				                                               size);
+				                                                  size);
 			}
 			else
 			{
 				url = "/{0}/{1}/_search?q={2}&fields=_id&from={3}&size={4}".Fill(index.ToLower(), string.Join(",", type),
-				                                                              queryString, from, size);
+				                                                                 queryString, from, size);
 			}
 
 			if (!string.IsNullOrEmpty(sortString))
@@ -349,8 +376,9 @@ namespace ElasticSearch.Client
 			var hitResult = new SearchResult(result.GetBody());
 			return hitResult.GetHitIds();
 		}
-		
-		public List<string>  SearchIds(string index,string[] type,Conditional conditional,string sortString,int from,int size)
+
+		public List<string> SearchIds(string index, string[] type, Conditional conditional, string sortString, int from,
+		                              int size)
 		{
 			return SearchIds(index, type, conditional.Query, sortString, from, size);
 		}
@@ -462,12 +490,12 @@ namespace ElasticSearch.Client
 			return GetOperationResult(response);
 		}
 
-		public OperateResult PutMapping(string index, string type,string typeJson)
+		public OperateResult PutMapping(string index, string type, string typeJson)
 		{
 			Contract.Assert(!string.IsNullOrEmpty(index));
 			Contract.Assert(typeJson != null);
 			string url = "/{0}/{1}/_mapping".Fill(index.ToLower(), type);
-			
+
 			RestResponse response = _provider.Put(url, typeJson);
 
 			if (response != null)
@@ -475,7 +503,7 @@ namespace ElasticSearch.Client
 				try
 				{
 					if (response.Status == Transport.IDL.Status.INTERNAL_SERVER_ERROR ||
-						response.Status == Transport.IDL.Status.BAD_REQUEST)
+					    response.Status == Transport.IDL.Status.BAD_REQUEST)
 					{
 						//auto create index
 						CreateIndex(index, new IndexSetting(5, 1));
@@ -494,11 +522,9 @@ namespace ElasticSearch.Client
 		}
 
 
-		public string GetMapping(string index,params string[] types)
+		public string GetMapping(string index, params string[] types)
 		{
 			Contract.Assert(!string.IsNullOrEmpty(index));
-//			string url = "/{0}/{1}/_mapping".Fill(index.ToLower());
-
 			string url;
 
 			if (types == null || types.Length == 0)
@@ -509,9 +535,10 @@ namespace ElasticSearch.Client
 			{
 				url = "/{0}/{1}/_mapping".Fill(index.ToLower(), string.Join(",", types));
 			}
-			var result=_provider.Get(url);
+			RestResponse result = _provider.Get(url);
 			return result.GetBody();
 		}
+
 		#endregion
 
 		#region indexAdmin
@@ -603,6 +630,22 @@ namespace ElasticSearch.Client
 			string url = "/_template/{0}".Fill(templateName);
 			RestResponse result = _provider.Delete(url);
 
+			return GetOperationResult(result);
+		}
+
+		public OperateResult OpenIndex(string index)
+		{
+			Contract.Assert(!string.IsNullOrEmpty(index));
+			string url = "/{0}/_open".Fill(index);
+			RestResponse result = _provider.Post(url,null);
+			return GetOperationResult(result);
+		}
+
+		public OperateResult CloseIndex(string index)
+		{
+			Contract.Assert(!string.IsNullOrEmpty(index));
+			string url = "/{0}/_close".Fill(index);
+			RestResponse result = _provider.Post(url, null);
 			return GetOperationResult(result);
 		}
 
@@ -795,7 +838,7 @@ namespace ElasticSearch.Client
 			{
 				try
 				{
-					Newtonsoft.Json.Linq.JObject o = Newtonsoft.Json.Linq.JObject.Parse(restr);
+					JObject o = JObject.Parse(restr);
 					var count = (int) o["count"];
 
 					return count;
@@ -833,7 +876,7 @@ namespace ElasticSearch.Client
 			{
 				try
 				{
-					Newtonsoft.Json.Linq.JObject o = Newtonsoft.Json.Linq.JObject.Parse(restr);
+					JObject o = JObject.Parse(restr);
 					var count = (int) o["count"];
 
 					return count;
@@ -860,7 +903,7 @@ namespace ElasticSearch.Client
 			{
 				try
 				{
-					Newtonsoft.Json.Linq.JObject o = Newtonsoft.Json.Linq.JObject.Parse(restr);
+					JObject o = JObject.Parse(restr);
 					var count = (int) o["count"];
 
 					return count;
@@ -875,74 +918,52 @@ namespace ElasticSearch.Client
 
 		#endregion
 
+		#region queryDSL
 
-		public DSL QueryDSL { get; set; }
-
-		public  class DSL
+		public SearchResult Search(string index, string[] type, ElasticQuery elasticQuery)
 		{
-			private RestProvider _provider;
+			string jsonstr = JsonSerializer.Get(elasticQuery);
 
-			internal DSL(RestProvider provider)
+			string url;
+
+			if (type == null || type.Length == 0)
 			{
-				_provider = provider;
+				url = "/{0}/_search".Fill(index.ToLower());
 			}
-
-			public SearchResult Search(string index,string[] type,IQuery query,int from,int size,string[] fields=null)
+			else
 			{
-				Contract.Assert(!string.IsNullOrEmpty(index));
-				Contract.Assert(query!=null);
-				Contract.Assert(from >= 0);
-				Contract.Assert(size > 0);
-
-				var elasticQuery = new ElasticQuery(from, size);
-				elasticQuery.SetQuery(query);
-
-			    if (fields != null) elasticQuery.AddFields(fields);
-
-			    string jsonstr = JsonSerializer.Get(elasticQuery);
-
-				string url = string.Empty;
-
-                if (type == null|| type.Length == 0)
-				{
-					url = "/{0}/_search".Fill(index.ToLower());
-				}
-				else
-				{
-					url = "/{0}/{1}/_search".Fill(index.ToLower(), string.Join(",", type));
-				}
-				RestResponse result = _provider.Post(url, jsonstr);
-				var hitResult = new SearchResult(result.GetBody());
-				return hitResult;
+				url = "/{0}/{1}/_search".Fill(index.ToLower(), string.Join(",", type));
 			}
-		}
-		
-		public SearchResult Search(string index,string[] type, Conditional conditional,int from,int size)
-		{
-			return Search(index, type, conditional.Query, from, size);
+			RestResponse result = _provider.Post(url, jsonstr);
+			var hitResult = new SearchResult(result.GetBody());
+			return hitResult;
 		}
 
-		public SearchResult Search(string index, string[] type, ExpressionEx expression, int from, int size)
+		public SearchResult Search(string index, string type, ElasticQuery elasticQuery)
 		{
-			return Search(index, type, QueryString.Conditional.Get(expression), from, size);
+			return Search(index, new[] {type}, elasticQuery);
 		}
 
-		public int Count(string index,string type,Conditional conditional)
+		public SearchResult Search(string index, string type, IQuery query, int from = 0, int size = 5, string[] fields = null)
 		{
-			return Count(index, type, conditional.Query);
+			return Search(index, new[] {type}, query, from, size, fields);
 		}
 
-		public int Count(string index,string type,ExpressionEx expression)
+		public SearchResult Search(string index, string[] type, IQuery query, int from, int size, string[] fields = null)
 		{
-			return Count(index, type, Conditional.Get(expression).Query);
+			Contract.Assert(!string.IsNullOrEmpty(index));
+			Contract.Assert(query != null);
+			Contract.Assert(from >= 0);
+			Contract.Assert(size > 0);
+
+			var elasticQuery = new ElasticQuery(from, size);
+			elasticQuery.SetQuery(query);
+
+			if (fields != null) elasticQuery.AddFields(fields);
+
+			return Search(index, type, elasticQuery);
 		}
 
-		public string Analyze(string indexName,string analyzer, string text, string format)
-		{
-			var url = "/{0}/_analyze?analyzer={1}&format={2}".Fill(indexName.ToLower(),analyzer,format);
-			var data = text;
-			var result=_provider.Post(url, data);
-			return result.GetBody();
-		}
+		#endregion
 	}
 }

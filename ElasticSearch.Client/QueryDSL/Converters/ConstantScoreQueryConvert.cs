@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace ElasticSearch.Client.QueryDSL
 {
-    public class ConstantScoreQueryConverter : JsonConverter
+    internal class ConstantScoreQueryConverter : JsonConverter
     {
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {

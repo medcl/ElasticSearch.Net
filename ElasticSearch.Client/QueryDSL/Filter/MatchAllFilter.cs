@@ -1,3 +1,4 @@
+using System.Text;
 using Newtonsoft.Json;
 
 namespace ElasticSearch.Client.QueryDSL

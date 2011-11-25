@@ -1,7 +1,7 @@
 using System;
 using System.Threading;
 using ElasticSearch.Client;
-using ElasticSearch.Client.EMO;
+using ElasticSearch.Client.Domain;
 using ElasticSearch.Client.Mapping;
 using ElasticSearch.Client.Utils;
 using NUnit.Framework;

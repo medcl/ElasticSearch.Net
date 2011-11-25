@@ -3,6 +3,9 @@ using Newtonsoft.Json;
 
 namespace ElasticSearch.Client.QueryDSL
 {
+    /// <summary>
+    /// Matches documents that have fields that contain a term (not analyzed). The term query maps to Lucene TermQuery
+    /// </summary>
     [JsonObject("term")]
     [JsonConverter(typeof(TermFilterConverter))]
     public class TermFilter:IFilter

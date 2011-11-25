@@ -4,16 +4,10 @@ using Newtonsoft.Json;
 
 namespace ElasticSearch.Client.QueryDSL
 {
-    public class TypeFilterConverter:JsonConverter
+    internal class TypeFilterConverter : JsonConverter
     {
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-//            {
-//    "type" : {
-//        "value" : "my_type"
-//    }
-//}   
-
             TypeFilter term = (TypeFilter)value;
             if (term != null)
             {

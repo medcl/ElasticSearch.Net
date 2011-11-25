@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using ElasticSearch.Client.Utils;
 
-namespace ElasticSearch.Client.EMO
+namespace ElasticSearch.Client.Domain
 {
 	/// <summary>
 	/// 

@@ -43,6 +43,8 @@ namespace ElasticSearch.Client.Transport.Thrift
 					var formatedMessage = string.Format("Method:{5},Status:{0},Url:{1}{2},ReqData{3},Response:{4}",
 								  response.Status, esSession.CurrentServer, strUrl, reqdata,
 								  response.GetBody(), method);
+
+
 					ExceptionHandler.HandleExceptionResponse(response.GetBody(), formatedMessage);
 
 

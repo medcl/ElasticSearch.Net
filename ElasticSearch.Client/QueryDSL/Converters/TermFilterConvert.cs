@@ -2,7 +2,7 @@ using Newtonsoft.Json;
 using System;
 namespace ElasticSearch.Client.QueryDSL
 {
-    public class TermFilterConverter:JsonConverter
+    internal class TermFilterConverter : JsonConverter
     {
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {

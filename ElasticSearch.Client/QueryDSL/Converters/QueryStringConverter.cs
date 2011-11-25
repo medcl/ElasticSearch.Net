@@ -4,11 +4,11 @@ using Newtonsoft.Json;
 
 namespace ElasticSearch.Client.QueryDSL
 {
-    public class QueryStringConverter:JsonConverter
+    internal class QueryStringConverter : JsonConverter
     {
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            QueryString term = (QueryString)value;
+            QueryStringQuery term = (QueryStringQuery)value;
             if (term != null)
             {
                 var stringBuilder = new StringBuilder();
@@ -33,7 +33,7 @@ namespace ElasticSearch.Client.QueryDSL
 
         public override bool CanConvert(Type objectType)
         {
-            return typeof(QueryString).IsAssignableFrom(objectType);
+            return typeof(QueryStringQuery).IsAssignableFrom(objectType);
         }
     }
 }

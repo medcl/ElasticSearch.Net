@@ -11,10 +11,16 @@ namespace Tests
         public void TestCreateParentChildType()
         {
             var index = "index_test_parent_child_type";
+
+			
+
             var parentType = new TypeSetting("blog");
             parentType.AddStringField("title");
 
             var client = new ElasticSearchClient("localhost");
+        	
+			client.CreateIndex(index);
+
             var op= client.PutMapping(index, parentType);
 
             Assert.AreEqual(true,op.Acknowledged);

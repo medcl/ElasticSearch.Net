@@ -4,6 +4,9 @@ using Newtonsoft.Json;
 
 namespace ElasticSearch.Client.QueryDSL
 {
+	/// <summary>
+	/// a queryDSL wrapper 
+	/// </summary>
 	[JsonConverter(typeof(ElasticQueryConverterer))]
 	public class ElasticQuery
 	{
@@ -30,33 +33,6 @@ namespace ElasticSearch.Client.QueryDSL
 		public void SetQuery(IQuery query)
 		{
 			Query = query;
-//			//TODO Top Children Query  Nested Query
-//			if(query is QueryString)
-//			{
-//				Query.Add("query_string",query);
-//				return;
-//			}
-//			if(query is TermQuery)
-//			{
-//				Query.Add("term", query);
-//				return;
-//			}
-//			if (query is TermsQuery)
-//			{
-//				Query.Add("terms", query); //terms or in
-//				return;
-//			}
-//			if (query is WildcardQuery)
-//			{
-//				Query.Add("wildcard", query);
-//				return;
-//			}
-//			if (query is BoolQuery)
-//			{
-//				Query.Add("bool", query);
-//				return;
-//			}
-//			throw new NotSupportedException();
 		}
 
 		public void AddField(string field)

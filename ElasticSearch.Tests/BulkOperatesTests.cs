@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using ElasticSearch.Client;
-using ElasticSearch.Client.EMO;
+using ElasticSearch.Client.Domain;
 using ElasticSearch.Client.Utils;
 using NUnit.Framework;
 
@@ -29,7 +29,7 @@ namespace Tests
 		[Test]
 		public void TestBulkIndexWithParentId()
 		{
-			var client = new ElasticSearchClient("localhost");
+            var client = new ElasticSearchClient("localhost");
 			var fields = new Dictionary<string, object>();
 			fields.Add("name", "jack");
 			fields.Add("age", 25);
