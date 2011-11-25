@@ -10,11 +10,19 @@ namespace ElasticSearch.Client.QueryDSL
 	[JsonConverter(typeof(ElasticQueryConverterer))]
 	public class ElasticQuery
 	{
-		public ElasticQuery(int from,int size,bool explatin=false)
+		public ElasticQuery(int from, int size, bool explatin = false)
 		{
 			From = from;
 			Size = size;
 			Explain = explatin;
+		}
+
+		public ElasticQuery(IQuery query, SortItem sortItem, int from, int size)
+		{
+			Query = query;
+			SortItems = new List<SortItem>() { sortItem };
+			From = from;
+			Size = size;
 		}
 
 		[DefaultValue(0)]
@@ -25,32 +33,56 @@ namespace ElasticSearch.Client.QueryDSL
 		public bool Explain { set; get; }
 
 		public List<string> Fields;
+		public List<SortItem> SortItems;
 
 		public IQuery Query;
 
 		public Facets Facets;
 
-		public void SetQuery(IQuery query)
+		public ElasticQuery SetQuery(IQuery query)
 		{
 			Query = query;
+			return this;
 		}
 
-		public void AddField(string field)
+		public ElasticQuery SetSortItems(List<SortItem> sortItems)
 		{
-			if(Fields==null){Fields=new List<string>();}
+			SortItems = sortItems;
+			return this;
+		}
+
+		public ElasticQuery AddField(string field)
+		{
+			if (Fields == null) { Fields = new List<string>(); }
 			Fields.Add(field);
+			return this;
+		}
+
+		public ElasticQuery AddSortItem(SortItem sortItem)
+		{
+			if (SortItems == null) { SortItems = new List<SortItem>(); }
+			SortItems.Add(sortItem);
+			return this;
+		}
+
+		public ElasticQuery AddSortItem(string field, SortType type = SortType.Desc)
+		{
+			if (SortItems == null) { SortItems = new List<SortItem>(); }
+			SortItems.Add(new SortItem(field, type));
+			return this;
 		}
 
 		public void SetFacets()
 		{
-			
+
 		}
 
-	    public void AddFields(string[] fields)
-	    {
-            if (Fields == null) { Fields = new List<string>(); }
-            Fields.AddRange(fields);
-	    }
+		public ElasticQuery AddFields(string[] fields)
+		{
+			if (Fields == null) { Fields = new List<string>(); }
+			Fields.AddRange(fields);
+			return this;
+		}
 	}
 
 	public class Facets

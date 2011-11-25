@@ -35,7 +35,7 @@ namespace Tests
 			result = client.Index(app,  indexItem);
 			Assert.AreEqual(true, result.Success);
 
-			Thread.Sleep(3000);
+			client.Refresh();
 			var count = client.Count(app,  indexType, ExpressionEx.Eq("age", 25));
 			Assert.AreEqual(0, count);
 

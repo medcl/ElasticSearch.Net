@@ -23,20 +23,23 @@ namespace Tests
 		[Test]
 		public void TestOpenCloseIndex()
 		{
+			Thread.Sleep(1000);
 			var client = new ElasticSearch.Client.ElasticSearchClient("localhost");
 			string indexAabbTestOpen = "index_aabb_test_open"+Guid.NewGuid().ToString("N");
 			client.CreateIndex(indexAabbTestOpen);
-
+			Thread.Sleep(500);
 			client.CloseIndex(indexAabbTestOpen);
 
 			var op= client.Index(indexAabbTestOpen, "type", "key", "{a:1}");
 			
 			Assert.AreEqual(false,op.Success);
 			Assert.True(op.JsonString.IndexOf("closed")>0);
-
+			Thread.Sleep(500);
 			client.OpenIndex(indexAabbTestOpen);
+			client.Refresh();
+			Thread.Sleep(500);
 			op = client.Index(indexAabbTestOpen, "type", "key", "{a:1}");
-			
+			client.Refresh();
 			Assert.AreEqual(true, op.Success);
 			client.DeleteIndex(indexAabbTestOpen);
 		}

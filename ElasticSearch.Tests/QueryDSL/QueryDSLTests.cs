@@ -23,7 +23,7 @@ namespace Tests
 	    public void TestQueryString()
 	    {
 	        var query = new QueryStringQuery("gender:true");
-	        var result = client.Search(index, new string[] { "type" }, query, 0, 5);
+	        var result = client.Search(index, "type" , query, 0, 5);
 	        Assert.AreEqual(50, result.GetTotalCount());
 	        Assert.AreEqual(5, result.GetHits().Hits.Count);
 	    }
@@ -35,7 +35,7 @@ namespace Tests
 
             var constanQuery = new ConstantScoreQuery(query);
             
-            var result = client.Search(index, new string[] { "type" }, constanQuery, 0, 5);
+            var result = client.Search(index, "type" , constanQuery, 0, 5);
             
             Assert.AreEqual(50, result.GetTotalCount());
             Assert.AreEqual(5, result.GetHits().Hits.Count);
@@ -49,7 +49,7 @@ namespace Tests
 
             var constanQuery = new ConstantScoreQuery(query);
             
-            var result = client.Search(index, new string[] { "type" }, constanQuery, 0, 5);
+            var result = client.Search(index, "type" , constanQuery, 0, 5);
             
             Assert.AreEqual(50, result.GetTotalCount());
             Assert.AreEqual(5, result.GetHits().Hits.Count);
@@ -62,7 +62,7 @@ namespace Tests
 
             var constanQuery = new ConstantScoreQuery(query);
             
-            var result = client.Search(index, new string[] { "type" }, constanQuery, 0, 5);
+            var result = client.Search(index, "type" , constanQuery, 0, 5);
             
             Assert.AreEqual(3, result.GetTotalCount());
             Assert.AreEqual(3, result.GetHits().Hits.Count);
@@ -73,7 +73,7 @@ namespace Tests
 	    public void TestTermQuery()
 	    {
 	        var query = new TermQuery("gender","true");
-	        var result = client.Search(index, new string[] {"type"}, query, 0, 5);
+	        var result = client.Search(index, "type" , query, 0, 5);
 	        Assert.AreEqual(50, result.GetTotalCount());
 	        Assert.AreEqual(5, result.GetHits().Hits.Count);
 	    }
@@ -82,7 +82,7 @@ namespace Tests
 	    public void TestTermQueryWithBoost()
 	    {
 	        var query = new TermQuery("gender", "true",2);
-	        var result = client.Search(index, new string[] { "type" }, query, 0, 5);
+	        var result = client.Search(index, "type" , query, 0, 5);
 	        Assert.AreEqual(50, result.GetTotalCount());
 	        Assert.AreEqual(5, result.GetHits().Hits.Count);
 	    }
@@ -91,7 +91,7 @@ namespace Tests
 	    public void TestTermsQuery()
 	    {
 	        var query = new TermsQuery("gender", "true","false");
-	        var result = client.Search(index, new string[] { "type" }, query, 0, 5);
+	        var result = client.Search(index, "type" , query, 0, 5);
 	        Assert.AreEqual(100, result.GetTotalCount());
 	        Assert.AreEqual(5, result.GetHits().Hits.Count);
 	    }
@@ -99,7 +99,7 @@ namespace Tests
 	    public void TestTermsQueryWithMinuMatch()
 	    {
 	        var query = new TermsQuery("gender",2, "true", "false");
-	        var result = client.Search(index, new string[] { "type" }, query, 0, 5);
+	        var result = client.Search(index, "type" , query, 0, 5);
 	        Assert.AreEqual(0, result.GetTotalCount());
 	        Assert.AreEqual(0, result.GetHits().Hits.Count);
 			
@@ -112,7 +112,7 @@ namespace Tests
 	        client.Index(index, item);
 
 	        Thread.Sleep(1000);
-	        result = client.Search(index, new string[] { "type" }, query, 0, 5);
+	        result = client.Search(index, "type" , query, 0, 5);
 	        Assert.AreEqual(1, result.GetTotalCount());
 	        Assert.AreEqual(1, result.GetHits().Hits.Count);
 
@@ -122,7 +122,7 @@ namespace Tests
 	    public void TestWildcardQuery()
 	    {
 	        var query = new WildcardQuery("name","张*");
-	        var result = client.Search(index, new string[] { "type" }, query, 0, 5);
+	        var result = client.Search(index, "type" , query, 0, 5);
 	        Assert.AreEqual(3, result.GetTotalCount());
 	        Assert.AreEqual(3, result.GetHits().Hits.Count);
 	        foreach (var VARIABLE in result.GetHits().Hits)
@@ -132,7 +132,7 @@ namespace Tests
 
 	        Console.WriteLine("--");
 	        query = new WildcardQuery("name", "张三*");
-	        result = client.Search(index, new string[] { "type" }, query, 0, 5);
+	        result = client.Search(index, "type" , query, 0, 5);
 	        Assert.AreEqual(2, result.GetTotalCount());
 	        Assert.AreEqual(2, result.GetHits().Hits.Count);
 	        foreach (var VARIABLE in result.GetHits().Hits)
@@ -147,7 +147,7 @@ namespace Tests
 	        var query = new BoolQuery();
 	        query.Must(new TermQuery("type", "common"));
 	        query.SetBoost(5);
-	        var result = client.Search(index, new string[] { "type" }, query, 0, 5);
+	        var result = client.Search(index, "type" , query, 0, 5);
 	        foreach (var VARIABLE in result.GetHits().Hits)
 	        {
 	            Console.WriteLine(VARIABLE.Fields["name"]);
@@ -157,7 +157,7 @@ namespace Tests
 
 	        query.Must(new WildcardQuery("name", "张三*"));
 //			query.SetMinimumNumberShouldMatch(1);
-	        result = client.Search(index, new string[] { "type" }, query, 0, 5);
+	        result = client.Search(index, "type" , query, 0, 5);
 	        foreach (var VARIABLE in result.GetHits().Hits)
 	        {
 	            Console.WriteLine(VARIABLE.Fields["name"]);
@@ -167,7 +167,7 @@ namespace Tests
 
 
 	        query.MustNot(new TermQuery("age", 24));
-	        result = client.Search(index, new string[] { "type" }, query, 0, 5);
+	        result = client.Search(index, "type" , query, 0, 5);
 	        foreach (var VARIABLE in result.GetHits().Hits)
 	        {
 	            Console.WriteLine(VARIABLE.Fields["name"]);
@@ -187,7 +187,7 @@ namespace Tests
             query.Must(new TermQuery("type", "common"));
             query.Must(new TermQuery("age", "23"));
             query.SetBoost(5);
-            var result = client.Search(index, new string[] { "type" }, query, 0, 5);
+            var result = client.Search(index, "type" , query, 0, 5);
             Assert.AreEqual(1, result.GetTotalCount());
             Assert.AreEqual(1, result.GetHits().Hits.Count);
 
@@ -196,7 +196,7 @@ namespace Tests
             query.Must(new TermQuery("type", "common"));
             query.MustNot(new TermQuery("age", "23"));
             query.SetBoost(5);
-            result = client.Search(index, new string[] { "type" }, query, 0, 5);
+            result = client.Search(index, "type" , query, 0, 5);
             Assert.AreEqual(2, result.GetTotalCount());
             Assert.AreEqual(2, result.GetHits().Hits.Count);
         }
@@ -213,7 +213,7 @@ namespace Tests
 	        query2.Must(query);
 	        query2.Must(new TermsQuery("name", "张三"));
 
-	        var result = client.Search(index, new string[] { "type" }, query2, 0, 5);
+	        var result = client.Search(index, "type" , query2, 0, 5);
 	        foreach (var VARIABLE in result.GetHits().Hits)
 	        {
 	            Console.WriteLine(VARIABLE.Fields["name"]);
@@ -226,7 +226,7 @@ namespace Tests
         {
             var q = new TermQuery("gender","true");
             
-            client.Search(index, new string[] {"type"}, q, 0, 5,new string[]{"_id"});
+            client.Search(index, "type" , q,null, 0, 5,new string[]{"_id"});
         }
 
 #endregion
@@ -525,14 +525,14 @@ namespace Tests
 			client.Refresh();
 
 			var q = new ConstantScoreQuery(new HasChildQuery("comment", new TermQuery("author", "lol")));
-			var result = client.Search(index, new string[] { "blog" }, q, 0, 5);
+			var result = client.Search(index, "blog" , q, 0, 5);
 
 			Assert.AreEqual(1, result.GetTotalCount());
 			Assert.AreEqual("1", result.GetHitIds()[0]);
 
 
 			q = new ConstantScoreQuery(new HasChildQuery("comment", new TermQuery("author", "laday-guagua")));
-			result = client.Search(index, new string[] { "blog" }, q, 0, 5);
+			result = client.Search(index, "blog" , q, 0, 5);
 
 			Assert.AreEqual(2, result.GetTotalCount());
 
@@ -600,14 +600,14 @@ namespace Tests
 			client.Refresh();
 
 			var q = new ConstantScoreQuery(new TopChildrenQuery("comment", new TermQuery("author", "lol")));
-			var result = client.Search(index, new string[] { "blog" }, q, 0, 5);
+			var result = client.Search(index, "blog" , q, 0, 5);
 
 			Assert.AreEqual(1, result.GetTotalCount());
 			Assert.AreEqual("1", result.GetHitIds()[0]);
 
 
 			q = new ConstantScoreQuery(new TopChildrenQuery("comment", new TermQuery("author", "laday-guagua")));
-			result = client.Search(index, new string[] { "blog" }, q, 0, 5);
+			result = client.Search(index, "blog" , q, 0, 5);
 
 			Assert.AreEqual(2, result.GetTotalCount());
 
@@ -620,13 +620,13 @@ namespace Tests
 		{
 			var filter = new TermFilter("gender", "true");//new TermsQuery("gender", "true", "false");
 			var filterQuery = new FilteredQuery( new MatchAllQuery(),filter);
-			var result = client.Search(index, new string[] { "type" }, filterQuery, 0, 5);
+			var result = client.Search(index, "type" , filterQuery, 0, 5);
 			Assert.AreEqual(50, result.GetTotalCount());
 			Assert.AreEqual(5, result.GetHits().Hits.Count);
 
 			var filter1 = new TermFilter("gender", "true");
 			filterQuery = new FilteredQuery(new MatchAllQuery(), filter1);
-			result = client.Search(index, new string[] { "type" }, filterQuery, 0, 5);
+			result = client.Search(index, "type" , filterQuery, 0, 5);
 			Assert.AreEqual(50, result.GetTotalCount());
 			Assert.AreEqual(5, result.GetHits().Hits.Count);
 		}
@@ -663,12 +663,12 @@ namespace Tests
 		public void TestIdsQuery()
 		{
 			var constantScoreQuery = new ConstantScoreQuery(new IdsQuery("type", "1", "2", "3"));
-			var result = client.Search(index, new string[] { "type" }, constantScoreQuery, 0, 5);
+			var result = client.Search(index, "type" , constantScoreQuery, 0, 5);
 			Assert.AreEqual(3, result.GetTotalCount());
 			Assert.AreEqual(3, result.GetHits().Hits.Count);
 
 			constantScoreQuery = new ConstantScoreQuery(new IdsQuery("type", "1", "2", "3", "1121"));
-			result = client.Search(index, new string[] { "type" }, constantScoreQuery, 0, 5);
+			result = client.Search(index, "type" , constantScoreQuery, 0, 5);
 			Assert.AreEqual(3, result.GetTotalCount());
 			Assert.AreEqual(3, result.GetHits().Hits.Count);
 
@@ -681,14 +681,14 @@ namespace Tests
 			client.Index(index, item);
 
 			constantScoreQuery = new ConstantScoreQuery(new IdsQuery("type", "1", "2", "3", "1121", "uk111"));
-			result = client.Search(index, new string[] { "type" }, constantScoreQuery, 0, 5);
+			result = client.Search(index, "type" , constantScoreQuery, 0, 5);
 			Assert.AreEqual(3, result.GetTotalCount());
 			Assert.AreEqual(3, result.GetHits().Hits.Count);
 
 
 			//ids can't query corss type
 			constantScoreQuery = new ConstantScoreQuery(new IdsQuery(new string[] { "type", "type1" }, "1", "2", "3", "1121", "uk111"));
-			result = client.Search(index, new string[] { "type" }, constantScoreQuery, 0, 5);
+			result = client.Search(index, "type" , constantScoreQuery, 0, 5);
 			Assert.AreEqual(3, result.GetTotalCount());
 			Assert.AreEqual(3, result.GetHits().Hits.Count);
 
@@ -696,13 +696,13 @@ namespace Tests
 			Thread.Sleep(1000);
 
 			constantScoreQuery = new ConstantScoreQuery(new IdsQuery(new string[] { "type", "type1" }, "1", "2", "3", "1121", "uk111"));
-			result = client.Search(index, new string[] { }, constantScoreQuery, 0, 5);
+			result = client.Search(index, null, constantScoreQuery, 0, 5);
 			Assert.AreEqual(4, result.GetTotalCount());
 			Assert.AreEqual(4, result.GetHits().Hits.Count);
 
 
 			constantScoreQuery = new ConstantScoreQuery(new IdsQuery(new string[] { "type", "type1" }, "1", "2", "3", "1121", "uk111", "dk222"));
-			result = client.Search(index, new string[] { }, constantScoreQuery, 0, 5);
+			result = client.Search(index, null, constantScoreQuery, 0, 5);
 			Assert.AreEqual(5, result.GetTotalCount());
 			Assert.AreEqual(5, result.GetHits().Hits.Count);
 		}
@@ -724,14 +724,14 @@ namespace Tests
 			var prefixQuery = new PrefixQuery("name", "张");
 			var termFilter = new TermFilter("type", "common");
 			var q = new FilteredQuery(prefixQuery,termFilter);
-			var result = client.Search(index, new string[] { "type" }, q, 0, 5);
+			var result = client.Search(index, "type" , q, 0, 5);
 
 			Assert.AreEqual(3, result.GetTotalCount());
 
 			prefixQuery = new PrefixQuery("name", "张三");
 			termFilter = new TermFilter("type", "common");
 			q = new FilteredQuery(prefixQuery, termFilter);
-			result = client.Search(index, new string[] { "type" }, q, 0, 5);
+			result = client.Search(index, "type" , q, 0, 5);
 
 			Assert.AreEqual(2, result.GetTotalCount());
 		}
@@ -742,7 +742,7 @@ namespace Tests
 			var rangefilter = new RangeQuery("age", "22", "25", true, true);
 			ConstantScoreQuery query = new ConstantScoreQuery(rangefilter);
 
-			var result = client.Search(index, new string[] { "type" }, query, 0, 5);
+			var result = client.Search(index, "type" , query, 0, 5);
 
 			Assert.AreEqual(4, result.GetTotalCount());
 
@@ -750,14 +750,14 @@ namespace Tests
 			rangefilter = new RangeQuery("age", "22", "25", false, true);
 			query = new ConstantScoreQuery(rangefilter);
 
-			result = client.Search(index, new string[] { "type" }, query, 0, 5);
+			result = client.Search(index, "type" , query, 0, 5);
 
 			Assert.AreEqual(3, result.GetTotalCount());
 
 			rangefilter = new RangeQuery("age", "22", "25", false, false);
 			query = new ConstantScoreQuery(rangefilter);
 
-			result = client.Search(index, new string[] { "type" }, query, 0, 5);
+			result = client.Search(index, "type" , query, 0, 5);
 
 			Assert.AreEqual(2, result.GetTotalCount());
 		}
@@ -818,7 +818,7 @@ namespace Tests
 			var rangefilter = new RangeFilter("age", "22", "25", true, true);
 			ConstantScoreQuery query = new ConstantScoreQuery(rangefilter);
 
-			var result = client.Search(index, new string[] { "type" }, query, 0, 5);
+			var result = client.Search(index, "type" , query, 0, 5);
 
 			Assert.AreEqual(4, result.GetTotalCount());
 
@@ -826,14 +826,14 @@ namespace Tests
 			rangefilter = new RangeFilter("age", "22", "25", false, true);
 			query = new ConstantScoreQuery(rangefilter);
 
-			result = client.Search(index, new string[] { "type" }, query, 0, 5);
+			result = client.Search(index, "type" , query, 0, 5);
 
 			Assert.AreEqual(3, result.GetTotalCount());
 
 			rangefilter = new RangeFilter("age", "22", "25", false, false);
 			query = new ConstantScoreQuery(rangefilter);
 
-			result = client.Search(index, new string[] { "type" }, query, 0, 5);
+			result = client.Search(index, "type" , query, 0, 5);
 
 			Assert.AreEqual(2, result.GetTotalCount());
 		}
@@ -845,7 +845,7 @@ namespace Tests
 
             var termFilter = new TermFilter("gender", "true");
             var constanFilter = new ConstantScoreQuery(termFilter);
-            var result2 = client.Search(index, new string[] { "type" }, constanFilter, 0, 5);
+            var result2 = client.Search(index, "type" , constanFilter, 0, 5);
             Assert.AreEqual(50, result2.GetTotalCount());
             Assert.AreEqual(5, result2.GetHits().Hits.Count);
         }
@@ -856,7 +856,7 @@ namespace Tests
             var termQuery = new TermQuery("gender", "true");
             var queryFilter = new QueryFilter(termQuery);
             var constanFilter = new ConstantScoreQuery(queryFilter);
-            var result2 = client.Search(index, new string[] { "type" }, constanFilter, 0, 5);
+            var result2 = client.Search(index, "type" , constanFilter, 0, 5);
             Assert.AreEqual(50, result2.GetTotalCount());
             Assert.AreEqual(5, result2.GetHits().Hits.Count);
         }
@@ -868,18 +868,18 @@ namespace Tests
 
             var constanQuery = new ConstantScoreQuery(query);
 
-            var result = client.Search(index, new string[] { "type" }, constanQuery, 0, 5);
+            var result = client.Search(index, "type" , constanQuery, 0, 5);
             Assert.AreEqual(50, result.GetTotalCount());
             Assert.AreEqual(5, result.GetHits().Hits.Count);
 
             var termQuery = new TermQuery("gender", "true");
-            var result1 = client.Search(index, new string[] { "type" }, termQuery, 0, 5);
+            var result1 = client.Search(index, "type" , termQuery, 0, 5);
             Assert.AreEqual(50, result1.GetTotalCount());
             Assert.AreEqual(5, result1.GetHits().Hits.Count);
 
             var termFilter = new TermFilter("gender", "true");
             var constanFilter = new ConstantScoreQuery(termFilter);
-            var result2 = client.Search(index, new string[] { "type" }, constanFilter, 0, 5);
+            var result2 = client.Search(index, "type" , constanFilter, 0, 5);
             Assert.AreEqual(50, result2.GetTotalCount());
             Assert.AreEqual(5, result2.GetHits().Hits.Count);
 
@@ -889,7 +889,7 @@ namespace Tests
             stopwatch.Start();
             for (int i = 0; i < 1000; i++)
             {
-                client.Search(index, new string[] { "type" }, termQuery, 0, 5);
+                client.Search(index, "type" , termQuery, 0, 5);
             }
             stopwatch.Stop();
             var time1 = stopwatch.ElapsedMilliseconds;
@@ -899,7 +899,7 @@ namespace Tests
             stopwatch.Start();
             for (int i = 0; i < 1000; i++)
             {
-                client.Search(index, new string[] { "type" }, constanQuery, 0, 5);
+                client.Search(index, "type" , constanQuery, 0, 5);
             }
             stopwatch.Stop();
             var time2 = stopwatch.ElapsedMilliseconds;
@@ -908,7 +908,7 @@ namespace Tests
             stopwatch.Start();
             for (int i = 0; i < 1000; i++)
             {
-                client.Search(index, new string[] { "type" }, constanFilter, 0, 5);
+                client.Search(index, "type" , constanFilter, 0, 5);
             }
             stopwatch.Stop();
             var time3 = stopwatch.ElapsedMilliseconds;
@@ -926,14 +926,14 @@ namespace Tests
             var termQuery = new TermQuery("type", "common");
             var termFilter = new TermFilter("age", "24");
             var filteredQuery = new FilteredQuery(termQuery,termFilter);
-            var result2 = client.Search(index, new string[] { "type" }, filteredQuery, 0, 5);
+            var result2 = client.Search(index, "type" , filteredQuery, 0, 5);
             Assert.AreEqual(1, result2.GetTotalCount());
             Assert.AreEqual(1, result2.GetHits().Hits.Count);
 
             var wildQuery = new WildcardQuery("name", "张三*");
             termFilter = new TermFilter("age", "23");
             filteredQuery = new FilteredQuery(wildQuery, termFilter);
-            result2 = client.Search(index, new string[] { "type" }, filteredQuery, 0, 5);
+            result2 = client.Search(index, "type" , filteredQuery, 0, 5);
             Assert.AreEqual(1, result2.GetTotalCount());
             Assert.AreEqual(1, result2.GetHits().Hits.Count);
             Assert.AreEqual("张三丰",result2.GetHits().Hits[0].Fields["name"]);
@@ -946,7 +946,7 @@ namespace Tests
 
             filteredQuery=new FilteredQuery(boolQuery,new TermFilter("age","23"));
 
-            result2 = client.Search(index, new string[] { "type" }, filteredQuery, 0, 5);
+            result2 = client.Search(index, "type" , filteredQuery, 0, 5);
             Assert.AreEqual(1, result2.GetTotalCount());
             Assert.AreEqual(1, result2.GetHits().Hits.Count);
             Assert.AreEqual("张三丰", result2.GetHits().Hits[0].Fields["name"]);
@@ -955,7 +955,7 @@ namespace Tests
 
             filteredQuery = new FilteredQuery(boolQuery, new TermFilter("age", "24"));
 
-            result2 = client.Search(index, new string[] { "type" }, filteredQuery, 0, 5);
+            result2 = client.Search(index, "type" , filteredQuery, 0, 5);
             Assert.AreEqual(1, result2.GetTotalCount());
             Assert.AreEqual(1, result2.GetHits().Hits.Count);
             Assert.AreEqual("张三", result2.GetHits().Hits[0].Fields["name"]);
@@ -963,7 +963,7 @@ namespace Tests
 
             filteredQuery = new FilteredQuery(boolQuery, new TermFilter("type", "common"));
 
-            result2 = client.Search(index, new string[] { "type" }, filteredQuery, 0, 5);
+            result2 = client.Search(index, "type" , filteredQuery, 0, 5);
             Assert.AreEqual(2, result2.GetTotalCount());
             Assert.AreEqual(2, result2.GetHits().Hits.Count);
 
@@ -977,7 +977,7 @@ namespace Tests
 
             filteredQuery = new FilteredQuery(boolQuery, new TermFilter("type", "common"));
 
-            result2 = client.Search(index, new string[] { "type" }, filteredQuery, 0, 5);
+            result2 = client.Search(index, "type" , filteredQuery, 0, 5);
             Assert.AreEqual(3, result2.GetTotalCount());
             Assert.AreEqual(3, result2.GetHits().Hits.Count);
 
@@ -990,7 +990,7 @@ namespace Tests
             //must+should ->[should] make nonsense
             filteredQuery = new FilteredQuery(boolQuery, new TermFilter("type", "common"));
 
-            result2 = client.Search(index, new string[] { "type" }, filteredQuery, 0, 5);
+            result2 = client.Search(index, "type" , filteredQuery, 0, 5);
             Assert.AreEqual(3, result2.GetTotalCount());
             Assert.AreEqual(3, result2.GetHits().Hits.Count);
 
@@ -1001,7 +1001,7 @@ namespace Tests
             boolQuery.Should(new TermQuery("age", 22));
             filteredQuery = new FilteredQuery(boolQuery, new TermFilter("type", "common"));
 
-            result2 = client.Search(index, new string[] { "type" }, filteredQuery, 0, 5);
+            result2 = client.Search(index, "type" , filteredQuery, 0, 5);
             Assert.AreEqual(1, result2.GetTotalCount());
             Assert.AreEqual(1, result2.GetHits().Hits.Count);
             Assert.AreEqual("张三", result2.GetHits().Hits[0].Fields["name"]);
@@ -1010,7 +1010,7 @@ namespace Tests
             boolQuery.Should(new TermQuery("age", 25));
             filteredQuery = new FilteredQuery(boolQuery, new TermFilter("type", "common"));
 
-            result2 = client.Search(index, new string[] { "type" }, filteredQuery, 0, 5);
+            result2 = client.Search(index, "type" , filteredQuery, 0, 5);
             Assert.AreEqual(2, result2.GetTotalCount());
             Assert.AreEqual(2, result2.GetHits().Hits.Count);
         }
@@ -1026,7 +1026,7 @@ namespace Tests
 
             var q = new FilteredQuery(termQuery,andFilter);
 
-            var result2 = client.Search(index, new string[] { "type" }, q, 0, 5);
+            var result2 = client.Search(index, "type" , q, 0, 5);
             Assert.AreEqual(1, result2.GetTotalCount());
             Assert.AreEqual(1, result2.GetHits().Hits.Count);
             Assert.AreEqual("张三", result2.GetHits().Hits[0].Fields["name"]);
@@ -1035,7 +1035,7 @@ namespace Tests
 
             var constantQuery = new ConstantScoreQuery(andFilter);
 
-            result2 = client.Search(index, new string[] { "type" }, constantQuery, 0, 5);
+            result2 = client.Search(index, "type" , constantQuery, 0, 5);
             Assert.AreEqual(1, result2.GetTotalCount());
             Assert.AreEqual(1, result2.GetHits().Hits.Count);
             Assert.AreEqual("张三", result2.GetHits().Hits[0].Fields["name"]);
@@ -1054,7 +1054,7 @@ namespace Tests
 
             var q = new FilteredQuery(termQuery, orFilter);
 
-            var result = client.Search(index, new string[] { "type" }, q, 0, 5);
+            var result = client.Search(index, "type" , q, 0, 5);
 
             Assert.AreEqual(2, result.GetTotalCount());
         }
@@ -1066,14 +1066,14 @@ namespace Tests
             var prefixfilter = new PrefixFilter("name", "张");
             var termQuery = new TermQuery("type", "common");
             var q = new FilteredQuery(termQuery, prefixfilter);
-            var result = client.Search(index, new string[] { "type" }, q, 0, 5);
+            var result = client.Search(index, "type" , q, 0, 5);
 
             Assert.AreEqual(3, result.GetTotalCount());
 
             prefixfilter = new PrefixFilter("name", "张三");
             termQuery = new TermQuery("type", "common");
             q = new FilteredQuery(termQuery, prefixfilter);
-            result = client.Search(index, new string[] { "type" }, q, 0, 5);
+            result = client.Search(index, "type" , q, 0, 5);
 
             Assert.AreEqual(2, result.GetTotalCount());
         }
@@ -1088,7 +1088,7 @@ namespace Tests
 
             var q = new FilteredQuery(termQuery, notFilter);
 
-            var result2 = client.Search(index, new string[] { "type" }, q, 0, 5);
+            var result2 = client.Search(index, "type" , q, 0, 5);
             Assert.AreEqual(2, result2.GetTotalCount());
             Assert.AreEqual(2, result2.GetHits().Hits.Count);
         }
@@ -1101,7 +1101,7 @@ namespace Tests
             boolFilter.Must(new TermFilter("age", "23"));
 
             var constantScoreQuery = new ConstantScoreQuery(boolFilter);
-            var result = client.Search(index, new string[] { "type" }, constantScoreQuery, 0, 5);
+            var result = client.Search(index, "type" , constantScoreQuery, 0, 5);
             Assert.AreEqual(1, result.GetTotalCount());
             Assert.AreEqual(1, result.GetHits().Hits.Count);
 
@@ -1110,7 +1110,7 @@ namespace Tests
             boolFilter.Must(new TermFilter("type", "common"));
             boolFilter.MustNot(new TermFilter("age", "23"));
             constantScoreQuery = new ConstantScoreQuery(boolFilter);
-            result = client.Search(index, new string[] { "type" }, constantScoreQuery, 0, 5);
+            result = client.Search(index, "type" , constantScoreQuery, 0, 5);
             Assert.AreEqual(2, result.GetTotalCount());
             Assert.AreEqual(2, result.GetHits().Hits.Count);
         }
@@ -1120,14 +1120,14 @@ namespace Tests
         public void TestExistsFilter()
         {
             var constantScoreQuery = new ConstantScoreQuery(new ExistsFilter("age"));
-            var  result = client.Search(index, new string[] { "type" }, constantScoreQuery, 0, 5);
+            var  result = client.Search(index, "type" , constantScoreQuery, 0, 5);
             Assert.AreEqual(4, result.GetTotalCount());
             Assert.AreEqual(4, result.GetHits().Hits.Count);
 
 
 
             constantScoreQuery = new ConstantScoreQuery(new ExistsFilter("ids"));
-            result = client.Search(index, new string[] { "type" }, constantScoreQuery, 0, 5);
+            result = client.Search(index, "type" , constantScoreQuery, 0, 5);
             Assert.AreEqual(100, result.GetTotalCount());
             Assert.AreEqual(5, result.GetHits().Hits.Count);
         }
@@ -1136,14 +1136,14 @@ namespace Tests
         public void TestMissingFiledFilter()
         {
             var constantScoreQuery = new ConstantScoreQuery(new MissingFilter("age"));
-            var result = client.Search(index, new string[] { "type" }, constantScoreQuery, 0, 5);
+            var result = client.Search(index, "type" , constantScoreQuery, 0, 5);
             Assert.AreEqual(100, result.GetTotalCount());
             Assert.AreEqual(5, result.GetHits().Hits.Count); 
 
 
 
             constantScoreQuery = new ConstantScoreQuery(new MissingFilter("ids"));
-            result = client.Search(index, new string[] { "type" }, constantScoreQuery, 0, 5);
+            result = client.Search(index, "type" , constantScoreQuery, 0, 5);
          Assert.AreEqual(4, result.GetTotalCount());
             Assert.AreEqual(4, result.GetHits().Hits.Count);
         }
@@ -1152,12 +1152,12 @@ namespace Tests
         public void TestIdsFilter()
         {
             var constantScoreQuery = new ConstantScoreQuery(new IdsFilter("type","1","2","3"));
-            var result = client.Search(index, new string[] { "type" }, constantScoreQuery, 0, 5);
+            var result = client.Search(index, "type" , constantScoreQuery, 0, 5);
             Assert.AreEqual(3, result.GetTotalCount());
             Assert.AreEqual(3, result.GetHits().Hits.Count);
 
             constantScoreQuery = new ConstantScoreQuery(new IdsFilter("type", "1", "2", "3","1121"));
-            result = client.Search(index, new string[] { "type" }, constantScoreQuery, 0, 5);
+            result = client.Search(index, "type" , constantScoreQuery, 0, 5);
             Assert.AreEqual(3, result.GetTotalCount());
             Assert.AreEqual(3, result.GetHits().Hits.Count);
 
@@ -1170,14 +1170,14 @@ namespace Tests
             client.Index(index, item);
 
             constantScoreQuery = new ConstantScoreQuery(new IdsFilter("type", "1", "2", "3", "1121", "uk111"));
-            result = client.Search(index, new string[] { "type" }, constantScoreQuery, 0, 5);
+            result = client.Search(index, "type" , constantScoreQuery, 0, 5);
             Assert.AreEqual(3, result.GetTotalCount());
             Assert.AreEqual(3, result.GetHits().Hits.Count);
 
 
             //ids can't query corss type
             constantScoreQuery = new ConstantScoreQuery(new IdsFilter(new string[] { "type", "type1" }, "1", "2", "3", "1121", "uk111"));
-            result = client.Search(index, new string[] { "type" }, constantScoreQuery, 0, 5);
+            result = client.Search(index, "type" , constantScoreQuery, 0, 5);
             Assert.AreEqual(3, result.GetTotalCount());
             Assert.AreEqual(3, result.GetHits().Hits.Count);
 
@@ -1185,13 +1185,13 @@ namespace Tests
             Thread.Sleep(1000);
 
             constantScoreQuery = new ConstantScoreQuery(new IdsFilter(new string[] { "type", "type1" }, "1", "2", "3", "1121", "uk111"));
-            result = client.Search(index, new string[] {  }, constantScoreQuery, 0, 5);
+            result = client.Search(index, null, constantScoreQuery, 0, 5);
             Assert.AreEqual(4, result.GetTotalCount());
             Assert.AreEqual(4, result.GetHits().Hits.Count);
 
 
             constantScoreQuery = new ConstantScoreQuery(new IdsFilter(new string[] { "type", "type1" }, "1", "2", "3", "1121", "uk111", "dk222"));
-            result = client.Search(index, new string[] {}, constantScoreQuery, 0, 5);
+            result = client.Search(index, null, constantScoreQuery, 0, 5);
             Assert.AreEqual(5, result.GetTotalCount());
             Assert.AreEqual(5, result.GetHits().Hits.Count);
         }
@@ -1210,18 +1210,18 @@ namespace Tests
 
             Thread.Sleep(1000);
             var constantScoreQuery = new ConstantScoreQuery(new LimitFilter(1));
-            var result = client.Search(testForShard, new string[] { "type" }, constantScoreQuery, 0, 25);
+            var result = client.Search(testForShard, "type" , constantScoreQuery, 0, 25);
             Assert.AreEqual(6, result.GetTotalCount());
             Assert.AreEqual(6, result.GetHits().Hits.Count);
 
 
              constantScoreQuery = new ConstantScoreQuery(new LimitFilter(2));
-             result = client.Search(testForShard, new string[] { "type" }, constantScoreQuery, 0, 25);
+             result = client.Search(testForShard, "type" , constantScoreQuery, 0, 25);
             Assert.AreEqual(12, result.GetTotalCount());
             Assert.AreEqual(12, result.GetHits().Hits.Count);
 
             constantScoreQuery = new ConstantScoreQuery(new LimitFilter(3));
-            result = client.Search(testForShard, new string[] { "type" }, constantScoreQuery, 0, 25);
+            result = client.Search(testForShard, "type" , constantScoreQuery, 0, 25);
             Assert.AreEqual(18, result.GetTotalCount());
             Assert.AreEqual(18, result.GetHits().Hits.Count);
 
@@ -1249,7 +1249,7 @@ namespace Tests
 
             Thread.Sleep(1000);
             var constantScoreQuery = new ConstantScoreQuery(new TypeFilter("type2"));
-            var result = client.Search(testForShard, new string[] { }, constantScoreQuery, 0, 25);
+            var result = client.Search(testForShard, null, constantScoreQuery, 0, 25);
             Assert.AreEqual(10, result.GetTotalCount());
             Assert.AreEqual(10, result.GetHits().Hits.Count);
 
@@ -1262,13 +1262,13 @@ namespace Tests
         {
             var query = new TermQuery("gender","true");//new TermsQuery("gender", "true", "false");
             var filterQuery = new FilteredQuery(query, new MatchAllFilter());
-            var result = client.Search(index, new string[] { "type" }, filterQuery, 0, 5);
+            var result = client.Search(index, "type" , filterQuery, 0, 5);
             Assert.AreEqual(50, result.GetTotalCount());
             Assert.AreEqual(5, result.GetHits().Hits.Count);
 
             var query1 = new TermsQuery("gender", "true");
             filterQuery = new FilteredQuery(query1, new MatchAllFilter());
-            result = client.Search(index, new string[] { "type" }, filterQuery, 0, 5);
+            result = client.Search(index, "type" , filterQuery, 0, 5);
             Assert.AreEqual(50, result.GetTotalCount());
             Assert.AreEqual(5, result.GetHits().Hits.Count);
         }
@@ -1332,14 +1332,14 @@ namespace Tests
             client.Refresh();
 
             var q=new ConstantScoreQuery(new HasChildFilter("comment",new TermQuery("author","lol")));
-            var result=client.Search(index, new string[]{"blog"}, q,0,5);
+            var result=client.Search(index, "blog", q,0,5);
 
             Assert.AreEqual(1,result.GetTotalCount());
             Assert.AreEqual("1",result.GetHitIds()[0]);
 
 
             q = new ConstantScoreQuery(new HasChildFilter("comment", new TermQuery("author", "laday-guagua")));
-            result = client.Search(index, new string[] { "blog" }, q, 0, 5);
+            result = client.Search(index, "blog" , q, 0, 5);
 
             Assert.AreEqual(2, result.GetTotalCount());
              
@@ -1355,7 +1355,7 @@ namespace Tests
             dict["param1"] = 20;
             var filter = new ScriptFilter("doc['age'].value > param1",dict);
             var filterQ = new FilteredQuery(query, filter);
-            var result= client.Search(index, new string[] {"type"}, filterQ, 0, 5);
+            var result= client.Search(index, "type" , filterQ, 0, 5);
             Assert.AreEqual(3,result.GetTotalCount());
 
 
@@ -1363,35 +1363,35 @@ namespace Tests
             dict["param1"] = 23;
             filter = new ScriptFilter("doc['age'].value > param1", dict);
             filterQ = new FilteredQuery(query, filter);
-            result = client.Search(index, new string[] { "type" }, filterQ, 0, 5);
+            result = client.Search(index, "type" , filterQ, 0, 5);
             Assert.AreEqual(2, result.GetTotalCount());
 
             dict = new Dictionary<string, object>();
             dict["param1"] = 24;
             filter = new ScriptFilter("doc['age'].value >= param1", dict);
             filterQ = new FilteredQuery(query, filter);
-            result = client.Search(index, new string[] { "type" }, filterQ, 0, 5);
+            result = client.Search(index, "type" , filterQ, 0, 5);
             Assert.AreEqual(2, result.GetTotalCount());
 
             dict = new Dictionary<string, object>();
             dict["param1"] = 25;
             filter = new ScriptFilter("doc['age'].value >= param1", dict);
             filterQ = new FilteredQuery(query, filter);
-            result = client.Search(index, new string[] { "type" }, filterQ, 0, 5);
+            result = client.Search(index, "type" , filterQ, 0, 5);
             Assert.AreEqual(1, result.GetTotalCount());
 
             dict = new Dictionary<string, object>();
             dict["param1"] = 25;
             filter = new ScriptFilter("doc['age'].value < param1", dict);
             filterQ = new FilteredQuery(query, filter);
-            result = client.Search(index, new string[] { "type" }, filterQ, 0, 5);
+            result = client.Search(index, "type" , filterQ, 0, 5);
             Assert.AreEqual(2, result.GetTotalCount());
 
             dict = new Dictionary<string, object>();
             dict["param1"] = 20;
             filter = new ScriptFilter("doc['age'].value < param1", dict);
             filterQ = new FilteredQuery(query, filter);
-            result = client.Search(index, new string[] { "type" }, filterQ, 0, 5);
+            result = client.Search(index, "type" , filterQ, 0, 5);
             Assert.AreEqual(0, result.GetTotalCount());
         }
 
@@ -1401,7 +1401,7 @@ namespace Tests
             var rangefilter = new NumericRangeFilter("age", 22, 25, true, true);
             ConstantScoreQuery query=new ConstantScoreQuery(rangefilter);
 
-            var result= client.Search(index, new string[] {"type"}, query, 0, 5);
+            var result= client.Search(index, "type" , query, 0, 5);
 
             Assert.AreEqual(4, result.GetTotalCount());
 
@@ -1409,14 +1409,14 @@ namespace Tests
             rangefilter = new NumericRangeFilter("age", 22, 25, false, true);
             query = new ConstantScoreQuery(rangefilter);
 
-            result = client.Search(index, new string[] { "type" }, query, 0, 5);
+            result = client.Search(index, "type" , query, 0, 5);
 
             Assert.AreEqual(3, result.GetTotalCount());
 
             rangefilter = new NumericRangeFilter("age", 22, 25, false, false);
             query = new ConstantScoreQuery(rangefilter);
 
-            result = client.Search(index, new string[] { "type" }, query, 0, 5);
+            result = client.Search(index, "type" , query, 0, 5);
 
             Assert.AreEqual(2, result.GetTotalCount());
         }
@@ -1427,12 +1427,12 @@ namespace Tests
         {
             var termsFilter = new TermsFilter("age", 22, 23, 24,25);
             var constantQ = new ConstantScoreQuery(termsFilter);
-            var result= client.Search(index, new string[] {"type"}, constantQ, 0, 5);
+            var result= client.Search(index, "type" , constantQ, 0, 5);
             Assert.AreEqual(4,result.GetTotalCount());
 
             termsFilter = new TermsFilter("age", 22);
             constantQ = new ConstantScoreQuery(termsFilter);
-            result = client.Search(index, new string[] { "type" }, constantQ, 0, 5);
+            result = client.Search(index, "type" , constantQ, 0, 5);
             Assert.AreEqual(1, result.GetTotalCount());
         }
 
@@ -1449,14 +1449,14 @@ namespace Tests
 
             var termsFilter = new TermsFilter("age", 22, 23, 24, 25);
             var constantQ = new ConstantScoreQuery(termsFilter);
-            var result = client.Search(index, new string[] { "type" }, constantQ, 0, 5);
+            var result = client.Search(index, "type" , constantQ, 0, 5);
             Assert.AreEqual(4, result.GetTotalCount());
 
             Stopwatch stopwatch=new Stopwatch();
             stopwatch.Start();
             for (int i = 0; i < 30000; i++)
             {
-                client.Search(index, new string[] { "type" }, constantQ, 0, 5);
+                client.Search(index, "type" , constantQ, 0, 5);
             }
             stopwatch.Stop();
             var time1 = stopwatch.ElapsedMilliseconds;
@@ -1465,14 +1465,14 @@ namespace Tests
             termsFilter = new TermsFilter("age", 22, 23, 24, 25);
             termsFilter.SetCache(true);
             constantQ = new ConstantScoreQuery(termsFilter);
-            result = client.Search(index, new string[] { "type" }, constantQ, 0, 5);
+            result = client.Search(index, "type" , constantQ, 0, 5);
             Assert.AreEqual(4, result.GetTotalCount());
             
             stopwatch = new Stopwatch();
             stopwatch.Start();
             for (int i = 0; i < 30000; i++)
             {
-                client.Search(index, new string[] { "type" }, constantQ, 0, 5);
+                client.Search(index, "type" , constantQ, 0, 5);
             }
             stopwatch.Stop();
             var time2 = stopwatch.ElapsedMilliseconds;
@@ -1504,12 +1504,32 @@ namespace Tests
             var nestFilter = new NestedFilter("person", new TermQuery("resume.age", 22), true);
 
             var q = new FilteredQuery(new TermQuery("type","vip"), nestFilter);
-            var result=client.Search(index, new string[] {"person"}, q, 0, 5);
+            var result=client.Search(index, "person", q, 0, 5);
             Assert.AreEqual(1,result.GetTotalCount());
             Assert.AreEqual("jackson", result.GetHits().Hits[0].Fields["name"]);
         
             
         }
+
+		[Test]
+		public void  TestWithSort()
+		{
+			var termq = new TermQuery("type", "common");
+			var conq = new ConstantScoreQuery(termq);
+			var result= client.Search(index, new string[] {"type"}, conq, new SortItem("age", SortType.Asc), 0, 5);
+			Assert.AreEqual(3,result.GetTotalCount());
+
+			Assert.AreEqual(23,result.GetHits().Hits[0].Fields["age"]);
+			Assert.AreEqual(24,result.GetHits().Hits[1].Fields["age"]);
+			Assert.AreEqual(25,result.GetHits().Hits[2].Fields["age"]);
+
+			result = client.Search(index, new string[] { "type" }, conq, new SortItem("age", SortType.Desc), 0, 5);
+			Assert.AreEqual(3, result.GetTotalCount());
+
+			Assert.AreEqual(25, result.GetHits().Hits[0].Fields["age"]);
+			Assert.AreEqual(24, result.GetHits().Hits[1].Fields["age"]);
+			Assert.AreEqual(23, result.GetHits().Hits[2].Fields["age"]);
+		}
 
 	    #endregion
 

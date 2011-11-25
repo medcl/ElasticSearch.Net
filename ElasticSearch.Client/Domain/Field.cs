@@ -16,4 +16,26 @@
 			this.Boost = boost;
 		}
 	}
+
+	public enum SortType
+	{
+		Asc,
+		Desc
+	}
+	public class SortItem
+	{
+		public SortItem(string name, SortType type)
+		{
+			FieldName = name;
+			SortType = type;
+		}
+
+		public string FieldName { set; get; }
+		public SortType SortType { set; get; }
+
+		public override string ToString()
+		{
+			return FieldName + ":" + SortType.ToString().ToLower();
+		}
+	}
 }
