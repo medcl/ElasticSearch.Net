@@ -17,20 +17,40 @@ namespace ElasticSearch.Client.QueryDSL
 
         public List<IFilter> Filters;
 
-        public AndFilter(params IFilter[] filters)
-        {
-            Filters=new List<IFilter>();
-            Filters.AddRange(filters);
-        }
+		public AndFilter(params IFilter[] filters)
+		{
+			Filters = new List<IFilter>();
 
-        public void Add(IFilter filter)
-        {
-            Filters.Add(filter);
-        }
+			foreach (var filter in filters)
+			{
+				if (filter is AndFilter)
+				{
+					Filters.AddRange((filter as AndFilter).Filters);
+				}
+				else
+				{
+					Filters.Add(filter);
+				}
+			}
+		}
 
-        public void SetCache(bool cache)
+		public AndFilter Add(IFilter filter)
+		{
+			if (filter is AndFilter)
+			{
+				Filters.AddRange((filter as AndFilter).Filters);
+			}
+			else
+			{
+				Filters.Add(filter);
+			}
+			return this;
+		}
+
+		public AndFilter SetCache(bool cache)
         {
             Cache = cache;
+			return this;
         }
 
     }

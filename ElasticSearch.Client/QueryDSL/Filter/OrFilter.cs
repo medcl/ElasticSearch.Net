@@ -17,16 +17,35 @@ namespace ElasticSearch.Client.QueryDSL
 
         public List<IFilter> Filters;
 
-        public OrFilter(params IFilter[] filters)
-        {
-            Filters = new List<IFilter>();
-            Filters.AddRange(filters);
-        }
+		public OrFilter(params IFilter[] filters)
+		{
+			Filters = new List<IFilter>();
 
-        public void Add(IFilter filter)
-        {
-            Filters.Add(filter);
-        }
+			foreach (var filter in filters)
+			{
+				if (filter is OrFilter)
+				{
+					Filters.AddRange((filter as OrFilter).Filters);
+				}
+				else
+				{
+					Filters.Add(filter);
+				}
+			}
+		}
+
+		public OrFilter Add(IFilter filter)
+		{
+			if (filter is OrFilter)
+			{
+				Filters.AddRange((filter as OrFilter).Filters);
+			}
+			else
+			{
+				Filters.Add(filter);
+			}
+			return this;
+		}
 
         public void SetCache(bool cache)
         {

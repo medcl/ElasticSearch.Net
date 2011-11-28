@@ -21,33 +21,33 @@ namespace ElasticSearch.Client.QueryDSL
 		internal double Boost=1.0;
 		[DefaultValue(false)]
 		internal bool DisableCoord=false;
-		public BoolQuery Must(IQuery query)
+		public BoolQuery Must(params IQuery[] query)
 		{
 			if (MustQueries == null)
 			{
 				MustQueries = new List<IQuery>();
 			}
-			MustQueries.Add(query); 
+			MustQueries.AddRange(query);
 			return this;
 		}
 
-		public BoolQuery Should(IQuery query)
+		public BoolQuery Should(params IQuery[] query)
 		{
 			if (ShouldQueries == null)
 			{
 				ShouldQueries = new List<IQuery>();
 			}
-			ShouldQueries.Add(query);
+			ShouldQueries.AddRange(query);
 			return this;
 		}
 
-		public BoolQuery MustNot(IQuery query)
+		public BoolQuery MustNot(params IQuery[] query)
 		{
 			if (MustNotQueries == null)
 			{
 				MustNotQueries = new List<IQuery>();
 			}
-			MustNotQueries.Add(query);
+			MustNotQueries.AddRange(query);
 			return this;
 		}
 
