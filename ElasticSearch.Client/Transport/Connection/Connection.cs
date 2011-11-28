@@ -2,6 +2,7 @@
 using ElasticSearch.Client.Transport.IDL;
 using Thrift.Protocol;
 using Thrift.Transport;
+using Thrift.Transport.Thrift.Transport;
 
 namespace ElasticSearch.Client.Transport.Connection
 {	
@@ -21,7 +22,9 @@ namespace ElasticSearch.Client.Transport.Connection
 			Server = server;
 			if (server.IsFramed)
 			{
-				_transport = new TFramedTransport(server.Host, server.Port, socketSettings);
+				var tsocket = new TSocket(server.Host, server.Port);
+				_transport = new TFramedTransport(tsocket);
+//				_transport = new TFramedTransport(server.Host, server.Port, socketSettings);
 			}
 			else
 			{

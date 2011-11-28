@@ -18,22 +18,24 @@ namespace ElasticSearch.Client.Transport
 			Enabled = nodeDefinition.Enabled;
 			Host = nodeDefinition.Host;
 			Port = nodeDefinition.Port;
-
+//			Framed = nodeDefinition.IsFramed;
 			DangerZoneThreshold = nodeDefinition.DangerZoneThreshold;
 			DangerZoneSeconds = nodeDefinition.DangerZoneSeconds;
-			ConnectionProvider = new ConnectionPool(nodeDefinition.Host, nodeDefinition.Port, nodeDefinition.ConnectionPool??ElasticSearchConfig.Instance.ConnectionPool);
+			ConnectionProvider = new ConnectionPool(nodeDefinition.Host, nodeDefinition.Port, nodeDefinition.ConnectionPool??ElasticSearchConfig.Instance.ConnectionPool,nodeDefinition.IsFramed);
 		}
-		public ESNode(string ip,int port)
+		public ESNode(string ip,int port,bool framed=false)
 		{
 			Host = ip;
 			Port = port;
 			Enabled = true;
-			ConnectionProvider = new ConnectionPool(Host, Port, ElasticSearchConfig.Instance.ConnectionPool);
+//			Framed = framed;
+			ConnectionProvider = new ConnectionPool(Host, Port, ElasticSearchConfig.Instance.ConnectionPool,framed);
 		}
 
 		public bool Enabled { get; private set; }
 		public string Host { get; private set; }
 		public int Port { get; private set; }
+//		public bool Framed { get; private set; }
 		public int DangerZoneThreshold { get; private set; }
 		public int DangerZoneSeconds { get; private set; }
 		public IConnectionProvider ConnectionProvider { get; private set; }

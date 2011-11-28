@@ -24,87 +24,228 @@ using System.Net.Sockets;
 
 namespace Thrift.Transport
 {
-	public class TFramedTransport : TTransport
+
+	/**
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements. See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership. The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+
+	using System.IO;
+
+	namespace Thrift.Transport
 	{
-		public static readonly int FrameHeaderLength = 4;
-
-		private readonly IPEndPoint remoteEndPoint;
-		private readonly TSocketV2 socket;
-
-		private MemoryStream readBuffer;
-		private MemoryStream writeBuffer = new MemoryStream(1024);
-
-		public TFramedTransport(string host, int port, TSocketSettings socketSettings)
+		public class TFramedTransport : TTransport
 		{
-			if (string.IsNullOrEmpty(host))
-				throw new ArgumentNullException("host");
-			if (socketSettings == null)
-				throw new ArgumentNullException("socketSettings");
+			protected TTransport transport = null;
+			protected MemoryStream writeBuffer;
+			protected MemoryStream readBuffer = null;
 
-			if (host.ToLower() == "localhost")
+			private const int header_size = 4;
+			private static byte[] header_dummy = new byte[header_size]; // used as header placeholder while initilizing new write buffer
+
+			public class Factory : TTransportFactory
 			{
-				host = "127.0.0.1";
-			}
-			remoteEndPoint = new IPEndPoint(IPAddress.Parse(host), port);
-			socket = new TSocketV2(socketSettings);
-		}
-
-		public override bool IsOpen
-		{
-			get { return socket.Connected; }
-		}
-
-		public override void Open()
-		{
-			socket.Connect(remoteEndPoint);
-		}
-
-		public override void Close()
-		{
-			socket.Close();
-		}
-
-		public override int Read(byte[] buf, int off, int len)
-		{
-			if (readBuffer != null)
-			{
-				int got = readBuffer.Read(buf, off, len);
-				if (got > 0)
-					return got;
+				public override TTransport GetTransport(TTransport trans)
+				{
+					return new TFramedTransport(trans);
+				}
 			}
 
-			// Read another frame of data
-			ReadFrame();
-			return readBuffer.Read(buf, off, len);
-		}
+			public TFramedTransport()
+			{
+				InitWriteBuffer();
+			}
 
-		private void ReadFrame()
-		{
-			readBuffer = socket.ReadFrame();
-		}
+			public TFramedTransport(TTransport transport)
+				: this()
+			{
+				this.transport = transport;
+			}
 
-		public override void Write(byte[] buf, int off, int len)
-		{
-			writeBuffer.Write(buf, off, len);
-		}
+			public override void Open()
+			{
+				transport.Open();
+			}
 
-		public override void Flush()
-		{
-			var frame = new byte[FrameHeaderLength + writeBuffer.Length];
-			byte[] data = writeBuffer.GetBuffer();
-			var dataLength = (int) writeBuffer.Length;
+			public override bool IsOpen
+			{
+				get
+				{
+					return transport.IsOpen;
+				}
+			}
 
-			writeBuffer = new MemoryStream(writeBuffer.Capacity);
+			public override void Close()
+			{
+				transport.Close();
+			}
 
-			frame[0] = (byte) (0xff & (dataLength >> 24));
-			frame[1] = (byte) (0xff & (dataLength >> 16));
-			frame[2] = (byte) (0xff & (dataLength >> 8));
-			frame[3] = (byte) (0xff & (dataLength));
-			Array.Copy(data, 0, frame, FrameHeaderLength, dataLength);
+			public override int Read(byte[] buf, int off, int len)
+			{
+				if (readBuffer != null)
+				{
+					int got = readBuffer.Read(buf, off, len);
+					if (got > 0)
+					{
+						return got;
+					}
+				}
 
-			socket.Send(frame, frame.Length, SocketFlags.None);
+				// Read another frame of data
+				ReadFrame();
+
+				return readBuffer.Read(buf, off, len);
+			}
+
+			private void ReadFrame()
+			{
+				byte[] i32rd = new byte[header_size];
+				transport.ReadAll(i32rd, 0, header_size);
+				int size =
+					((i32rd[0] & 0xff) << 24) |
+					((i32rd[1] & 0xff) << 16) |
+					((i32rd[2] & 0xff) << 8) |
+					((i32rd[3] & 0xff));
+
+				byte[] buff = new byte[size];
+				transport.ReadAll(buff, 0, size);
+				readBuffer = new MemoryStream(buff);
+			}
+
+			public override void Write(byte[] buf, int off, int len)
+			{
+				writeBuffer.Write(buf, off, len);
+			}
+
+			public override void Flush()
+			{
+				byte[] buf = writeBuffer.GetBuffer();
+				int len = (int)writeBuffer.Length;
+				int data_len = len - header_size;
+				if (data_len < 0)
+					throw new System.InvalidOperationException(); // logic error actually
+
+				InitWriteBuffer();
+
+				// Inject message header into the reserved buffer space
+				buf[0] = (byte)(0xff & (data_len >> 24));
+				buf[1] = (byte)(0xff & (data_len >> 16));
+				buf[2] = (byte)(0xff & (data_len >> 8));
+				buf[3] = (byte)(0xff & (data_len));
+
+				// Send the entire message at once
+				transport.Write(buf, 0, len);
+
+				transport.Flush();
+			}
+
+			private void InitWriteBuffer()
+			{
+				// Create new buffer instance
+				writeBuffer = new MemoryStream(1024);
+
+				// Reserve space for message header to be put right before sending it out
+				writeBuffer.Write(header_dummy, 0, header_size);
+			}
 		}
 	}
+
+
+//	public class TFramedTransport : TTransport
+//	{
+//		public static readonly int FrameHeaderLength = 4;
+//
+//		private readonly IPEndPoint remoteEndPoint;
+//		private readonly TSocketV2 socket;
+//
+//		private MemoryStream readBuffer;
+//		private MemoryStream writeBuffer = new MemoryStream(1024);
+//
+//		public TFramedTransport(string host, int port, TSocketSettings socketSettings)
+//		{
+//			if (string.IsNullOrEmpty(host))
+//				throw new ArgumentNullException("host");
+//			if (socketSettings == null)
+//				throw new ArgumentNullException("socketSettings");
+//
+//			if (host.ToLower() == "localhost")
+//			{
+//				host = "127.0.0.1";
+//			}
+//			remoteEndPoint = new IPEndPoint(IPAddress.Parse(host), port);
+//			socket = new TSocketV2(socketSettings);
+//		}
+//
+//		public override bool IsOpen
+//		{
+//			get { return socket.Connected; }
+//		}
+//
+//		public override void Open()
+//		{
+//			socket.Connect(remoteEndPoint);
+//		}
+//
+//		public override void Close()
+//		{
+//			socket.Close();
+//		}
+//
+//		public override int Read(byte[] buf, int off, int len)
+//		{
+//			if (readBuffer != null)
+//			{
+//				int got = readBuffer.Read(buf, off, len);
+//				if (got > 0)
+//					return got;
+//			}
+//
+//			// Read another frame of data
+//			ReadFrame();
+//			return readBuffer.Read(buf, off, len);
+//		}
+//
+//		private void ReadFrame()
+//		{
+//			readBuffer = socket.ReadFrame();
+//		}
+//
+//		public override void Write(byte[] buf, int off, int len)
+//		{
+//			writeBuffer.Write(buf, off, len);
+//		}
+//
+//		public override void Flush()
+//		{
+//			var frame = new byte[FrameHeaderLength + writeBuffer.Length];
+//			byte[] data = writeBuffer.GetBuffer();
+//			var dataLength = (int) writeBuffer.Length;
+//
+//			writeBuffer = new MemoryStream(writeBuffer.Capacity);
+//
+//			frame[0] = (byte) (0xff & (dataLength >> 24));
+//			frame[1] = (byte) (0xff & (dataLength >> 16));
+//			frame[2] = (byte) (0xff & (dataLength >> 8));
+//			frame[3] = (byte) (0xff & (dataLength));
+//			Array.Copy(data, 0, frame, FrameHeaderLength, dataLength);
+//
+//			socket.Send(frame, frame.Length, SocketFlags.None);
+//		}
+//	}
 
 //	public class TFramedTransport : TTransport
 //	{

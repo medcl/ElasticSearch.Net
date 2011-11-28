@@ -28,10 +28,10 @@ namespace ElasticSearch.Client
 			_provider = new RestProvider(clusterName);
 		}
 
-		public ElasticSearchClient(string host, int port, TransportType transportType)
+		public ElasticSearchClient(string host, int port, TransportType transportType,bool isframed=false)
 		{
 			string cluster = string.Format("{0}:{1}", host, port);
-			ESNodeManager.Instance.BuildCustomNodes(cluster, host, port, transportType);
+			ESNodeManager.Instance.BuildCustomNodes(cluster, host, port, transportType,isframed);
 			_provider = new RestProvider(cluster);
 		}
 

@@ -80,7 +80,7 @@ namespace ElasticSearch.Client.Transport
 		/// <param name="ip"></param>
 		/// <param name="port"></param>
 		/// <param name="transportType"></param>
-		public void BuildCustomNodes(string clusterName,string ip,int port,TransportType transportType)
+		public void BuildCustomNodes(string clusterName,string ip,int port,TransportType transportType,bool isFramed=false)
 		{
 			BuildCluster(clusterName,transportType);
 
@@ -88,7 +88,7 @@ namespace ElasticSearch.Client.Transport
 			{	List<ESNode> nodes;
 				ClusterThriftNodes.TryGetValue(clusterName, out nodes);
 				if(nodes==null)nodes=new List<ESNode>();
-				nodes.Add(new ESNode(ip, port));
+				nodes.Add(new ESNode(ip, port,isFramed));
 				ClusterThriftNodes[clusterName] = nodes;
 			}
 			else

@@ -52,12 +52,13 @@ namespace ElasticSearch.Client.Domain
 
 					if(bulkObject.Fields.Count>0)
 					{
-						stringBuilder.AppendLine(JsonSerializer.Get(bulkObject.Fields));
+						stringBuilder.Append(JsonSerializer.Get(bulkObject.Fields));
 					}
 					else
 					{
-						stringBuilder.AppendLine(bulkObject.JsonData);
+						stringBuilder.Append(bulkObject.JsonData);
 					}
+					stringBuilder.Append("\n");   
 			}
 			return stringBuilder.ToString();
 		}

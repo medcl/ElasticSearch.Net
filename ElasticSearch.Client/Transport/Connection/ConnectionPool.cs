@@ -34,11 +34,11 @@ namespace ElasticSearch.Client.Transport.Connection
 
 		#region ctor
 
-		public ConnectionPool(string host, int port, ConnectionPoolConfig config)
+		public ConnectionPool(string host, int port, ConnectionPoolConfig config,bool isframed=false)
 		{
 			if (config == null) throw new ArgumentNullException("config");
 
-			_target = new Server(host, port);
+			_target = new Server(host, port,isframed);
 			_config = config;
 			_socketSettings = config.SocketSettings ?? TSocketSettings.DefaultSettings;
 
