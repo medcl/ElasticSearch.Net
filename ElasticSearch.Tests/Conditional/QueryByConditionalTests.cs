@@ -52,7 +52,7 @@ namespace Tests
 		[TestFixtureSetUp]
 		public void Setup()
 		{
-			client=new ElasticSearchClient("localhost",9200,TransportType.Http);
+			client=new ElasticSearchClient("localhost");
 		}
 		[TestFixtureTearDown]
 		public void CleanUp()

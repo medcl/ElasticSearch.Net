@@ -8,14 +8,14 @@ namespace Tests
 	[TestFixture]
 	public class ClusterSetupTests
 	{
-		[Test]
+		[Test,Ignore]
 		public void TestDynamicUserClusters()
 		{
 			ElasticSearchClient client = new ElasticSearchClient("127.0.0.1", 9200, TransportType.Http);
 
 			List<string> indices= client.GetIndices();
 
-			client=new ElasticSearchClient("127.0.0.1",9500,TransportType.Thrift);
+			client=new ElasticSearchClient("127.0.0.1",9500,TransportType.Thrift,true);
 
 			indices= client.GetIndices();
 		}

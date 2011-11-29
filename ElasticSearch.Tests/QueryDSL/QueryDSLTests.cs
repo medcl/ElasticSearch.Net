@@ -1542,7 +1542,7 @@ namespace Tests
 			typesetting.AddFieldSetting("id", new NumberFieldSetting() { });
 			typesetting.AddFieldSetting("gender", new BooleanFieldSetting() { Index = IndexType.not_analyzed });
 
-			client.Index(index, "type", "_medcl", "{}");
+			client.CreateIndex(index);
 			client.PutMapping(index, typesetting);
 
 			IndexItem item;

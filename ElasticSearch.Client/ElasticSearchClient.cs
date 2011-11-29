@@ -130,7 +130,7 @@ namespace ElasticSearch.Client
 			return null;
 		}
 
-		public OperateResult Delete(string indexName, string indexType, string[] objectKeys)
+		public OperateResult Delete(string indexName, string indexType, string[] objectKeys, string routing = null)
 		{
 			Contract.Assert(!string.IsNullOrEmpty(indexName));
 			Contract.Assert(!string.IsNullOrEmpty(indexType));
@@ -141,9 +141,40 @@ namespace ElasticSearch.Client
 			var stringBuilder = new StringBuilder(objectKeys.Length);
 			foreach (string variable in objectKeys)
 			{
-				stringBuilder.AppendLine(
-					"{{ \"delete\" : {{ \"_index\" : \"{0}\", \"_type\" : \"{1}\", \"_id\" : \"{2}\" }} }}".Fill(indexName.ToLower(),
-					                                                                                             indexType, variable));
+				stringBuilder.Append(
+					"{{ \"delete\" : {{ \"_index\" : \"{0}\", \"_type\" : \"{1}\", \"_id\" : \"{2}\"".Fill(indexName.ToLower(),
+																											  indexType, variable));
+				if (!string.IsNullOrEmpty(routing))
+				{
+					stringBuilder.Append(string.Format(", \"routing\" : \"{0}\"", routing));
+				}
+				stringBuilder.Append(" }}");
+				stringBuilder.Append("\n");
+			}
+			string jsonData = stringBuilder.ToString();
+			RestResponse result = _provider.Post(url, jsonData);
+			OperateResult result1 = GetOperationResult(result);
+			result1.Success = result.Status == Transport.IDL.Status.OK;
+			return result1;
+		}
+
+
+		public OperateResult Delete(string indexName, string indexType, List<KeyValuePair<string, string>> keyParentPairs)
+		{
+			Contract.Assert(!string.IsNullOrEmpty(indexName));
+			Contract.Assert(!string.IsNullOrEmpty(indexType));
+			Contract.Assert(keyParentPairs != null);
+			Contract.Assert(keyParentPairs.Count > 0);
+
+			string url = "/_bulk";
+			var stringBuilder = new StringBuilder(keyParentPairs.Count);
+			foreach (var variable in keyParentPairs)
+			{
+
+				stringBuilder.Append(
+					"{{ \"delete\" : {{ \"_index\" : \"{0}\", \"_type\" : \"{1}\", \"_id\" : \"{2}\", \"routing\" : \"{3}\" }} }}".Fill(indexName.ToLower(),
+																											  indexType, variable.Key, variable.Value));
+				stringBuilder.Append("\n");
 			}
 			string jsonData = stringBuilder.ToString();
 			RestResponse result = _provider.Post(url, jsonData);
@@ -652,6 +683,18 @@ namespace ElasticSearch.Client
 		#endregion
 
 		#region delete
+
+		public OperateResult Delete(string index, string type, string indexKey, string routing)
+		{
+			Contract.Assert(!string.IsNullOrEmpty(index));
+			Contract.Assert(!string.IsNullOrEmpty(type));
+			Contract.Assert(!string.IsNullOrEmpty(indexKey));
+
+
+			string url = "/{0}/{1}/{2}?routing={3}".Fill(index.ToLower(), type, indexKey, routing);
+			RestResponse result = _provider.Delete(url);
+			return GetOperationResult(result);
+		}
 
 		public OperateResult Delete(string index, string type, string indexKey)
 		{

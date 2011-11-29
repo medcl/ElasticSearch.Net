@@ -14,20 +14,21 @@ namespace ElasticSearch.Client.Domain
 		public string JsonData;
 		public string ParentId;
 		public BulkObject(){}
-		public BulkObject(string index,string type,string id,string jsonData,string parentKey=null)
+		public BulkObject(string index, string type, string id, string jsonData, string parentKey = null)
 		{
 			Index = index.Trim().ToLower();
 			Type = type.Trim();
 			Id = id;
 			JsonData = jsonData;
+			ParentId = parentKey;
 		}
-		public BulkObject(string index, string type, string id, Dictionary<string, object> fields)
+		public BulkObject(string index, string type, string id, Dictionary<string, object> fields, string parentKey = null)
 		{
 			Index = index.Trim().ToLower();
 			Type = type.Trim();
 			Id = id;
 			Fields = fields;
-			
+			ParentId = parentKey;
 		}
 	}
 
@@ -58,8 +59,9 @@ namespace ElasticSearch.Client.Domain
 					{
 						stringBuilder.Append(bulkObject.JsonData);
 					}
-					stringBuilder.Append("\n");   
+					stringBuilder.Append("\n");
 			}
+			
 			return stringBuilder.ToString();
 		}
 	}
