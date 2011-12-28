@@ -26,8 +26,8 @@ namespace ElasticSearch.Client.QueryDSL
                 {
                     serializer.Serialize(writer, term.Filter);
                 }
-                writer.WritePropertyName("_cache");
-                writer.WriteValue(term.Cache);
+//                writer.WritePropertyName("_cache");
+//                writer.WriteValue(term.Cache);
                 writer.WriteEndObject();
                 writer.WriteEndObject();
             }

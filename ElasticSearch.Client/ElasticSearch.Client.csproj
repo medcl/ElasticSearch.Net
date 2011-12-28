@@ -117,11 +117,11 @@
     <Compile Include="QueryDSL\Filter\MatchAllFilter.cs" />
     <Compile Include="QueryDSL\Converters\Filter\MatchAllFilterConverter.cs" />
     <Compile Include="QueryDSL\Filter\MatchAllQuery.cs" />
-    <Compile Include="QueryDSL\Filter\MatchAllQueryConverter.cs" />
+    <Compile Include="QueryDSL\Converters\Query\MatchAllQueryConverter.cs" />
     <Compile Include="QueryDSL\Filter\MissingFilter.cs" />
     <Compile Include="QueryDSL\Converters\Filter\MissingFilterConverter.cs" />
     <Compile Include="QueryDSL\Filter\NestedFilter.cs" />
-    <Compile Include="QueryDSL\Filter\NestedFilterConverter.cs" />
+    <Compile Include="QueryDSL\Converters\Filter\NestedFilterConverter.cs" />
     <Compile Include="QueryDSL\Filter\NotFilter.cs" />
     <Compile Include="QueryDSL\Converters\Filter\NotFilterConverter.cs" />
     <Compile Include="QueryDSL\Filter\NumericRangeFilter.cs" />
