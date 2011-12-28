@@ -28,7 +28,7 @@ namespace ElasticSearch.Client.QueryDSL
                 }
 
                 stringBuilder.Append("]");
-                stringBuilder.Append(",\"_cache\": " + term.Cache.ToString().ToLower());
+//                stringBuilder.Append(",\"_cache\": " + term.Cache.ToString().ToLower());
                 stringBuilder.Append("}}");
 
                 writer.WriteRawValue(stringBuilder.ToString());

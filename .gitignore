@@ -17,3 +17,4 @@
 *.suo
 Settings.StyleCop
 StyleCop.Cache
+*.user

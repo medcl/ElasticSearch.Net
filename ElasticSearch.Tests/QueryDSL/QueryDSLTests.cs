@@ -849,6 +849,61 @@ namespace Tests
             Assert.AreEqual(50, result2.GetTotalCount());
             Assert.AreEqual(5, result2.GetHits().Hits.Count);
         }
+
+
+        [Test]
+        public void TestConstantScoreWithRangeFilter()
+        {
+            var termFilter = new RangeFilter("age", "22","25",true,true);
+            var constanFilter = new ConstantScoreQuery(termFilter);
+            var result2 = client.Search(index, "type", constanFilter, 0, 5);
+            Assert.AreEqual(4, result2.GetTotalCount());
+            Assert.AreEqual(4, result2.GetHits().Hits.Count);
+        }
+
+        [Test]
+        public void TestConstantScoreNestedAndFilter()
+        {
+
+            IFilter termFilter = new TermFilter("gender", "true");
+
+            var andFilter = new AndFilter(termFilter);
+            
+            var constanFilter = new ConstantScoreQuery(andFilter);
+            
+            var result2 = client.Search(index, "type", constanFilter, 0, 5);
+            Assert.AreEqual(50, result2.GetTotalCount());
+            Assert.AreEqual(5, result2.GetHits().Hits.Count);
+
+
+            //test and filter and range filter
+
+            termFilter = new RangeFilter("age", "22", "25", true, true);
+
+            andFilter = new AndFilter(termFilter);
+
+            constanFilter = new ConstantScoreQuery(andFilter);
+            result2 = client.Search(index, "type", constanFilter, 0, 5);
+            Assert.AreEqual(4, result2.GetTotalCount());
+            Assert.AreEqual(4, result2.GetHits().Hits.Count);
+
+
+            //test bool filter and range filter
+            termFilter = new RangeFilter("age", "22", "25", true, true);
+
+            var boolfilter = new BoolFilter();
+            boolfilter.Must(termFilter);
+
+            constanFilter = new ConstantScoreQuery(boolfilter);
+            result2 = client.Search(index, "type", constanFilter, 0, 5);
+            Assert.AreEqual(4, result2.GetTotalCount());
+            Assert.AreEqual(4, result2.GetHits().Hits.Count);
+
+
+        }
+
+
+
         
         [Test]
         public void TestConstantQueryWithQueryFilter()

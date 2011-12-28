@@ -16,7 +16,7 @@ namespace ElasticSearch.Client.QueryDSL
                 stringBuilder.Append(term.Prefix);
                 stringBuilder.Append("\""); 
                 
-                stringBuilder.Append(",\"_cache\" :"+term.Cache.ToString().ToLower());
+//                stringBuilder.Append(",\"_cache\" :"+term.Cache.ToString().ToLower());
                 
                 stringBuilder.Append("}}");
 

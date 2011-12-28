@@ -21,7 +21,7 @@ namespace ElasticSearch.Client.QueryDSL
 //                }
 //                writer.WriteEndArray();
                 writer.WriteEndObject();
-                writer.WriteRaw(",\"_cache\": " + term.Cache.ToString().ToLower());
+//                writer.WriteRaw(",\"_cache\": " + term.Cache.ToString().ToLower());
                 writer.WriteEndObject();
             }
         }

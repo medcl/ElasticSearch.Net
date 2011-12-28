@@ -14,7 +14,7 @@ namespace ElasticSearch.Client.QueryDSL
                 writer.WriteStartObject();
                 writer.WritePropertyName("query");
                 serializer.Serialize(writer, term.Query);
-                writer.WriteRaw(",\"_cache\": " + term.Cache.ToString().ToLower());
+//                writer.WriteRaw(",\"_cache\": " + term.Cache.ToString().ToLower());
                 writer.WriteEndObject();
             }
         }
