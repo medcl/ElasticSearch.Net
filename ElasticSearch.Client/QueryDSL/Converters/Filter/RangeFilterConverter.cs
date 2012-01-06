@@ -11,7 +11,7 @@ namespace ElasticSearch.Client.QueryDSL
             if (term != null)
             {
                 writer.WriteStartObject();
-                writer.WritePropertyName("numeric_range");
+                writer.WritePropertyName("range");
                 writer.WriteStartObject();
                 writer.WritePropertyName(term.Field);
                 writer.WriteStartObject();
