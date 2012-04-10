@@ -39,6 +39,12 @@ namespace ElasticSearch.Client.QueryDSL
 					writer.WriteValue(term.Fuzziness);
 				}
 
+                if (!Equals(term.Boost, default(float)))
+                {
+                    writer.WritePropertyName("boost");
+                    writer.WriteValue(term.Boost);
+                }
+
 				if (!Equals(term.PrefixLength, default(int)))
 				{
 					writer.WritePropertyName("prefix_length");

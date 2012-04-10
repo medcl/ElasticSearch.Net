@@ -7,7 +7,11 @@ namespace ElasticSearch.Client.Domain
 	public class Hits
 	{
 		[JsonProperty("_source")] 
-		public Dictionary<string, object> Fields = new Dictionary<string, object>();
+		public Dictionary<string, object> Source = new Dictionary<string, object>();
+
+        [JsonProperty("fields")]
+        public Dictionary<string, object> Fields;
+
 		[JsonProperty("_id")] 
 		public string Id;
 		[JsonProperty("_index")] 
@@ -33,7 +37,7 @@ namespace ElasticSearch.Client.Domain
 			stringBuilder.Append(" _version:");
 			stringBuilder.Append(Version);
 			stringBuilder.Append(" _source:");
-			foreach (var field in Fields)
+			foreach (var field in Source)
 			{
 				stringBuilder.Append(field.Key);
 				stringBuilder.Append(", ");

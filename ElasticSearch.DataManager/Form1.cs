@@ -14,7 +14,7 @@ using Aga.Controls.Tree.NodeControls;
 using ElasticSearch.Client;
 using ElasticSearch.Client.Admin;
 using ElasticSearch.Client.Config;
-using ElasticSearch.Client.EMO;
+using ElasticSearch.Client.Domain;
 using ElasticSearch.Client.Mapping;
 using ElasticSearch.Client.Utils;
 using ElasticSearch.DataManager.Dialogs;

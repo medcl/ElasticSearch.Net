@@ -127,7 +127,7 @@ namespace Tests
 	        Assert.AreEqual(3, result.GetHits().Hits.Count);
 	        foreach (var VARIABLE in result.GetHits().Hits)
 	        {
-	            Console.WriteLine(VARIABLE.Fields["name"]);
+	            Console.WriteLine(VARIABLE.Source["name"]);
 	        }
 
 	        Console.WriteLine("--");
@@ -137,7 +137,7 @@ namespace Tests
 	        Assert.AreEqual(2, result.GetHits().Hits.Count);
 	        foreach (var VARIABLE in result.GetHits().Hits)
 	        {
-	            Console.WriteLine(VARIABLE.Fields["name"]);
+	            Console.WriteLine(VARIABLE.Source["name"]);
 	        }
 	    }
 
@@ -150,7 +150,7 @@ namespace Tests
 	        var result = client.Search(index, "type" , query, 0, 5);
 	        foreach (var VARIABLE in result.GetHits().Hits)
 	        {
-	            Console.WriteLine(VARIABLE.Fields["name"]);
+	            Console.WriteLine(VARIABLE.Source["name"]);
 	        }
 	        Assert.AreEqual(3, result.GetTotalCount());
 	        Assert.AreEqual(3, result.GetHits().Hits.Count);
@@ -160,7 +160,7 @@ namespace Tests
 	        result = client.Search(index, "type" , query, 0, 5);
 	        foreach (var VARIABLE in result.GetHits().Hits)
 	        {
-	            Console.WriteLine(VARIABLE.Fields["name"]);
+	            Console.WriteLine(VARIABLE.Source["name"]);
 	        }
 	        Assert.AreEqual(2, result.GetTotalCount());
 	        Assert.AreEqual(2, result.GetHits().Hits.Count);
@@ -170,7 +170,7 @@ namespace Tests
 	        result = client.Search(index, "type" , query, 0, 5);
 	        foreach (var VARIABLE in result.GetHits().Hits)
 	        {
-	            Console.WriteLine(VARIABLE.Fields["name"]);
+	            Console.WriteLine(VARIABLE.Source["name"]);
 	        }
 	        Assert.AreEqual(1, result.GetTotalCount());
 	        Assert.AreEqual(1, result.GetHits().Hits.Count);
@@ -216,7 +216,7 @@ namespace Tests
 	        var result = client.Search(index, "type" , query2, 0, 5);
 	        foreach (var VARIABLE in result.GetHits().Hits)
 	        {
-	            Console.WriteLine(VARIABLE.Fields["name"]);
+	            Console.WriteLine(VARIABLE.Source["name"]);
 	        }
 	    }
         
@@ -267,7 +267,7 @@ namespace Tests
 			{
 				Console.WriteLine(o.ToString());
 			}
-			Assert.AreEqual("张",result.GetHits().Hits[0].Fields["name"]);
+			Assert.AreEqual("张",result.GetHits().Hits[0].Source["name"]);
 		}
 
 		[Test,Ignore]
@@ -378,7 +378,7 @@ namespace Tests
 			Assert.IsTrue(score0 > score1);
 			Assert.AreEqual(score1, score2);
 			Assert.AreEqual(3, result.GetTotalCount());
-			Assert.AreEqual("d2", result.GetHits().Hits[0].Fields["id"]);
+			Assert.AreEqual("d2", result.GetHits().Hits[0].Source["id"]);
 
 
 		}
@@ -991,7 +991,7 @@ namespace Tests
             result2 = client.Search(index, "type" , filteredQuery, 0, 5);
             Assert.AreEqual(1, result2.GetTotalCount());
             Assert.AreEqual(1, result2.GetHits().Hits.Count);
-            Assert.AreEqual("张三丰",result2.GetHits().Hits[0].Fields["name"]);
+            Assert.AreEqual("张三丰",result2.GetHits().Hits[0].Source["name"]);
 
 
             var boolQuery = new BoolQuery();
@@ -1004,7 +1004,7 @@ namespace Tests
             result2 = client.Search(index, "type" , filteredQuery, 0, 5);
             Assert.AreEqual(1, result2.GetTotalCount());
             Assert.AreEqual(1, result2.GetHits().Hits.Count);
-            Assert.AreEqual("张三丰", result2.GetHits().Hits[0].Fields["name"]);
+            Assert.AreEqual("张三丰", result2.GetHits().Hits[0].Source["name"]);
 
 
 
@@ -1013,7 +1013,7 @@ namespace Tests
             result2 = client.Search(index, "type" , filteredQuery, 0, 5);
             Assert.AreEqual(1, result2.GetTotalCount());
             Assert.AreEqual(1, result2.GetHits().Hits.Count);
-            Assert.AreEqual("张三", result2.GetHits().Hits[0].Fields["name"]);
+            Assert.AreEqual("张三", result2.GetHits().Hits[0].Source["name"]);
 
 
             filteredQuery = new FilteredQuery(boolQuery, new TermFilter("type", "common"));
@@ -1059,7 +1059,7 @@ namespace Tests
             result2 = client.Search(index, "type" , filteredQuery, 0, 5);
             Assert.AreEqual(1, result2.GetTotalCount());
             Assert.AreEqual(1, result2.GetHits().Hits.Count);
-            Assert.AreEqual("张三", result2.GetHits().Hits[0].Fields["name"]);
+            Assert.AreEqual("张三", result2.GetHits().Hits[0].Source["name"]);
 
 
             boolQuery.Should(new TermQuery("age", 25));
@@ -1084,7 +1084,7 @@ namespace Tests
             var result2 = client.Search(index, "type" , q, 0, 5);
             Assert.AreEqual(1, result2.GetTotalCount());
             Assert.AreEqual(1, result2.GetHits().Hits.Count);
-            Assert.AreEqual("张三", result2.GetHits().Hits[0].Fields["name"]);
+            Assert.AreEqual("张三", result2.GetHits().Hits[0].Source["name"]);
 
 
 
@@ -1093,7 +1093,7 @@ namespace Tests
             result2 = client.Search(index, "type" , constantQuery, 0, 5);
             Assert.AreEqual(1, result2.GetTotalCount());
             Assert.AreEqual(1, result2.GetHits().Hits.Count);
-            Assert.AreEqual("张三", result2.GetHits().Hits[0].Fields["name"]);
+            Assert.AreEqual("张三", result2.GetHits().Hits[0].Source["name"]);
 
         }
 
@@ -1561,7 +1561,7 @@ namespace Tests
             var q = new FilteredQuery(new TermQuery("type","vip"), nestFilter);
             var result=client.Search(index, "person", q, 0, 5);
             Assert.AreEqual(1,result.GetTotalCount());
-            Assert.AreEqual("jackson", result.GetHits().Hits[0].Fields["name"]);
+            Assert.AreEqual("jackson", result.GetHits().Hits[0].Source["name"]);
         
             
         }
@@ -1574,16 +1574,16 @@ namespace Tests
 			var result= client.Search(index, new string[] {"type"}, conq, new SortItem("age", SortType.Asc), 0, 5);
 			Assert.AreEqual(3,result.GetTotalCount());
 
-			Assert.AreEqual(23,result.GetHits().Hits[0].Fields["age"]);
-			Assert.AreEqual(24,result.GetHits().Hits[1].Fields["age"]);
-			Assert.AreEqual(25,result.GetHits().Hits[2].Fields["age"]);
+			Assert.AreEqual(23,result.GetHits().Hits[0].Source["age"]);
+			Assert.AreEqual(24,result.GetHits().Hits[1].Source["age"]);
+			Assert.AreEqual(25,result.GetHits().Hits[2].Source["age"]);
 
 			result = client.Search(index, new string[] { "type" }, conq, new SortItem("age", SortType.Desc), 0, 5);
 			Assert.AreEqual(3, result.GetTotalCount());
 
-			Assert.AreEqual(25, result.GetHits().Hits[0].Fields["age"]);
-			Assert.AreEqual(24, result.GetHits().Hits[1].Fields["age"]);
-			Assert.AreEqual(23, result.GetHits().Hits[2].Fields["age"]);
+			Assert.AreEqual(25, result.GetHits().Hits[0].Source["age"]);
+			Assert.AreEqual(24, result.GetHits().Hits[1].Source["age"]);
+			Assert.AreEqual(23, result.GetHits().Hits[2].Source["age"]);
 		}
 
 	    #endregion

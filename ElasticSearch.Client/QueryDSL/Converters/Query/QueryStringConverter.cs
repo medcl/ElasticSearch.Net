@@ -13,17 +13,21 @@ namespace ElasticSearch.Client.QueryDSL
             {
                 var stringBuilder = new StringBuilder();
                 stringBuilder.Append("{query_string:{ ");
-                stringBuilder.Append("\"default_field\":\"" + term.DefaultField + "\" ");
-                stringBuilder.Append(",\"query\":\"" + term.Query + "\" ");
+                if (!string.IsNullOrEmpty(term.DefaultField)) { stringBuilder.Append("\"default_field\":\"" + term.DefaultField + "\", "); }
+                stringBuilder.Append("\"query\":\"" + term.Query + "\" ");
+                if (term.Fields != null && term.Fields.Count > 0)
+                {
+                    stringBuilder.Append(",\"fields\":[\"" + string.Join("\",\"", term.Fields.ToArray()) + "\"] ");
+                }
                 stringBuilder.Append(",\"default_operator\":\"" + term.DefaultOperator + "\" ");
-                stringBuilder.Append(",\"analyzer\":\"" + term.Analyzer + "\" ");
+                if (!string.IsNullOrEmpty(term.Analyzer)) { stringBuilder.Append(",\"analyzer\":\"" + term.Analyzer + "\" "); }
                 stringBuilder.Append("}}");
 
                 //TODO 完成更多参数+ 参数判断
 
                 writer.WriteRawValue(stringBuilder.ToString());
             }
-		
+
         }
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)

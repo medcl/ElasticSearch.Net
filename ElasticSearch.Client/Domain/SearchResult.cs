@@ -80,7 +80,7 @@ namespace ElasticSearch.Client.Domain
 				foreach (Hits hit in hitStatus.Hits)
 				{
 					var dict = new Dictionary<string, object>();
-					foreach (var fileItem in hit.Fields)
+					foreach (var fileItem in hit.Source)
 					{
 						if (dict.ContainsKey(fileItem.Key))
 						{

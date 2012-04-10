@@ -7,7 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using ElasticSearch.Client.EMO;
+using ElasticSearch.Client.Domain;
 
 namespace ElasticSearch.DataManager.Dialogs
 {

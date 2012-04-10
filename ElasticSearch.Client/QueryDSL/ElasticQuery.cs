@@ -37,7 +37,7 @@ namespace ElasticSearch.Client.QueryDSL
 
 		public IQuery Query;
 
-		public Facets Facets;
+        public IFacet Facets;
 
 		public ElasticQuery SetQuery(IQuery query)
 		{
@@ -76,24 +76,58 @@ namespace ElasticSearch.Client.QueryDSL
 		{
 
 		}
-
-		public ElasticQuery AddFields(string[] fields)
-		{
-			if (Fields == null) { Fields = new List<string>(); }
-			Fields.AddRange(fields);
-			return this;
+        
+          public ElasticQuery SetFacets(IFacet facet)
+        {
+            Facets = facet;
+            return this;
 		}
+
+	    public ElasticQuery AddFields(string[] fields)
+	    {
+            if (Fields == null) { Fields = new List<string>(); }
+            Fields.AddRange(fields);
+	    	return this;
+	    }
 	}
 
-	public class Facets
-	{
-//		public Dictionary<string ,IQuery> 
+    public interface IFacet
+    {
+        
+    }
 
-		public void AddFacet(string facertName,string filterClause)
-		{
-			
-		}
-	}
+    [JsonConverter(typeof(TermsFacetConverterer))]
+    public class TermsFacet : IFacet
+    {
+        internal List<TermsFacetItem> facetItems;
+        public TermsFacet(string facetName, string field, int size = 10)
+        {
+            facetItems = new List<TermsFacetItem>();
+            var item = new TermsFacetItem();
+            item.FacetName = facetName;
+            item.Field = field;
+            item.Size = size;
+            facetItems.Add(item);
+        }
+
+        public TermsFacet AddTermFacet(string facetName, string field, int size = 10)
+        {
+            var item = new TermsFacetItem();
+            item.FacetName = facetName;
+            item.Field = field;
+            item.Size = size;
+            facetItems.Add(item);
+            return this;
+        }
+
+        public class TermsFacetItem
+        {
+            public string Field;
+            public int Size;
+            public string FacetName { get; set; }
+        }
+    }
+
 
 	public class Filter
 	{

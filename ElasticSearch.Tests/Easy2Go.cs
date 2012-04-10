@@ -24,7 +24,7 @@ namespace Tests
 			var doc = client.Search(indexName, indexType, "c:d");
 			Console.WriteLine(doc.JsonString);
 			Assert.AreEqual(1, doc.GetHits().Hits.Count);
-			Assert.AreEqual("b", doc.GetHits().Hits[0].Fields["a"]);
+			Assert.AreEqual("b", doc.GetHits().Hits[0].Source["a"]);
 
 			client.Delete(indexName, indexType, "testkey");
 

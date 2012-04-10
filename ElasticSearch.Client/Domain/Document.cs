@@ -14,7 +14,7 @@ namespace ElasticSearch.Client.Domain
 			var dict = new Dictionary<string, object>();
 			if (Hits != null)
 			{
-				foreach (var fileItem in Hits.Fields)
+				foreach (var fileItem in Hits.Source)
 				{
 					if (dict.ContainsKey(fileItem.Key))
 					{

@@ -53,5 +53,12 @@ namespace ElasticSearch.Client.QueryDSL
 			Operator = oPperator;
 			Analyzer = analyzer;
 		}
+
+        public TextQuery SetBoost(float boost)
+        {
+            Boost = boost;
+            return this;
+        }
+
 	}
 }
