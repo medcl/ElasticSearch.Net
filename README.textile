@@ -1,5 +1,9 @@
 h1. ElasticSearch.NET Client
 
+h2. License
+
+Apache2
+
 h2. Requirements
 
 version  0.16.0 or upper
