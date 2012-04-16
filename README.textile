@@ -107,4 +107,4 @@ Get:
       client.Get("testindex", "testtype", "testkey");
 </pre>
 
-check my tests to see more examples!
+check my tests for more example!
