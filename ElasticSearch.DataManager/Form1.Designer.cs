@@ -59,12 +59,16 @@ namespace ElasticSearchDataManager
             this.analyzeTestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bulkIndexToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.createTypeMappingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripSeparator();
+            this.modifyShardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem7 = new System.Windows.Forms.ToolStripSeparator();
+            this.forEachUpdateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nodeTextBox1 = new Aga.Controls.Tree.NodeControls.NodeTextBox();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.clearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripSeparator();
-            this.modifyShardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem8 = new System.Windows.Forms.ToolStripSeparator();
+            this.facetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -191,9 +195,13 @@ namespace ElasticSearchDataManager
             this.bulkIndexToolStripMenuItem,
             this.createTypeMappingToolStripMenuItem,
             this.toolStripMenuItem6,
-            this.modifyShardToolStripMenuItem});
+            this.modifyShardToolStripMenuItem,
+            this.toolStripMenuItem7,
+            this.forEachUpdateToolStripMenuItem,
+            this.toolStripMenuItem8,
+            this.facetToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(183, 304);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(183, 360);
             // 
             // 导出数据ToolStripMenuItem
             // 
@@ -290,6 +298,30 @@ namespace ElasticSearchDataManager
             this.createTypeMappingToolStripMenuItem.Text = "CreateTypeMapping";
             this.createTypeMappingToolStripMenuItem.Click += new System.EventHandler(this.createTypeMappingToolStripMenuItem_Click);
             // 
+            // toolStripMenuItem6
+            // 
+            this.toolStripMenuItem6.Name = "toolStripMenuItem6";
+            this.toolStripMenuItem6.Size = new System.Drawing.Size(179, 6);
+            // 
+            // modifyShardToolStripMenuItem
+            // 
+            this.modifyShardToolStripMenuItem.Name = "modifyShardToolStripMenuItem";
+            this.modifyShardToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.modifyShardToolStripMenuItem.Text = "ModifyShard";
+            this.modifyShardToolStripMenuItem.Click += new System.EventHandler(this.modifyShardToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem7
+            // 
+            this.toolStripMenuItem7.Name = "toolStripMenuItem7";
+            this.toolStripMenuItem7.Size = new System.Drawing.Size(179, 6);
+            // 
+            // forEachUpdateToolStripMenuItem
+            // 
+            this.forEachUpdateToolStripMenuItem.Name = "forEachUpdateToolStripMenuItem";
+            this.forEachUpdateToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.forEachUpdateToolStripMenuItem.Text = "ForEach-Update";
+            this.forEachUpdateToolStripMenuItem.Click += new System.EventHandler(this.forEachUpdateToolStripMenuItem_Click);
+            // 
             // nodeTextBox1
             // 
             this.nodeTextBox1.DataPropertyName = "Text";
@@ -321,17 +353,17 @@ namespace ElasticSearchDataManager
             this.clearToolStripMenuItem.Text = "&Clear";
             this.clearToolStripMenuItem.Click += new System.EventHandler(this.clearToolStripMenuItem_Click);
             // 
-            // toolStripMenuItem6
+            // toolStripMenuItem8
             // 
-            this.toolStripMenuItem6.Name = "toolStripMenuItem6";
-            this.toolStripMenuItem6.Size = new System.Drawing.Size(179, 6);
+            this.toolStripMenuItem8.Name = "toolStripMenuItem8";
+            this.toolStripMenuItem8.Size = new System.Drawing.Size(179, 6);
             // 
-            // modifyShardToolStripMenuItem
+            // facetToolStripMenuItem
             // 
-            this.modifyShardToolStripMenuItem.Name = "modifyShardToolStripMenuItem";
-            this.modifyShardToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
-            this.modifyShardToolStripMenuItem.Text = "ModifyShard";
-            this.modifyShardToolStripMenuItem.Click += new System.EventHandler(this.modifyShardToolStripMenuItem_Click);
+            this.facetToolStripMenuItem.Name = "facetToolStripMenuItem";
+            this.facetToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.facetToolStripMenuItem.Text = "Facet";
+            this.facetToolStripMenuItem.Click += new System.EventHandler(this.facetToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -389,6 +421,10 @@ namespace ElasticSearchDataManager
 		private ToolStripMenuItem createTypeMappingToolStripMenuItem;
         private ToolStripSeparator toolStripMenuItem6;
         private ToolStripMenuItem modifyShardToolStripMenuItem;
+        private ToolStripSeparator toolStripMenuItem7;
+        private ToolStripMenuItem forEachUpdateToolStripMenuItem;
+        private ToolStripSeparator toolStripMenuItem8;
+        private ToolStripMenuItem facetToolStripMenuItem;
 	}
 }
 

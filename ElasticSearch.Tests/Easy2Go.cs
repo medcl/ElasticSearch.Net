@@ -22,7 +22,7 @@ namespace Tests
 			client.Refresh(indexName);
 
 			var doc = client.Search(indexName, indexType, "c:d");
-			Console.WriteLine(doc.JsonString);
+			Console.WriteLine(doc.Response);
 			Assert.AreEqual(1, doc.GetHits().Hits.Count);
 			Assert.AreEqual("b", doc.GetHits().Hits[0].Source["a"]);
 

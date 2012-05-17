@@ -57,6 +57,13 @@ namespace ElasticSearch.Client.QueryDSL
 					writer.WriteValue(term.MaxExpansions);
 				}
 
+
+                if (!string.IsNullOrEmpty(term.Analyzer))
+                {
+                    writer.WritePropertyName("analyzer");
+                    writer.WriteValue(term.Analyzer);
+                }
+
 				writer.WriteEndObject();
 				writer.WriteEndObject();
 				writer.WriteEndObject();

@@ -61,5 +61,9 @@ namespace ElasticSearch.DataManager.Dialogs
             this.ResumeLayout(false);
 
         }
+    
+        
     }
+
+    
 }

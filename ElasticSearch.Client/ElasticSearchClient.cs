@@ -17,6 +17,9 @@ namespace ElasticSearch.Client
 {
 	/// <summary>
 	/// ElasticSearch.Client
+	/// license:Apache2
+	/// author:medcl
+	/// url:http://log.medcl.net
 	/// </summary>
 	public class ElasticSearchClient
 	{
@@ -82,6 +85,7 @@ namespace ElasticSearch.Client
 			return GetOperationResult(result);
 		}
 
+
 		public OperateResult Bulk(IList<BulkObject> bulkObjects)
 		{
 			Contract.Assert(bulkObjects != null);
@@ -96,6 +100,27 @@ namespace ElasticSearch.Client
 		}
 
 		#endregion
+
+
+        public bool PartialUpdate(string index, string type, string indexKey, string jsonData, string routing = null)
+        {
+            Contract.Assert(!string.IsNullOrEmpty(index));
+            Contract.Assert(!string.IsNullOrEmpty(type));
+            Contract.Assert(!string.IsNullOrEmpty(jsonData));
+            Contract.Assert(!string.IsNullOrEmpty(indexKey));
+
+            var url = "/{0}/{1}/{2}/_update".Fill(index.Trim().ToLower(), type.Trim(), indexKey);
+
+            //set parent-child relation
+            if (!string.IsNullOrEmpty(routing))
+            {
+                url = url + string.Format("?routing={0}", routing);
+            }
+
+            RestResponse result = _provider.Post(url, jsonData);
+            return result.Status == Transport.IDL.Status.OK || result.Status == Transport.IDL.Status.CREATED;
+        }
+
 
 		public Document Get(string index, string type, string indexKey, string routing = null)
 		{
@@ -262,7 +287,7 @@ namespace ElasticSearch.Client
 				                                                      size);
 			}
 			RestResponse result = _provider.Get(url);
-			var hitResult = new SearchResult(result.GetBody());
+			var hitResult = new SearchResult(url,result.GetBody());
 			return hitResult;
 		}
 
@@ -285,7 +310,7 @@ namespace ElasticSearch.Client
 			string url = "/{0}/_search?q={1}&from={2}&size={3}".Fill(index.ToLower(), queryString, from, size);
 			RestResponse result = _provider.Get(url);
 
-			var hitResult = new SearchResult(result.GetBody());
+			var hitResult = new SearchResult(url,result.GetBody());
 			return hitResult;
 		}
 
@@ -363,7 +388,7 @@ namespace ElasticSearch.Client
 
 			RestResponse result = _provider.Get(url);
 
-			var hitResult = new SearchResult(result.GetBody());
+			var hitResult = new SearchResult(url,result.GetBody());
 			return hitResult;
 		}
 
@@ -404,7 +429,7 @@ namespace ElasticSearch.Client
 
 			RestResponse result = _provider.Get(url);
 
-			var hitResult = new SearchResult(result.GetBody());
+			var hitResult = new SearchResult(url,result.GetBody());
 			return hitResult.GetHitIds();
 		}
 
@@ -978,10 +1003,14 @@ namespace ElasticSearch.Client
 				url = "/{0}/{1}/_search".Fill(index.ToLower(), string.Join(",", type));
 			}
 			RestResponse result = _provider.Post(url, jsonstr);
-			var hitResult = new SearchResult(result.GetBody());
+			var hitResult = new SearchResult(url,jsonstr,result.GetBody());
 			return hitResult;
 		}
 
+        public SearchResult Search(string index, ElasticQuery elasticQuery)
+        {
+            return Search(index, new string[]{}, elasticQuery);
+        }
 		public SearchResult Search(string index, string type, ElasticQuery elasticQuery)
 		{
 			string[] temp = null;

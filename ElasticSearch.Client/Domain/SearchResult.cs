@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using ElasticSearch.Client.Utils;
 using Newtonsoft.Json;
 using JsonSerializer = ElasticSearch.Client.Utils.JsonSerializer;
@@ -15,14 +16,31 @@ namespace ElasticSearch.Client.Domain
 
 		public SearchResult(string jsonResult)
 		{
-			JsonString = jsonResult;
+			Response = jsonResult;
 		}
+
+        public SearchResult(string uri,string response)
+        {
+            URI = uri;
+            Response = response;
+        }
+        public SearchResult(string uri,string query, string response)
+        {
+            URI = uri;
+            Query = query;
+            Response = response;
+        }
 
 		[JsonIgnore]
 		private bool _isNotcalled = true;
 		
 		[JsonIgnore]
-		public string JsonString { set; get; }
+		public string Response { set; get; }
+
+        [JsonIgnore]
+        public string URI { set; get; }       
+        [JsonIgnore]
+        public string Query { set; get; }
 
 		[JsonIgnore] 
 		private LogWrapper _logger = LogWrapper.GetLogger();
@@ -34,9 +52,9 @@ namespace ElasticSearch.Client.Domain
 				_isNotcalled = false;
 				try
 				{
-					if (!string.IsNullOrEmpty(JsonString))
+					if (!string.IsNullOrEmpty(Response))
 					{
-						var temp = JsonSerializer.Get<SearchHits>(JsonString);
+						var temp = JsonSerializer.Get<SearchHits>(Response);
 						if (temp != null && temp.Hits != null)
 						{
 							_hits = temp.Hits;
@@ -45,7 +63,7 @@ namespace ElasticSearch.Client.Domain
 				}
 				catch (System.Exception e)
 				{
-					_logger.Error(JsonString, e);
+					_logger.Error(Response, e);
 				}
 
 			}
@@ -102,5 +120,24 @@ namespace ElasticSearch.Client.Domain
 
 			return result;
 		}
+
+	    internal Dictionary<string, Dictionary<string, int>> _facets;
+
+	    /// <summary>
+        /// Facets统计信息
+        /// </summary>
+        [IgnoreDataMember]
+        public Dictionary<string, Dictionary<string, int>> Facets
+	    {
+	        get
+	        {
+                if(_facets==null)
+                {
+                    this.InitOrGetFacets();
+                }
+	            return _facets;
+	        }
+	        set { _facets = value; }
+	    }
 	}
 }

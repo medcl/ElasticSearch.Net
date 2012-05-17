@@ -33,12 +33,22 @@ namespace ElasticSearch.Client.QueryDSL
 					writer.WriteStartObject();
 					foreach (var sortItem in term.SortItems)
 					{
-						writer.WritePropertyName(sortItem.FieldName);
-						writer.WriteValue(sortItem.SortType.ToString().ToLower());
+					    if (sortItem != null)
+					    {
+					        writer.WritePropertyName(sortItem.FieldName);
+					        writer.WriteValue(sortItem.SortType.ToString().ToLower());
+					    }
 					}
 
 					writer.WriteEndObject();
 				}
+
+                //facets
+                if (term.Facets != null)
+                {
+                    writer.WritePropertyName("facets");
+                    serializer.Serialize(writer, term.Facets);
+                }
 
 				writer.WriteRaw(",\"explain\": " + term.Explain.ToString().ToLower());
 

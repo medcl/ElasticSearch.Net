@@ -31,7 +31,14 @@ namespace ElasticSearch.Client.Config
 
 			#region load Config
 
-			_instance = LoadConfig<ElasticSearchConfig>(ConfigName);
+		    try
+		    {
+		        _instance = LoadConfig<ElasticSearchConfig>(ConfigName);
+		    }
+		    catch (System.Exception ex)
+		    {
+		        Console.WriteLine(ex);
+		    }
 
 			#endregion
 		}

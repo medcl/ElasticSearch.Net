@@ -16,6 +16,7 @@ using ElasticSearch.Client.Admin;
 using ElasticSearch.Client.Config;
 using ElasticSearch.Client.Domain;
 using ElasticSearch.Client.Mapping;
+using ElasticSearch.Client.QueryDSL;
 using ElasticSearch.Client.Utils;
 using ElasticSearch.DataManager.Dialogs;
 using Newtonsoft.Json.Linq;
@@ -180,9 +181,9 @@ namespace ElasticSearchDataManager
 			if(complicatedSource)
 			{
 				//complicated object
-				if (!string.IsNullOrEmpty(docs.JsonString))
+				if (!string.IsNullOrEmpty(docs.Response))
 				{
-					var obj = JObject.Parse(docs.JsonString);
+					var obj = JObject.Parse(docs.Response);
 					var hits = obj["hits"]["hits"];
 					foreach (var hit in hits)
 					{
@@ -314,6 +315,14 @@ namespace ElasticSearchDataManager
 		{
 			CallDelegate callDelegate = delegate
 			{
+                if (richTextBox1.Lines.Length > 500)
+                {
+                    richTextBox1.Clear();
+                }
+                if (!message.EndsWith("\r\n"))
+                {
+                    this.richTextBox1.AppendText("\r\n");
+                }
 				this.richTextBox1.AppendText(message);
 				richTextBox1.Focus();
 				this.richTextBox1.Select(this.richTextBox1.TextLength, 0);
@@ -325,6 +334,14 @@ namespace ElasticSearchDataManager
 			}
 			else
 			{
+                if (richTextBox1.Lines.Length > 500)
+                {
+                    richTextBox1.Clear();
+                }
+                if (!message.EndsWith("\r\n"))
+                {
+                    this.richTextBox1.AppendText("\r\n");
+                }
 				this.richTextBox1.AppendText(message);
 				this.richTextBox1.SelectionStart = richTextBox1.Text.Length;
 				richTextBox1.Focus();
@@ -402,7 +419,7 @@ namespace ElasticSearchDataManager
 				var result = elasticNode.ElasticSearchInstance.Search(index, "*", 0, 5);
 				
 		
-			jsonView.LoadJson(result.JsonString);
+			jsonView.LoadJson(result.Response);
 				jsonView.ShowDialog();
 			
 		}
@@ -411,18 +428,24 @@ namespace ElasticSearchDataManager
 		{
 			if (treeViewAdv1.SelectedNodes.Count == 1)
 			{
-				var tempNode = (ElasticNode)treeViewAdv1.SelectedNode.Tag;
-				if (tempNode != null && tempNode.IndexStatus != null)
-				{
-					toolStripStatusLabel1.Text = tempNode.IndexStatus.ToString();
-				}
-				else if(treeViewAdv1.SelectedNode.Level==4)
-				{
-					WriteLog("\r\n-----\r\n");
-					WriteLog("\r\n");
-					var type = (treeViewAdv1.SelectedNode.Tag as ElasticNode).Tag as TypeSetting;
-					WriteLog(JsonSerializer.Get(type,true));
-				}
+			    if (treeViewAdv1.SelectedNode != null)
+			    {
+			        if (treeViewAdv1.SelectedNode.Tag != null)
+			        {
+			            var tempNode = (ElasticNode)treeViewAdv1.SelectedNode.Tag;
+			            if (tempNode != null && tempNode.IndexStatus != null)
+			            {
+			                toolStripStatusLabel1.Text = tempNode.IndexStatus.ToString();
+			            }
+			            else if(treeViewAdv1.SelectedNode.Level==4)
+			            {
+			                WriteLog("\r\n-----\r\n");
+			                WriteLog("\r\n");
+			                var type = (treeViewAdv1.SelectedNode.Tag as ElasticNode).Tag as TypeSetting;
+			                WriteLog(JsonSerializer.Get(type,true));
+			            }
+			        }
+			    }
 			}
 		}
 
@@ -481,7 +504,7 @@ namespace ElasticSearchDataManager
 					WriteLog("Search Index: {0},{1},{2},{3},{4}",search.IndexType, search.Query, search.Sort, search.GetFrom, search.GetSize);
 					var result = currentElasticSearchInstance.Search(tempNode.IndexName, search.IndexType, search.Query, search.Sort,
 					                                                 search.GetFrom, search.GetSize);
-					jsonView.LoadJson(result.JsonString);
+					jsonView.LoadJson(result.Response);
 					jsonView.ShowDialog();
 				}
 			}
@@ -499,6 +522,7 @@ namespace ElasticSearchDataManager
 				elasticNode.Nodes.Add(mapNode);
 
 				var mappings= currentElasticSearchInstance.GetMapping(index);
+                WriteLog(mappings);
 				JObject j = JObject.Parse(mappings);
 				var VARIABLE =j[index];
 				var typeSetting = JsonSerializer.Get<Dictionary<string, TypeSetting>>(VARIABLE.ToString());
@@ -562,5 +586,101 @@ namespace ElasticSearchDataManager
 
             }
         }
-	}
+
+        private void forEachUpdateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var tempNode = (ElasticNode)treeViewAdv1.SelectedNode.Tag;
+            if (tempNode != null)
+            {
+                var start = DateTime.Now;
+                
+                var size = 500;
+                string type = "bc8c7a80-c2fc-4d62-9de3-ec6b9f59ba95";
+                GetInput g=new GetInput(type,"Type");
+                if(g.ShowDialog()==DialogResult.OK)
+                {
+                    type = g.Input;
+                }
+
+                string query = "*";
+                g = new GetInput(query, "Query");
+                if (g.ShowDialog() == DialogResult.OK)
+                {
+                    query = g.Input;
+                }
+
+                var total = currentElasticSearchInstance.Count(tempNode.IndexName, query);
+
+                string sort = "__TIME";
+                g = new GetInput(sort, "SortBy");
+                if (g.ShowDialog() == DialogResult.OK)
+                {
+                    sort = g.Input;
+                }
+                string content = "{\"visibleType\":\"0\"}";
+
+                g = new GetInput(content, "update content");
+                if (g.ShowDialog() == DialogResult.OK)
+                {
+                    content = g.Input;
+                }
+
+                int hit = 0;
+                for (int i = 0; i < total; i+=size)
+                {
+                    WriteLog("Index From:{0},Size:{1}".Fill(i,size));
+                    
+                    SearchResult docs= currentElasticSearchInstance.Search(tempNode.IndexName, type,
+                                                        new QueryStringQuery(query), new SortItem(sort, SortType.Asc), i, size);
+                    WriteLog("QueryResult:{0} // {1}".Fill(docs.GetHitIds().Count,docs.GetTotalCount()));
+                    List<string> ids = docs.GetHitIds();
+                    foreach (var id in ids)
+                    {
+                     var result=   currentElasticSearchInstance.PartialUpdate(tempNode.IndexName, type, id, content);
+                        if(result)
+                        {
+                            hit += 1;
+                        }else{WriteLog("Index Failed:{0}".Fill(id));}
+                    }
+                }
+                var end = DateTime.Now;
+                WriteLog("Index:{0} Updating Finished.total {1} updated,time:{2},{3} ".Fill(tempNode.IndexName, hit,end-start,hit));
+
+            }
+        }
+
+        private void facetToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+             var tempNode = (ElasticNode)treeViewAdv1.SelectedNode.Tag;
+             if (tempNode != null)
+             {
+                 var g = new GetInput("","pls input a fileld name to do Facet");
+                 if (g.ShowDialog() == DialogResult.OK)
+                 {
+
+              var facets= currentElasticSearchInstance.Search(tempNode.IndexName,
+                                                         new ElasticQuery(new MatchAllQuery(), null, 0, 10)
+                                                             {Facets = new TermsFacet("facet", g.Input)});
+
+
+              tempNode.Nodes.Clear();//NOTE
+              var facetNode = new ElasticNode("facets");
+              tempNode.Nodes.Add(facetNode);
+
+                     if (facets.Facets != null)
+                         foreach (var facet in facets.Facets)
+                         {
+                             var item = new ElasticNode(facet.Key + "(" + facet.Value.Count + ")");
+                             facetNode.Nodes.Add(item);
+                             foreach (var VARIABLE in facet.Value)
+                             {
+                                 item.Nodes.Add(new ElasticNode(VARIABLE.Key + "(" + VARIABLE.Value.ToString() + ")"));
+                             }
+                         }
+                 }
+                 }
+             }
+        }
+	
 }

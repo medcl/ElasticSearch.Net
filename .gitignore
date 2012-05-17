@@ -10,4 +10,10 @@
 /BenchmarkTests/bin
 /BenchmarkTests/obj
 
-
+*.ReSharper.user
+*.Cache
+*.user
+*.suo
+Settings.StyleCop
+StyleCop.Cache
+*.user

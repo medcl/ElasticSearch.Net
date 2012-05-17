@@ -87,6 +87,9 @@
     <Compile Include="Dialogs\FormBase.Designer.cs">
       <DependentUpon>FormBase.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\GetInput.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Dialogs\JsonView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -127,6 +130,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\FormBase.resx">
       <DependentUpon>FormBase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\GetInput.resx">
+      <DependentUpon>GetInput.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\JsonView.resx">
       <DependentUpon>JsonView.cs</DependentUpon>
