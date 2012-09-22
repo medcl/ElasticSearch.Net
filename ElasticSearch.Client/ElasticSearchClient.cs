@@ -73,7 +73,7 @@ namespace ElasticSearch.Client
 			Contract.Assert(!string.IsNullOrEmpty(index));
 			Contract.Assert(!string.IsNullOrEmpty(type));
 			Contract.Assert(!string.IsNullOrEmpty(jsonData));
-			Contract.Assert(!string.IsNullOrEmpty(indexKey));
+//			Contract.Assert(!string.IsNullOrEmpty(indexKey));
 
 			string url = "/{0}/{1}/{2}/".Fill(index.Trim().ToLower(), type.Trim(), indexKey);
 			//set parent-child relation
@@ -109,7 +109,7 @@ namespace ElasticSearch.Client
             Contract.Assert(!string.IsNullOrEmpty(jsonData));
             Contract.Assert(!string.IsNullOrEmpty(indexKey));
 
-            var url = "/{0}/{1}/{2}/_update".Fill(index.Trim().ToLower(), type.Trim(), indexKey);
+            var url = "/{0}/{1}/{2}/_partial_update".Fill(index.Trim().ToLower(), type.Trim(), indexKey);
 
             //set parent-child relation
             if (!string.IsNullOrEmpty(routing))

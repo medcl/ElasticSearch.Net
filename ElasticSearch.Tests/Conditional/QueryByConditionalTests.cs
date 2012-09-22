@@ -46,6 +46,14 @@ namespace Tests
 
 			count = client.Count(app,  indexType, Conditional.Get(ExpressionEx.Between("age", 22, 23, true)));
 			Assert.AreEqual(2, count);
+            
+            //a coplex example
+            var cond1= Conditional.Get(ExpressionEx.Eq("name", "jack"))
+                .And(ExpressionEx.Between("age",22,30))
+                .And(ExpressionEx.Fuzzy("address","beijing",1.0f,4))
+                .And(ExpressionEx.Le("no",87));
+            Conditional cond2 = Conditional.Or(cond1, Conditional.Not(ExpressionEx.Eq("gender", "male")));
+            client.Search("index", "type", cond2.Query);
 
 
 		}

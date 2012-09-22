@@ -92,13 +92,18 @@ namespace ElasticSearch.Client.Domain
 		{
 			if (str is string)
 			{
-				var str1 = str.ToString();
+				string str1 = str.ToString();
 				if (str1.Contains("\0"))
 				{
-					str = str1.Replace("\0", string.Empty);
+					str1 = str1.Replace("\0", string.Empty);
 				}
+                if (str1.Contains("\\"))
+                {
+                    str1 = str1.Replace("\\", "\\\\");
+                }
+			    return str1.FilterControlChar();
 			}
-			return str;
+            return str;
 		}
 
 		public string FieldsToJson()
