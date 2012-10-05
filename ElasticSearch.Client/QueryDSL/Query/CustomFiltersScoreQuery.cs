@@ -11,7 +11,7 @@ namespace ElasticSearch.Client.QueryDSL
     public class CustomFiltersScoreQuery: IQuery
     {
         public IQuery Query;
-        public IDictionary<IFilter, double> Filters;
+        public IDictionary<IFilter, double> Filters = new Dictionary<IFilter, double>();
         /// <summary>
         /// A score_mode can be defined to control how multiple matching filters control the score. By default, it is set to first which means the first matching filter will control the score of the result. It can also be set to max/total/avg which will aggregate the result from all matching filters based on the aggregation type.
         /// </summary>
@@ -33,6 +33,7 @@ namespace ElasticSearch.Client.QueryDSL
 
         public CustomFiltersScoreQuery(IQuery query, IDictionary<IFilter, double> boostedFilters)
         {
+            Query = query;
             Filters = boostedFilters;
         }
 
