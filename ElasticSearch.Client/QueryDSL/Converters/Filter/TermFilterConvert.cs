@@ -8,7 +8,15 @@ namespace ElasticSearch.Client.QueryDSL
         {
             TermFilter term = (TermFilter)value;
             if (term != null)
-                writer.WriteRawValue(string.Format("{{term: {{ \"{0}\" : \"{1}\"}} }}", term.Field, term.Value));
+            {
+                writer.WriteStartObject();
+                writer.WritePropertyName("term");
+                writer.WriteStartObject();
+                writer.WritePropertyName(term.Field);
+                writer.WriteValue(term.Value);
+                writer.WriteEndObject();
+                writer.WriteEndObject();
+            }
         }
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
