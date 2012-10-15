@@ -93,7 +93,7 @@
     <Compile Include="Dialogs\JsonView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dialogs\ModifyShard.cs">
+    <Compile Include="Dialogs\ModifyReplica.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Dialogs\NewIndex.cs">
@@ -137,8 +137,8 @@
     <EmbeddedResource Include="Dialogs\JsonView.resx">
       <DependentUpon>JsonView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\ModifyShard.resx">
-      <DependentUpon>ModifyShard.cs</DependentUpon>
+    <EmbeddedResource Include="Dialogs\ModifyReplica.resx">
+      <DependentUpon>ModifyReplica.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\NewIndex.resx">
       <DependentUpon>NewIndex.cs</DependentUpon>

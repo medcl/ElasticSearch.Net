@@ -2,14 +2,14 @@
 
 namespace ElasticSearch.DataManager.Dialogs
 {
-    public class ModifyShard:FormBase
+    public class ModifyReplica:FormBase
     {
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label1;
         public int Replica { get { return Convert.ToInt32(textBox1.Text.ToString()); } }
 
 
-        public ModifyShard()
+        public ModifyReplica()
         {
             InitializeComponent();
         }
@@ -40,9 +40,9 @@ namespace ElasticSearch.DataManager.Dialogs
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(18, 20);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(38, 13);
+            this.label1.Size = new System.Drawing.Size(46, 13);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Shard:";
+            this.label1.Text = "Replica:";
             // 
             // textBox1
             // 
@@ -51,11 +51,11 @@ namespace ElasticSearch.DataManager.Dialogs
             this.textBox1.Size = new System.Drawing.Size(140, 20);
             this.textBox1.TabIndex = 1;
             // 
-            // ModifyShard
+            // ModifyReplica
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.ClientSize = new System.Drawing.Size(267, 84);
-            this.Name = "ModifyShard";
+            this.Name = "ModifyReplica";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);

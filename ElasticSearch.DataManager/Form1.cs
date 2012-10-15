@@ -577,11 +577,11 @@ namespace ElasticSearchDataManager
             var tempNode = (ElasticNode)treeViewAdv1.SelectedNode.Tag;
             if (tempNode != null)
             {
-                ModifyShard modifyShard=new ModifyShard();
-                if(modifyShard.ShowDialog()==DialogResult.OK)
+                ModifyReplica modifyReplica=new ModifyReplica();
+                if(modifyReplica.ShowDialog()==DialogResult.OK)
                 {
-                    currentElasticSearchInstance.ModifyIndex(tempNode.IndexName, new IndexSetting(5,modifyShard.Replica));
-                    WriteLog("Index:{0} now have {1} shards".Fill(tempNode.IndexName,modifyShard.Replica));
+                    currentElasticSearchInstance.ModifyIndex(tempNode.IndexName, new IndexSetting(5,modifyReplica.Replica));
+                    WriteLog("Index:{0} now have {1} shards".Fill(tempNode.IndexName,modifyReplica.Replica));
                 }
 
             }

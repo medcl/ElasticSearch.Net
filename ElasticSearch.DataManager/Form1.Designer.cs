@@ -307,7 +307,7 @@ namespace ElasticSearchDataManager
             // 
             this.modifyShardToolStripMenuItem.Name = "modifyShardToolStripMenuItem";
             this.modifyShardToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
-            this.modifyShardToolStripMenuItem.Text = "ModifyShard";
+            this.modifyShardToolStripMenuItem.Text = "ModifyReplica";
             this.modifyShardToolStripMenuItem.Click += new System.EventHandler(this.modifyShardToolStripMenuItem_Click);
             // 
             // toolStripMenuItem7
