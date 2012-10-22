@@ -136,14 +136,13 @@ namespace ElasticSearchDataManager
 					var complicatedSource = export.ComplicatedSource;
 					var resolveTenant = export.ResolveTenant;
 					var showLog = export.ShowLog;
+				    var skipCount = export.SkipCount;
 
 					foreach (var selectedNode in treeViewAdv1.SelectedNodes)
 					{
 						var elasticNode = ((ElasticNode)(selectedNode.Tag));
 						var index = elasticNode.IndexName;
 						WriteLog("Export for: {0}", selectedNode.Tag);
-
-						var tenantId = tenantRegex.Match(index).Value;
 
 						int bufferSize = buffer;
 						int limitSize = limit;
@@ -155,7 +154,7 @@ namespace ElasticSearchDataManager
 														if (bufferSize > limitSize) bufferSize = limitSize;
 														WriteLog("Transform Index : {0} To Index : {1},{2} Pending Docs", index, toIndex, limitSize);
 
-														for (int i = 0; i < limitSize; i += bufferSize)
+                                                        for (int i = skipCount; i < limitSize; i += bufferSize)
 														{
 															IndexTransfer(index, toIndex, i, bufferSize, bulkSize, elasticNode.ElasticSearchInstance, descClient, complicatedSource, resolveTenant, showLog);
 														}
@@ -581,7 +580,7 @@ namespace ElasticSearchDataManager
                 if(modifyReplica.ShowDialog()==DialogResult.OK)
                 {
                     currentElasticSearchInstance.ModifyIndex(tempNode.IndexName, new IndexSetting(5,modifyReplica.Replica));
-                    WriteLog("Index:{0} now have {1} shards".Fill(tempNode.IndexName,modifyReplica.Replica));
+                    WriteLog("Index:{0} now have {1} replicas".Fill(tempNode.IndexName,modifyReplica.Replica));
                 }
 
             }

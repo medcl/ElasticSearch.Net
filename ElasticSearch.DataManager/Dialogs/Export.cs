@@ -30,6 +30,7 @@ namespace ElasticSearch.DataManager.Dialogs
 		/// BulkSizeLimit
 		/// </summary>
 		public int BulkSize { get { return int.Parse(textBox4.Text); } }
+        public int SkipCount { get { return int.Parse(textBox5.Text); } }
 
 		private void button1_Click(object sender, EventArgs e)
 		{
