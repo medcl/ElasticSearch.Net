@@ -55,16 +55,7 @@ namespace ElasticSearch.Client.Utils
                     var facetkey = jToken.Value<JProperty>();
                     var fkey = facetkey.Name;
                     var fvalue = facetkey.Value;
-
-                    #region trash
-
-                    //                    var missing= fvalue["missing"];
-                    //                    var type= fvalue["_type"];
-                    //                    var total= fvalue["total"];
-                    //                    var other= fvalue["other"];
-
-                    #endregion
-
+                
                     var terms = fvalue["terms"];
 
                     var dict = new Dictionary<string, int>();
@@ -90,6 +81,8 @@ namespace ElasticSearch.Client.Utils
             }
         }
 
+
+
         public static string FilterControlChar(this string controlStr)
         {
             var newArray = new char[controlStr.Length];
@@ -105,6 +98,11 @@ namespace ElasticSearch.Client.Utils
             return new string(newArray);
 
 
+        }
+
+        public static  bool IsNullOrEmpty(this string str)
+        {
+            return string.IsNullOrEmpty(str);
         }
     }
 }

@@ -153,7 +153,7 @@ namespace ElasticSearch.Client.QueryDSL
             return this;
         }
 
-        public QueryStringQuery AddField(string field, int weight)
+        public QueryStringQuery AddField(string field, int weight=10)
         {
             if (Fields == null) Fields = new List<string>();
             Fields.Add(string.Format("{0}^{1}", field, weight));

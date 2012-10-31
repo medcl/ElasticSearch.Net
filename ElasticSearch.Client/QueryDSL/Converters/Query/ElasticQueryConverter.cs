@@ -50,7 +50,17 @@ namespace ElasticSearch.Client.QueryDSL
                     serializer.Serialize(writer, term.Facets);
                 }
 
-				writer.WriteRaw(",\"explain\": " + term.Explain.ToString().ToLower());
+                //hightlight
+                if(term.Hightlight!=null)
+                {
+                    writer.WritePropertyName("highlight");
+                    serializer.Serialize(writer,term.Hightlight);
+                }
+
+                if (term.Explain)
+                {
+                    writer.WriteRaw(",\"explain\": " + term.Explain.ToString().ToLower());
+                }
 
 				writer.WriteEndObject();
 			}

@@ -313,6 +313,15 @@ namespace ElasticSearch.Client
 			var hitResult = new SearchResult(url,result.GetBody());
 			return hitResult;
 		}
+        
+        //TODO,remove this method
+        public SearchResult Search(string url)
+        {
+            RestResponse result = _provider.Get(url);
+
+            var hitResult = new SearchResult(url, result.GetBody());
+            return hitResult; 
+        }
 
 		public SearchResult Search(string index, string type, string queryString)
 		{

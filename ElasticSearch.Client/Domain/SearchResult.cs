@@ -122,6 +122,7 @@ namespace ElasticSearch.Client.Domain
 		}
 
 	    internal Dictionary<string, Dictionary<string, int>> _facets;
+        internal Dictionary<string, string> _hightlights;
 
 	    /// <summary>
         /// Facets统计信息
@@ -138,6 +139,9 @@ namespace ElasticSearch.Client.Domain
 	            return _facets;
 	        }
 	        set { _facets = value; }
-	    }
+	    } 
+        
+
+
 	}
 }

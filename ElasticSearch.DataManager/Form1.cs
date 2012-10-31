@@ -148,20 +148,36 @@ namespace ElasticSearchDataManager
 						int limitSize = limit;
 						new Thread(new ThreadStart(delegate()
 													{
-														var start = DateTime.Now;
-														var total = elasticNode.ElasticSearchInstance.Count(index, "*");
-														if (limitSize > total) limitSize = total;
-														if (bufferSize > limitSize) bufferSize = limitSize;
-														WriteLog("Transform Index : {0} To Index : {1},{2} Pending Docs", index, toIndex, limitSize);
+                                                        try
+                                                        {
 
-                                                        for (int i = skipCount; i < limitSize; i += bufferSize)
-														{
-															IndexTransfer(index, toIndex, i, bufferSize, bulkSize, elasticNode.ElasticSearchInstance, descClient, complicatedSource, resolveTenant, showLog);
-														}
+                                                            var start = DateTime.Now;
+                                                            var total = elasticNode.ElasticSearchInstance.Count(index,
+                                                                                                                "*");
+                                                            if (limitSize > total) limitSize = total;
+                                                            if (bufferSize > limitSize) bufferSize = limitSize;
+                                                            WriteLog(
+                                                                "Transform Index : {0} To Index : {1},{2} Pending Docs",
+                                                                index, toIndex, limitSize);
+
+                                                            for (int i = skipCount; i < limitSize; i += bufferSize)
+                                                            {
+                                                                IndexTransfer(index, toIndex, i, bufferSize, bulkSize,
+                                                                              elasticNode.ElasticSearchInstance,
+                                                                              descClient, complicatedSource,
+                                                                              resolveTenant, showLog);
+                                                            }
 
 
-														WriteLog("Index : {0} Transform Finished,Time Elapsed : {1}", index,
-																 DateTime.Now - start);
+                                                            WriteLog(
+                                                                "Index : {0} Transform Finished,Time Elapsed : {1}",
+                                                                index,
+                                                                DateTime.Now - start);
+                                                        }catch(Exception ex)
+                                                        {
+                                                            //todo
+                                                        }
+
 													})).Start();
 
 					}

@@ -8,6 +8,9 @@ namespace ElasticSearch.Client.Domain
 	{
 		[JsonProperty("_source")] 
 		public Dictionary<string, object> Source = new Dictionary<string, object>();
+        
+        [JsonProperty("highlight")]
+        public Dictionary<string, string[]> Highlight = new Dictionary<string, string[]>();
 
         [JsonProperty("fields")]
         public Dictionary<string, object> Fields;
@@ -38,6 +41,14 @@ namespace ElasticSearch.Client.Domain
 			stringBuilder.Append(Version);
 			stringBuilder.Append(" _source:");
 			foreach (var field in Source)
+			{
+				stringBuilder.Append(field.Key);
+				stringBuilder.Append(", ");
+				stringBuilder.Append(field.Value);
+			}	
+            
+            stringBuilder.Append(" _highlight:");
+			foreach (var field in Highlight)
 			{
 				stringBuilder.Append(field.Key);
 				stringBuilder.Append(", ");
