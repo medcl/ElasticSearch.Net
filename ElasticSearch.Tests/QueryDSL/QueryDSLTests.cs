@@ -473,7 +473,7 @@ namespace Tests
 
 			#region preparing mapping
 
-		    client.DeleteIndex(index);
+//		    client.DeleteIndex(index);
 
 			var parentType = new TypeSetting("blog");
 			parentType.AddStringField("title");
@@ -548,7 +548,7 @@ namespace Tests
 		public void TestTopChildrenQuery()
 		{
 			var index = "index_test_parent_child_type123_with_top_child_query_query";
-		    client.DeleteIndex(index);
+//		    client.DeleteIndex(index);
 
 			#region preparing mapping
 
@@ -1337,7 +1337,7 @@ namespace Tests
         public void TestHasChildFilter()
         {
             var index = "index_test_parent_child_type123_with_has_child_query";
-            client.DeleteIndex(index);
+//            client.DeleteIndex(index);
             #region preparing mapping
 
             var parentType = new TypeSetting("blog");
