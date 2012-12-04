@@ -64,6 +64,8 @@ namespace Tests
         public void TestCreateUser()
         {
             var template_key = "test_user_template";
+            client.DeleteTemplate(template_key);
+
             var template = new TemplateSetting(template_key);
             template.Template = "test_user*";
             template.IndexSetting = new TemplateIndexSetting(1, 1);
@@ -154,6 +156,9 @@ namespace Tests
         public void TestTemplate()
         {
             var tempkey = "test_template_key1";
+
+            client.DeleteTemplate(tempkey);
+
             var template = new TemplateSetting(tempkey);
             template.Template = "business_*";
             template.IndexSetting = new TemplateIndexSetting(3, 2);

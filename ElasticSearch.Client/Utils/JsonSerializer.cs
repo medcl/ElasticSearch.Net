@@ -11,11 +11,13 @@ namespace ElasticSearch.Client.Utils
 		
 		static JsonSerializerSettings SerializationSettings = new JsonSerializerSettings()
 		{
-			ContractResolver = new CamelCasePropertyNamesContractResolver(),
+//			ContractResolver = new CamelCasePropertyNamesContractResolver(),
 			NullValueHandling = NullValueHandling.Ignore,
 			DefaultValueHandling = DefaultValueHandling.Ignore,
 			Converters = new List<JsonConverter> { new IsoDateTimeConverter() }
 		};
+
+
 
 
 		public static string Get<T>(T t)

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using ElasticSearch.Client.Config;
 using ElasticSearch.Client.Transport.Http;
 using ElasticSearch.Client.Transport.IDL;
@@ -16,7 +17,7 @@ namespace ElasticSearch.Client.Transport
 	internal class RestProvider : IRestProvider
 	{
 		private const string DefaultEncoding = "utf-8";
-		private readonly string _clusterName;
+	    private readonly string _clusterName;
 
 		public RestProvider(string clusterName)
 		{

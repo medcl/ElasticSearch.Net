@@ -75,7 +75,7 @@ namespace ElasticSearch.Client
 			Contract.Assert(!string.IsNullOrEmpty(jsonData));
 //			Contract.Assert(!string.IsNullOrEmpty(indexKey));
 
-			string url = "/{0}/{1}/{2}/".Fill(index.Trim().ToLower(), type.Trim(), indexKey);
+			string url = "/{0}/{1}/{2}".Fill(index.Trim().ToLower(), type.Trim(), indexKey);
 			//set parent-child relation
 			if (!string.IsNullOrEmpty(parentKey))
 			{

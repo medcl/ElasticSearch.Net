@@ -50,10 +50,10 @@ namespace Tests
             //a coplex example
             var cond1= Conditional.Get(ExpressionEx.Eq("name", "jack"))
                 .And(ExpressionEx.Between("age",22,30))
-                .And(ExpressionEx.Fuzzy("address","beijing",1.0f,4))
+                .And(ExpressionEx.Fuzzy("address","beijing",0.7f,4))
                 .And(ExpressionEx.Le("no",87));
             Conditional cond2 = Conditional.Or(cond1, Conditional.Not(ExpressionEx.Eq("gender", "male")));
-            client.Search("index", "type", cond2.Query);
+            client.Search(app, "type", cond2.Query);
 
 
 		}

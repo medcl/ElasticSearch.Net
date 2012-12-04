@@ -72,10 +72,17 @@ namespace ElasticSearch.Client.Transport.Http
 					var stream = e.Response.GetResponseStream();
 					if (stream != null)
 					{
-						var reader = new StreamReader(stream,
-						                              Encoding.GetEncoding(encoding));
-						responseStr = reader.ReadToEnd();
-						result.SetBody(responseStr);
+					    try
+					    {
+					        var reader = new StreamReader(stream);
+					        responseStr = reader.ReadToEnd();
+					        result.SetBody(responseStr);
+					    }
+					    catch (System.Exception exception)
+					    {
+//					        Console.WriteLine(exception);
+                            _logger.Error(exception);
+					    }
 					}
 				}
 				var msg = string.Format("Method:{2}, Url: {0},Body:{1},Encoding:{3},Time:{5},Response:{4}", url,

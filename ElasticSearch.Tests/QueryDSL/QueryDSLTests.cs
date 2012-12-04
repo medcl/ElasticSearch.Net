@@ -473,6 +473,8 @@ namespace Tests
 
 			#region preparing mapping
 
+		    client.DeleteIndex(index);
+
 			var parentType = new TypeSetting("blog");
 			parentType.AddStringField("title");
 			client.CreateIndex(index);
@@ -482,6 +484,7 @@ namespace Tests
 
 			var childType = new TypeSetting("comment", parentType);
 			childType.AddStringField("comments");
+		    childType.AddStringField("author").Analyzer = "keyword";
 
 			op = client.PutMapping(index, childType);
 			Assert.AreEqual(true, op.Acknowledged);
@@ -545,6 +548,7 @@ namespace Tests
 		public void TestTopChildrenQuery()
 		{
 			var index = "index_test_parent_child_type123_with_top_child_query_query";
+		    client.DeleteIndex(index);
 
 			#region preparing mapping
 
@@ -557,6 +561,7 @@ namespace Tests
 
 			var childType = new TypeSetting("comment", parentType);
 			childType.AddStringField("comments");
+		    childType.AddStringField("author").Analyzer = "keyword";
 
 			op = client.PutMapping(index, childType);
 			Assert.AreEqual(true, op.Acknowledged);
@@ -1332,7 +1337,7 @@ namespace Tests
         public void TestHasChildFilter()
         {
             var index = "index_test_parent_child_type123_with_has_child_query";
-
+            client.DeleteIndex(index);
             #region preparing mapping
 
             var parentType = new TypeSetting("blog");
@@ -1344,6 +1349,7 @@ namespace Tests
 
             var childType = new TypeSetting("comment", parentType);
             childType.AddStringField("comments");
+            childType.AddStringField("author").Analyzer = "keyword";
 
             op = client.PutMapping(index, childType);
             Assert.AreEqual(true, op.Acknowledged);
@@ -1385,6 +1391,7 @@ namespace Tests
             #endregion
 
             client.Refresh();
+            Thread.Sleep(2000);
 
             var q=new ConstantScoreQuery(new HasChildFilter("comment",new TermQuery("author","lol")));
             var result=client.Search(index, "blog", q,0,5);

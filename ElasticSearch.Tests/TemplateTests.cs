@@ -15,8 +15,12 @@ namespace Tests
 		[Test]
 		public void TestTemplate()
 		{
+            
 			var tempkey = "test_template_key1";
-			var template = new TemplateSetting(tempkey);
+
+		    client.DeleteTemplate(tempkey);
+
+            var template = new TemplateSetting(tempkey);
 			template.Template = "business_*";
 			template.IndexSetting = new TemplateIndexSetting(3, 2);
 
