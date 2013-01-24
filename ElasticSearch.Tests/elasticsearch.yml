@@ -1,0 +1,2 @@
+#保证所有测试通过，必须设置默认的analyzer为keyword
+index.analysis.analyzer.default.type : "keyword"

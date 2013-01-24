@@ -42,6 +42,6 @@ namespace ElasticSearch.DataManager.Dialogs
 			DialogResult = DialogResult.Cancel;
 		}
 		public bool ComplicatedSource{get { return checkBox1.Checked; }}
-		public bool ResolveTenant{get { return checkBox2.Checked; }}
+        public bool ResolveTenant { get { return false; } }
 	}
 }

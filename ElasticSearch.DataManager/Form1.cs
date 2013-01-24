@@ -205,19 +205,7 @@ namespace ElasticSearchDataManager
 						var source = ((Newtonsoft.Json.Linq.JObject)(hit["_source"])).ToString().Replace("\r\n",string.Empty);// hit["_source"].Value<string>();
 						var _type = hit["_type"].Value<string>();
 						var _id = hit["_id"].Value<string>();
-
-						if (resolveTenant)
-						{
-							//methond for setting
-							//if (index.StartsWith("setting") || index.StartsWith("labs.setting") || index.StartsWith("demo.setting"))
-							{
-								var fields = ElasticSearch.Client.Utils.JsonSerializer.Get<Dictionary<string, object>>(source);
-
-								fields=ParseFieldValue(fields);
-								source = ElasticSearch.Client.Utils.JsonSerializer.Get(fields);
-							}
-						}
-
+                        
 
 						i++;
 						
@@ -261,20 +249,7 @@ namespace ElasticSearchDataManager
 
 				#endregion
 				
-				#region multi-tenant
-				if (resolveTenant)
-				{
-					if (index.StartsWith("setting") || index.StartsWith("labs.setting") || index.StartsWith("demo.setting"))
-					{
 
- 						fields= ParseFieldValue(fields);
-//						fields["_tenantid"] = fields["__TENANTID"];
-//						fields.Remove("__TENANTID");
-//						fields.Remove("__TYPEID");
-					}
-				}
-
-				#endregion
 
 				#region BulkInsert
 
