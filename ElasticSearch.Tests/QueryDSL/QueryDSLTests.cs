@@ -1154,7 +1154,7 @@ namespace Tests
         }
 
 
-        [Test]
+        [Ignore]
         public void TestGeoDistanceFilter()
         {
             var geoDistanceFilter = new GeoDistanceFilter("pin.location", "40,-70", "200km");
