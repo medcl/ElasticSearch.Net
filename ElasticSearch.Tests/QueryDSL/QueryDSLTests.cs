@@ -1153,6 +1153,16 @@ namespace Tests
             Assert.AreEqual(2, result2.GetHits().Hits.Count);
         }
 
+
+        [Test]
+        public void TestGeoDistanceFilter()
+        {
+            var geoDistanceFilter = new GeoDistanceFilter("pin.location", "40,-70", "200km");
+            var result = client.Search(index, "type", new FilteredQuery(new MatchAllQuery(), geoDistanceFilter));
+
+        }
+
+
         [Test]
         public void TestBoolFilterWithTwoCondition()
         {

@@ -7,7 +7,34 @@ namespace ElasticSearch.Client.QueryDSL
     {
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            throw new NotImplementedException();
+            GeoDistanceFilter term = (GeoDistanceFilter)value;
+            if (term != null)
+            {
+
+                writer.WriteStartObject();
+                writer.WritePropertyName("geo_distance");
+                writer.WriteStartObject();
+
+                if (!string.IsNullOrEmpty(term.Distance))
+                {
+                    writer.WritePropertyName("distance");
+                    writer.WriteValue(term.Distance);
+
+                    if (!string.IsNullOrEmpty(term.DistanceType))
+                    {
+                        writer.WritePropertyName("distance_type");
+                        writer.WriteValue(term.DistanceType);
+                    }
+                    if (!string.IsNullOrEmpty(term.Field))
+                    {
+                        writer.WritePropertyName(term.Field);
+                        writer.WriteValue(term.Location);
+                    }
+
+                }
+                writer.WriteEndObject();
+                writer.WriteEndObject();
+            }
         }
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
@@ -17,7 +44,7 @@ namespace ElasticSearch.Client.QueryDSL
 
         public override bool CanConvert(Type objectType)
         {
-            throw new NotImplementedException();
+            return typeof(GeoDistanceFilter).IsAssignableFrom(objectType);
         }
     }
 }
