@@ -645,14 +645,23 @@ namespace ElasticSearchDataManager
              var tempNode = (ElasticNode)treeViewAdv1.SelectedNode.Tag;
              if (tempNode != null)
              {
-                 var g = new GetInput("","pls input a fileld name to do Facet");
+                 var g = new GetInput("", "pls input a fileld name to do Facet,ie: disease.name.not_analyzed");
                  if (g.ShowDialog() == DialogResult.OK)
                  {
+                     int facet_size = 10;
+                      var gf = new GetInput("","pls input size of Facet");
+                      if (gf.ShowDialog() == DialogResult.OK)
+                      {
+                          if(!gf.Input.ToString().IsNullOrEmpty())
+                          {
+                              facet_size = Convert.ToInt32(gf.Input);
+                          }
+                      }
 
-              var facets= currentElasticSearchInstance.Search(tempNode.IndexName,
-                                                         new ElasticQuery(new MatchAllQuery(), null, 0, 10)
-                                                             {Facets = new TermsFacet("facet", g.Input)});
-
+                     var facets= currentElasticSearchInstance.Search(tempNode.IndexName,
+                                                         new ElasticQuery(new MatchAllQuery(), null, 0, 10) { Facets = new TermsFacet("facet", g.Input, facet_size) });
+//                     WriteLog("facets.Response");
+//                     WriteLog(facets.Response);
 
               tempNode.Nodes.Clear();//NOTE
               var facetNode = new ElasticNode("facets");
