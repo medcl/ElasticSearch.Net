@@ -40,7 +40,7 @@ namespace ElasticSearch.Client.Mapping
 	{
 		public DateFieldSetting()
 		{
-			Type = "boolean";
+            Type = "date";
 		}
 		[JsonProperty("format")]
 		public string Format;
