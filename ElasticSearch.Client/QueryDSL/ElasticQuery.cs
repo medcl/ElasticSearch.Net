@@ -79,10 +79,25 @@ namespace ElasticSearch.Client.QueryDSL
 
 		public ElasticQuery AddSortItem(SortItem sortItem)
 		{
-			if (SortItems == null) { SortItems = new List<SortItem>(); }
+			EnsureSortItemsExist();
 			SortItems.Add(sortItem);
 			return this;
 		}
+
+        public ElasticQuery AddSortItems(IEnumerable<SortItem> sortItems)
+        {
+            EnsureSortItemsExist();
+            SortItems.AddRange(sortItems);
+            return this;
+        }
+
+	    private void EnsureSortItemsExist()
+	    {
+	        if (SortItems == null)
+	        {
+	            SortItems = new List<SortItem>();
+	        }
+	    }
 
 		public ElasticQuery AddSortItem(string field, SortType type = SortType.Desc)
 		{
