@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics.Contracts;
+using System.Linq;
 using System.Text;
 using System.Web;
 using ElasticSearch.Client.Admin;
@@ -1043,21 +1044,27 @@ namespace ElasticSearch.Client
 
 		public SearchResult Search(string index, string[] type, IQuery query,SortItem sortItem, int from, int size, string[] fields = null)
 		{
-			Contract.Assert(!string.IsNullOrEmpty(index));
-			Contract.Assert(query != null);
-			Contract.Assert(from >= 0);
-			Contract.Assert(size > 0);
-
-			var elasticQuery = new ElasticQuery(from, size);
-			elasticQuery.SetQuery(query);
-			if (sortItem != null)
-			{
-				elasticQuery.AddSortItem(sortItem);
-			}
-			if (fields != null) elasticQuery.AddFields(fields);
-
-			return Search(index, type, elasticQuery);
+		    return Search(index, type, query, from, size,
+		                  sortItem == null ? Enumerable.Empty<SortItem>() : Enumerable.Repeat(sortItem, 1), fields);
 		}
+
+        public SearchResult Search(string index, string[] type, IQuery query, int from, int size, IEnumerable<SortItem> sortItems = null, string[] fields = null)
+        {
+            Contract.Assert(!string.IsNullOrEmpty(index));
+            Contract.Assert(query != null);
+            Contract.Assert(from >= 0);
+            Contract.Assert(size > 0);
+
+            var elasticQuery = new ElasticQuery(from, size);
+            elasticQuery.SetQuery(query);
+            if (sortItems != null)
+            {
+                elasticQuery.AddSortItems(sortItems);
+            }
+            if (fields != null) elasticQuery.AddFields(fields);
+
+            return Search(index, type, elasticQuery);
+        }
 
 		#endregion
 	}
